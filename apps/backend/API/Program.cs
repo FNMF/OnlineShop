@@ -1,0 +1,93 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using API.Database;
+using API.Entities.Other;
+using API.Helpers;
+using API.Repositories;
+using API.Services;
+
+namespace API
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            /*
+            //²âÊÔÄ£¿é
+            Test.Tester.Run();
+            Console.WriteLine();
+            return;
+            */
+
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+
+            builder.Services.AddControllers();
+
+            builder.Services.AddHttpClient();
+
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+
+            builder.Services.AddSingleton<JwtHelper>(sp => {
+                var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
+                return new JwtHelper(settings);
+            });
+
+            builder.Services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
+                    };
+                });
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddDbContext<OnlineshopContext>(options =>
+            {
+                var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            });
+
+            builder.Services.AddLogging();
+
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService,UserService>();
+            builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+            builder.Services.AddScoped<IAddressService, AddressService>();
+            builder.Services.AddScoped<ILogRepository, LogRepository>();
+            builder.Services.AddScoped<ILogService, LogService>();
+            builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
+            builder.Services.AddScoped<IMerchantService, MerchantService>();
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseStaticFiles();
+
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}

@@ -1,0 +1,25 @@
+# --- Build artifacts ---
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# --- User-specific files ---
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# --- Rider / VS Code / VS settings ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Logs and temp files ---
+*.log
+*.tmp
+
+# --- Environment secrets ---
+.env
+.env.local
