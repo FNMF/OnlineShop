@@ -24,6 +24,15 @@ namespace API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            DotNetEnv.Env.Load();
+
+            builder.Configuration
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            var connectionString = builder.Configuration["ConnectionStrings:Default"];
+            var jwtKey = builder.Configuration["Jwt:Key"];
+
 
             builder.Services.AddControllers();
 

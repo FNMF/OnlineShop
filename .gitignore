@@ -23,3 +23,8 @@ obj/
 # --- Environment secrets ---
 .env
 .env.local
+
+# 防止敏感配置再次被提交
+appsettings.*.json
+.env
+*.secrets.json
