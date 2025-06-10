@@ -31,9 +31,6 @@ public partial class Admin
     [StringLength(255)]
     public string AdminPwdhash { get; set; } = null!;
 
-    [Column("admin_level", TypeName = "enum('SK','R','SA','OP','DEFAULT')")]
-    public string AdminLevel { get; set; } = null!;
-
     [Column("admin_key")]
     [StringLength(10)]
     public string AdminKey { get; set; } = null!;
@@ -47,6 +44,9 @@ public partial class Admin
 
     [Column("admin_isdeleted")]
     public bool AdminIsdeleted { get; set; }
+
+    [InverseProperty("ArAdminuu")]
+    public virtual ICollection<AdminRole> AdminRoles { get; set; } = new List<AdminRole>();
 
     [InverseProperty("MerchantAdminuu")]
     public virtual ICollection<Merchant> Merchants { get; set; } = new List<Merchant>();

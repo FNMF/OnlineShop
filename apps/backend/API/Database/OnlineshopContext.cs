@@ -21,6 +21,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Admin> Admins { get; set; }
 
+    public virtual DbSet<AdminRole> AdminRoles { get; set; }
+
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Coupon> Coupons { get; set; }
@@ -37,11 +39,21 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
+    public virtual DbSet<Permission> Permissions { get; set; }
+
+    public virtual DbSet<Privilege> Privileges { get; set; }
+
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<Refund> Refunds { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<RolePermission> RolePermissions { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<UserPrivilege> UserPrivileges { get; set; }
 
     public virtual DbSet<Usercoupon> Usercoupons { get; set; }
 
@@ -74,7 +86,22 @@ public partial class OnlineshopContext : DbContext
 
             entity.Property(e => e.AdminUuid).IsFixedLength();
             entity.Property(e => e.AdminKey).IsFixedLength();
-            entity.Property(e => e.AdminLevel).HasDefaultValueSql("'DEFAULT'");
+        });
+
+        modelBuilder.Entity<AdminRole>(entity =>
+        {
+            entity.HasKey(e => e.ArUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.ArUuid).IsFixedLength();
+            entity.Property(e => e.ArAdminuuid).IsFixedLength();
+
+            entity.HasOne(d => d.ArAdminuu).WithMany(p => p.AdminRoles)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("admin_role_admin_admin_uuid_fk");
+
+            entity.HasOne(d => d.ArRole).WithMany(p => p.AdminRoles)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("admin_role_role_role_id_fk");
         });
 
         modelBuilder.Entity<Cart>(entity =>
@@ -172,6 +199,16 @@ public partial class OnlineshopContext : DbContext
                 .HasConstraintName("order_user_user_uuid_fk");
         });
 
+        modelBuilder.Entity<Permission>(entity =>
+        {
+            entity.HasKey(e => e.PermissionId).HasName("PRIMARY");
+        });
+
+        modelBuilder.Entity<Privilege>(entity =>
+        {
+            entity.HasKey(e => e.PrivilegeId).HasName("PRIMARY");
+        });
+
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.ProductUuid).HasName("PRIMARY");
@@ -203,6 +240,26 @@ public partial class OnlineshopContext : DbContext
                 .HasConstraintName("refund_user_user_uuid_fk");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("PRIMARY");
+        });
+
+        modelBuilder.Entity<RolePermission>(entity =>
+        {
+            entity.HasKey(e => e.RpUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.RpUuid).IsFixedLength();
+
+            entity.HasOne(d => d.RpPermission).WithMany(p => p.RolePermissions)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("role_permission_permission_permission_id_fk");
+
+            entity.HasOne(d => d.RpRole).WithMany(p => p.RolePermissions)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("role_permission_role_role_id_fk");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserUuid).HasName("PRIMARY");
@@ -210,7 +267,22 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.UserUuid).IsFixedLength();
             entity.Property(e => e.UserCredit).HasDefaultValueSql("'50'");
             entity.Property(e => e.UserOpenid).IsFixedLength();
-            entity.Property(e => e.UserStatus).HasDefaultValueSql("'new'");
+        });
+
+        modelBuilder.Entity<UserPrivilege>(entity =>
+        {
+            entity.HasKey(e => e.UpUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.UpUuid).IsFixedLength();
+            entity.Property(e => e.UpUseruuid).IsFixedLength();
+
+            entity.HasOne(d => d.UpPrivilege).WithMany(p => p.UserPrivileges)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("user_privilege_privilege_privilege_id_fk");
+
+            entity.HasOne(d => d.UpUseruu).WithMany(p => p.UserPrivileges)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("user_privilege_user_user_uuid_fk");
         });
 
         modelBuilder.Entity<Usercoupon>(entity =>
@@ -221,6 +293,10 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.UpDiscountvalue).HasDefaultValueSql("'0.00'");
             entity.Property(e => e.UpStatus).HasDefaultValueSql("'unused'");
             entity.Property(e => e.UpUseruuid).IsFixedLength();
+
+            entity.HasOne(d => d.UpCoupon).WithMany(p => p.Usercoupons)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("usercoupon_coupon_coupon_id_fk");
 
             entity.HasOne(d => d.UpUseruu).WithMany(p => p.Usercoupons)
                 .OnDelete(DeleteBehavior.ClientSetNull)

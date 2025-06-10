@@ -45,4 +45,7 @@ public partial class Coupon
 
     [Column("coupon_isdeleted")]
     public bool CouponIsdeleted { get; set; }
+
+    [InverseProperty("UpCoupon")]
+    public virtual ICollection<Usercoupon> Usercoupons { get; set; } = new List<Usercoupon>();
 }

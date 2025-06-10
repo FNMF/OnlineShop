@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Entities.Models;
 
 [Table("usercoupon")]
+[Index("UpCouponid", Name = "usercoupon_coupon_coupon_id_fk")]
 [Index("UpUseruuid", Name = "usercoupon_user_user_uuid_fk")]
 public partial class Usercoupon
 {
@@ -40,6 +41,10 @@ public partial class Usercoupon
 
     [InverseProperty("OrderUcuu")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    [ForeignKey("UpCouponid")]
+    [InverseProperty("Usercoupons")]
+    public virtual Coupon UpCoupon { get; set; } = null!;
 
     [ForeignKey("UpUseruuid")]
     [InverseProperty("Usercoupons")]

@@ -28,9 +28,6 @@ public partial class User
     [Column("user_credit")]
     public int UserCredit { get; set; }
 
-    [Column("user_status", TypeName = "enum('new','normal','blocked','acquaintance')")]
-    public string UserStatus { get; set; } = null!;
-
     [Column("user_createdat", TypeName = "datetime")]
     public DateTime UserCreatedat { get; set; }
 
@@ -51,6 +48,9 @@ public partial class User
 
     [InverseProperty("RefundUseruu")]
     public virtual ICollection<Refund> Refunds { get; set; } = new List<Refund>();
+
+    [InverseProperty("UpUseruu")]
+    public virtual ICollection<UserPrivilege> UserPrivileges { get; set; } = new List<UserPrivilege>();
 
     [InverseProperty("UpUseruu")]
     public virtual ICollection<Usercoupon> Usercoupons { get; set; } = new List<Usercoupon>();

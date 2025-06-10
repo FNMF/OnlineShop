@@ -24,7 +24,7 @@ public partial class Address
     public string AddressName { get; set; } = null!;
 
     [Column("address_phone")]
-    [StringLength(50)]
+    [StringLength(255)]
     public string AddressPhone { get; set; } = null!;
 
     [Column("address_province")]

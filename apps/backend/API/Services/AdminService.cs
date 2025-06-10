@@ -77,7 +77,6 @@ namespace API.Services
                     return null;
                 }
                 admin.AdminPhone = dto.phone;
-                admin.AdminLevel = dto.level;
                 await _repository.UpdateAdminAsync(admin);
                 await _logService.CreateLog("admin", "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
@@ -121,14 +120,14 @@ namespace API.Services
                 return false;
             }
         }
-        public async Task<RAdminDto> CreateAdmin(CUAdminDto dto)
+        /*public async Task<RAdminDto> CreateAdmin(CUAdminDto dto)
         {
             try
             {
-                var admin = new Admin { AdminLastlocation =dto.ipaddress,
-                AdminLastlogintime =  DateTime.Now,
-                }
+                var admin = new Admin { AdminLastlocation = dto.ipaddress,
+                    AdminLastlogintime = DateTime.Now,
+                };
             }
-        }
+        }*/
     }
 }
