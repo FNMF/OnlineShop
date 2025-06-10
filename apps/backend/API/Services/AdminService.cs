@@ -1,5 +1,6 @@
 ﻿using API.Entities.Dto;
 using API.Entities.Models;
+using API.Helpers;
 using API.Repositories;
 using System;
 using System.Text.Json;
@@ -27,8 +28,7 @@ namespace API.Services
                 if (admin == null) { _logger.LogWarning("管理员不存在"); return null; }
                 var radmin = new RAdminDto
                 {
-                    phone = admin.AdminPhone,
-                    level = admin.AdminLevel,
+                    phone = AESHelper.Decrypt(admin.AdminPhone),
                     account = admin.AdminAccount
                 };
                 return radmin;
@@ -47,8 +47,7 @@ namespace API.Services
                 if (admin == null) { _logger.LogWarning("管理员不存在"); return null; }
                 var radmin = new RAdminDto
                 {
-                    phone = admin.AdminPhone,
-                    level = admin.AdminLevel,
+                    phone = AESHelper.Decrypt(admin.AdminPhone),
                     account = admin.AdminAccount
                 };
                 return radmin;
@@ -76,14 +75,13 @@ namespace API.Services
                     _logger.LogWarning("修改管理员时原管理员不存在或异常");
                     return null;
                 }
-                admin.AdminPhone = dto.phone;
+                admin.AdminPhone =AESHelper.Encrypt(dto.phone);
                 await _repository.UpdateAdminAsync(admin);
                 await _logService.CreateLog("admin", "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
                 {
                     account = admin.AdminAccount,
-                    phone = admin.AdminPhone,
-                    level = admin.AdminLevel,
+                    phone = AESHelper.Decrypt( admin.AdminPhone)
 
                 };
                 return radmin;

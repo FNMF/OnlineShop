@@ -3,6 +3,7 @@ using System.Text.Json;
 using API.Entities.Dto;
 using API.Entities.Models;
 using API.Repositories;
+using API.Helpers;
 
 namespace API.Services
 {
@@ -25,6 +26,21 @@ namespace API.Services
 
                 var addresses = await _addressRepository.GetAllAddressByUuidAsync(uuidBytes);
 
+                if (addresses != null)      //遍历解码所有的加密的敏感信息
+                {
+                    foreach (var address in addresses)
+                    {
+                        try
+                        {
+                            address.AddressPhone = AESHelper.Decrypt(address.AddressPhone);
+                            address.AddressDetail = AESHelper.Decrypt(address.AddressDetail);
+                        }catch (Exception ex)
+                        {
+                            _logger.LogError(ex, "解码地址时出错，UserUuid:{uuid}", useruuid);
+                        }
+                    }
+                }
+
                 return addresses ?? new List<Address>();
             }
             catch (Exception ex)
@@ -33,7 +49,7 @@ namespace API.Services
                 return new List<Address>();
             }
         }
-        public async Task<bool> CreateAddressByUuidAsync(CUAddressDto dto, Guid useruuid)       //通过传入的Dto和uuid创建新地址    
+        public async Task<bool> CreateAddressByUuidAsync(CURAddressDto dto, Guid useruuid)       //通过传入的Dto和uuid创建新地址    
         {
 
             try
@@ -63,8 +79,8 @@ namespace API.Services
                     AddressProvince = dto.Province,
                     AddressCity = dto.City,
                     AddressDistrict = dto.District,
-                    AddressDetail = dto.Detail,
-                    AddressPhone = dto.Phone,
+                    AddressDetail = AESHelper.Encrypt(dto.Detail),
+                    AddressPhone = AESHelper.Encrypt(dto.Phone),
                     AddressIsdefault = dto.IsDefault,
                     AddressTime = DateTime.Now,
                     AddressUseruuid = uuidBytes,
@@ -108,7 +124,7 @@ namespace API.Services
             }
         }
 
-        public async Task<bool> UpdateAddressByUuidAsync(Guid addressuuid, CUAddressDto dto)
+        public async Task<bool> UpdateAddressByUuidAsync(Guid addressuuid, CURAddressDto dto)
         {
             try
             {
@@ -138,11 +154,11 @@ namespace API.Services
                 }
 
                 address.AddressName = dto.Name;
-                address.AddressPhone = dto.Phone;
+                address.AddressPhone = AESHelper.Encrypt(dto.Phone);
                 address.AddressProvince = dto.Province;
                 address.AddressCity = dto.City;
                 address.AddressDistrict = dto.District;
-                address.AddressDetail = dto.Detail;
+                address.AddressDetail = AESHelper.Encrypt(dto.Detail);
                 address.AddressIsdefault = dto.IsDefault;
                 address.AddressTime = DateTime.Now;
 

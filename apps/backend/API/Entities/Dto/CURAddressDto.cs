@@ -1,6 +1,6 @@
 ﻿namespace API.Entities.Dto
 {
-    public class CUAddressDto
+    public class CURAddressDto
     {
         public string Name { get; set; }
         public string Phone {  get; set; }
