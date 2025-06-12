@@ -10,7 +10,6 @@ namespace API.Services
         Task<string?> RenameUserByUuidAsync(Guid useruuid, string newName);
         Task<int?> UpdateUserBpByUuidAsync(Guid useruuid, int bp, string detail);
         Task<int?> UpdateUserCreditByUuidAsync(Guid useruuid, int credit,string detail);
-        Task<string?> UpdateUserStatusByUuidAsync(Guid useruuid, string status);
         Task<bool> DeleteUserByUuidAsync(Guid useruuid);
     }
 }

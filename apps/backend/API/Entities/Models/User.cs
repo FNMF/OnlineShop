@@ -40,9 +40,6 @@ public partial class User
     [InverseProperty("CartUseruu")]
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
-    [InverseProperty("NotificationUseruu")]
-    public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
-
     [InverseProperty("OrderUseruu")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

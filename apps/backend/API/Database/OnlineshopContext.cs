@@ -172,11 +172,8 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.NotificationUuid).HasName("PRIMARY");
 
             entity.Property(e => e.NotificationUuid).IsFixedLength();
-            entity.Property(e => e.NotificationUseruuid).IsFixedLength();
-
-            entity.HasOne(d => d.NotificationUseruu).WithMany(p => p.Notifications)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("notification_user_user_uuid_fk");
+            entity.Property(e => e.NotificationReceiveuuid).IsFixedLength();
+            entity.Property(e => e.NotificationSenderuuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Order>(entity =>

@@ -140,30 +140,7 @@ namespace API.Services
             }
 
         }
-        public async Task<string?> UpdateUserStatusByUuidAsync(Guid useruuid, string status)     //使用uuid更新status状态
-        {
-            try
-            {
-                byte[] uuidBytes = useruuid.ToByteArray();
-                var user = await _userRepository.GetByUuidAsync(uuidBytes);
-                if (user == null)
-                {
-                    _logger.LogWarning("用户不存在");
-                    return null;
-                }
-
-                user.UserStatus = status;
-                await _userRepository.UpdateUserAsync(user);
-                await _logService.CreateLog("user", "用户状态更新","无", uuidBytes, status);
-                return user.UserStatus;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "更新用户状态时出错,UserUuid:{Uuid}", useruuid);
-                return null;
-            }
-
-        }
+        
         public async Task<bool> DeleteUserByUuidAsync(Guid useruuid)        //使用逻辑删除实现删除（防止关联表出错以及后续审计）
         {
             try
