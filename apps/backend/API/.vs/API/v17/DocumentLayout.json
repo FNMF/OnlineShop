@@ -7,8 +7,12 @@
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:repositories\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\repositories\\iaddressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:repositories\\iaddressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\database\\onlineshopcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:database\\onlineshopcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\repositories\\iadminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,14 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\helpers\\pwdhashhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:helpers\\pwdhashhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\repositories\\addressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:repositories\\addressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\database\\onlineshopcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:database\\onlineshopcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -166,17 +162,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NotificationRepository.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\NotificationRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\NotificationRepository.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\NotificationRepository.cs",
+              "RelativeToolTip": "Repositories\\NotificationRepository.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAkwAcAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-12T14:53:04.62Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "INotificationRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\INotificationRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\INotificationRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\INotificationRepository.cs*",
-              "RelativeToolTip": "Repositories\\INotificationRepository.cs*",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAABWAAAA",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\INotificationRepository.cs",
+              "RelativeToolTip": "Repositories\\INotificationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-12T14:28:36.996Z",
               "EditorCaption": ""
@@ -186,21 +195,12 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PwdHashHelper.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\PwdHashHelper.cs",
-              "RelativeDocumentMoniker": "Helpers\\PwdHashHelper.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\PwdHashHelper.cs",
-              "RelativeToolTip": "Helpers\\PwdHashHelper.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAQwBcAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T08:03:50.391Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -213,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "IAdminRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\IAdminRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\IAdminRepository.cs",
@@ -226,19 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AddressRepository.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\AddressRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\AddressRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\AddressRepository.cs",
-              "RelativeToolTip": "Repositories\\AddressRepository.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T08:50:24.047Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "Services\\AuthService.cs",
@@ -250,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "AddressService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\AddressService.cs",
               "RelativeDocumentMoniker": "Services\\AddressService.cs",
@@ -262,19 +250,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "OnlineshopContext.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Database\\OnlineshopContext.cs",
               "RelativeDocumentMoniker": "Database\\OnlineshopContext.cs",
               "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Database\\OnlineshopContext.cs",
               "RelativeToolTip": "Database\\OnlineshopContext.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAA8wAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T08:51:11.845Z"
+              "WhenOpened": "2025-06-01T08:51:11.845Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "PwdHashHelper.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\PwdHashHelper.cs",
+              "RelativeDocumentMoniker": "Helpers\\PwdHashHelper.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\PwdHashHelper.cs",
+              "RelativeToolTip": "Helpers\\PwdHashHelper.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwBcAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T08:03:50.391Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -287,7 +289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "IUserService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "Services\\IUserService.cs",
@@ -300,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "CURAddressDto.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Dto\\CURAddressDto.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\CURAddressDto.cs",
@@ -312,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "RandomKeyHelper.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\RandomKeyHelper.cs",
               "RelativeDocumentMoniker": "Helpers\\RandomKeyHelper.cs",
@@ -324,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": ".env",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\.env",
               "RelativeDocumentMoniker": ".env",
@@ -336,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -348,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "CUAdminDto.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Dto\\CUAdminDto.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\CUAdminDto.cs",
@@ -360,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "RandomKeyHelper.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\RandomKeyHelper.cs",
               "RelativeDocumentMoniker": "Helpers\\RandomKeyHelper.cs",
@@ -372,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "RAdminDto.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Dto\\RAdminDto.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\RAdminDto.cs",
@@ -384,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "PwdHashHelper.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Helpers\\PwdHashHelper.cs",
               "RelativeDocumentMoniker": "Helpers\\PwdHashHelper.cs",
@@ -396,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "IAdminService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\IAdminService.cs",
               "RelativeDocumentMoniker": "Services\\IAdminService.cs",
@@ -408,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "Address.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Models\\Address.cs",
               "RelativeDocumentMoniker": "Entities\\Models\\Address.cs",
@@ -420,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "IAdminRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\IAdminRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\IAdminRepository.cs",
@@ -432,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 34,
               "Title": "MerchantRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\MerchantRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\MerchantRepository.cs",
@@ -444,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "RAdminDto.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Dto\\RAdminDto.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\RAdminDto.cs",
@@ -456,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "CUAdminDto.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Dto\\CUAdminDto.cs",
               "RelativeDocumentMoniker": "Entities\\Dto\\CUAdminDto.cs",
@@ -468,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "OnlineshopContext.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Database\\OnlineshopContext.cs",
               "RelativeDocumentMoniker": "Database\\OnlineshopContext.cs",
@@ -480,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 26,
               "Title": "MerchantService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\MerchantService.cs",
               "RelativeDocumentMoniker": "Services\\MerchantService.cs",
@@ -492,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "AdminRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\AdminRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\AdminRepository.cs",
@@ -504,7 +506,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -516,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 27,
               "Title": "MerchantService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\MerchantService.cs",
               "RelativeDocumentMoniker": "Services\\MerchantService.cs",
@@ -528,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -540,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "Tester.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Test\\Tester.cs",
               "RelativeDocumentMoniker": "Test\\Tester.cs",
@@ -552,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "AddressService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Services\\AddressService.cs",
               "RelativeDocumentMoniker": "Services\\AddressService.cs",
@@ -564,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
@@ -576,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "Tester.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Test\\Tester.cs",
               "RelativeDocumentMoniker": "Test\\Tester.cs",
@@ -588,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "LogRepository.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\LogRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\LogRepository.cs",
@@ -600,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 37,
               "Title": "HashSalt.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Other\\HashSalt.cs",
               "RelativeDocumentMoniker": "Entities\\Other\\HashSalt.cs",
@@ -612,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 36,
               "Title": "JwtSettings.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Other\\JwtSettings.cs",
               "RelativeDocumentMoniker": "Entities\\Other\\JwtSettings.cs",
@@ -624,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 35,
               "Title": "UuidPwd.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Entities\\Other\\UuidPwd.cs",
               "RelativeDocumentMoniker": "Entities\\Other\\UuidPwd.cs",
@@ -633,40 +635,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-29T09:39:15.779Z"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "b78332f9-be2c-42c7-83d6-6fd9b0d26b36",
-        "Display": 1,
-        "X": -44,
-        "Y": 539,
-        "Width": 1339,
-        "Height": 633,
-        "WindowState": 0
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IAddressRepository.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\IAddressRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\IAddressRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Repositories\\IAddressRepository.cs",
-              "RelativeToolTip": "Repositories\\IAddressRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T14:29:11.398Z",
-              "EditorCaption": ""
             }
           ]
         }

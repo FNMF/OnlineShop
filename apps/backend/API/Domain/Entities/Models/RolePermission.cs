@@ -1,0 +1,30 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace API.Entities.Models;
+
+[Table("role_permission")]
+[Index("RpPermissionid", Name = "role_permission_permission_permission_id_fk")]
+[Index("RpRoleid", Name = "role_permission_role_role_id_fk")]
+public partial class RolePermission
+{
+    [Key]
+    [Column("rp_uuid")]
+    [MaxLength(16)]
+    public byte[] RpUuid { get; set; } = null!;
+
+    [Column("rp_roleid")]
+    public int RpRoleid { get; set; }
+
+    [Column("rp_permissionid")]
+    public int RpPermissionid { get; set; }
+
+    [ForeignKey("RpPermissionid")]
+    [InverseProperty("RolePermissions")]
+    public virtual Permission RpPermission { get; set; } = null!;
+
+    [ForeignKey("RpRoleid")]
+    [InverseProperty("RolePermissions")]
+    public virtual Role RpRole { get; set; } = null!;
+}

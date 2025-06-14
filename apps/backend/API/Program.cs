@@ -1,12 +1,10 @@
+using API.Helpers;
+using API.Repositories;
+using API.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using API.Database;
-using API.Entities.Other;
-using API.Helpers;
-using API.Repositories;
-using API.Services;
 
 namespace API
 {
@@ -40,7 +38,8 @@ namespace API
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-            builder.Services.AddSingleton<JwtHelper>(sp => {
+            builder.Services.AddSingleton<JwtHelper>(sp =>
+            {
                 var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
                 return new JwtHelper(settings);
             });
@@ -73,7 +72,7 @@ namespace API
 
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IUserService,UserService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<ILogRepository, LogRepository>();
