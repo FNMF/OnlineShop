@@ -1,3 +1,5 @@
+using API.Database;
+using API.Entities.Other;
 using API.Helpers;
 using API.Repositories;
 using API.Services;
@@ -12,12 +14,7 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            /*
-            //²âÊÔÄ£¿é
-            Test.Tester.Run();
-            Console.WriteLine();
-            return;
-            */
+            
 
             var builder = WebApplication.CreateBuilder(args);
 

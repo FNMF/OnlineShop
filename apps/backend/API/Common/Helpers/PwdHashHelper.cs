@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using API.Entities.Other;
+using System.Security.Cryptography;
 
 namespace API.Helpers
 {

@@ -1,6 +1,10 @@
 ﻿namespace API.Domain.Enums
 {
-    public class NotificationSenderType
+    public enum NotificationSenderType
     {
+        merchant = 0,
+        platform = 1,
+        system = 2,
+        other = 3
     }
 }

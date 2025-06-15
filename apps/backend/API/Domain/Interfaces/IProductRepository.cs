@@ -1,4 +1,5 @@
 ﻿using API.Domain.Entities.Dto;
+using API.Entities.Models;
 
 namespace API.Repositories
 {

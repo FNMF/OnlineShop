@@ -1,4 +1,6 @@
-﻿namespace API.Repositories
+﻿using API.Entities.Models;
+
+namespace API.Repositories
 {
     public interface ILogRepository
     {

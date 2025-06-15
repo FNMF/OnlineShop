@@ -21,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="wwwroot\Temp\" />
-    <Folder Include="wwwroot\Logs\" />
+    <Folder Include="Infrastructure\Database\" />
   </ItemGroup>
 
 </Project>

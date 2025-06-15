@@ -1,6 +1,9 @@
 ﻿namespace API.Domain.Enums
 {
-    public class NotificationType
+    public enum NotificationType
     {
+        order = 0,
+        system = 1,
+        activity = 2
     }
 }

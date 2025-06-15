@@ -7,7 +7,13 @@
     file类还没完善，导致从下至上导致localfile、image、product，不能完全实现
 
 ##
-    所有repository层中把查询all改成分页查询，虽然不是所有业务都需要但是统一api很有必要
+    所有Service层中把查询all改成分页查询，虽然不是所有业务都需要但是统一api很有必要
 
 ##
-    
+    命名规则要调整，比如业务中的Create要改成Add，符合规范
+
+##
+    所有的Repository层只保留Query，而不需要细分，把所有逻辑全部放在Service层里
+
+##
+    深刻认识到不提前把架构想明白，后续重构有多麻烦了。。。

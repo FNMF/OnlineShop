@@ -1,4 +1,5 @@
 ﻿using API.Domain.Entities.Models;
+using API.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Database;
