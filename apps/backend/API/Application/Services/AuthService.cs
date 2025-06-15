@@ -1,4 +1,5 @@
-﻿using API.Helpers;
+﻿using API.Entities.Other;
+using API.Helpers;
 using System.Text.Json;
 
 namespace API.Services

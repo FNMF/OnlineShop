@@ -7,7 +7,7 @@
     -减少错误
     -便于代码审查
 
-    版本v0.0.0
+    版本v0.0.1
 
 ##代码规范
 
@@ -104,6 +104,27 @@
     例子：
     public async Task<List<Address>> GetAllAddressByUuidAsync(Guid useruuid)        //通过uuid查询这个人所有的地址并返回一个地址List
 
+###Git管理
+    开始阶段，项目还在逐步重构，生产力不足的情况下，对Git无严格规范，仅需注释完善了什么即可；
+    Git提交时：
+    对于更新内容：
+        "更新了+文件层级+部分名称+更新内容"
+        "更新了+大更新总结"
+        例如："更新了Infrastructure中Repositories的格式"、"更新了docs中代码规范的命名规范"、"更新了项目格式"
+    
+    对于新增内容：
+        "新增了+文件层级+部分名称+新增内容"
+        "新增了+大新增总结"
+        例如："新增了Api中Controllers的UserController"、"新增了Jwt验证模块"
+
+    对于删除内容：
+        "删除了+文件层级+部分名称+删除内容+删除理由"
+        "删除了+大删除总结+删除理由"
+        例如："删除了Application中Services的UserService里GetUserByOpenId方法以及其接口因为方法无需实现"、"删除了Power表以及项目中实现因为无需实现"
+
 ##变更记录
     v0.0.0
     -初始创建
+
+    v0.0.1
+    -更新Git管理的规范
