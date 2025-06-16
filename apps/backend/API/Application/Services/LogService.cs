@@ -1,5 +1,8 @@
-﻿using API.Entities.Models;
+﻿using API.Api.Models;
+using API.Entities.Models;
 using API.Repositories;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace API.Services
 {
@@ -13,7 +16,7 @@ namespace API.Services
             _logRepository = logRepository;
             _logger = logger;
         }
-        public async Task<bool> CreateLog(string type, string description, string detail)
+        public async Task<bool> AddLog(string type, string description, string detail)
         {
             try
             {
@@ -34,7 +37,7 @@ namespace API.Services
                 return false;
             }
         }
-        public async Task<bool> CreateLog(string type, string description, string detail, byte[] objectuuidBytes, string datajson)
+        public async Task<bool> AddLog(string type, string description, string detail, byte[] objectuuidBytes, string datajson)
         {
             try
             {
@@ -57,7 +60,43 @@ namespace API.Services
                 return false;
             }
         }
-        public async Task<List<Log>> GetLog(byte[] uuidBytes)
+        public async Task<List<Log>> GetLogs(LogQueryOptions queryOptions)
+        {
+            try
+            {
+                var query = _logRepository.QueryLog();
+
+                if (queryOptions.UuidBytes != null)
+                {
+                    query = query.Where(l => l.LogUuid == queryOptions.UuidBytes);
+                }
+                if (queryOptions.Type.HasValue)
+                {
+                    query = query.Where(l => l.LogType == queryOptions.Type.Value.ToString());
+                }
+                if (queryOptions.Start.HasValue && queryOptions.End.HasValue)
+                {
+                    query = query.Where(l => l.LogTime <= queryOptions.End.Value && l.LogTime >= queryOptions.Start);
+                }
+                if (queryOptions.PageNumber.HasValue && queryOptions.PageSize.HasValue)
+                {
+                    if (queryOptions.PageSize <= 0) queryOptions.PageSize = 10;
+                    if (queryOptions.PageNumber <= 0) queryOptions.PageNumber = 1;
+
+                    query = query
+                        .OrderByDescending(l => l.LogTime)
+                        .Skip((queryOptions.PageNumber ?? 1 - 1) * queryOptions.PageSize ?? 10)
+                        .Take(queryOptions.PageSize ?? 10);
+                }
+                return await query.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "查询日志时出错");
+                return null;
+            }
+        }
+        /*public async Task<List<Log>> GetLog(byte[] uuidBytes)
         {
             try
             {
@@ -108,7 +147,7 @@ namespace API.Services
                 _logger.LogError(ex, "查询日志时出错");
                 return null;
             }
-        }
+        }*/
 
     }
 }

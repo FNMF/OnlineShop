@@ -75,7 +75,7 @@ namespace API.Services
                 }
                 admin.AdminPhone = AESHelper.Encrypt(dto.phone);
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.CreateLog("admin", "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
+                await _logService.AddLog("admin", "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
                 {
                     account = admin.AdminAccount,
@@ -105,7 +105,7 @@ namespace API.Services
                     return false;
                 }
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.CreateLog("admin", "删除管理员信息", "逻辑删除", uuidBytes, JsonSerializer.Serialize(admin));
+                await _logService.AddLog("admin", "删除管理员信息", "逻辑删除", uuidBytes, JsonSerializer.Serialize(admin));
 
                 return true;
 

@@ -78,7 +78,7 @@ namespace API.Services
 
                 user.UserName = newName;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.CreateLog("user", "用户改名", "无", uuidBytes, newName);
+                await _logService.AddLog("user", "用户改名", "无", uuidBytes, newName);
 
                 return newName;
             }
@@ -103,7 +103,7 @@ namespace API.Services
 
                 user.UserBp += bp;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.CreateLog("bp", "积分状态更新", detail, uuidBytes, bp.ToString());
+                await _logService.AddLog("bp", "积分状态更新", detail, uuidBytes, bp.ToString());
 
                 return user.UserBp;
             }
@@ -128,7 +128,7 @@ namespace API.Services
 
                 user.UserCredit += credit;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.CreateLog("credit", "信用状态更新", detail, uuidBytes, credit.ToString());
+                await _logService.AddLog("credit", "信用状态更新", detail, uuidBytes, credit.ToString());
 
                 return user.UserCredit;
             }
@@ -153,7 +153,7 @@ namespace API.Services
                 }
                 user.UserIsdeleted = true;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.CreateLog("user", "删除用户", "逻辑删除", uuidBytes, "无");
+                await _logService.AddLog("user", "删除用户", "逻辑删除", uuidBytes, "无");
                 return true;
             }
             catch (Exception ex)

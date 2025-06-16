@@ -54,11 +54,11 @@ namespace API.Services
             if (user == null)
             {
                 user = await _userService.CreateUserWithOpenIdAsync(session.openid);
-                await _logService.CreateLog("user", "创建新用户", "无", user.UserUuid.ToArray(), json);
+                await _logService.AddLog("user", "创建新用户", "无", user.UserUuid.ToArray(), json);
                 return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), "User", new Guid(user.UserUuid));
             }
 
-            await _logService.CreateLog("user", "用户登录", "无", user.UserUuid.ToArray(), json);
+            await _logService.AddLog("user", "用户登录", "无", user.UserUuid.ToArray(), json);
             return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), "User", new Guid(user.UserUuid));
         }
 

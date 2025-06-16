@@ -89,7 +89,7 @@ namespace API.Services
 
 
                 await _addressRepository.AddAddressAsync(address);
-                await _logService.CreateLog("user", "用户创建地址", "无", uuidBytes, JsonSerializer.Serialize(address));
+                await _logService.AddLog("user", "用户创建地址", "无", uuidBytes, JsonSerializer.Serialize(address));
 
                 return true;
             }
@@ -114,7 +114,7 @@ namespace API.Services
                 address.AddressIsdeleted = true;
 
                 await _addressRepository.UpdateAddressAsync(address);
-                await _logService.CreateLog("user", "用户删除地址", "逻辑删除", uuidBytes, JsonSerializer.Serialize(address));
+                await _logService.AddLog("user", "用户删除地址", "逻辑删除", uuidBytes, JsonSerializer.Serialize(address));
                 return true;
             }
             catch (Exception ex)
@@ -163,7 +163,7 @@ namespace API.Services
                 address.AddressTime = DateTime.Now;
 
                 await _addressRepository.UpdateAddressAsync(address);
-                await _logService.CreateLog("user", "用户修改地址", "无", uuidBytes, JsonSerializer.Serialize(address));
+                await _logService.AddLog("user", "用户修改地址", "无", uuidBytes, JsonSerializer.Serialize(address));
                 return true;
             }
             catch (Exception ex)

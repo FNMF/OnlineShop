@@ -10,10 +10,14 @@ namespace API.Repositories
         public async Task<bool> AddLog(Log log)
         {
             await _context.Logs.AddAsync(log);
-            await _context.SaveChangesAsync();
-            return true;
+            int affected = await _context.SaveChangesAsync();       //如果数据库操作大于0则返回true
+            return affected > 0;
         }
-        public async Task<List<Log>> GetLog(byte[] uuidBytes, int pageNumber, int pageSize)
+        public IQueryable<Log> QueryLog()        //对于Repository层只需要返回IQueryable即可，剩下操作全在Service层完成
+        {
+            return _context.Logs;
+        }
+        /*public async Task<List<Log>> GetLog(byte[] uuidBytes, int pageNumber, int pageSize)
         {
             if (pageSize <= 0) pageSize = 10;
             if (pageNumber <= 0) pageNumber = 1;
@@ -58,6 +62,6 @@ namespace API.Repositories
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-        }
+        }*/
     }
 }

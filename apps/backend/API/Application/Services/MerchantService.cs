@@ -99,7 +99,7 @@ namespace API.Services
                 };
 
                 await _merchantRepository.AddMerchant(merchant);
-                await _logService.CreateLog("merchant", "商户创建", "无", dto.AdminUuid.ToByteArray(), JsonSerializer.Serialize(merchant));
+                await _logService.AddLog("merchant", "商户创建", "无", dto.AdminUuid.ToByteArray(), JsonSerializer.Serialize(merchant));
                 return merchant;
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace API.Services
                 merchant.MerchantBusinessend = dto.EndTime;
 
                 await _merchantRepository.UpdateMerchant(merchant);
-                await _logService.CreateLog("merchant", "修改商户", "无", uuidBytes, JsonSerializer.Serialize(dto));
+                await _logService.AddLog("merchant", "修改商户", "无", uuidBytes, JsonSerializer.Serialize(dto));
                 return new Merchant();
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace API.Services
                 merchant.MerchantIsdeleted = true;
 
                 await _merchantRepository.UpdateMerchant(merchant);
-                await _logService.CreateLog("merchant", "删除商户", "逻辑删除", uuidBytes, JsonSerializer.Serialize(merchant));
+                await _logService.AddLog("merchant", "删除商户", "逻辑删除", uuidBytes, JsonSerializer.Serialize(merchant));
                 return true;
             }
             catch (Exception ex)
