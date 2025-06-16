@@ -1,5 +1,5 @@
 ﻿using API.Domain.Entities.Dto;
-using API.Entities.Models;
+using API.Domain.Entities.Models;
 
 namespace API.Services
 {

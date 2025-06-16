@@ -1,6 +1,6 @@
-using API.Database;
 using API.Entities.Other;
 using API.Helpers;
+using API.Infrastructure.Database;
 using API.Repositories;
 using API.Services;
 using Microsoft.EntityFrameworkCore;

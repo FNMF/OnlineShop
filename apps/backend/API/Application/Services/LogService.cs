@@ -1,8 +1,7 @@
 ﻿using API.Api.Models;
-using API.Entities.Models;
+using API.Domain.Entities.Models;
 using API.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace API.Services
 {

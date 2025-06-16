@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("merchant")]
 [Index("MerchantAdminuuid", Name = "merchant_admin_admin_uuid_fk")]

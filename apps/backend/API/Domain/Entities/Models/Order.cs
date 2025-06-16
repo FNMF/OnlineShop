@@ -1,7 +1,8 @@
-﻿using API.Entities.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
@@ -23,7 +24,7 @@ public partial class Order
     [Precision(8, 2)]
     public decimal OrderTotal { get; set; }
 
-    [Column("order_status", TypeName = "enum('new','unpaid','unaccepted','preparing','unship','shipping','done','canceled','reject','exception')")]
+    [Column("order_status", TypeName = "enum('created','unpaid','unaccepted','preparing','unship','shipping','done','canceled','reject','exception')")]
     public string OrderStatus { get; set; } = null!;
 
     [Column("order_sid")]

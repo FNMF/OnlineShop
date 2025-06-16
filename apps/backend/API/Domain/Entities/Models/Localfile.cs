@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("localfile")]
 public partial class Localfile
@@ -19,7 +22,7 @@ public partial class Localfile
     [StringLength(255)]
     public string LocalfilePath { get; set; } = null!;
 
-    [Column("localfile_type", TypeName = "enum('image','video','sound','log','other')")]
+    [Column("localfile_type", TypeName = "enum('image','video','audio','log','other')")]
     public string LocalfileType { get; set; } = null!;
 
     [Column("localfile_time", TypeName = "datetime")]

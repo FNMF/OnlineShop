@@ -1,9 +1,10 @@
-﻿using API.Domain.Entities.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("refund")]
 [Index("RefundOrderuuid", Name = "refund_order_order_uuid_fk")]
@@ -23,14 +24,14 @@ public partial class Refund
     [MaxLength(16)]
     public byte[] RefundOrderuuid { get; set; } = null!;
 
-    [Column("refund_type", TypeName = "enum('return','refund','discount')")]
+    [Column("refund_type", TypeName = "enum('returnof','refund','discount')")]
     public string RefundType { get; set; } = null!;
 
     [Column("refund_reason")]
     [StringLength(300)]
     public string? RefundReason { get; set; }
 
-    [Column("refund_status", TypeName = "enum('new','review','pass','refuse')")]
+    [Column("refund_status", TypeName = "enum('create','review','pass','refuse')")]
     public string RefundStatus { get; set; } = null!;
 
     [Column("refund_amount")]

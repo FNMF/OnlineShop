@@ -1,6 +1,5 @@
-﻿using API.Database;
-using API.Entities.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using API.Domain.Entities.Models;
+using API.Infrastructure.Database;
 
 namespace API.Repositories
 {

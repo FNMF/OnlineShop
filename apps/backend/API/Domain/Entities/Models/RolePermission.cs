@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("role_permission")]
 [Index("RpPermissionid", Name = "role_permission_permission_permission_id_fk")]

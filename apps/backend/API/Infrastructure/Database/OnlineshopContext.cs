@@ -1,8 +1,10 @@
-﻿using API.Domain.Entities.Models;
-using API.Entities.Models;
+﻿using System;
+using System.Collections.Generic;
+using API.Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
-namespace API.Database;
+namespace API.Infrastructure.Database;
 
 public partial class OnlineshopContext : DbContext
 {
@@ -183,7 +185,7 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.OrderExpectedtime).HasDefaultValueSql("'顺序配送'");
             entity.Property(e => e.OrderRider).HasDefaultValueSql("'店家骑手'");
             entity.Property(e => e.OrderRiderservice).HasDefaultValueSql("'店家配送'");
-            entity.Property(e => e.OrderStatus).HasDefaultValueSql("'new'");
+            entity.Property(e => e.OrderStatus).HasDefaultValueSql("'created'");
             entity.Property(e => e.OrderUcuuid).IsFixedLength();
             entity.Property(e => e.OrderUseruuid).IsFixedLength();
 
@@ -223,7 +225,7 @@ public partial class OnlineshopContext : DbContext
 
             entity.Property(e => e.RefundUuid).IsFixedLength();
             entity.Property(e => e.RefundOrderuuid).IsFixedLength();
-            entity.Property(e => e.RefundStatus).HasDefaultValueSql("'new'");
+            entity.Property(e => e.RefundStatus).HasDefaultValueSql("'create'");
             entity.Property(e => e.RefundUseruuid).IsFixedLength();
 
             entity.HasOne(d => d.RefundOrderuu).WithMany(p => p.Refunds)
@@ -282,18 +284,18 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Usercoupon>(entity =>
         {
-            entity.HasKey(e => e.UpUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.UcUuid).HasName("PRIMARY");
 
-            entity.Property(e => e.UpUuid).IsFixedLength();
-            entity.Property(e => e.UpDiscountvalue).HasDefaultValueSql("'0.00'");
-            entity.Property(e => e.UpStatus).HasDefaultValueSql("'unused'");
-            entity.Property(e => e.UpUseruuid).IsFixedLength();
+            entity.Property(e => e.UcUuid).IsFixedLength();
+            entity.Property(e => e.UcDiscountvalue).HasDefaultValueSql("'0.00'");
+            entity.Property(e => e.UcStatus).HasDefaultValueSql("'unused'");
+            entity.Property(e => e.UcUseruuid).IsFixedLength();
 
-            entity.HasOne(d => d.UpCoupon).WithMany(p => p.Usercoupons)
+            entity.HasOne(d => d.UcCoupon).WithMany(p => p.Usercoupons)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("usercoupon_coupon_coupon_id_fk");
 
-            entity.HasOne(d => d.UpUseruu).WithMany(p => p.Usercoupons)
+            entity.HasOne(d => d.UcUseruu).WithMany(p => p.Usercoupons)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("usercoupon_user_user_uuid_fk");
         });

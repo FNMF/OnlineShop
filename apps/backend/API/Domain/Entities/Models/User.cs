@@ -1,8 +1,10 @@
-﻿using API.Domain.Entities.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("user")]
 public partial class User
@@ -47,6 +49,6 @@ public partial class User
     [InverseProperty("UpUseruu")]
     public virtual ICollection<UserPrivilege> UserPrivileges { get; set; } = new List<UserPrivilege>();
 
-    [InverseProperty("UpUseruu")]
+    [InverseProperty("UcUseruu")]
     public virtual ICollection<Usercoupon> Usercoupons { get; set; } = new List<Usercoupon>();
 }

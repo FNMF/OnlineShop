@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("notification")]
 public partial class Notification
@@ -35,8 +38,8 @@ public partial class Notification
     [Column("notification_isdeleted")]
     public bool NotificationIsdeleted { get; set; }
 
-    [Column("notification_receivetype", TypeName = "enum('user','merchant','alluser','allmerchant')")]
-    public string NotificationReceivetype { get; set; } = null!;
+    [Column("notification_receivertype", TypeName = "enum('user','merchant','alluser','allmerchant')")]
+    public string NotificationReceivertype { get; set; } = null!;
 
     [Column("notification_sendertype", TypeName = "enum('merchant','platform','system','other')")]
     public string NotificationSendertype { get; set; } = null!;

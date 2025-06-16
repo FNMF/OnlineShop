@@ -1,51 +1,52 @@
-﻿using API.Domain.Entities.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.Models;
+namespace API.Domain.Entities.Models;
 
 [Table("usercoupon")]
-[Index("UpCouponid", Name = "usercoupon_coupon_coupon_id_fk")]
-[Index("UpUseruuid", Name = "usercoupon_user_user_uuid_fk")]
+[Index("UcCouponid", Name = "usercoupon_coupon_coupon_id_fk")]
+[Index("UcUseruuid", Name = "usercoupon_user_user_uuid_fk")]
 public partial class Usercoupon
 {
     [Key]
-    [Column("up_uuid")]
+    [Column("uc_uuid")]
     [MaxLength(16)]
-    public byte[] UpUuid { get; set; } = null!;
+    public byte[] UcUuid { get; set; } = null!;
 
-    [Column("up_couponid")]
-    public int UpCouponid { get; set; }
+    [Column("uc_couponid")]
+    public int UcCouponid { get; set; }
 
-    [Column("up_useruuid")]
+    [Column("uc_useruuid")]
     [MaxLength(16)]
-    public byte[] UpUseruuid { get; set; } = null!;
+    public byte[] UcUseruuid { get; set; } = null!;
 
-    [Column("up_receivetime", TypeName = "datetime")]
-    public DateTime UpReceivetime { get; set; }
+    [Column("uc_receivetime", TypeName = "datetime")]
+    public DateTime UcReceivetime { get; set; }
 
-    [Column("up_usedtime", TypeName = "datetime")]
-    public DateTime UpUsedtime { get; set; }
+    [Column("uc_usedtime", TypeName = "datetime")]
+    public DateTime UcUsedtime { get; set; }
 
-    [Column("up_status", TypeName = "enum('unused','used','OT','void')")]
-    public string UpStatus { get; set; } = null!;
+    [Column("uc_status", TypeName = "enum('unused','used','OT','invalidity')")]
+    public string UcStatus { get; set; } = null!;
 
-    [Column("up_discountvalue")]
+    [Column("uc_discountvalue")]
     [Precision(8, 2)]
-    public decimal? UpDiscountvalue { get; set; }
+    public decimal? UcDiscountvalue { get; set; }
 
-    [Column("up_isdeleted")]
-    public bool UpIsdeleted { get; set; }
+    [Column("uc_isdeleted")]
+    public bool UcIsdeleted { get; set; }
 
     [InverseProperty("OrderUcuu")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    [ForeignKey("UpCouponid")]
+    [ForeignKey("UcCouponid")]
     [InverseProperty("Usercoupons")]
-    public virtual Coupon UpCoupon { get; set; } = null!;
+    public virtual Coupon UcCoupon { get; set; } = null!;
 
-    [ForeignKey("UpUseruuid")]
+    [ForeignKey("UcUseruuid")]
     [InverseProperty("Usercoupons")]
-    public virtual User UpUseruu { get; set; } = null!;
+    public virtual User UcUseruu { get; set; } = null!;
 }

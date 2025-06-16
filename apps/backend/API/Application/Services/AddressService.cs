@@ -1,5 +1,5 @@
-﻿using API.Entities.Dto;
-using API.Entities.Models;
+﻿using API.Domain.Entities.Models;
+using API.Entities.Dto;
 using API.Helpers;
 using API.Repositories;
 using System.Text.Json;

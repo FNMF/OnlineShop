@@ -1,5 +1,5 @@
-﻿using API.Database;
-using API.Entities.Models;
+﻿using API.Domain.Entities.Models;
+using API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories
