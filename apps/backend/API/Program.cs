@@ -1,8 +1,10 @@
-using API.Entities.Other;
-using API.Helpers;
+using API.Application.Interfaces;
+using API.Application.Services;
+using API.Common.Helpers;
+using API.Common.Models;
+using API.Domain.Interfaces;
 using API.Infrastructure.Database;
-using API.Repositories;
-using API.Services;
+using API.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

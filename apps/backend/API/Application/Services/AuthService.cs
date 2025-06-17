@@ -1,8 +1,9 @@
-﻿using API.Entities.Other;
-using API.Helpers;
+﻿using API.Application.Interfaces;
+using API.Common.Helpers;
+using API.Common.Models;
 using System.Text.Json;
 
-namespace API.Services
+namespace API.Application.Services
 {
     public class AuthService : IAuthService
     {

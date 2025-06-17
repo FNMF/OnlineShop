@@ -1,7 +1,7 @@
 ﻿using API.Api.Models;
 using API.Domain.Entities.Models;
 
-namespace API.Services
+namespace API.Application.Interfaces
 {
     public interface ILogService
     {

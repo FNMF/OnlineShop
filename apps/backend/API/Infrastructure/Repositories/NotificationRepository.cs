@@ -1,8 +1,10 @@
-﻿using API.Domain.Entities.Models;
+﻿using API.Api.Models;
+using API.Domain.Entities.Models;
+using API.Domain.Interfaces;
 using API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Repositories
+namespace API.Infrastructure.Repositories
 {
     public class NotificationRepository : INotificationRepository
     {
@@ -11,7 +13,11 @@ namespace API.Repositories
         {
             _context = context;
         }
-        public async Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize)
+        public IQueryable<Notification> QueryNotifications()
+        {
+            return _context.Notifications;
+        }
+        /*public async Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize)
         {
             if (pageSize <= 0) pageSize = 10;
             if (pageNumber <= 0) pageNumber = 1;
@@ -58,7 +64,7 @@ namespace API.Repositories
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-        }
+        }*/
         public async Task<bool> AddNotificationAsync(Notification notification)
         {
             await _context.Notifications.AddAsync(notification);

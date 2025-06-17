@@ -1,9 +1,10 @@
 ﻿using API.Api.Models;
+using API.Application.Interfaces;
 using API.Domain.Entities.Models;
-using API.Repositories;
+using API.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Services
+namespace API.Application.Services
 {
     public class LogService : ILogService
     {
@@ -63,7 +64,7 @@ namespace API.Services
         {
             try
             {
-                var query = _logRepository.QueryLog();
+                var query = _logRepository.QueryLogs();
 
                 if (queryOptions.UuidBytes != null)
                 {

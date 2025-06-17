@@ -1,13 +1,15 @@
-﻿using API.Domain.Entities.Models;
+﻿using API.Api.Models;
+using API.Domain.Entities.Models;
 
-namespace API.Repositories
+namespace API.Domain.Interfaces
 {
     public interface INotificationRepository
     {
-        Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize);
+        IQueryable<Notification> QueryNotifications();
+        /*Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize);
         Task<List<Notification>> GetMerchantAllNotificationByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize);
         Task<List<Notification>> GetUserAllNotificationsByUuidAndTypeWithPagingAsync(byte[] uuidBytes, string type, int pageNumber, int pageSize);
-        Task<List<Notification>> GetMerchantAllNotificationByUuidAndTypeWithPagingAsync(byte[] uuidBytes, string type, int pageNumber, int pageSize);
+        Task<List<Notification>> GetMerchantAllNotificationByUuidAndTypeWithPagingAsync(byte[] uuidBytes, string type, int pageNumber, int pageSize);*/
         Task<bool> AddNotificationAsync(Notification notification);
         Task<bool> AddBatchNotificationAsync(List<Notification> notifications);
         Task<bool> UpdateNotificationAsync(Notification notification);

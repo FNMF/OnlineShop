@@ -1,11 +1,11 @@
 ﻿using API.Domain.Entities.Models;
 
-namespace API.Repositories
+namespace API.Domain.Interfaces
 {
     public interface ILogRepository
     {
         Task<bool> AddLog(Log log);
-        IQueryable<Log> QueryLog();
+        IQueryable<Log> QueryLogs();
         /*Task<List<Log>> GetLog(byte[] uuidBytes, int pageNumber, int pageSize);
         Task<List<Log>> GetLog(byte[] uuidBytes, string type, int pageNumber, int pageSize);
         Task<List<Log>> GetLog(byte[] uuidBytes, string type, DateTime start, DateTime end, int pageNumber, int pageSize);

@@ -1,10 +1,10 @@
-﻿using API.Entities.Other;
+﻿using API.Common.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace API.Helpers
+namespace API.Common.Helpers
 {
     public class JwtHelper
     {

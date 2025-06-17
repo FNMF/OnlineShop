@@ -1,8 +1,9 @@
 ﻿using API.Domain.Entities.Models;
+using API.Domain.Interfaces;
 using API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Repositories
+namespace API.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {

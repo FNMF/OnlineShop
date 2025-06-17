@@ -1,4 +1,4 @@
-﻿namespace API.Repositories
+﻿namespace API.Domain.Interfaces
 {
     public interface IUsercouponRepository
     {

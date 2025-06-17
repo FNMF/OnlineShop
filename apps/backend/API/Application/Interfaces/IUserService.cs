@@ -1,6 +1,6 @@
 ﻿using API.Domain.Entities.Models;
 
-namespace API.Services
+namespace API.Application.Interfaces
 {
     public interface IUserService
     {

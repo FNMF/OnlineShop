@@ -1,7 +1,7 @@
-﻿using API.Entities.Other;
+﻿using API.Common.Models;
 using System.Security.Cryptography;
 
-namespace API.Helpers
+namespace API.Common.Helpers
 {
     public class PwdHashHelper
     {

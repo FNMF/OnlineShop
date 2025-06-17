@@ -1,9 +1,10 @@
-﻿using API.Entities.Dto;
-using API.Helpers;
-using API.Repositories;
+﻿using API.Application.DTOs;
+using API.Application.Interfaces;
+using API.Common.Helpers;
+using API.Domain.Interfaces;
 using System.Text.Json;
 
-namespace API.Services
+namespace API.Application.Services
 {
     public class AdminService
     {

@@ -1,7 +1,8 @@
-﻿using API.Domain.Entities.Models;
-using API.Repositories;
+﻿using API.Application.Interfaces;
+using API.Domain.Entities.Models;
+using API.Domain.Interfaces;
 
-namespace API.Services
+namespace API.Application.Services
 {
     public class UserService : IUserService
     {

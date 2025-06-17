@@ -1,4 +1,4 @@
-﻿namespace API.Entities.Dto
+﻿namespace API.Application.DTOs
 {
     public class CURAddressDto
     {

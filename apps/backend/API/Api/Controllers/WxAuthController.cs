@@ -1,8 +1,8 @@
-﻿using API.Entities.Dto;
-using API.Services;
+﻿using API.Application.DTOs;
+using API.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Api.Controllers
 {
     [ApiController]
     [Route("api/auth")]

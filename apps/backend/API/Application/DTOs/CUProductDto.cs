@@ -1,6 +1,4 @@
-﻿using API.Entities.Dto;
-
-namespace API.Domain.Entities.Dto
+﻿namespace API.Application.DTOs
 {
     public class CUProductDto
     {

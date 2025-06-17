@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace API.Helpers
+namespace API.Common.Helpers
 {
     public class RandomKeyHelper
     {

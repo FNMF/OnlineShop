@@ -1,7 +1,8 @@
 ﻿using API.Domain.Entities.Models;
+using API.Domain.Interfaces;
 using API.Infrastructure.Database;
 
-namespace API.Repositories
+namespace API.Infrastructure.Repositories
 {
     public class LogRepository : ILogRepository
     {
@@ -12,7 +13,7 @@ namespace API.Repositories
             int affected = await _context.SaveChangesAsync();       //如果数据库操作大于0则返回true
             return affected > 0;
         }
-        public IQueryable<Log> QueryLog()        //对于Repository层只需要返回IQueryable即可，剩下操作全在Service层完成
+        public IQueryable<Log> QueryLogs()        //对于Repository层只需要返回IQueryable即可，剩下操作全在Service层完成
         {
             return _context.Logs;
         }

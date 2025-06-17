@@ -1,7 +1,7 @@
-﻿using API.Domain.Entities.Dto;
+﻿using API.Application.DTOs;
 using API.Domain.Entities.Models;
 
-namespace API.Repositories
+namespace API.Domain.Interfaces
 {
     public interface IProductRepository
     {

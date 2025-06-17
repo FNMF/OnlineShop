@@ -1,4 +1,4 @@
-﻿namespace API.Domain.Entities.Dto
+﻿namespace API.Application.DTOs
 {
     public class CUMerchantDto
     {

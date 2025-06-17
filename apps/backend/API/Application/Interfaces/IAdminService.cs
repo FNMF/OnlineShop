@@ -1,6 +1,6 @@
-﻿using API.Entities.Dto;
+﻿using API.Application.DTOs;
 
-namespace API.Services
+namespace API.Application.Interfaces
 {
     public interface IAdminService
     {

@@ -1,4 +1,4 @@
-﻿namespace API.Entities.Other
+﻿namespace API.Common.Models
 {
     public class UuidPwd
     {
