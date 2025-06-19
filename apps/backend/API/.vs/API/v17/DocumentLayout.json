@@ -3,84 +3,28 @@
   "WorkspaceRootPath": "D:\\Project\\OnlineShop\\apps\\backend\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\dtos\\cuadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\dtos\\cuadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\iaddressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\iaddressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\imerchantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\imerchantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\merchantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\merchantservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\notificationdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\notificationdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\logservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\logservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\notificationqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\notificationqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\infrastructure\\repositories\\logrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:infrastructure\\repositories\\logrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\domain\\interfaces\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\domain\\interfaces\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:domain\\interfaces\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\logqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\logqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -90,167 +34,80 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CUAdminDto.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\DTOs\\CUAdminDto.cs",
-              "RelativeDocumentMoniker": "Application\\DTOs\\CUAdminDto.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\DTOs\\CUAdminDto.cs",
-              "RelativeToolTip": "Application\\DTOs\\CUAdminDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAZAAAA",
+              "Title": "NotificationDeleteOptions.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationDeleteOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\NotificationDeleteOptions.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationDeleteOptions.cs",
+              "RelativeToolTip": "Api\\Models\\NotificationDeleteOptions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:52.149Z",
+              "WhenOpened": "2025-06-19T06:52:36.69Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "IAddressService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAddressService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IAddressService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAddressService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IAddressService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:46.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IAdminService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAdminService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IAdminService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAdminService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IAdminService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:39.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAuthService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IAuthService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IAuthService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IAuthService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:34.996Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ILogService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\ILogService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\ILogService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\ILogService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\ILogService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:31.576Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IMerchantService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IMerchantService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IMerchantService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IMerchantService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IMerchantService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:28.234Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IUserService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\IUserService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\IUserService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\IUserService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:20.459Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\UserService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\UserService.cs",
-              "RelativeToolTip": "Application\\Services\\UserService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:10.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MerchantService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\MerchantService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\MerchantService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\MerchantService.cs",
-              "RelativeToolTip": "Application\\Services\\MerchantService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:54:02.716Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "LogService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\LogService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\LogService.cs",
               "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\LogService.cs",
               "RelativeToolTip": "Application\\Services\\LogService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAfAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:53:57.986Z",
+              "WhenOpened": "2025-06-17T08:06:15.691Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\AuthService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AuthService.cs",
-              "RelativeToolTip": "Application\\Services\\AuthService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
+              "DocumentIndex": 2,
+              "Title": "INotificationRepository.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\INotificationRepository.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\INotificationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:53:52.671Z",
+              "WhenOpened": "2025-06-17T08:05:50.828Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AdminService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AdminService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\AdminService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AdminService.cs",
-              "RelativeToolTip": "Application\\Services\\AdminService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "NotificationRepository.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\NotificationRepository.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\NotificationRepository.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAxwFUAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:53:41.392Z",
+              "WhenOpened": "2025-06-17T08:05:58.72Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
+              "Title": "INotificationService.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\INotificationService.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\INotificationService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T08:03:21.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "NotificationService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\NotificationService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\NotificationService.cs",
@@ -258,102 +115,7 @@
               "RelativeToolTip": "Application\\Services\\NotificationService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:49:52.527Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "INotificationService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
-              "RelativeDocumentMoniker": "Application\\Interfaces\\INotificationService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
-              "RelativeToolTip": "Application\\Interfaces\\INotificationService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:49:37.025Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "AddressService.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AddressService.cs",
-              "RelativeDocumentMoniker": "Application\\Services\\AddressService.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\AddressService.cs",
-              "RelativeToolTip": "Application\\Services\\AddressService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:53:22.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "LogQueryOptions.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\LogQueryOptions.cs",
-              "RelativeDocumentMoniker": "Api\\Models\\LogQueryOptions.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\LogQueryOptions.cs",
-              "RelativeToolTip": "Api\\Models\\LogQueryOptions.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:25:18.767Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "NotificationQueryOptions.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationQueryOptions.cs",
-              "RelativeDocumentMoniker": "Api\\Models\\NotificationQueryOptions.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationQueryOptions.cs",
-              "RelativeToolTip": "Api\\Models\\NotificationQueryOptions.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:25:16.193Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "NotificationRepository.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\NotificationRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\NotificationRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEIAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:22:21.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "INotificationRepository.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
-              "RelativeDocumentMoniker": "Domain\\Interfaces\\INotificationRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
-              "RelativeToolTip": "Domain\\Interfaces\\INotificationRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:22:15.961Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "LogRepository.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\LogRepository.cs",
-              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\LogRepository.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\LogRepository.cs",
-              "RelativeToolTip": "Infrastructure\\Repositories\\LogRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T07:23:20.532Z",
+              "WhenOpened": "2025-06-17T08:03:20.544Z",
               "EditorCaption": ""
             }
           ]

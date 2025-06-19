@@ -28,7 +28,7 @@ namespace API.Application.Services
                     LogDetail = detail,
                     LogTime = DateTime.Now
                 };
-                await _logRepository.AddLog(log);
+                await _logRepository.AddLogAsync(log);
                 return true;
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace API.Application.Services
                     LogDatajson = datajson,
                     LogObjectuuid = objectuuidBytes
                 };
-                await _logRepository.AddLog(log);
+                await _logRepository.AddLogAsync(log);
                 return true;
             }
             catch (Exception ex)

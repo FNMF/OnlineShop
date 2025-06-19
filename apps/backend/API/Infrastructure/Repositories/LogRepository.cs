@@ -7,7 +7,7 @@ namespace API.Infrastructure.Repositories
     public class LogRepository : ILogRepository
     {
         private readonly OnlineshopContext _context;
-        public async Task<bool> AddLog(Log log)
+        public async Task<bool> AddLogAsync(Log log)
         {
             await _context.Logs.AddAsync(log);
             int affected = await _context.SaveChangesAsync();       //如果数据库操作大于0则返回true

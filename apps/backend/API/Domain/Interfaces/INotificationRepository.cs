@@ -13,7 +13,7 @@ namespace API.Domain.Interfaces
         Task<bool> AddNotificationAsync(Notification notification);
         Task<bool> AddBatchNotificationAsync(List<Notification> notifications);
         Task<bool> UpdateNotificationAsync(Notification notification);
-        Task<bool> DeleteOutOfTimeNotificationAsync(List<Notification> notifications);
+        Task<bool> DeleteNotificationAsync(List<Notification> notifications);
 
     }
 }

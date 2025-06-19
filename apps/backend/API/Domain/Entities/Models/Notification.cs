@@ -29,9 +29,6 @@ public partial class Notification
     [Column("notification_type", TypeName = "enum('order','system','activity')")]
     public string NotificationType { get; set; } = null!;
 
-    [Column("notification_isreaded")]
-    public bool NotificationIsreaded { get; set; }
-
     [Column("notification_time", TypeName = "datetime")]
     public DateTime NotificationTime { get; set; }
 

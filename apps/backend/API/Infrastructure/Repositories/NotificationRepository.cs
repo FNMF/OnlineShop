@@ -83,7 +83,7 @@ namespace API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> DeleteOutOfTimeNotificationAsync(List<Notification> notifications)
+        public async Task<bool> DeleteNotificationAsync(List<Notification> notifications)
         {
             _context.Notifications.RemoveRange(notifications);
             var result = await _context.SaveChangesAsync();

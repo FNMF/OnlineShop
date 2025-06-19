@@ -7,7 +7,7 @@
     -减少错误
     -便于代码审查
 
-    版本v0.0.2
+    版本v0.0.3
 
 ##代码规范
 
@@ -44,10 +44,17 @@
                         abbreviated Pascal      OT        
     
     注意事项：
+        对于方法类，用于Repository层的方法如果是异步则需要添加Async后缀，而对于Service层则不需要，Service层方法名越简单但能表意即可
+        
+        对于Service中某些方法，如果使用了查询选项这样的传入，则方法名无需添加参数后缀，例如：public async Task<List<Log>> GetLogs(LogQueryOptions queryOptions)
+        
         对于枚举类是历史遗留问题，数据库字段太多了不易修改，这里强调枚举类在项目中所有的缩写用大写字母并且在其类中必须明确注释缩写的原意，比如OT表示out of time。
 
 ###语法与代码样式
-    所有的{}要用换行法表示，例如：
+    所有的非简写{}要用换行法表示，例如：
+    public string name {get; set;}
+    /////////////////////////
+
     if(condition)
     {
         DoSomethings;
@@ -135,3 +142,7 @@
 
     v0.0.2
     -更新Git管理的规范
+
+    v0.0.3
+    -更新了命名规范
+    -更新了语法与代码样式

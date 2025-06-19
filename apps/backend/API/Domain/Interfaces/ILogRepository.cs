@@ -4,7 +4,7 @@ namespace API.Domain.Interfaces
 {
     public interface ILogRepository
     {
-        Task<bool> AddLog(Log log);
+        Task<bool> AddLogAsync(Log log);
         IQueryable<Log> QueryLogs();
         /*Task<List<Log>> GetLog(byte[] uuidBytes, int pageNumber, int pageSize);
         Task<List<Log>> GetLog(byte[] uuidBytes, string type, int pageNumber, int pageSize);
