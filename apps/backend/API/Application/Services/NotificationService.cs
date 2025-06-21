@@ -2,7 +2,7 @@
 
 namespace API.Application.Services
 {
-    public class NotificationService:INotificationService
+    public class NotificationService
     {
     }
 }

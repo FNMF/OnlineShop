@@ -47,4 +47,7 @@ public partial class Notification
 
     [Column("notification_endtime", TypeName = "datetime")]
     public DateTime NotificationEndtime { get; set; }
+
+    [Column("notification_isaudited")]
+    public bool NotificationIsaudited { get; set; }
 }

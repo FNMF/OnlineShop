@@ -23,11 +23,11 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<AdminRole> AdminRoles { get; set; }
 
+    public virtual DbSet<Audit> Audits { get; set; }
+
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Coupon> Coupons { get; set; }
-
-    public virtual DbSet<Image> Images { get; set; }
 
     public virtual DbSet<Localfile> Localfiles { get; set; }
 
@@ -56,6 +56,12 @@ public partial class OnlineshopContext : DbContext
     public virtual DbSet<UserPrivilege> UserPrivileges { get; set; }
 
     public virtual DbSet<Usercoupon> Usercoupons { get; set; }
+
+    public virtual DbSet<Walletaccount> Walletaccounts { get; set; }
+
+    public virtual DbSet<Walletrequest> Walletrequests { get; set; }
+
+    public virtual DbSet<Wallettransaction> Wallettransactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -104,6 +110,17 @@ public partial class OnlineshopContext : DbContext
                 .HasConstraintName("admin_role_role_role_id_fk");
         });
 
+        modelBuilder.Entity<Audit>(entity =>
+        {
+            entity.HasKey(e => e.AuditUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.AuditUuid).IsFixedLength();
+            entity.Property(e => e.AuditAuditoruuid).IsFixedLength();
+            entity.Property(e => e.AuditObjectuuid).IsFixedLength();
+            entity.Property(e => e.AuditStatus).HasDefaultValueSql("'pending'");
+            entity.Property(e => e.AuditSubmitteruuid).IsFixedLength();
+        });
+
         modelBuilder.Entity<Cart>(entity =>
         {
             entity.HasKey(e => e.CartUuid).HasName("PRIMARY");
@@ -124,28 +141,12 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.CouponStatus).HasDefaultValueSql("'NA'");
         });
 
-        modelBuilder.Entity<Image>(entity =>
-        {
-            entity.HasKey(e => e.ImageUuid).HasName("PRIMARY");
-
-            entity.Property(e => e.ImageUuid).IsFixedLength();
-            entity.Property(e => e.ImageFileuuid).IsFixedLength();
-            entity.Property(e => e.ImageProductuuid).IsFixedLength();
-
-            entity.HasOne(d => d.ImageFileuu).WithMany(p => p.Images)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("image_file_file_uuid_fk");
-
-            entity.HasOne(d => d.ImageProductuu).WithMany(p => p.Images)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("image_product_product_uuid_fk");
-        });
-
         modelBuilder.Entity<Localfile>(entity =>
         {
             entity.HasKey(e => e.LocalfileUuid).HasName("PRIMARY");
 
             entity.Property(e => e.LocalfileUuid).IsFixedLength();
+            entity.Property(e => e.LocalfileObjectuuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Log>(entity =>
@@ -298,6 +299,43 @@ public partial class OnlineshopContext : DbContext
             entity.HasOne(d => d.UcUseruu).WithMany(p => p.Usercoupons)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("usercoupon_user_user_uuid_fk");
+        });
+
+        modelBuilder.Entity<Walletaccount>(entity =>
+        {
+            entity.HasKey(e => e.WaUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.WaUuid).IsFixedLength();
+            entity.Property(e => e.WaMerchantuuid).IsFixedLength();
+
+            entity.HasOne(d => d.WaMerchantuu).WithMany(p => p.Walletaccounts)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("wallet_account_merchant_merchant_uuid_fk");
+        });
+
+        modelBuilder.Entity<Walletrequest>(entity =>
+        {
+            entity.HasKey(e => e.WrUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.WrUuid).IsFixedLength();
+            entity.Property(e => e.WrMerchantuuid).IsFixedLength();
+
+            entity.HasOne(d => d.WrMerchantuu).WithMany(p => p.Walletrequests)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("walletrequest_merchant_merchant_uuid_fk");
+        });
+
+        modelBuilder.Entity<Wallettransaction>(entity =>
+        {
+            entity.HasKey(e => e.WtUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.WtUuid).IsFixedLength();
+            entity.Property(e => e.WtMerchantuuid).IsFixedLength();
+            entity.Property(e => e.WtObjectuuid).IsFixedLength();
+
+            entity.HasOne(d => d.WtMerchantuu).WithMany(p => p.Wallettransactions)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("wallettransaction_merchant_merchant_uuid_fk");
         });
 
         OnModelCreatingPartial(modelBuilder);

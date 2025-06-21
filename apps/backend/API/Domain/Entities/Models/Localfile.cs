@@ -25,12 +25,26 @@ public partial class Localfile
     [Column("localfile_type", TypeName = "enum('image','video','audio','log','other')")]
     public string LocalfileType { get; set; } = null!;
 
-    [Column("localfile_time", TypeName = "datetime")]
-    public DateTime LocalfileTime { get; set; }
+    [Column("localfile_createdat", TypeName = "datetime")]
+    public DateTime LocalfileCreatedat { get; set; }
 
     [Column("localfile_isdeleted")]
     public bool LocalfileIsdeleted { get; set; }
 
-    [InverseProperty("ImageFileuu")]
-    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
+    [Column("localfile_objectuuid")]
+    [MaxLength(16)]
+    public byte[]? LocalfileObjectuuid { get; set; }
+
+    [Column("localfile_objecttype", TypeName = "enum('merchant','product','user','platform','system')")]
+    public string LocalfileObjecttype { get; set; } = null!;
+
+    [Column("localfile_mimetype")]
+    [StringLength(50)]
+    public string LocalfileMimetype { get; set; } = null!;
+
+    [Column("localfile_size")]
+    public long LocalfileSize { get; set; }
+
+    [Column("localfile_isaudited")]
+    public bool LocalfileIsaudited { get; set; }
 }

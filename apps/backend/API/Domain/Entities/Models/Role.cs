@@ -24,6 +24,9 @@ public partial class Role
     [StringLength(20)]
     public string RoleDisplayname { get; set; } = null!;
 
+    [Column("role_type", TypeName = "enum('system','platform','shop')")]
+    public string RoleType { get; set; } = null!;
+
     [InverseProperty("ArRole")]
     public virtual ICollection<AdminRole> AdminRoles { get; set; } = new List<AdminRole>();
 

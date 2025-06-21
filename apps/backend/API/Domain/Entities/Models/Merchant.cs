@@ -52,10 +52,22 @@ public partial class Merchant
     [Column("merchant_isdeleted")]
     public bool MerchantIsdeleted { get; set; }
 
+    [Column("merchant_isaudited")]
+    public bool MerchantIsaudited { get; set; }
+
     [ForeignKey("MerchantAdminuuid")]
     [InverseProperty("Merchants")]
     public virtual Admin? MerchantAdminuu { get; set; }
 
     [InverseProperty("ProductMerchantuu")]
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    [InverseProperty("WaMerchantuu")]
+    public virtual ICollection<Walletaccount> Walletaccounts { get; set; } = new List<Walletaccount>();
+
+    [InverseProperty("WrMerchantuu")]
+    public virtual ICollection<Walletrequest> Walletrequests { get; set; } = new List<Walletrequest>();
+
+    [InverseProperty("WtMerchantuu")]
+    public virtual ICollection<Wallettransaction> Wallettransactions { get; set; } = new List<Wallettransaction>();
 }

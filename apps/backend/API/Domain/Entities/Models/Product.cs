@@ -59,8 +59,8 @@ public partial class Product
     [Column("product_isdeleted")]
     public bool ProductIsdeleted { get; set; }
 
-    [InverseProperty("ImageProductuu")]
-    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
+    [Column("product_isaudited")]
+    public bool ProductIsaudited { get; set; }
 
     [ForeignKey("ProductMerchantuuid")]
     [InverseProperty("Products")]
