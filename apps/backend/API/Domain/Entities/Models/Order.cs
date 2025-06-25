@@ -46,8 +46,7 @@ public partial class Order
     [MaxLength(16)]
     public byte[]? OrderUcuuid { get; set; }
 
-    [Column("order_riderservice")]
-    [StringLength(255)]
+    [Column("order_riderservice", TypeName = "enum('scheduled','immediate','preorder','pickup')")]
     public string OrderRiderservice { get; set; } = null!;
 
     [Column("order_rider")]
