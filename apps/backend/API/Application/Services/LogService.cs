@@ -1,5 +1,6 @@
 ﻿using API.Api.Models;
 using API.Application.Interfaces;
+using API.Common.Helpers;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +23,7 @@ namespace API.Application.Services
             {
                 var log = new Log
                 {
-                    LogUuid = Guid.NewGuid().ToByteArray(),
+                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
                     LogType = type,
                     LogDescription = description,
                     LogDetail = detail,
@@ -43,7 +44,7 @@ namespace API.Application.Services
             {
                 var log = new Log
                 {
-                    LogUuid = Guid.NewGuid().ToByteArray(),
+                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
                     LogType = type,
                     LogDescription = description,
                     LogDetail = detail,

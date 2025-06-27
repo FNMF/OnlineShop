@@ -1,5 +1,6 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces;
+using API.Common.Helpers;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
 using System.Text.Json;
@@ -96,7 +97,7 @@ namespace API.Application.Services
                     MerchantBusinessend = dto.EndTime,
                     MerchantName = dto.Name,
                     MerchantAdminuuid = dto.AdminUuid.ToByteArray(),
-                    MerchantUuid = Guid.NewGuid().ToByteArray()
+                    MerchantUuid = UuidV7Helper.NewUuidV7ToBtyes()
                 };
 
                 await _merchantRepository.AddMerchant(merchant);

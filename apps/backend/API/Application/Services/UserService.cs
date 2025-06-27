@@ -1,4 +1,5 @@
 ﻿using API.Application.Interfaces;
+using API.Common.Helpers;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
 
@@ -54,7 +55,7 @@ namespace API.Application.Services
         {
             try
             {
-                var user = new User { UserOpenid = openId, UserCreatedat = DateTime.Now, UserUuid = Guid.NewGuid().ToByteArray() };
+                var user = new User { UserOpenid = openId, UserCreatedat = DateTime.Now, UserUuid = UuidV7Helper.NewUuidV7ToBtyes() };
                 await _userRepository.AddUserAsync(user);
                 return user;
             }

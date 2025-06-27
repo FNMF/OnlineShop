@@ -85,7 +85,7 @@ namespace API.Application.Services
                     AddressIsdefault = dto.IsDefault,
                     AddressTime = DateTime.Now,
                     AddressUseruuid = uuidBytes,
-                    AddressUuid = Guid.NewGuid().ToByteArray()
+                    AddressUuid = UuidV7Helper.NewUuidV7ToBtyes()
                 };
 
 
