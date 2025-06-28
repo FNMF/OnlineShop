@@ -29,6 +29,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Coupon> Coupons { get; set; }
 
+    public virtual DbSet<Delivery> Deliveries { get; set; }
+
     public virtual DbSet<Localfile> Localfiles { get; set; }
 
     public virtual DbSet<Log> Logs { get; set; }
@@ -141,6 +143,19 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.CouponStatus).HasDefaultValueSql("'NA'");
         });
 
+        modelBuilder.Entity<Delivery>(entity =>
+        {
+            entity.HasKey(e => e.DeliveryUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.DeliveryUuid).IsFixedLength();
+            entity.Property(e => e.DeliveryNotificationuuid).IsFixedLength();
+            entity.Property(e => e.DeliveryReceiveruuid).IsFixedLength();
+
+            entity.HasOne(d => d.DeliveryNotificationuu).WithMany(p => p.Deliveries)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("delivery_notification_notification_uuid_fk");
+        });
+
         modelBuilder.Entity<Localfile>(entity =>
         {
             entity.HasKey(e => e.LocalfileUuid).HasName("PRIMARY");
@@ -173,7 +188,6 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.NotificationUuid).HasName("PRIMARY");
 
             entity.Property(e => e.NotificationUuid).IsFixedLength();
-            entity.Property(e => e.NotificationReceiveuuid).IsFixedLength();
             entity.Property(e => e.NotificationSenderuuid).IsFixedLength();
         });
 

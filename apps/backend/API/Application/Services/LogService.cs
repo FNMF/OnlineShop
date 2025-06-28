@@ -2,6 +2,7 @@
 using API.Application.Interfaces;
 using API.Common.Helpers;
 using API.Domain.Entities.Models;
+using API.Domain.Enums;
 using API.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,14 +18,14 @@ namespace API.Application.Services
             _logRepository = logRepository;
             _logger = logger;
         }
-        public async Task<bool> AddLog(string type, string description, string detail)
+        public async Task<bool> AddLog(LogType type, string description, string detail)
         {
             try
             {
                 var log = new Log
                 {
                     LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
-                    LogType = type,
+                    LogType = type.ToString(),
                     LogDescription = description,
                     LogDetail = detail,
                     LogTime = DateTime.Now
@@ -38,14 +39,36 @@ namespace API.Application.Services
                 return false;
             }
         }
-        public async Task<bool> AddLog(string type, string description, string detail, byte[] objectuuidBytes, string datajson)
+        public async Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes)
         {
             try
             {
                 var log = new Log
                 {
                     LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
-                    LogType = type,
+                    LogType = type.ToString(),
+                    LogDescription = description,
+                    LogDetail = detail,
+                    LogTime = DateTime.Now,
+                    LogObjectuuid = objectuuidBytes
+                };
+                await _logRepository.AddLogAsync(log);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "创建log时出错");
+                return false;
+            }
+        }
+        public async Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes, string datajson)
+        {
+            try
+            {
+                var log = new Log
+                {
+                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                    LogType = type.ToString(),
                     LogDescription = description,
                     LogDetail = detail,
                     LogTime = DateTime.Now,

@@ -56,11 +56,11 @@ namespace API.Application.Services
             {
                 user = await _userService.CreateUserWithOpenIdAsync(session.openid);
                 await _logService.AddLog("user", "创建新用户", "无", user.UserUuid.ToArray(), json);
-                return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), "User", new Guid(user.UserUuid));
+                return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), "User", null);
             }
 
             await _logService.AddLog("user", "用户登录", "无", user.UserUuid.ToArray(), json);
-            return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), "User", new Guid(user.UserUuid));
+            return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), "User", null);
         }
 
     }

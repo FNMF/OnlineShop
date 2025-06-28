@@ -1,4 +1,4 @@
-#项目进度备忘录
+#项目备忘录
 ##
     权限方面暂鸽，admin和role的中间表以及role和permission的中间表需要明确需求后建立。
     对应admin的RSC暂时不能实现
