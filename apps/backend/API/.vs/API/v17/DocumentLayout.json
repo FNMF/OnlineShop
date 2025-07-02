@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "D:\\Project\\OnlineShop\\apps\\backend\\API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\domain\\interfaces\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:domain\\interfaces\\inotificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:infrastructure\\repositories\\notificationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\services\\logservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\logservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\notificationqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\notificationqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\notificationdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\notificationdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\inotificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|D:\\Project\\OnlineShop\\apps\\backend\\API\\application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\api\\models\\createnotificationinputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\createnotificationinputdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\dtos\\createnotificationcommanddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\dtos\\createnotificationcommanddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|d:\\project\\onlineshop\\apps\\backend\\api\\application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\ilogservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +42,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "INotificationRepository.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\INotificationRepository.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Domain\\Interfaces\\INotificationRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\INotificationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T12:47:16.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotificationRepository.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\NotificationRepository.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Infrastructure\\Repositories\\NotificationRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\NotificationRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T12:29:08.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NotificationDeleteOptions.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationDeleteOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\NotificationDeleteOptions.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationDeleteOptions.cs",
+              "RelativeToolTip": "Api\\Models\\NotificationDeleteOptions.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T12:22:36.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NotificationQueryOptions.cs",
+              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationQueryOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\NotificationQueryOptions.cs",
+              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\NotificationQueryOptions.cs",
+              "RelativeToolTip": "Api\\Models\\NotificationQueryOptions.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T12:06:18.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ILogService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\ILogService.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\ILogService.cs",
@@ -50,70 +114,40 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CreateNotificationCommandDto.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\DTOs\\CreateNotificationCommandDto.cs",
-              "RelativeDocumentMoniker": "Application\\DTOs\\CreateNotificationCommandDto.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\DTOs\\CreateNotificationCommandDto.cs",
-              "RelativeToolTip": "Application\\DTOs\\CreateNotificationCommandDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T12:36:04.328Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateNotificationInputDto.cs",
-              "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\CreateNotificationInputDto.cs",
-              "RelativeDocumentMoniker": "Api\\Models\\CreateNotificationInputDto.cs",
-              "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Api\\Models\\CreateNotificationInputDto.cs",
-              "RelativeToolTip": "Api\\Models\\CreateNotificationInputDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T12:36:00.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "LogService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\LogService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\LogService.cs",
               "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\LogService.cs",
               "RelativeToolTip": "Application\\Services\\LogService.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAkwB0AAAAnAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB0AAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T10:08:17.2Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "NotificationService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\NotificationService.cs",
               "RelativeDocumentMoniker": "Application\\Services\\NotificationService.cs",
               "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Services\\NotificationService.cs",
               "RelativeToolTip": "Application\\Services\\NotificationService.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAAAGAAAABuAAAA",
+              "ViewState": "AQIAAOYAAAAAAAAAAAAAABQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T05:41:30.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "INotificationService.cs",
               "DocumentMoniker": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\INotificationService.cs",
               "ToolTip": "D:\\Project\\OnlineShop\\apps\\backend\\API\\Application\\Interfaces\\INotificationService.cs",
               "RelativeToolTip": "Application\\Interfaces\\INotificationService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAABqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T05:31:37.298Z",
               "EditorCaption": ""

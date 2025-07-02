@@ -14,6 +14,7 @@ namespace API.Domain.Interfaces
         Task<bool> AddBatchNotificationAsync(List<Notification> notifications);
         Task<bool> UpdateNotificationAsync(Notification notification);
         Task<bool> DeleteNotificationAsync(List<Notification> notifications);
+        Task SaveChangesAsync();
 
     }
 }
