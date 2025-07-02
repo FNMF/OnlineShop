@@ -89,5 +89,9 @@ namespace API.Infrastructure.Repositories
             var result = await _context.SaveChangesAsync();
             return result > 0;
         }
+        public Task SaveChangesAsync()
+        {
+            return _context.SaveChangesAsync();
+        }
     }
 }

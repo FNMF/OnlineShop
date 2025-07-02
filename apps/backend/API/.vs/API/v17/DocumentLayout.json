@@ -1,12 +1,207 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\domain\\entities\\models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:domain\\entities\\models\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\api\\models\\addresscreateoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\addresscreateoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\application\\interfaces\\iaddressservice.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\interfaces\\iaddressservice.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\api\\models\\addressqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\addressqueryoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\infrastructure\\repositories\\addressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:infrastructure\\repositories\\addressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\api\\models\\addressupdateoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\addressupdateoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\api\\models\\addressdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:api\\models\\addressdeleteoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\domain\\entities\\models\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:domain\\entities\\models\\log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\application\\dtos\\curaddressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\dtos\\curaddressdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\application\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:application\\services\\addressservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|c:\\users\\administrator\\desktop\\project\\demo\\apps\\backend\\api\\domain\\interfaces\\iaddressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{02576815-F938-45E3-BDB3-6573DB8743EE}|API.csproj|solutionrelative:domain\\interfaces\\iaddressrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Log.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Entities\\Models\\Log.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Models\\Log.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Entities\\Models\\Log.cs",
+              "RelativeToolTip": "Domain\\Entities\\Models\\Log.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:59:28.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CURAddressDto.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\DTOs\\CURAddressDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\CURAddressDto.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\DTOs\\CURAddressDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\CURAddressDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:23:48.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AddressDeleteOptions.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressDeleteOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\AddressDeleteOptions.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressDeleteOptions.cs",
+              "RelativeToolTip": "Api\\Models\\AddressDeleteOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:50:53.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AddressUpdateOptions.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressUpdateOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\AddressUpdateOptions.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressUpdateOptions.cs",
+              "RelativeToolTip": "Api\\Models\\AddressUpdateOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:22:42.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Address.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Entities\\Models\\Address.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Models\\Address.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Entities\\Models\\Address.cs",
+              "RelativeToolTip": "Domain\\Entities\\Models\\Address.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAmwC0AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:11:47.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AddressCreateOptions.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressCreateOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\AddressCreateOptions.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressCreateOptions.cs",
+              "RelativeToolTip": "Api\\Models\\AddressCreateOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T16:07:37.688Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAddressService.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\Interfaces\\IAddressService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IAddressService.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\Interfaces\\IAddressService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IAddressService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T15:06:58.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AddressService.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\Services\\AddressService.cs",
+              "RelativeDocumentMoniker": "Application\\Services\\AddressService.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Application\\Services\\AddressService.cs",
+              "RelativeToolTip": "Application\\Services\\AddressService.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAIwA8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T14:48:06.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IAddressRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Interfaces\\IAddressRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interfaces\\IAddressRepository.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Domain\\Interfaces\\IAddressRepository.cs",
+              "RelativeToolTip": "Domain\\Interfaces\\IAddressRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T14:43:48.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AddressQueryOptions.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressQueryOptions.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\AddressQueryOptions.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Api\\Models\\AddressQueryOptions.cs",
+              "RelativeToolTip": "Api\\Models\\AddressQueryOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-02T14:58:25.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AddressRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Infrastructure\\Repositories\\AddressRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\Repositories\\AddressRepository.cs",
+              "ToolTip": "C:\\Users\\Administrator\\Desktop\\project\\demo\\apps\\backend\\API\\Infrastructure\\Repositories\\AddressRepository.cs",
+              "RelativeToolTip": "Infrastructure\\Repositories\\AddressRepository.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA0wCMAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-01T16:16:40.185Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

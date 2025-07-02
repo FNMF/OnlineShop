@@ -13,7 +13,11 @@ namespace API.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<List<Address>> GetAllAddressByUuidAsync(byte[] uuidBytes)
+        public IQueryable<Address> QueryAddresses()
+        {
+            return _context.Addresses;
+        }
+        /*public async Task<List<Address>> GetAllAddressByUuidAsync(byte[] uuidBytes)
         {
             return await _context.Addresses
                 .Where(a => a.AddressUseruuid == uuidBytes && a.AddressIsdeleted == false)
@@ -30,7 +34,7 @@ namespace API.Infrastructure.Repositories
         {
             return await _context.Addresses
                      .FirstOrDefaultAsync(a => a.AddressUuid == uuidBytes && a.AddressIsdeleted == false);
-        }
+        }*/
         public async Task<bool> AddAddressAsync(Address address)
         {
             await _context.Addresses.AddAsync(address);
