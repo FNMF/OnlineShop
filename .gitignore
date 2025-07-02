@@ -18,6 +18,12 @@ obj/
 .idea/
 *.code-workspace
 
+# Visual Studio
+.vs/
+*.vc.db
+*.VC.db
+*.pdb
+
 # --- Logs and temp files ---
 *.log
 *.tmp
