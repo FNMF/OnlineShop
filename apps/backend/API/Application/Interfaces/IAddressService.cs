@@ -1,13 +1,14 @@
-﻿using API.Application.DTOs;
+﻿using API.Api.Models;
+using API.Application.DTOs;
 using API.Domain.Entities.Models;
 
 namespace API.Application.Interfaces
 {
     public interface IAddressService
     {
-        Task<List<Address>> GetAllAddressByUuidAsync(Guid useruuid);
-        Task<bool> CreateAddressByUuidAsync(CURAddressDto dto, Guid useruuid);
-        Task<bool?> DeleteAddressByUuidAsync(Guid addressuuid);
-        Task<bool> UpdateAddressByUuidAsync(Guid addressuuid, CURAddressDto dto);
+        Task<List<Address>> GetAllAddressByUuid(AddressQueryOptions addressQueryOptions);
+        Task<bool> CreateAddressByUuid(AddressCreateOptions addressCreateOptions);
+        Task<bool?> DeleteAddressByUuid(AddressDeleteOptions addressDeleteOptions);
+        Task<bool> UpdateAddressByUuid(AddressUpdateOptions addressUpdateOptions);
     }
 }
