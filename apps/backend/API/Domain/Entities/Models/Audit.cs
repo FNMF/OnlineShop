@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("audit")]
+[Index("AuditGroupuuid", Name = "audit_auditgroup_ag_uuid_fk")]
 public partial class Audit
 {
     [Key]
@@ -44,4 +45,12 @@ public partial class Audit
 
     [Column("audit_reviewedat", TypeName = "datetime")]
     public DateTime AuditReviewedat { get; set; }
+
+    [Column("audit_groupuuid")]
+    [MaxLength(16)]
+    public byte[] AuditGroupuuid { get; set; } = null!;
+
+    [ForeignKey("AuditGroupuuid")]
+    [InverseProperty("Audits")]
+    public virtual Auditgroup AuditGroupuu { get; set; } = null!;
 }

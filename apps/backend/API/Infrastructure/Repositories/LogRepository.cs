@@ -7,6 +7,10 @@ namespace API.Infrastructure.Repositories
     public class LogRepository : ILogRepository
     {
         private readonly OnlineshopContext _context;
+        public LogRepository(OnlineshopContext context)
+        {
+            _context = context;
+        }
         public async Task<bool> AddLogAsync(Log log)
         {
             await _context.Logs.AddAsync(log);

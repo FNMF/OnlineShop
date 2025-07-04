@@ -25,6 +25,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Audit> Audits { get; set; }
 
+    public virtual DbSet<Auditgroup> Auditgroups { get; set; }
+
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Coupon> Coupons { get; set; }
@@ -118,9 +120,22 @@ public partial class OnlineshopContext : DbContext
 
             entity.Property(e => e.AuditUuid).IsFixedLength();
             entity.Property(e => e.AuditAuditoruuid).IsFixedLength();
+            entity.Property(e => e.AuditGroupuuid).IsFixedLength();
             entity.Property(e => e.AuditObjectuuid).IsFixedLength();
             entity.Property(e => e.AuditStatus).HasDefaultValueSql("'pending'");
             entity.Property(e => e.AuditSubmitteruuid).IsFixedLength();
+
+            entity.HasOne(d => d.AuditGroupuu).WithMany(p => p.Audits)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("audit_auditgroup_ag_uuid_fk");
+        });
+
+        modelBuilder.Entity<Auditgroup>(entity =>
+        {
+            entity.HasKey(e => e.AgUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.AgUuid).IsFixedLength();
+            entity.Property(e => e.AgObjectuuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Cart>(entity =>

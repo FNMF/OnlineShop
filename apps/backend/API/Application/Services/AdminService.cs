@@ -1,6 +1,7 @@
 ﻿using API.Application.DTOs;
 using API.Application.Interfaces;
 using API.Common.Helpers;
+using API.Domain.Enums;
 using API.Domain.Interfaces;
 using System.Text.Json;
 
@@ -76,7 +77,7 @@ namespace API.Application.Services
                 }
                 admin.AdminPhone = AESHelper.Encrypt(dto.phone);
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.AddLog("admin", "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
+                await _logService.AddLog(LogType.admin, "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
                 {
                     account = admin.AdminAccount,
@@ -106,7 +107,7 @@ namespace API.Application.Services
                     return false;
                 }
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.AddLog("admin", "删除管理员信息", "逻辑删除", uuidBytes, JsonSerializer.Serialize(admin));
+                await _logService.AddLog(LogType.admin, "删除管理员信息", "逻辑删除", uuidBytes, JsonSerializer.Serialize(admin));
 
                 return true;
 

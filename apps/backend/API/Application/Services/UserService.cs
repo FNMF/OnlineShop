@@ -1,6 +1,7 @@
 ﻿using API.Application.Interfaces;
 using API.Common.Helpers;
 using API.Domain.Entities.Models;
+using API.Domain.Enums;
 using API.Domain.Interfaces;
 
 namespace API.Application.Services
@@ -80,7 +81,7 @@ namespace API.Application.Services
 
                 user.UserName = newName;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.AddLog("user", "用户改名", "无", uuidBytes, newName);
+                await _logService.AddLog(LogType.user, "用户改名", "无", uuidBytes, newName);
 
                 return newName;
             }
@@ -105,7 +106,7 @@ namespace API.Application.Services
 
                 user.UserBp += bp;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.AddLog("bp", "积分状态更新", detail, uuidBytes, bp.ToString());
+                await _logService.AddLog(LogType.bp, "积分状态更新", detail, uuidBytes, bp.ToString());
 
                 return user.UserBp;
             }
@@ -130,7 +131,7 @@ namespace API.Application.Services
 
                 user.UserCredit += credit;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.AddLog("credit", "信用状态更新", detail, uuidBytes, credit.ToString());
+                await _logService.AddLog(LogType.credit, "信用状态更新", detail, uuidBytes, credit.ToString());
 
                 return user.UserCredit;
             }
@@ -155,7 +156,7 @@ namespace API.Application.Services
                 }
                 user.UserIsdeleted = true;
                 await _userRepository.UpdateUserAsync(user);
-                await _logService.AddLog("user", "删除用户", "逻辑删除", uuidBytes, "无");
+                await _logService.AddLog(LogType.user, "删除用户", "逻辑删除", uuidBytes, "无");
                 return true;
             }
             catch (Exception ex)
