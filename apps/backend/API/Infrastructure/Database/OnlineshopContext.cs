@@ -135,7 +135,7 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.AgUuid).HasName("PRIMARY");
 
             entity.Property(e => e.AgUuid).IsFixedLength();
-            entity.Property(e => e.AgObjectuuid).IsFixedLength();
+            entity.Property(e => e.AgSubmitteruuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Cart>(entity =>

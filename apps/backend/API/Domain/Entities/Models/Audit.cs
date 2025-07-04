@@ -50,6 +50,9 @@ public partial class Audit
     [MaxLength(16)]
     public byte[] AuditGroupuuid { get; set; } = null!;
 
+    [Column("audit_isdeleted")]
+    public bool AuditIsdeleted { get; set; }
+
     [ForeignKey("AuditGroupuuid")]
     [InverseProperty("Audits")]
     public virtual Auditgroup AuditGroupuu { get; set; } = null!;

@@ -14,15 +14,18 @@ public partial class Auditgroup
     [MaxLength(16)]
     public byte[] AgUuid { get; set; } = null!;
 
-    [Column("ag_objectuuid")]
+    [Column("ag_submitteruuid")]
     [MaxLength(16)]
-    public byte[] AgObjectuuid { get; set; } = null!;
+    public byte[] AgSubmitteruuid { get; set; } = null!;
 
     [Column("ag_createdat", TypeName = "datetime")]
     public DateTime AgCreatedat { get; set; }
 
     [Column("ag_issingle")]
     public bool AgIssingle { get; set; }
+
+    [Column("ag_isdeleted")]
+    public bool AgIsdeleted { get; set; }
 
     [InverseProperty("AuditGroupuu")]
     public virtual ICollection<Audit> Audits { get; set; } = new List<Audit>();
