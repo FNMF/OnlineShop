@@ -13,14 +13,49 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.14">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.TestPlatform" Version="17.9.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+    <PackageReference Include="Scrutor" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Api\Common\Controllers\" />
+    <Folder Include="Api\MerchantCase\Controllers\" />
+    <Folder Include="Api\MerchantCase\Models\" />
+    <Folder Include="Api\SystemCase\Controllers\" />
+    <Folder Include="Api\SystemCase\Models\" />
+    <Folder Include="Api\UserCase\Models\" />
+    <Folder Include="Application\MerchantCase\DTOs\" />
+    <Folder Include="Application\MerchantCase\Handlers\" />
+    <Folder Include="Application\MerchantCase\Services\" />
+    <Folder Include="Application\MerchantCase\Interfaces\" />
+    <Folder Include="Application\PlatformCase\DTOs\" />
+    <Folder Include="Application\SystemCase\DTOs\" />
+    <Folder Include="Application\SystemCase\Handlers\" />
+    <Folder Include="Application\SystemCase\Interfaces\" />
+    <Folder Include="Application\SystemCase\Services\" />
+    <Folder Include="Application\UserCase\DTOs\" />
+    <Folder Include="Application\UserCase\Handlers\" />
+    <Folder Include="Application\UserCase\Interfaces\" />
+    <Folder Include="Application\UserCase\Services\" />
+    <Folder Include="Domain\Events\SystemCase\" />
+    <Folder Include="Domain\Events\UserCase\" />
+    <Folder Include="Domain\Events\MerchantCase\" />
+    <Folder Include="Domain\Services\MerchantCase\Implementations\" />
+    <Folder Include="Domain\Services\MerchantCase\Interfaces\" />
+    <Folder Include="Domain\Services\PlatformCase\Implementations\" />
+    <Folder Include="Domain\Services\PlatformCase\Interfaces\" />
+    <Folder Include="Domain\Services\SystemCase\Implementations\" />
+    <Folder Include="Domain\Services\SystemCase\Interfaces\" />
+    <Folder Include="Domain\Services\UserCase\Implementations\" />
+    <Folder Include="Domain\Services\UserCase\Interfaces\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

@@ -1,6 +1,6 @@
-﻿using API.Application.DTOs;
-using API.Application.Interfaces;
+﻿using API.Application.Common.DTOs;
 using API.Common.Helpers;
+using API.Common.Interfaces;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
 using System.Text.Json;

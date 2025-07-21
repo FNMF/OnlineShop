@@ -1,5 +1,4 @@
-﻿using API.Api.Models;
-using API.Domain.Entities.Models;
+﻿using API.Domain.Entities.Models;
 
 namespace API.Application.Interfaces
 {

@@ -43,6 +43,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
+    public virtual DbSet<Orderitem> Orderitems { get; set; }
+
     public virtual DbSet<Permission> Permissions { get; set; }
 
     public virtual DbSet<Privilege> Privileges { get; set; }
@@ -177,6 +179,7 @@ public partial class OnlineshopContext : DbContext
 
             entity.Property(e => e.LocalfileUuid).IsFixedLength();
             entity.Property(e => e.LocalfileObjectuuid).IsFixedLength();
+            entity.Property(e => e.LocalfileUploaderuuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Log>(entity =>
@@ -222,6 +225,23 @@ public partial class OnlineshopContext : DbContext
             entity.HasOne(d => d.OrderUseruu).WithMany(p => p.Orders)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("order_user_user_uuid_fk");
+        });
+
+        modelBuilder.Entity<Orderitem>(entity =>
+        {
+            entity.HasKey(e => e.OrderitemUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.OrderitemUuid).IsFixedLength();
+            entity.Property(e => e.OrderitemOrderuuid).IsFixedLength();
+            entity.Property(e => e.OrderitemProductuuid).IsFixedLength();
+
+            entity.HasOne(d => d.OrderitemOrderuu).WithMany(p => p.Orderitems)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("orderitem_order_order_uuid_fk");
+
+            entity.HasOne(d => d.OrderitemProductuu).WithMany(p => p.Orderitems)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("orderitem_product_product_uuid_fk");
         });
 
         modelBuilder.Entity<Permission>(entity =>

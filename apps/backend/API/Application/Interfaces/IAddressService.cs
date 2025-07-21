@@ -1,5 +1,4 @@
-﻿using API.Api.Models;
-using API.Application.DTOs;
+﻿using API.Api.Common.Models;
 using API.Domain.Entities.Models;
 
 namespace API.Application.Interfaces

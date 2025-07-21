@@ -1,6 +1,7 @@
-﻿using API.Application.DTOs;
+﻿using API.Application.Common.DTOs;
 using API.Application.Interfaces;
 using API.Common.Helpers;
+using API.Common.Interfaces;
 using API.Domain.Entities.Models;
 using API.Domain.Enums;
 using API.Domain.Interfaces;

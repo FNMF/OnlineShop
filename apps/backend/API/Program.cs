@@ -1,9 +1,13 @@
+using API.Application.Common.EventBus;
 using API.Application.Interfaces;
 using API.Application.Services;
 using API.Common.Helpers;
+using API.Common.Interfaces;
+using API.Common.Middlewares;
 using API.Common.Models;
 using API.Domain.Interfaces;
 using API.Infrastructure.Database;
+using API.Infrastructure.Events;
 using API.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -16,8 +20,6 @@ namespace API
     {
         public static void Main(string[] args)
         {
-            
-
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -30,6 +32,14 @@ namespace API
             var connectionString = builder.Configuration["ConnectionStrings:Default"];
             var jwtKey = builder.Configuration["Jwt:Key"];
 
+            builder.Services.AddScoped<EventBus>();
+
+            // 自动注册所有 Handler 实现类
+            builder.Services.Scan(scan => scan
+                .FromApplicationDependencies()
+                .AddClasses(classes => classes.AssignableTo(typeof(IEventHandler<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
 
             builder.Services.AddControllers();
 
@@ -84,6 +94,8 @@ namespace API
             builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
             var app = builder.Build();
+
+            
 
             // Configure the HTTP request pipeline.
 

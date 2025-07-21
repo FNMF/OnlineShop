@@ -62,6 +62,9 @@ public partial class Product
     [Column("product_isaudited")]
     public bool ProductIsaudited { get; set; }
 
+    [InverseProperty("OrderitemProductuu")]
+    public virtual ICollection<Orderitem> Orderitems { get; set; } = new List<Orderitem>();
+
     [ForeignKey("ProductMerchantuuid")]
     [InverseProperty("Products")]
     public virtual Merchant ProductMerchantuu { get; set; } = null!;

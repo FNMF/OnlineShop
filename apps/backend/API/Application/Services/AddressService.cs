@@ -1,15 +1,13 @@
-﻿using API.Api.Models;
-using API.Application.DTOs;
+﻿using API.Api.Common.Models;
 using API.Application.Interfaces;
 using API.Common.Helpers;
+using API.Common.Interfaces;
 using API.Domain.Entities.Models;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
 using API.Infrastructure.Extensions;
-using API.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace API.Application.Services
 {

@@ -47,4 +47,12 @@ public partial class Localfile
 
     [Column("localfile_isaudited")]
     public bool LocalfileIsaudited { get; set; }
+
+    [Column("localfile_uploaderuuid")]
+    [MaxLength(16)]
+    public byte[] LocalfileUploaderuuid { get; set; } = null!;
+
+    [Column("localfile_uploadip")]
+    [StringLength(50)]
+    public string LocalfileUploadip { get; set; } = null!;
 }

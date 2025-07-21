@@ -1,8 +1,9 @@
 ﻿using API.Application.Interfaces;
+using API.Common.Interfaces;
 
 namespace API.Application.Services
 {
-    public class AuditAndAuditGroupService
+    public class AuditAndAuditGroupService: IAuditAndAuditGroupService
     {
         private readonly IAuditService _auditService;
         private readonly IAuditGroupService _auditGroupService;

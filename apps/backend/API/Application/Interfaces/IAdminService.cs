@@ -1,4 +1,4 @@
-﻿using API.Application.DTOs;
+﻿using API.Application.Common.DTOs;
 
 namespace API.Application.Interfaces
 {

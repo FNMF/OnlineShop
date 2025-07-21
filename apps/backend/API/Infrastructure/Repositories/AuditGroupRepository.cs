@@ -33,9 +33,9 @@ namespace API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            return _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -86,6 +86,9 @@ public partial class Order
     [InverseProperty("Orders")]
     public virtual User OrderUseruu { get; set; } = null!;
 
+    [InverseProperty("OrderitemOrderuu")]
+    public virtual ICollection<Orderitem> Orderitems { get; set; } = new List<Orderitem>();
+
     [InverseProperty("RefundOrderuu")]
     public virtual ICollection<Refund> Refunds { get; set; } = new List<Refund>();
 }
