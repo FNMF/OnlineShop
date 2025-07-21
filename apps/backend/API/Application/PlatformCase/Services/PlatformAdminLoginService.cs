@@ -10,12 +10,14 @@ namespace API.Application.PlatformCase.Services
     public class PlatformAdminLoginService : IPlatformAdminLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
+        private readonly IAuthService _authService;
         private readonly EventBus _eventBus;
         private readonly ILogger<PlatformAdminLoginService> _logger;
 
-        public PlatformAdminLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, EventBus eventBus, ILogger<PlatformAdminLoginService> logger)
+        public PlatformAdminLoginService(IAdminPasswordVerifyService adminPasswordVerifyService,IAuthService authService, EventBus eventBus, ILogger<PlatformAdminLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
+            _authService = authService;
             _eventBus = eventBus;
             _logger = logger;
         }

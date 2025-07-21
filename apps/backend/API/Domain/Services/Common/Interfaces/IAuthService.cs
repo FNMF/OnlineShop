@@ -1,4 +1,4 @@
-﻿namespace API.Application.Interfaces
+﻿namespace API.Domain.Services.Common.Interfaces
 {
     public interface IAuthService
     {

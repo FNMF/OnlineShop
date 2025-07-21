@@ -6,6 +6,7 @@ using API.Common.Interfaces;
 using API.Common.Middlewares;
 using API.Common.Models;
 using API.Domain.Interfaces;
+using API.Domain.Services.Common.Interfaces;
 using API.Infrastructure.Database;
 using API.Infrastructure.Events;
 using API.Infrastructure.Repositories;

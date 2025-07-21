@@ -3,6 +3,7 @@ using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models;
 using API.Domain.Enums;
+using API.Domain.Services.Common.Interfaces;
 using System.Text.Json;
 
 namespace API.Application.Services
@@ -11,6 +12,7 @@ namespace API.Application.Services
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IUserService _userService;
+        private readonly IAdminService _adminService;
         private readonly JwtHelper _jwtHelper;
         private readonly IConfiguration _config;
         private readonly ILogger<AuthService> _logger;
@@ -58,11 +60,11 @@ namespace API.Application.Services
             {
                 user = await _userService.CreateUserWithOpenIdAsync(session.openid);
                 await _logService.AddLog(LogType.user, "创建新用户", "无", user.UserUuid.ToArray(), json);
-                return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), "User", null);
+                return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), CurrentType.User, null);
             }
 
             await _logService.AddLog(LogType.user, "用户登录", "无", user.UserUuid.ToArray(), json);
-            return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), "User", null);
+            return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), CurrentType.User, null);
         }
 
     }

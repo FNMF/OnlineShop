@@ -24,9 +24,9 @@ namespace API.Api.PlatformCase.Controllers
         /// </summary>
         /// <param name="loginDto">登录DTO</param>
         /// <returns>登录结果</returns>
-        [HttpPost("login")]
+        [HttpPost("login/account")]
         [AuthorizePermission(Permissions.VerifyAdmin)]
-        public async Task<IActionResult> Login([FromBody] PlatformAdminLoginByAccountDTO loginDto)
+        public async Task<IActionResult> LoginByAccount([FromBody] PlatformAdminLoginByAccountDTO loginDto)
         {
             if (loginDto == null)
             {

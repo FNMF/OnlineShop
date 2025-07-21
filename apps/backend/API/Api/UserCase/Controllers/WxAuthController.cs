@@ -1,5 +1,5 @@
 ﻿using API.Application.Common.DTOs;
-using API.Application.Interfaces;
+using API.Domain.Services.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.UserCase.Controllers
