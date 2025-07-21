@@ -1,6 +1,7 @@
 ﻿using API.Api.PlatformCase.Models;
 using API.Application.Common.EventBus;
 using API.Application.PlatformCase.Interfaces;
+using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Events.PlatformCase;
 using API.Domain.Services.Common.Interfaces;
@@ -10,14 +11,12 @@ namespace API.Application.PlatformCase.Services
     public class PlatformAdminLoginService : IPlatformAdminLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
-        private readonly IAuthService _authService;
         private readonly EventBus _eventBus;
         private readonly ILogger<PlatformAdminLoginService> _logger;
 
-        public PlatformAdminLoginService(IAdminPasswordVerifyService adminPasswordVerifyService,IAuthService authService, EventBus eventBus, ILogger<PlatformAdminLoginService> logger)
+        public PlatformAdminLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, EventBus eventBus, ILogger<PlatformAdminLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
-            _authService = authService;
             _eventBus = eventBus;
             _logger = logger;
         }
@@ -39,7 +38,7 @@ namespace API.Application.PlatformCase.Services
                 // 例如，你可以通过 EventPublisher 触发一些事件
                 await _eventBus.PublishAsync(new PlatformAdminLoginEvent(loginDto.Account));
 
-                return Result.Success("登录成功");
+                return Result.Success(isValid.Message);
             }
             catch (Exception ex)
             {
