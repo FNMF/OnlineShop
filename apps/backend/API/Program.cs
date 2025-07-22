@@ -30,8 +30,8 @@ namespace API
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
-            var connectionString = builder.Configuration["ConnectionStrings:Default"];
-            var jwtKey = builder.Configuration["Jwt:Key"];
+            var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+            var jwtKey = builder.Configuration["Jwt:SecretKey"];
 
             builder.Services.AddScoped<EventBus>();
 
@@ -50,8 +50,9 @@ namespace API
 
             builder.Services.AddSingleton<JwtHelper>(sp =>
             {
+                var configuration = sp.GetRequiredService<IConfiguration>();
                 var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
-                return new JwtHelper(settings);
+                return new JwtHelper(settings, configuration);
             });
 
             builder.Services.AddAuthentication("Bearer")
@@ -83,7 +84,15 @@ namespace API
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddScoped<ICurrentService, CurrentService>();
 
-            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.Scan(scan => scan
+                .FromApplicationDependencies(dep => dep.FullName.StartsWith("API"))
+                .AddClasses(classes =>
+                    classes.Where(type =>
+                        type.Name.EndsWith("Service") || type.Name.EndsWith("Repository")))
+                            .AsImplementedInterfaces()
+                            .WithScopedLifetime());
+
+            /*builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
@@ -92,11 +101,11 @@ namespace API
             builder.Services.AddScoped<ILogService, LogService>();
             builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IMerchantService, MerchantService>();
-            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();*/
 
             var app = builder.Build();
 
-            
+
 
             // Configure the HTTP request pipeline.
 

@@ -7,9 +7,9 @@ namespace API.Application.Services
     public class AuditService:IAuditService
     {
         private readonly IAuditRepository _auditRepository;
-        private readonly ILogger _logger;
+        private readonly ILogger<AuditService> _logger;
 
-        public AuditService(IAuditRepository auditRepository, ILogger logger)
+        public AuditService(IAuditRepository auditRepository, ILogger<AuditService> logger)
         {
             _auditRepository = auditRepository;
             _logger = logger;

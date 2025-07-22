@@ -3,6 +3,7 @@ using API.Common.Models.Results;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
 using API.Domain.Services.Common.Interfaces;
+using System.Security.Cryptography;
 
 namespace API.Domain.Services.Common.Implementations
 {
@@ -24,12 +25,17 @@ namespace API.Domain.Services.Common.Implementations
             try
             {
                 var admin = await _repository.GetAdminByAccountAsync(account);
+
+                Console.WriteLine(admin.AdminSalt);
+                Console.WriteLine(admin.AdminPwdhash);
+                Console.WriteLine(PwdHashHelper.Hashing(password, admin.AdminSalt));
+
                 if (admin == null)
                 {
                     _logger.LogWarning("管理员不存在");
                     return Result.Fail(ResultCode.NotExist, "管理员不存在");
                 }
-                if (admin.AdminPwdhash == PwdHashHelper.Hashing(password, admin.AdminSalt))
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
                 {
                     string jwt = _jwtHelper.GenerateToken(null, new Guid(admin.AdminUuid), CurrentType.Platform, account.ToString());
                     return Result.Success(jwt);

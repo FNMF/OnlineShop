@@ -14,11 +14,11 @@ namespace API.Application.Services
     public class NotificationService:INotificationService
     {
         private readonly INotificationRepository _notificationRepository;
-        private readonly ILogger _logger;
+        private readonly ILogger<NotificationService> _logger;
         private readonly ILogService _logService;
         private readonly ICurrentService _currentService;
 
-        public NotificationService(INotificationRepository notificationRepository, ILogger logger,ILogService logService, ICurrentService currentService)
+        public NotificationService(INotificationRepository notificationRepository, ILogger<NotificationService> logger,ILogService logService, ICurrentService currentService)
         {
             _notificationRepository = notificationRepository;
             _logger = logger;

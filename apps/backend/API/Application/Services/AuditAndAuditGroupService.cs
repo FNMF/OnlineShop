@@ -8,9 +8,9 @@ namespace API.Application.Services
         private readonly IAuditService _auditService;
         private readonly IAuditGroupService _auditGroupService;
         private readonly ILogService _logService;
-        private ILogger _logger;
+        private readonly ILogger<AuditAndAuditGroupService> _logger;
 
-        public AuditAndAuditGroupService(IAuditService auditService, IAuditGroupService auditGroupService, ILogService logService, ILogger logger)
+        public AuditAndAuditGroupService(IAuditService auditService, IAuditGroupService auditGroupService, ILogService logService, ILogger<AuditAndAuditGroupService> logger)
         {
             _auditService = auditService;
             _auditGroupService = auditGroupService;

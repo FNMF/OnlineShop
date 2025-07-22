@@ -10,10 +10,12 @@ namespace API.Common.Helpers
     public class JwtHelper
     {
         private readonly JwtSettings _settings;
+        private readonly IConfiguration _configuration;
 
-        public JwtHelper(JwtSettings settings)
+        public JwtHelper(JwtSettings settings, IConfiguration configuration)
         {
             _settings = settings;
+            _configuration = configuration;
         }
 
         public string GenerateToken(string? openId, Guid uuid, CurrentType userRole, string? name)
@@ -32,7 +34,7 @@ namespace API.Common.Helpers
                 claims.Add(new Claim(ClaimTypes.Name, name));           //如果有名字则add，如果没有则无视，理由同上
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecretKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
