@@ -36,3 +36,6 @@ obj/
 appsettings.*.json
 .env
 *.secrets.json
+
+#基础尚未开发的子项目
+/mobile/MerchantApp/
