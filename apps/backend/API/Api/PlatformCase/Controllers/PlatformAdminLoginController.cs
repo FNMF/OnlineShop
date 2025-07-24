@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.PlatformCase.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Platform/[controller]")]
     [ApiController]
     public class PlatformAdminLoginController:ControllerBase
     {

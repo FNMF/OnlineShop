@@ -18,12 +18,11 @@ namespace API.Common.Helpers
             _configuration = configuration;
         }
 
-        public string GenerateToken(string? openId, Guid uuid, CurrentType userRole, string? name)
+        public string GenerateToken(string? openId, Guid uuid, string? name)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, uuid.ToString()),
-                new Claim(ClaimTypes.Role, userRole.ToString())
             };
             if (!string.IsNullOrEmpty(openId))          //如果是微信小程序登录会有这个，但是因为如果Claim中有NULL值会报错，所以要拎出来写一个判断，防止报错
             {

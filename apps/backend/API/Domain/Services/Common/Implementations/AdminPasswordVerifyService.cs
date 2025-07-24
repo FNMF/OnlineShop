@@ -37,7 +37,7 @@ namespace API.Domain.Services.Common.Implementations
                 }
                 if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
                 {
-                    string jwt = _jwtHelper.GenerateToken(null, new Guid(admin.AdminUuid), CurrentType.Platform, account.ToString());
+                    string jwt = _jwtHelper.GenerateToken(null, new Guid(admin.AdminUuid), account.ToString());
                     return Result.Success(jwt);
                 }
                 else

@@ -38,4 +38,4 @@ appsettings.*.json
 *.secrets.json
 
 #基础尚未开发的子项目
-/mobile/MerchantApp/
+apps/mobile/MerchantApp/
