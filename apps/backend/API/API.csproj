@@ -27,15 +27,10 @@
 
   <ItemGroup>
     <Folder Include="Api\Common\Controllers\" />
-    <Folder Include="Api\MerchantCase\Controllers\" />
-    <Folder Include="Api\MerchantCase\Models\" />
     <Folder Include="Api\SystemCase\Controllers\" />
     <Folder Include="Api\SystemCase\Models\" />
     <Folder Include="Api\UserCase\Models\" />
     <Folder Include="Application\MerchantCase\DTOs\" />
-    <Folder Include="Application\MerchantCase\Handlers\" />
-    <Folder Include="Application\MerchantCase\Services\" />
-    <Folder Include="Application\MerchantCase\Interfaces\" />
     <Folder Include="Application\PlatformCase\DTOs\" />
     <Folder Include="Application\SystemCase\DTOs\" />
     <Folder Include="Application\SystemCase\Handlers\" />
@@ -47,7 +42,6 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
-    <Folder Include="Domain\Events\MerchantCase\" />
     <Folder Include="Domain\Services\MerchantCase\Implementations\" />
     <Folder Include="Domain\Services\MerchantCase\Interfaces\" />
     <Folder Include="Domain\Services\PlatformCase\Implementations\" />
