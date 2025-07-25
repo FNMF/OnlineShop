@@ -144,6 +144,7 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.CartUuid).HasName("PRIMARY");
 
             entity.Property(e => e.CartUuid).IsFixedLength();
+            entity.Property(e => e.CartProductuuid).IsFixedLength();
             entity.Property(e => e.CartQuantity).HasDefaultValueSql("'1'");
             entity.Property(e => e.CartUseruuid).IsFixedLength();
 

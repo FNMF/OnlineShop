@@ -1,10 +1,11 @@
 ﻿using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
+using API.Domain.Services.AddressPart.Interfaces;
 
 namespace API.Domain.Services.AddressPart.Implementations
 {
-    public class AddressRemoveService
+    public class AddressRemoveService:IAddressRemoveService
     {
         private readonly IAddressRepository _addressRepository;
         private readonly ILogger<AddressRemoveService> _logger;
@@ -40,6 +41,7 @@ namespace API.Domain.Services.AddressPart.Implementations
 
             }catch (Exception ex) 
             {
+                _logger.LogError(ex, "服务器错误");
                 return Result.Fail(ResultCode.ServerError, "服务器错误");
             }
         }

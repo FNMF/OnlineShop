@@ -2,10 +2,11 @@
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
+using API.Domain.Services.AddressPart.Interfaces;
 
 namespace API.Domain.Services.AddressPart.Implementations
 {
-    public class AddressUpdateService
+    public class AddressUpdateService:IAddressUpdateService
     {
         private readonly IAddressRepository _addressRepository;
         private readonly ILogger<AddressUpdateService> _logger;
@@ -32,6 +33,7 @@ namespace API.Domain.Services.AddressPart.Implementations
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "服务器错误");
                 return Result<Address>.Fail(ResultCode.ServerError, "服务器错误");
             }
         }

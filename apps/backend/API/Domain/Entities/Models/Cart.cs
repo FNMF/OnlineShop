@@ -19,17 +19,15 @@ public partial class Cart
     [MaxLength(16)]
     public byte[] CartUseruuid { get; set; } = null!;
 
-    [Column("cart_productid")]
-    public int CartProductid { get; set; }
+    [Column("cart_productuuid")]
+    [MaxLength(16)]
+    public byte[] CartProductuuid { get; set; } = null!;
 
     [Column("cart_quantity")]
     public int CartQuantity { get; set; }
 
     [Column("cart_time", TypeName = "datetime")]
     public DateTime CartTime { get; set; }
-
-    [Column("cart_isdeleted")]
-    public bool CartIsdeleted { get; set; }
 
     [ForeignKey("CartUseruuid")]
     [InverseProperty("Carts")]

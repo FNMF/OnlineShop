@@ -3,10 +3,11 @@ using API.Application.Common.DTOs;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
+using API.Domain.Services.AddressPart.Interfaces;
 
 namespace API.Domain.Services.AddressPart.Implementations
 {
-    public class AddressCreateService
+    public class AddressCreateService:IAddressCreateService
     {
         private readonly IAddressRepository _addressRepository;
         private readonly ILogger<AddressCreateService> _logger;
@@ -32,6 +33,7 @@ namespace API.Domain.Services.AddressPart.Implementations
                 return result;
             }catch (Exception ex)
             {
+                _logger.LogError(ex, "服务器错误");
                 return Result<Address>.Fail(ResultCode.ServerError, "服务器错误");
             }
         }

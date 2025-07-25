@@ -117,18 +117,7 @@ namespace API.Application.Services
                 {
                     throw new UnauthorizedAccessException("只有用户能创建地址");
                 }
-                // 如果是默认地址，先将该用户之前的默认地址取消
-                if (addressCreateOptions.IsDefault)
-                {
-                    query = query.Where(x =>x.AddressIsdefault == true);
-                    var existingDefaults = await query.ToListAsync();
-                    //var existingDefaults = await GetAllIsdefaultAsync(uuidBytes);
-
-                    foreach (var addr in existingDefaults)
-                    {
-                        addr.AddressIsdefault = false;
-                    }
-                }
+                
 
                 var address = new Address
                 {
@@ -138,7 +127,6 @@ namespace API.Application.Services
                     AddressDistrict = addressCreateOptions.District,
                     AddressDetail = AESHelper.Encrypt(addressCreateOptions.Detail),
                     AddressPhone = AESHelper.Encrypt(addressCreateOptions.Phone),
-                    AddressIsdefault = addressCreateOptions.IsDefault,
                     AddressTime = DateTime.Now,
                     AddressUseruuid = _currentService.CurrentUuid,
                     AddressUuid = UuidV7Helper.NewUuidV7ToBtyes()

@@ -42,10 +42,8 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
-    <Folder Include="Domain\Services\AddressPart\Interfaces\" />
     <Folder Include="Domain\Services\aaaExample\Implementations\" />
     <Folder Include="Domain\Services\aaaExample\Interfaces\" />
-    <Folder Include="Domain\Services\AddressPart\AddressUpdateFactory\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
