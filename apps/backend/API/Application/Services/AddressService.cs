@@ -236,19 +236,6 @@ namespace API.Application.Services
                 }
 
 
-                if (addressUpdateOptions.IsDefault)
-                {
-                    query = _addressRepository.QueryAddresses();        //可能存在错误，使用了可能未重置的query
-                    query = query.Where(x => x.AddressUseruuid == _currentService.CurrentUuid && x.AddressIsdeleted == false &&x.AddressIsdefault == true);
-                    var existingDefaults = await query.ToListAsync();
-                    
-                    //var existingDefaults = await GetAllIsdefaultAsync(uuidBytes);
-
-                    foreach (var addr in existingDefaults)
-                    {
-                        addr.AddressIsdefault = false;
-                    }
-                }
 
                 address.AddressName = addressUpdateOptions.Name;
                 address.AddressPhone = AESHelper.Encrypt(addressUpdateOptions.Phone);
@@ -256,7 +243,6 @@ namespace API.Application.Services
                 address.AddressCity = addressUpdateOptions.City;
                 address.AddressDistrict = addressUpdateOptions.District;
                 address.AddressDetail = AESHelper.Encrypt(addressUpdateOptions.Detail);
-                address.AddressIsdefault = addressUpdateOptions.IsDefault;
                 address.AddressTime = DateTime.Now;
 
                 await _addressRepository.UpdateAddressAsync(address);

@@ -12,9 +12,8 @@ namespace API.Domain.Entities.Models;
 public partial class AdminRole
 {
     [Key]
-    [Column("ar_uuid")]
-    [MaxLength(16)]
-    public byte[] ArUuid { get; set; } = null!;
+    [Column("ar_id")]
+    public int ArId { get; set; }
 
     [Column("ar_adminuuid")]
     [MaxLength(16)]

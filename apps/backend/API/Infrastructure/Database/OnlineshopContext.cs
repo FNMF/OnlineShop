@@ -84,7 +84,6 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.AddressUuid).HasName("PRIMARY");
 
             entity.Property(e => e.AddressUuid).IsFixedLength();
-            entity.Property(e => e.AddressIsdefault).HasDefaultValueSql("'1'");
             entity.Property(e => e.AddressUseruuid).IsFixedLength();
 
             entity.HasOne(d => d.AddressUseruu).WithMany(p => p.Addresses)
@@ -97,14 +96,14 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.AdminUuid).HasName("PRIMARY");
 
             entity.Property(e => e.AdminUuid).IsFixedLength();
+            entity.Property(e => e.AdminAccount).ValueGeneratedOnAdd();
             entity.Property(e => e.AdminKey).IsFixedLength();
         });
 
         modelBuilder.Entity<AdminRole>(entity =>
         {
-            entity.HasKey(e => e.ArUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.ArId).HasName("PRIMARY");
 
-            entity.Property(e => e.ArUuid).IsFixedLength();
             entity.Property(e => e.ArAdminuuid).IsFixedLength();
 
             entity.HasOne(d => d.ArAdminuu).WithMany(p => p.AdminRoles)
@@ -292,9 +291,7 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<RolePermission>(entity =>
         {
-            entity.HasKey(e => e.RpUuid).HasName("PRIMARY");
-
-            entity.Property(e => e.RpUuid).IsFixedLength();
+            entity.HasKey(e => e.RpId).HasName("PRIMARY");
 
             entity.HasOne(d => d.RpPermission).WithMany(p => p.RolePermissions)
                 .OnDelete(DeleteBehavior.ClientSetNull)

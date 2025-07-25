@@ -23,7 +23,7 @@ namespace API.Application.MerchantCase.Services
             _logger = logger;
         }
         
-        public async Task<Result> LoginByAccountAsync(MerchantLoginByAccountDTO loginDto)
+        public async Task<Result> LoginByAccountAsync(MerchantLoginByAccountDto loginDto)
         {
             try
             {

@@ -43,10 +43,6 @@ public partial class Address
     [StringLength(255)]
     public string AddressDetail { get; set; } = null!;
 
-    [Required]
-    [Column("address_isdefault")]
-    public bool? AddressIsdefault { get; set; }
-
     [Column("address_time", TypeName = "datetime")]
     public DateTime AddressTime { get; set; }
 

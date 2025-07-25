@@ -18,7 +18,7 @@ namespace API.Api.MerchantCase.Controllers
 
         [HttpPost("account")]
         //[AuthorizePermission(Permissions.VerifyAdmin)]
-        public async Task<IActionResult> LoginByAccount([FromBody] MerchantLoginByAccountDTO loginDto)
+        public async Task<IActionResult> LoginByAccount([FromBody] MerchantLoginByAccountDto loginDto)
         {
             if (loginDto == null)
             {

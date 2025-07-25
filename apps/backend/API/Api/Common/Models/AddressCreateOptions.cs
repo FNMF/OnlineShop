@@ -9,7 +9,6 @@
         public string District { get; set; }
         public string Detail { get; set; }
         public bool IsDefault { get; set; }
-        public byte[] UuidBytes { get; set; }
     }
 }
 

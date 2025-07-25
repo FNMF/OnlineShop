@@ -26,7 +26,7 @@ namespace API.Api.PlatformCase.Controllers
         /// <returns>登录结果</returns>
         [HttpPost("account")]
         //[AuthorizePermission(Permissions.VerifyAdmin)]
-        public async Task<IActionResult> LoginByAccount([FromBody] PlatformAdminLoginByAccountDTO loginDto)
+        public async Task<IActionResult> LoginByAccount([FromBody] PlatformAdminLoginByAccountDto loginDto)
         {
             if (loginDto == null)
             {

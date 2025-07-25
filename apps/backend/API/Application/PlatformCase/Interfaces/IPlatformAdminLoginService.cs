@@ -5,6 +5,6 @@ namespace API.Application.PlatformCase.Interfaces
 {
     public interface IPlatformAdminLoginService
     {
-        Task<Result> LoginByAccountAsync(PlatformAdminLoginByAccountDTO loginDto);
+        Task<Result> LoginByAccountAsync(PlatformAdminLoginByAccountDto loginDto);
     }
 }

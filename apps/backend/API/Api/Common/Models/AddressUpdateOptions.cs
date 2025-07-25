@@ -8,7 +8,6 @@
         public string City { get; set; }
         public string District { get; set; }
         public string Detail { get; set; }
-        public bool IsDefault { get; set; }
         public byte[] AddressUuid { get; set; }
     }
 }

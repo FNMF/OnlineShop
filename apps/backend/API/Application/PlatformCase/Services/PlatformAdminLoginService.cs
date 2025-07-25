@@ -21,7 +21,7 @@ namespace API.Application.PlatformCase.Services
             _logger = logger;
         }
 
-        public async Task<Result> LoginByAccountAsync(PlatformAdminLoginByAccountDTO loginDto)
+        public async Task<Result> LoginByAccountAsync(PlatformAdminLoginByAccountDto loginDto)
         {
             try
             {

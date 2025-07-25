@@ -12,9 +12,8 @@ namespace API.Domain.Entities.Models;
 public partial class RolePermission
 {
     [Key]
-    [Column("rp_uuid")]
-    [MaxLength(16)]
-    public byte[] RpUuid { get; set; } = null!;
+    [Column("rp_id")]
+    public int RpId { get; set; }
 
     [Column("rp_roleid")]
     public int RpRoleid { get; set; }

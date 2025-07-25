@@ -42,14 +42,10 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
-    <Folder Include="Domain\Services\MerchantCase\Implementations\" />
-    <Folder Include="Domain\Services\MerchantCase\Interfaces\" />
-    <Folder Include="Domain\Services\PlatformCase\Implementations\" />
-    <Folder Include="Domain\Services\PlatformCase\Interfaces\" />
-    <Folder Include="Domain\Services\SystemCase\Implementations\" />
-    <Folder Include="Domain\Services\SystemCase\Interfaces\" />
-    <Folder Include="Domain\Services\UserCase\Implementations\" />
-    <Folder Include="Domain\Services\UserCase\Interfaces\" />
+    <Folder Include="Domain\Services\AddressPart\Interfaces\" />
+    <Folder Include="Domain\Services\aaaExample\Implementations\" />
+    <Folder Include="Domain\Services\aaaExample\Interfaces\" />
+    <Folder Include="Domain\Services\AddressPart\AddressUpdateFactory\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
