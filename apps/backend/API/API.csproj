@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <Content Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <EmbeddedResource Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <None Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.14">
@@ -45,7 +52,8 @@
     <Folder Include="Domain\Services\AddressPart\Interfaces\" />
     <Folder Include="Domain\Services\aaaExample\Implementations\" />
     <Folder Include="Domain\Services\aaaExample\Interfaces\" />
-    <Folder Include="Domain\Services\AddressPart\AddressUpdateFactory\" />
+    <Folder Include="Domain\Services\ProductPart\Implementations\" />
+    <Folder Include="Domain\Services\ProductPart\Interfaces\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
