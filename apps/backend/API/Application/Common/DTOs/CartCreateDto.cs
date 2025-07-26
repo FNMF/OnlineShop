@@ -6,11 +6,11 @@
         public byte[] ProductUuid { get; }
         public int Quantity { get; }
 
-        public CartCreateDto(byte[] userUuid, byte[] productUuid, int quantity)
+        public CartCreateDto(CartCreateDto dto)
         {
-            UserUuid = userUuid;
-            ProductUuid = productUuid;
-            Quantity = quantity;
+            UserUuid = dto.UserUuid;
+            ProductUuid = dto.ProductUuid;
+            Quantity = dto.Quantity;
         }
     }
 }

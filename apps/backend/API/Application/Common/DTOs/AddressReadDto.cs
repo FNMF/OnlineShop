@@ -1,25 +1,23 @@
 ﻿namespace API.Application.Common.DTOs
 {
-    public class AddressCreateDto
+    public class AddressReadDto
     {
+        public byte[] AddressUuid { get; }
         public string Name { get; }
-        public string Phone { get; }
+        public string Phone {  get; }
         public string Province { get; }
         public string City { get; }
         public string District { get; }
-        public string Detail { get; }
-        public byte[] UserUuid { get; }
-
-        public AddressCreateDto(AddressCreateDto dto)
+        public string Detail {  get; }
+        public AddressReadDto(AddressReadDto dto) 
         {
+            AddressUuid = dto.AddressUuid;
             Name = dto.Name;
             Phone = dto.Phone;
             Province = dto.Province;
             City = dto.City;
             District = dto.District;
             Detail = dto.Detail;
-            UserUuid = dto.UserUuid;
         }
-
     }
 }

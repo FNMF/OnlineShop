@@ -7,12 +7,12 @@
         public byte[] ProductUuid { get; }
         public int Quantity { get; }
 
-        public CartUpdateDto(byte[] userUuid,  byte[] productUuid, int quantity, byte[] cartUuid)
+        public CartUpdateDto(CartUpdateDto dto)
         {
-            UserUuid = userUuid;
-            ProductUuid = productUuid;
-            Quantity = quantity;
-            CartUuid = cartUuid;
+            UserUuid = dto.UserUuid;
+            CartUuid = dto.CartUuid;
+            ProductUuid = dto.ProductUuid;
+            Quantity = dto.Quantity;
         }
     }
 }
