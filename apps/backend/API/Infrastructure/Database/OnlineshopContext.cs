@@ -198,7 +198,9 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.MerchantAdminuuid).IsFixedLength();
             entity.Property(e => e.MerchantIsclosed).HasDefaultValueSql("'1'");
 
-            entity.HasOne(d => d.MerchantAdminuu).WithMany(p => p.Merchants).HasConstraintName("merchant_admin_admin_uuid_fk");
+            entity.HasOne(d => d.MerchantAdminuu).WithMany(p => p.Merchants)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("merchant_admin_admin_uuid_fk");
         });
 
         modelBuilder.Entity<Notification>(entity =>
