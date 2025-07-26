@@ -9,8 +9,8 @@ namespace API.Application.Common.DTOs
         public string City { get; }
         public string District { get; }
         public string Detail { get; }
-        public DateTime Businessstart { get; }
-        public DateTime Businessend { get; }
+        public TimeOnly Businessstart { get; }
+        public TimeOnly Businessend { get; }
         public byte[] Adminuuid { get; }
         public byte[] MerchantUuid { get; }
         public MerchantUpdateDto(MerchantUpdateDto dto)

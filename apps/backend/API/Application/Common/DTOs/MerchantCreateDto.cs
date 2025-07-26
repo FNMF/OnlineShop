@@ -7,19 +7,19 @@
         public string City {  get; }
         public string District {  get; }
         public string Detail { get; }
-        public DateTime Businessstart { get; }
-        public DateTime Businessend { get; }
-        public byte[]? Adminuuid {  get; }
-        public MerchantCreateDto(string name, string province, string city, string district, string detail, DateTime businessstart, DateTime businessend, byte[]? adminuuid)
+        public TimeOnly Businessstart { get; }
+        public TimeOnly Businessend { get; }
+        public byte[] Adminuuid {  get; }
+        public MerchantCreateDto(MerchantCreateDto dto)
         {
-            Name = name;
-            Province = province;
-            City = city;
-            District = district;
-            Detail = detail;
-            Businessstart = businessstart;
-            Businessend = businessend;
-            Adminuuid = adminuuid;
+            Name = dto.Name;
+            Province = dto.Province;
+            City = dto.City;
+            District = dto.District;
+            Detail = dto.Detail;
+            Businessstart = dto.Businessstart;
+            Businessend = dto.Businessend;
+            Adminuuid = dto.Adminuuid;
         }
     }
 }

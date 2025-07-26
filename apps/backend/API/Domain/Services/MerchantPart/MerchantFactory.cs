@@ -17,12 +17,9 @@ namespace API.Domain.Services.MerchantPart
             {
                 o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
                 o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
-                /*
-                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<200,
-                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<100,
-                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<100,
-                未完成检验*/
+                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
+                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
+                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
             };
 
             var validationMessages = new List<string>();
@@ -62,13 +59,10 @@ namespace API.Domain.Services.MerchantPart
             var validations = new List<Func<MerchantUpdateDto, bool>>
             {
                 o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                /*
-                o => o.Price>0&&Regex.IsMatch(o.Price.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
-                o => o.Stock>=0,
-                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<200,
-                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<100,
-                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<100,
-                未完成*/
+                o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
+                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
+                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
+                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
             };
 
             var validationMessages = new List<string>();
