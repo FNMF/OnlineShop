@@ -35,15 +35,15 @@ public partial class Merchant
     [StringLength(255)]
     public string MerchantDetail { get; set; } = null!;
 
-    [Column("merchant_businessstart", TypeName = "datetime")]
-    public DateTime MerchantBusinessstart { get; set; }
+    [Column("merchant_businessstart", TypeName = "time")]
+    public TimeOnly MerchantBusinessstart { get; set; }
 
-    [Column("merchant_businessend", TypeName = "datetime")]
-    public DateTime MerchantBusinessend { get; set; }
+    [Column("merchant_businessend", TypeName = "time")]
+    public TimeOnly MerchantBusinessend { get; set; }
 
     [Column("merchant_adminuuid")]
     [MaxLength(16)]
-    public byte[]? MerchantAdminuuid { get; set; }
+    public byte[] MerchantAdminuuid { get; set; } = null!;
 
     [Required]
     [Column("merchant_isclosed")]
@@ -57,7 +57,7 @@ public partial class Merchant
 
     [ForeignKey("MerchantAdminuuid")]
     [InverseProperty("Merchants")]
-    public virtual Admin? MerchantAdminuu { get; set; }
+    public virtual Admin MerchantAdminuu { get; set; } = null!;
 
     [InverseProperty("ProductMerchantuu")]
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();

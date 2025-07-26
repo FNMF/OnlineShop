@@ -39,4 +39,3 @@ namespace API.Domain.Services.CartPart.Implementations
         }
     }
 }
-}
