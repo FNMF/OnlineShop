@@ -20,7 +20,7 @@ namespace API.Api.UserCase.Controllers
         {
             try
             {
-                var token = await _authService.LoginWithWxCodeAsync(dto.Code);
+                var token = await _authService.LoginWithWxCodeAsync(dto);
                 return Ok(new { token });
             }
             catch (Exception ex)

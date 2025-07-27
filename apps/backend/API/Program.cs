@@ -86,16 +86,6 @@ namespace API
                             .AsImplementedInterfaces()
                             .WithScopedLifetime());
 
-            /*builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IAddressRepository, AddressRepository>();
-            builder.Services.AddScoped<IAddressService, AddressService>();
-            builder.Services.AddScoped<ILogRepository, LogRepository>();
-            builder.Services.AddScoped<ILogService, LogService>();
-            builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
-            builder.Services.AddScoped<IMerchantService, MerchantService>();
-            builder.Services.AddScoped<IAdminRepository, AdminRepository>();*/
 
             var app = builder.Build();
 

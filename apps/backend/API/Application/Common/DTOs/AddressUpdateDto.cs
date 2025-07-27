@@ -11,16 +11,16 @@
         public byte[] UserUuid { get; }
         public byte[] AddressUuid { get; }
 
-        public AddressUpdateDto(AddressUpdateDto dto)
+        public AddressUpdateDto(string name, string phone, string province, string city, string district, string detail, byte[] userUuid, byte[] addressUuid)
         {
-            Name = dto.Name;
-            Phone = dto.Phone;
-            Province = dto.Province;
-            City = dto.City;
-            District = dto.District;
-            Detail = dto.Detail;
-            UserUuid = dto.UserUuid;
-            AddressUuid = dto.AddressUuid;
+            Name = name;
+            Phone = phone;
+            Province = province;
+            City = city;
+            District = district;
+            Detail = detail;
+            UserUuid = userUuid;
+            AddressUuid = addressUuid;
         }
     }
 }

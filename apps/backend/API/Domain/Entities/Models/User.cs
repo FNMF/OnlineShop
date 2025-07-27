@@ -11,7 +11,7 @@ public partial class User
 {
     [Column("user_name")]
     [StringLength(30)]
-    public string? UserName { get; set; }
+    public string UserName { get; set; } = null!;
 
     [Key]
     [Column("user_uuid")]
@@ -33,6 +33,10 @@ public partial class User
 
     [Column("user_isdeleted")]
     public bool UserIsdeleted { get; set; }
+
+    [Column("user_phone")]
+    [StringLength(20)]
+    public string UserPhone { get; set; } = null!;
 
     [InverseProperty("AddressUseruu")]
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();

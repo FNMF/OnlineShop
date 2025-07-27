@@ -1,9 +1,13 @@
-﻿using API.Application.Interfaces;
+﻿using API.Application.Common.DTOs;
+using API.Application.Interfaces;
 using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models;
 using API.Domain.Enums;
 using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.UserPart.Interfaces;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 
 namespace API.Application.Services
@@ -11,32 +15,31 @@ namespace API.Application.Services
     public class AuthService : IAuthService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IUserService _userService;
-        private readonly IAdminService _adminService;
         private readonly JwtHelper _jwtHelper;
         private readonly IConfiguration _config;
-        private readonly ILogger<AuthService> _logger;
+        private readonly IUserCreateService _userCreateService;
+        private readonly IUserReadService _userReadService;
         private readonly ILogService _logService;
 
-        public AuthService(IHttpClientFactory httpClientFactory, IUserService userService, JwtHelper jwtHelper, IConfiguration config, ILogger<AuthService> logger, ILogService logService)
+        public AuthService(IHttpClientFactory httpClientFactory, JwtHelper jwtHelper, IConfiguration config,IUserCreateService userCreateService, IUserReadService userReadService, ILogService logService)
         {
             _httpClientFactory = httpClientFactory;
-            _userService = userService;
             _jwtHelper = jwtHelper;
             _config = config;
-            _logger = logger;
+            _userCreateService = userCreateService;
+            _userReadService = userReadService;
             _logService = logService;
         }
 
-        public async Task<string> LoginWithWxCodeAsync(string code)
+        public async Task<string> LoginWithWxCodeAsync(WxLoginDto dto)
         {
             var appId = _config["WxSettings:AppId"];
             var secret = _config["WxSettings:AppSecret"];
 
-            if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(appId) || string.IsNullOrWhiteSpace(secret))
+            if (string.IsNullOrWhiteSpace(dto.Code) || string.IsNullOrWhiteSpace(appId) || string.IsNullOrWhiteSpace(secret))
                 throw new ArgumentException("登录参数错误");
 
-            var url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={secret}&js_code={code}&grant_type=authorization_code";
+            var url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={secret}&js_code={dto.Code}&grant_type=authorization_code";
 
             var client = _httpClientFactory.CreateClient();
             var response = await client.GetAsync(url);
@@ -50,22 +53,70 @@ namespace API.Application.Services
             if (session == null || !string.IsNullOrEmpty(session.errmsg))
                 throw new Exception($"微信返回错误：{session?.errmsg ?? "未知错误"}");
 
-            if (string.IsNullOrEmpty(session.openid))
-                throw new Exception("获取微信 OpenID 失败");
-            //var session = new WxSessionResult { openid = "aZ3kLm8QwP1xVrT9yB2nCfE7HgMd" };//测试用跳过微信给openid
+            var openId = session.openid;
+            var sessionKey = session.session_key;
+
+            if (string.IsNullOrEmpty(openId) || string.IsNullOrEmpty(sessionKey))
+                throw new Exception("获取微信 openId 或 sessionKey 失败");
+            
+            var userInfoJson = DecryptWxData(dto.EncryptedData, dto.Iv, sessionKey);
+            var userInfo = JsonSerializer.Deserialize<WxUserInfo>(userInfoJson);
+
+            var phoneInfoJson = DecryptWxData(dto.EncryptedPhoneData, dto.PhoneIv, sessionKey);
+            var phoneInfo = JsonSerializer.Deserialize<WxPhoneInfo>(phoneInfoJson);
 
 
-            var user = await _userService.GetByOpenIdAsync(session.openid);
+            var resultofRead = await _userReadService.GetUserByOpenId(session.openid);
+            var user = resultofRead.Data;
             if (user == null)
             {
-                user = await _userService.CreateUserWithOpenIdAsync(session.openid);
-                await _logService.AddLog(LogType.user, "创建新用户", "无", user.UserUuid.ToArray(), json);
-                return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), null);
+                var userdto = new UserCreateDto(userInfo?.NickName, openId, phoneInfo.PhoneNumber, userInfo.AvatarUrl);
+                var resultofCreate = await _userCreateService.AddUserAsync(userdto);
+                await _logService.AddLog(LogType.user, "创建新用户", "无", resultofCreate.Data.UserUuid.ToArray(), json);
+                return _jwtHelper.GenerateToken(resultofCreate.Data.UserOpenid.ToString(), new Guid(resultofCreate.Data.UserUuid), null);
             }
 
             await _logService.AddLog(LogType.user, "用户登录", "无", user.UserUuid.ToArray(), json);
             return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), null);
         }
 
+        private static string DecryptWxData(string encryptedData, string iv, string sessionKey)
+        {
+            var encryptedDataBytes = Convert.FromBase64String(encryptedData);
+            var ivBytes = Convert.FromBase64String(iv);
+            var keyBytes = Convert.FromBase64String(sessionKey);
+
+            using var aes = Aes.Create();
+            aes.Key = keyBytes;
+            aes.IV = ivBytes;
+            aes.Mode = CipherMode.CBC;
+            aes.Padding = PaddingMode.PKCS7;
+
+            using var decryptor = aes.CreateDecryptor();
+            var resultArray = decryptor.TransformFinalBlock(encryptedDataBytes, 0, encryptedDataBytes.Length);
+            return Encoding.UTF8.GetString(resultArray);
+        }
+
+        // 微信 API 返回的 session_key 结构
+        public class WxSessionResult
+        {
+            public string openid { get; set; }
+            public string session_key { get; set; }
+            public string unionid { get; set; }
+            public string errmsg { get; set; }
+        }
+
+        // 用户信息
+        public class WxUserInfo
+        {
+            public string NickName { get; set; }
+            public string AvatarUrl { get; set; }
+        }
+
+        // 手机号信息
+        public class WxPhoneInfo
+        {
+            public string PhoneNumber { get; set; }
+        }
     }
 }

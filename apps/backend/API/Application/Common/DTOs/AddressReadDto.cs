@@ -9,15 +9,15 @@
         public string City { get; }
         public string District { get; }
         public string Detail {  get; }
-        public AddressReadDto(AddressReadDto dto) 
+        public AddressReadDto(byte[] addressUuid,string name, string phone, string province, string city, string district,string detail)
         {
-            AddressUuid = dto.AddressUuid;
-            Name = dto.Name;
-            Phone = dto.Phone;
-            Province = dto.Province;
-            City = dto.City;
-            District = dto.District;
-            Detail = dto.Detail;
+            AddressUuid = addressUuid;
+            Name = name;
+            Phone = phone;
+            Province = province;
+            City = city;
+            District = district;
+            Detail = detail;
         }
     }
 }
