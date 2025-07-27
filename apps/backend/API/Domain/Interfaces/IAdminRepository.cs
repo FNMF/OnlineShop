@@ -1,4 +1,5 @@
 ﻿using API.Domain.Entities.Models;
+using API.Domain.Enums;
 
 namespace API.Domain.Interfaces
 {
@@ -9,6 +10,7 @@ namespace API.Domain.Interfaces
         Task<Admin> GetAdminByPhoneAsync(string phone);
         Task<Admin> AddAdminAsync(Admin admin);
         Task<Admin> UpdateAdminAsync(Admin admin);
+        Task<RoleType> QueryRoleType(Admin admin);
 
     }
 }

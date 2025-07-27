@@ -20,7 +20,7 @@ namespace API.Domain.Services.Common.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> VerifyPasswordAsync(int account, string password)
+        public async Task<Result> VerifyPlatformPasswordAsync(int account, string password)
         {
             try
             {
@@ -35,6 +35,12 @@ namespace API.Domain.Services.Common.Implementations
                     _logger.LogWarning("管理员不存在");
                     return Result.Fail(ResultCode.NotExist, "管理员不存在");
                 }
+                if (await _repository.QueryRoleType(admin) != RoleType.platform)
+                {
+                    _logger.LogWarning("身份错误");
+                    return Result.Fail(ResultCode.NotExist, "身份错误");
+                }
+
                 if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
                 {
                     string jwt = _jwtHelper.GenerateToken(null, new Guid(admin.AdminUuid), account.ToString());
@@ -45,6 +51,44 @@ namespace API.Domain.Services.Common.Implementations
                     return Result.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
                 }
             }catch (Exception ex)
+            {
+                _logger.LogError(ex, "验证密码时出错");
+                return Result.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
+
+        public async Task<Result> VerifyShopPasswordAsync(int account, string password)
+        {
+            try
+            {
+                var admin = await _repository.GetAdminByAccountAsync(account);
+
+                Console.WriteLine(admin.AdminSalt);
+                Console.WriteLine(admin.AdminPwdhash);
+                Console.WriteLine(PwdHashHelper.Hashing(password, admin.AdminSalt));
+
+                if (admin == null)
+                {
+                    _logger.LogWarning("管理员不存在");
+                    return Result.Fail(ResultCode.NotExist, "管理员不存在");
+                }
+                if (await _repository.QueryRoleType(admin) != RoleType.shop)
+                {
+                    _logger.LogWarning("身份错误");
+                    return Result.Fail(ResultCode.NotExist, "身份错误");
+                }
+
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
+                {
+                    string jwt = _jwtHelper.GenerateToken(null, new Guid(admin.AdminUuid), account.ToString());
+                    return Result.Success(jwt);
+                }
+                else
+                {
+                    return Result.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
+                }
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "验证密码时出错");
                 return Result.Fail(ResultCode.ServerError, ex.Message);

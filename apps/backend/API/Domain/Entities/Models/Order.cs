@@ -24,7 +24,7 @@ public partial class Order
     [Precision(8, 2)]
     public decimal OrderTotal { get; set; }
 
-    [Column("order_status", TypeName = "enum('created','unpaid','unaccepted','preparing','unship','shipping','done','canceled','reject','exception')")]
+    [Column("order_status", TypeName = "enum('created','paid','accepted','preparing','prepared','shipped','completed','cancelled','rejected','exception')")]
     public string OrderStatus { get; set; } = null!;
 
     [Column("order_sid")]
@@ -88,6 +88,9 @@ public partial class Order
 
     [InverseProperty("OrderitemOrderuu")]
     public virtual ICollection<Orderitem> Orderitems { get; set; } = new List<Orderitem>();
+
+    [InverseProperty("PaymentOrderuu")]
+    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
     [InverseProperty("RefundOrderuu")]
     public virtual ICollection<Refund> Refunds { get; set; } = new List<Refund>();

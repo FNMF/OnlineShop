@@ -45,6 +45,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Orderitem> Orderitems { get; set; }
 
+    public virtual DbSet<Payment> Payments { get; set; }
+
     public virtual DbSet<Permission> Permissions { get; set; }
 
     public virtual DbSet<Privilege> Privileges { get; set; }
@@ -244,6 +246,19 @@ public partial class OnlineshopContext : DbContext
             entity.HasOne(d => d.OrderitemProductuu).WithMany(p => p.Orderitems)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("orderitem_product_product_uuid_fk");
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.PaymentUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.PaymentUuid).IsFixedLength();
+            entity.Property(e => e.PaymentOrderuuid).IsFixedLength();
+            entity.Property(e => e.PaymentStatus).HasDefaultValueSql("'pending'");
+
+            entity.HasOne(d => d.PaymentOrderuu).WithMany(p => p.Payments)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("payment_order_order_uuid_fk");
         });
 
         modelBuilder.Entity<Permission>(entity =>

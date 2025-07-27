@@ -26,7 +26,7 @@ namespace API.Application.PlatformCase.Services
             try
             {
                 // 1. 调用 Domain 层的服务来验证账号和密码
-                var isValid = await _adminPasswordVerifyService.VerifyPasswordAsync(loginDto.Account, loginDto.Password);
+                var isValid = await _adminPasswordVerifyService.VerifyPlatformPasswordAsync(loginDto.Account, loginDto.Password);
 
                 if (!isValid.IsSuccess)
                 {

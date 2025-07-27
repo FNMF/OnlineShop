@@ -4,6 +4,7 @@ namespace API.Domain.Services.Common.Interfaces
 {
     public interface IAdminPasswordVerifyService
     {
-        Task<Result> VerifyPasswordAsync(int account, string password);
+        Task<Result> VerifyPlatformPasswordAsync(int account, string password);
+        Task<Result> VerifyShopPasswordAsync(int account, string password);
     }
 }
