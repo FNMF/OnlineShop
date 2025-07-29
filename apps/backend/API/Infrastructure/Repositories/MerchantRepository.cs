@@ -9,11 +9,27 @@ namespace API.Infrastructure.Repositories
     {
         private readonly OnlineshopContext _context;
 
-        public MerchantRepository(OnlineshopContext onlineshopContext)
+        public MerchantRepository(OnlineshopContext context)
         {
-            _context = onlineshopContext;
+            _context = context;
         }
-
+        public IQueryable<Merchant> QueryMerchants()
+        {
+            return _context.Merchants;
+        }
+        public async Task<bool> AddMerchantAsync(Merchant merchant)
+        {
+            await _context.Merchants.AddAsync(merchant);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateMerchantAsync(Merchant merchant)
+        {
+            _context.Merchants.Update(merchant);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        /*
         public async Task<List<Merchant>> GetMerchantsByLocation(string province, string city)
         {
             return await _context.Merchants
@@ -48,7 +64,7 @@ namespace API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return merchant;
         }
-
+        */
 
     }
 }

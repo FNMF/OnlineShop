@@ -9,9 +9,10 @@
         public string Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
-        public byte[] Merchantuuid { get; }
+        public byte[] MerchantUuid { get; }
+        public string CoverUrl { get; }
 
-        public ProductCreateDto(string name, decimal price, int stock, string description, string ingredient, string weight,bool islisted, byte[] merchantuuid)
+        public ProductCreateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, byte[] merchantUuid, string coverUrl)
         {
             Name = name;
             Price = price;
@@ -19,8 +20,9 @@
             Description = description;
             Ingredient = ingredient;
             Weight = weight;
-            Islisted = islisted;
-            Merchantuuid = merchantuuid;
+            Islisted = isListed;
+            MerchantUuid = merchantUuid;
+            CoverUrl = coverUrl;
         }
     }
 }
