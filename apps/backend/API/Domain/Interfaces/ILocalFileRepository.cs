@@ -4,10 +4,10 @@ namespace API.Domain.Interfaces
 {
     public interface ILocalFileRepository
     {
-        Task<bool> AddLocalFile(Localfile localFile);
-        Task<bool> AddBatchLocalFile(List<Localfile> localFiles);
-        Task<bool> UpdateLocalFile(Localfile localfile);
-        Task<bool> RemoveLocalFile(Localfile localfile);
+        Task<bool> AddLocalFileAsync(Localfile localFile);
+        Task<bool> AddBatchLocalFileAsync(List<Localfile> localFiles);
+        Task<bool> UpdateLocalFileAsync(Localfile localfile);
+        Task<bool> RemoveLocalFileAsync(Localfile localfile);
         IQueryable<Localfile> QueryLocalFiles();
         Task SaveChangesAsync();
     }

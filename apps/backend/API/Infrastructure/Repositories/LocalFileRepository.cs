@@ -11,25 +11,25 @@ namespace API.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<bool> AddLocalFile(Localfile localFile)
+        public async Task<bool> AddLocalFileAsync(Localfile localFile)
         {
             await _context.AddAsync(localFile);
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> AddBatchLocalFile(List<Localfile> localFiles)
+        public async Task<bool> AddBatchLocalFileAsync(List<Localfile> localFiles)
         {
             await _context.AddRangeAsync(localFiles);
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> UpdateLocalFile(Localfile localfile)
+        public async Task<bool> UpdateLocalFileAsync(Localfile localfile)
         {
             _context.Update(localfile);
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> RemoveLocalFile(Localfile localfile)
+        public async Task<bool> RemoveLocalFileAsync(Localfile localfile)
         {
             _context.Remove(localfile);
             await _context.SaveChangesAsync();
