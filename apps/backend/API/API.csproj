@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Services\aaaExample\**" />
     <Compile Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <Content Remove="Domain\Services\aaaExample\**" />
     <Content Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <EmbeddedResource Remove="Domain\Services\aaaExample\**" />
     <EmbeddedResource Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <None Remove="Domain\Services\aaaExample\**" />
     <None Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
   </ItemGroup>
 
@@ -49,8 +53,6 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
-    <Folder Include="Domain\Services\aaaExample\Implementations\" />
-    <Folder Include="Domain\Services\aaaExample\Interfaces\" />
     <Folder Include="Domain\Services\ProductPart\Implementations\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />

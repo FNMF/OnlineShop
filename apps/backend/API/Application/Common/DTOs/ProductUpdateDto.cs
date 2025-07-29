@@ -9,19 +9,22 @@
         public string Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
-        public byte[] Merchantuuid { get; }
+        public byte[] MerchantUuid { get; }
         public byte[] ProductUuid { get; }
+        public string CoverUrl {  get; }
 
-        public ProductUpdateDto(ProductUpdateDto dto)
+        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, byte[] merchantUuid,byte[] productUuid, string coverUrl)
         {
-            Name = dto.Name;
-            Price = dto.Price;
-            Stock = dto.Stock;
-            Description = dto.Description;
-            Ingredient = dto.Ingredient;
-            Weight = dto.Weight;
-            Merchantuuid = dto.Merchantuuid;
-            ProductUuid = dto.ProductUuid;
+            Name = name;
+            Price = price;
+            Stock = stock;
+            Description = description;
+            Ingredient = ingredient;
+            Weight = weight;
+            Islisted = isListed;
+            MerchantUuid = merchantUuid;
+            ProductUuid = productUuid;
+            CoverUrl = coverUrl;
         }
     }
 }
