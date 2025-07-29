@@ -220,6 +220,7 @@ public partial class OnlineshopContext : DbContext
             entity.Property(e => e.OrderUuid).IsFixedLength();
             entity.Property(e => e.OrderChannel).HasDefaultValueSql("'wechat'");
             entity.Property(e => e.OrderExpectedtime).HasDefaultValueSql("'顺序配送'");
+            entity.Property(e => e.OrderPaymentuuid).IsFixedLength();
             entity.Property(e => e.OrderStatus).HasDefaultValueSql("'created'");
             entity.Property(e => e.OrderUcuuid).IsFixedLength();
             entity.Property(e => e.OrderUseruuid).IsFixedLength();

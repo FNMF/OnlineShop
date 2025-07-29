@@ -6,6 +6,7 @@ namespace API.Domain.Aggregates.OrderAggregates
     {
         public byte[] OrderUuid { get; set; }
         public byte[] OrderUseruuid { get;set; }
+        public byte[] OrderPaymentuuid {  get; set; }
         public decimal OrderTotal { get; set; }
         public string OrderStatus { get; set; }
         public string OrderSid { get; set; }
@@ -88,10 +89,76 @@ namespace API.Domain.Aggregates.OrderAggregates
 
         private void RecalculateTotal() => OrderTotal = _orderItems.Sum(i => i.SubTotal);
         
-        public void MarkAsPaid()
+        public void MarkAsPaid(byte[] paymentUuid)
         {
+            if(OrderStatus != Enums.OrderStatus.created.ToString())
+            {
+                throw new InvalidOperationException("订单必须是待支付状态才能支付");
+            }
+            OrderPaymentuuid = paymentUuid;
+            OrderStatus = Enums.OrderStatus.paid.ToString();
+            //可添加领域事件
 
         }
+        public void MarkAsAccepted()
+        {
+            if (OrderStatus != Enums.OrderStatus.paid.ToString())
+            {
+                throw new InvalidOperationException("订单必须是已支付状态才能接受");
+            }
+            OrderStatus = Enums.OrderStatus.accepted.ToString();
 
+        }
+        public void MarkAsPrepared()
+        {
+            if (OrderStatus != Enums.OrderStatus.accepted.ToString())
+            {
+                throw new InvalidOperationException("订单必须是已接受状态才能准备完成"); 
+            }
+            OrderStatus = Enums.OrderStatus.prepared.ToString();
+        }
+        public void MarkAsShipped()
+        {
+            if (OrderStatus != Enums.OrderStatus.prepared.ToString())
+            {
+                throw new InvalidOperationException("订单必须是已准备完成状态才能配送");
+            }
+            OrderStatus = Enums.OrderStatus.shipped.ToString();
+            
+        }
+        public void MarkAsComleted()
+        {
+            if (OrderStatus != Enums.OrderStatus.shipped.ToString())
+            {
+                throw new InvalidOperationException("订单必须是已配送状态才能完成");
+            }
+            OrderStatus = Enums.OrderStatus.completed.ToString();
+        }
+        public void MarkAsCanceled(string reason)        //用户取消
+        {
+            if (OrderStatus == Enums.OrderStatus.completed.ToString()|| OrderStatus == Enums.OrderStatus.rejected.ToString()|| OrderStatus == Enums.OrderStatus.completed.ToString())
+            {
+                throw new InvalidOperationException("订单必须是未完成状态才能取消");
+            }
+            OrderStatus =  Enums.OrderStatus.canceled.ToString();
+        }
+        public void MarkAsRejected(string reason)
+        {
+            if (OrderStatus != Enums.OrderStatus.paid.ToString())
+            {
+                throw new InvalidOperationException("订单必须是已支付状态才能拒绝");
+            }
+            OrderStatus = Enums.OrderStatus.rejected.ToString();
+        }
+        public void MarkAsExecption(string ex)
+        {
+            OrderStatus = Enums.OrderStatus.exception.ToString();
+            //领域事件
+        }
+
+        private void AddDomainEvent(object @event)
+        {
+            // 将事件添加到领域事件队列，交给应用层或事件总线处理
+        }
     }
 }

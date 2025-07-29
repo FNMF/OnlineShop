@@ -24,7 +24,7 @@ public partial class Order
     [Precision(8, 2)]
     public decimal OrderTotal { get; set; }
 
-    [Column("order_status", TypeName = "enum('created','paid','accepted','preparing','prepared','shipped','completed','cancelled','rejected','exception')")]
+    [Column("order_status", TypeName = "enum('created','paid','accepted','prepared','shipped','completed','cancelled','rejected','exception')")]
     public string OrderStatus { get; set; } = null!;
 
     [Column("order_sid")]
@@ -77,6 +77,10 @@ public partial class Order
 
     [Column("order_isdeleted")]
     public bool OrderIsdeleted { get; set; }
+
+    [Column("order_paymentuuid")]
+    [MaxLength(16)]
+    public byte[]? OrderPaymentuuid { get; set; }
 
     [ForeignKey("OrderUcuuid")]
     [InverseProperty("Orders")]
