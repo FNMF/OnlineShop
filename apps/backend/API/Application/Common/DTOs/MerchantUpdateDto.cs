@@ -13,17 +13,17 @@ namespace API.Application.Common.DTOs
         public TimeOnly Businessend { get; }
         public byte[] Adminuuid { get; }
         public byte[] MerchantUuid { get; }
-        public MerchantUpdateDto(MerchantUpdateDto dto)
+        public MerchantUpdateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, byte[] adminuuid, byte[] merchantUuid)
         {
-            Name = dto.Name;
-            Province = dto.Province;
-            City = dto.City;
-            District = dto.District;
-            Detail = dto.Detail;
-            Businessstart = dto.Businessstart;
-            Businessend = dto.Businessend;
-            Adminuuid = dto.Adminuuid;
-            MerchantUuid = dto.MerchantUuid;
+            Name = name;
+            Province = province;
+            City = city;
+            District = district;
+            Detail = detail;
+            Businessstart = businessstart;
+            Businessend = businessend;
+            Adminuuid = adminuuid;
+            MerchantUuid = merchantUuid;
         }
     }
 }
