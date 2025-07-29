@@ -10,16 +10,15 @@
         public string Detail { get; }
         public byte[] UserUuid { get; }
 
-        public AddressCreateDto(AddressCreateDto dto)
+        public AddressCreateDto(string name, string phone, string province, string city, string district, string detail, byte[] userUuid)
         {
-            Name = dto.Name;
-            Phone = dto.Phone;
-            Province = dto.Province;
-            City = dto.City;
-            District = dto.District;
-            Detail = dto.Detail;
-            UserUuid = dto.UserUuid;
+            Name = name;
+            Phone = phone;
+            Province = province;
+            City = city;
+            District = district;
+            Detail = detail;
+            UserUuid = userUuid;
         }
-
     }
 }

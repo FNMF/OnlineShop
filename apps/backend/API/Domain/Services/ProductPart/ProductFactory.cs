@@ -45,7 +45,7 @@ namespace API.Domain.Services.ProductPart
                 ProductIngredient = dto.Ingredient,
                 ProductWeight = dto.Weight,
                 ProductIslisted = dto.Islisted,
-                ProductMerchantuuid = dto.Merchantuuid,
+                ProductMerchantuuid = dto.MerchantUuid,
                 ProductUuid = UuidV7Helper.NewUuidV7ToBtyes(),
                 ProductIsavailable=false,
                 //ProductCoverurl=,此处应有图片链接
@@ -92,7 +92,7 @@ namespace API.Domain.Services.ProductPart
                 ProductIngredient = dto.Ingredient,
                 ProductWeight = dto.Weight,
                 ProductIslisted = dto.Islisted,
-                ProductMerchantuuid = dto.Merchantuuid,
+                ProductMerchantuuid = dto.MerchantUuid,
                 ProductUuid = dto.ProductUuid,
                 ProductIsavailable = false,
                 //ProductCoverurl=,此处应有图片链接

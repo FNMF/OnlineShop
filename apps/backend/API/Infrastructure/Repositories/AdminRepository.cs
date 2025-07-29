@@ -1,4 +1,5 @@
 ﻿using API.Domain.Entities.Models;
+using API.Domain.Enums;
 using API.Domain.Interfaces;
 using API.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,30 @@ namespace API.Infrastructure.Repositories
             _context.Admins.Update(admin);
             await _context.SaveChangesAsync();
             return admin;
+        }
+        public async Task<RoleType> QueryRoleType(Admin admin)
+        {
+            var roleIds = await _context.Set<AdminRole>()
+                .Where(a => a.ArAdminuuid == admin.AdminUuid)
+                .Select(a => a.ArRoleid)
+                .ToListAsync();
+
+            if (!roleIds.Any())
+                return RoleType.none;
+
+            var roleTypes = await _context.Set<Role>()
+                .Where(r => roleIds.Contains(r.RoleId))
+                .Select(r => r.RoleType)
+                .ToListAsync();
+
+            if(roleTypes.Contains(RoleType.system.ToString()))
+                return RoleType.system;
+            if (roleTypes.Contains(RoleType.platform.ToString()))
+                return RoleType.platform;
+            if (roleTypes.Contains(RoleType.shop.ToString()))
+                return RoleType.shop;
+
+            return RoleType.none;
         }
     }
 }

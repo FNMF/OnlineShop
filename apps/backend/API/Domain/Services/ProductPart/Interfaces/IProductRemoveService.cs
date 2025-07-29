@@ -2,7 +2,7 @@
 
 namespace API.Domain.Services.ProductPart.Interfaces
 {
-    public interface IProductRemoveService
+    public interface IAuditRemoveService
     {
         Task<Result> RemoveProductAsync(byte[] productUuid);
     }

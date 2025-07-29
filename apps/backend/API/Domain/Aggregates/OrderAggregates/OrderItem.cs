@@ -18,6 +18,10 @@
             UnitPrice = unitPrice;
             Name = name;
         }
-        
+        public decimal SubTotal => Quantity * UnitPrice;
+        public int AddQuantity(int quantity)
+        {
+            return Quantity + quantity;
+        }
     }
 }

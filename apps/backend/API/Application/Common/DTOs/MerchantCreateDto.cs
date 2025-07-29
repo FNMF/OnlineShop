@@ -10,16 +10,16 @@
         public TimeOnly Businessstart { get; }
         public TimeOnly Businessend { get; }
         public byte[] Adminuuid {  get; }
-        public MerchantCreateDto(MerchantCreateDto dto)
+        public MerchantCreateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, byte[] adminuuid)
         {
-            Name = dto.Name;
-            Province = dto.Province;
-            City = dto.City;
-            District = dto.District;
-            Detail = dto.Detail;
-            Businessstart = dto.Businessstart;
-            Businessend = dto.Businessend;
-            Adminuuid = dto.Adminuuid;
+            Name = name;
+            Province = province;
+            City = city;
+            District = district;
+            Detail = detail;
+            Businessstart = businessstart;
+            Businessend = businessend;
+            Adminuuid = adminuuid;
         }
     }
 }

@@ -13,7 +13,23 @@ namespace API.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<User> GetByUuidAsync(byte[] uuidBytes)       //通过uuid查询用户
+        public IQueryable<User> QueryUsers() 
+        {
+            return _context.Users;
+        }
+        public async Task<bool> AddUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        /*public async Task<User> GetByUuidAsync(byte[] uuidBytes)       //通过uuid查询用户
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.UserUuid == uuidBytes);
 
@@ -40,5 +56,6 @@ namespace API.Infrastructure.Repositories
 
         //这里有个删除，但是建议是逻辑删除而不是物理删除
         //所以只需要在service层中修改属性isdeleted然后再update即可
+        */
     }
 }

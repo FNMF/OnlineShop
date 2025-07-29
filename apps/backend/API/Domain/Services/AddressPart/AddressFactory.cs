@@ -13,7 +13,7 @@ namespace API.Domain.Services.AddressPart
             var validations = new List<Func<AddressCreateDto, bool>>
             {
                 o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                o => !string.IsNullOrEmpty(o.Phone)||o.Phone.Length!=11||!o.Phone.All(char.IsDigit),
+                o => ! string.IsNullOrEmpty(o.Phone) && o.Phone.Length != 11&&!o.Phone.All(char.IsDigit),
                 o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
                 o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
                 o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
@@ -56,7 +56,7 @@ namespace API.Domain.Services.AddressPart
             var validations = new List<Func<AddressUpdateDto, bool>>
             {
                 o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                o => !string.IsNullOrEmpty(o.Phone)||o.Phone.Length!=11||!o.Phone.All(char.IsDigit),
+                o => ! string.IsNullOrEmpty(o.Phone) && o.Phone.Length != 11&&!o.Phone.All(char.IsDigit),
                 o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
                 o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
                 o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,

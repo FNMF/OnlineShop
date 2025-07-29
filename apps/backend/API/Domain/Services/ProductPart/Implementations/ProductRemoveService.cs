@@ -5,7 +5,7 @@ using API.Domain.Services.ProductPart.Interfaces;
 
 namespace API.Domain.Services.ProductPart.Implementations
 {
-    public class ProductRemoveService:IProductRemoveService
+    public class ProductRemoveService:IAuditRemoveService
     {
         private readonly IProductRepository _productRepository;
         private readonly ILogger<ProductRemoveService> _logger;

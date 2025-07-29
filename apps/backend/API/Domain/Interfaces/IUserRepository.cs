@@ -4,9 +4,12 @@ namespace API.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<User> GetByOpenIdAsync(string openId);
+        IQueryable<User> QueryUsers();
+        Task<bool> AddUserAsync(User user);
+        Task<bool> UpdateUserAsync(User user);
+        /*Task<User> GetByOpenIdAsync(string openId);
         Task<User> GetByUuidAsync(byte[] uuidBytes);
         Task<User> AddUserAsync(User user);
-        Task<User> UpdateUserAsync(User user);
+        Task<User> UpdateUserAsync(User user);*/
     }
 }
