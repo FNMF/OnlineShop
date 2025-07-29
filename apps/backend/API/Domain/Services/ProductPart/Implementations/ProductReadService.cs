@@ -1,4 +1,5 @@
-﻿using API.Domain.Entities.Models;
+﻿using API.Common.Models.Results;
+using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;
 

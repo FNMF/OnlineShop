@@ -12,17 +12,16 @@
         public byte[] Merchantuuid { get; }
         public byte[] ProductUuid { get; }
 
-        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool islisted, byte[] merchantuuid, byte[] productUuid)
+        public ProductUpdateDto(ProductUpdateDto dto)
         {
-            Name = name;
-            Price = price;
-            Stock = stock;
-            Description = description;
-            Ingredient = ingredient;
-            Weight = weight;
-            Islisted = islisted;
-            Merchantuuid = merchantuuid;
-            ProductUuid = productUuid;
+            Name = dto.Name;
+            Price = dto.Price;
+            Stock = dto.Stock;
+            Description = dto.Description;
+            Ingredient = dto.Ingredient;
+            Weight = dto.Weight;
+            Merchantuuid = dto.Merchantuuid;
+            ProductUuid = dto.ProductUuid;
         }
     }
 }

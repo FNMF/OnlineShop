@@ -49,6 +49,9 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
+    <Folder Include="Domain\Services\aaaExample\Implementations\" />
+    <Folder Include="Domain\Services\aaaExample\Interfaces\" />
+    <Folder Include="Domain\Services\ProductPart\Implementations\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

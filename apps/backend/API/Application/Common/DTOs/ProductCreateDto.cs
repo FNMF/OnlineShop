@@ -11,16 +11,16 @@
         public bool Islisted { get; }
         public byte[] Merchantuuid { get; }
 
-        public ProductCreateDto(string name, decimal price, int stock, string description, string ingredient, string weight,bool islisted, byte[] merchantuuid)
+        public ProductCreateDto(ProductCreateDto dto)
         {
-            Name = name;
-            Price = price;
-            Stock = stock;
-            Description = description;
-            Ingredient = ingredient;
-            Weight = weight;
-            Islisted = islisted;
-            Merchantuuid = merchantuuid;
+            Name = dto.Name;
+            Price = dto.Price;
+            Stock = dto.Stock;
+            Description = dto.Description;
+            Ingredient = dto.Ingredient;
+            Weight = dto.Weight;
+            Islisted = dto.Islisted;
+            Merchantuuid = dto.Merchantuuid;
         }
     }
 }
