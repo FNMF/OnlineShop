@@ -82,7 +82,7 @@ namespace API
                 .FromApplicationDependencies(dep => dep.FullName.StartsWith("API"))
                 .AddClasses(classes =>
                     classes.Where(type =>
-                        type.Name.EndsWith("Service") || type.Name.EndsWith("Repository")))
+                        type.Name.EndsWith("Service") || type.Name.EndsWith("Repository")||type.Name.EndsWith("Factory")))
                             .AsImplementedInterfaces()
                             .WithScopedLifetime());
 

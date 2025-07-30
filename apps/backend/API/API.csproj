@@ -54,11 +54,6 @@
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
-<<<<<<< HEAD
-=======
-    <Folder Include="Domain\Services\aaaExample\Implementations\" />
-    <Folder Include="Domain\Services\aaaExample\Interfaces\" />
->>>>>>> red119
     <Folder Include="Domain\Services\ProductPart\Implementations\" />
     <Folder Include="Infrastructure\Database\" />
     <Folder Include="wwwroot\" />
