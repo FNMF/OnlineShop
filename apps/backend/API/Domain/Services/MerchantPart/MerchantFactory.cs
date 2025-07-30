@@ -2,10 +2,6 @@
 using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Net;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace API.Domain.Services.MerchantPart
 {
@@ -34,8 +30,8 @@ namespace API.Domain.Services.MerchantPart
             if (validationMessages.Any())
             {
                 return Result<Merchant>.Fail(ResultCode.ValidationError, string.Join(", ", validationMessages));
-            }
-            ;
+            };
+
             var merchant = new Merchant
             {
                 MerchantName = dto.Name,

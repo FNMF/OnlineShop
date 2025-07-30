@@ -12,5 +12,7 @@
         BusinessError = 600,        //自定义业务异常
         LoginVerifyError = 601,     //用户名或密码错误
         NotExist = 602,             //用户不存在
+        InfoExpire = 603,           //信息过期
+        InfoExist = 604,            //信息已存在
     }
 }

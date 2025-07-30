@@ -3,7 +3,9 @@ using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Middlewares;
 using API.Common.Models;
+using API.Domain.Events.MerchantCase;
 using API.Infrastructure.Database;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +37,8 @@ namespace API
                 .AddClasses(classes => classes.AssignableTo(typeof(IEventHandler<>)))
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+
+            
 
             builder.Services.AddControllers();
 
@@ -88,7 +92,6 @@ namespace API
 
 
             var app = builder.Build();
-
 
 
             // Configure the HTTP request pipeline.

@@ -23,12 +23,12 @@ namespace API.Application.MerchantCase.Services
             _logger = logger;
         }
         
-        public async Task<Result> LoginByAccountAsync(MerchantLoginByAccountDto loginDto)
+        public async Task<Result> LoginByAccountAsync(MerchantLoginByAccountOptions opt)
         {
             try
             {
                 // 1. 调用 Domain 层的服务来验证账号和密码
-                var isValid = await _adminPasswordVerifyService.VerifyShopPasswordAsync(loginDto.Account, loginDto.Password);
+                var isValid = await _adminPasswordVerifyService.VerifyShopPasswordAsync(opt.Account, opt.Password);
 
                 if (!isValid.IsSuccess)
                 {
@@ -38,7 +38,7 @@ namespace API.Application.MerchantCase.Services
 
                 // 3. 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
                 // 例如，你可以通过 EventPublisher 触发一些事件
-                await _eventBus.PublishAsync(new MerchantLoginEvent(loginDto.Account));
+                await _eventBus.PublishAsync(new MerchantLoginEvent(opt.Account));
 
                 return Result.Success(isValid.Message);
             }

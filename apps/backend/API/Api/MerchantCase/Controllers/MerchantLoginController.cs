@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.MerchantCase.Controllers
 {
-    [Route("api/Merchant/[controller]")]
+    [Route("api/merchant/login")]
     [ApiController]
     public class MerchantLoginController:ControllerBase
     {
@@ -18,14 +18,14 @@ namespace API.Api.MerchantCase.Controllers
 
         [HttpPost("account")]
         //[AuthorizePermission(Permissions.VerifyAdmin)]
-        public async Task<IActionResult> LoginByAccount([FromBody] MerchantLoginByAccountDto loginDto)
+        public async Task<IActionResult> LoginByAccount([FromBody] MerchantLoginByAccountOptions opt)
         {
-            if (loginDto == null)
+            if (opt == null)
             {
                 return BadRequest("无效的请求数据");
             }
 
-            var result = await _merchantLoginService.LoginByAccountAsync(loginDto);
+            var result = await _merchantLoginService.LoginByAccountAsync(opt);
             if (result.IsSuccess)
             {
                 return Ok(result); // 返回登录成功的结果（比如 Token 等）

@@ -18,7 +18,7 @@ namespace API.Common.Helpers
             _configuration = configuration;
         }
 
-        public string GenerateToken(string? openId, Guid uuid, string? name)
+        public string UserGenerateToken(string? openId, Guid uuid, string? name)
         {
             var claims = new List<Claim>
             {
@@ -32,6 +32,30 @@ namespace API.Common.Helpers
             {
                 claims.Add(new Claim(ClaimTypes.Name, name));           //如果有名字则add，如果没有则无视，理由同上
             }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _settings.Issuer,
+                audience: _settings.Audience,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(_settings.ExpiresMinutes),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public string AdminGenerateToken(string Phone, Guid uuid, string account)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, uuid.ToString()),
+                new Claim("Phone", Phone),
+                new Claim("Account", account),
+            };
+             
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

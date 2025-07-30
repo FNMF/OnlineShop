@@ -73,11 +73,11 @@ namespace API.Application.Services
                 var userdto = new UserCreateDto(userInfo?.NickName, openId, phoneInfo.PhoneNumber, userInfo.AvatarUrl);
                 var resultofCreate = await _userCreateService.AddUserAsync(userdto);
                 await _logService.AddLog(LogType.user, "创建新用户", "无", resultofCreate.Data.UserUuid.ToArray(), json);
-                return _jwtHelper.GenerateToken(resultofCreate.Data.UserOpenid.ToString(), new Guid(resultofCreate.Data.UserUuid), null);
+                return _jwtHelper.UserGenerateToken(resultofCreate.Data.UserOpenid.ToString(), new Guid(resultofCreate.Data.UserUuid), null);
             }
 
             await _logService.AddLog(LogType.user, "用户登录", "无", user.UserUuid.ToArray(), json);
-            return _jwtHelper.GenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), null);
+            return _jwtHelper.UserGenerateToken(user.UserOpenid.ToString(), new Guid(user.UserUuid), null);
         }
 
         private static string DecryptWxData(string encryptedData, string iv, string sessionKey)

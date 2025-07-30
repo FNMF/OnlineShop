@@ -3,8 +3,9 @@ using API.Common.Models.Results;
 
 namespace API.Application.MerchantCase.Interfaces
 {
-    public interface IMerchantLoginService
+    public interface IMerchantRegisterService
     {
-        Task<Result> LoginByAccountAsync(MerchantLoginByAccountOptions loginDto);
+        Task<Result> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt);
+
     }
 }

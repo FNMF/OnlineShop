@@ -1,4 +1,5 @@
-﻿using API.Domain.Entities.Models;
+﻿using API.Common.Models.Results;
+using API.Domain.Entities.Models;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
 using API.Infrastructure.Database;
@@ -61,6 +62,36 @@ namespace API.Infrastructure.Repositories
                 return RoleType.shop;
 
             return RoleType.none;
+        }
+
+        public async Task<Result> SetAsNoServiceAdmin(Admin admin)
+        {
+            var adminRoles = await _context.Set<AdminRole>()
+                 .Where(a => a.ArAdminuuid == admin.AdminUuid)
+                .ToListAsync();
+
+            if (adminRoles.Any())
+            {
+                _context.RemoveRange(adminRoles); // 删除原有角色关系
+            }
+
+            var noneRole = await _context.Set<Role>()
+                .FirstOrDefaultAsync(r => r.RoleName == RoleName.shop_noservice.ToString());
+
+            if (noneRole == null)
+            {
+                return Result.Fail(ResultCode.NotFound,"未找到对应的角色");
+            }
+            var newAdminRole = new AdminRole
+            {
+                ArAdminuuid = admin.AdminUuid,
+                ArRoleid = noneRole.RoleId
+            };
+
+            await _context.Set<AdminRole>().AddAsync(newAdminRole);
+            await _context.SaveChangesAsync();
+
+            return Result.Success();
         }
     }
 }

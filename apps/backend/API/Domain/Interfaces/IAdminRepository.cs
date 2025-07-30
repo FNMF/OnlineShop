@@ -1,4 +1,5 @@
-﻿using API.Domain.Entities.Models;
+﻿using API.Common.Models.Results;
+using API.Domain.Entities.Models;
 using API.Domain.Enums;
 
 namespace API.Domain.Interfaces
@@ -11,6 +12,7 @@ namespace API.Domain.Interfaces
         Task<Admin> AddAdminAsync(Admin admin);
         Task<Admin> UpdateAdminAsync(Admin admin);
         Task<RoleType> QueryRoleType(Admin admin);
+        Task<Result> SetAsNoServiceAdmin(Admin admin);
 
     }
 }
