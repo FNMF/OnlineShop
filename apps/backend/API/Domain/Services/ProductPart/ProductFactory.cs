@@ -46,7 +46,6 @@ namespace API.Domain.Services.ProductPart
                 ProductWeight = dto.Weight,
                 ProductIslisted = dto.Islisted,
                 ProductMerchantuuid = dto.MerchantUuid,
-                ProductUuid = UuidV7Helper.NewUuidV7ToBtyes(),
                 ProductIsavailable=false,
                 ProductCoverurl= dto.CoverUrl,
                 ProductTime = DateTime.Now,

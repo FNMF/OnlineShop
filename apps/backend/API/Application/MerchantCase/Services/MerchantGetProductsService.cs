@@ -27,11 +27,11 @@ namespace API.Application.MerchantCase.Services
 
                 if (result.IsSuccess)
                 {
-                    var productDtos = result.Data.Select(p => new ProductReadDto
+                    var products = result.Data.Select(p => new ProductReadDto
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductDescription, 
                     p.ProductIngredient, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
-                    return Result<List<ProductReadDto>>.Success(productDtos);
+                    return Result<List<ProductReadDto>>.Success(products);
                 }
                 else
                 {

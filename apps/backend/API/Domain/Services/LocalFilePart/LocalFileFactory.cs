@@ -60,6 +60,8 @@ namespace API.Domain.Services.LocalFilePart
                 LocalfileType = dto.File.ContentType,
                 LocalfileCreatedat = DateTime.Now,
                 LocalfileUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                LocalfileObjectuuid = dto.ObjectUuid,
+                LocalfileObjecttype = dto.LocalfileObjectType.ToString().ToLowerInvariant(),
                 LocalfileUploaderuuid = dto.UploderUuid,
                 LocalfileUploadip = dto.UploderIp,
                 LocalfileIsaudited = false,

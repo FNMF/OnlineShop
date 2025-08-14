@@ -1,4 +1,5 @@
-﻿using API.Application.MerchantCase.Interfaces;
+﻿using API.Api.Common.Models;
+using API.Application.MerchantCase.Interfaces;
 using API.Common.Interfaces;
 using API.Domain.Enums;
 using API.Infrastructure.Attributes;
@@ -11,13 +12,14 @@ namespace API.Api.MerchantCase.Controllers
     public class MerchantProductController:ControllerBase
     {
         private readonly IMerchantGetProductsService _merchantGetProductService;
-        private readonly ICurrentService _currentService;
+        private readonly IMerchantAddProductService _merchantAddProductService;
 
-        public MerchantProductController(IMerchantGetProductsService merchantProductService, ICurrentService currentService)
+
+        public MerchantProductController(IMerchantGetProductsService merchantProductService, IMerchantAddProductService merchantAddProductService = null)
         {
             _merchantGetProductService = merchantProductService;
-            _currentService = currentService;
-        }    
+            _merchantAddProductService = merchantAddProductService;
+        }
 
         [HttpGet("")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.GetProduct)]
@@ -36,11 +38,23 @@ namespace API.Api.MerchantCase.Controllers
 
         [HttpPost("")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
-        public async Task<IActionResult> AddProduct()
+        public async Task<IActionResult> AddProduct([FromBody] ProductCreateOptions opt)
         {
-            //todo未完成逻辑
-            //var result = await _
-            return Ok("添加商品的逻辑尚未实现，请稍后再试。");
+            var result = await _merchantAddProductService.AddProduct(opt);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
+
+        /* todo
+         * 未完成开发
+         * [HttpPatch("uuid")]
+        [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]
+        public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] )*/
     }
 }
