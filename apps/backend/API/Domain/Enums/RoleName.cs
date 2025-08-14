@@ -10,9 +10,9 @@
         platform_warehouse = 5,
         platform_finance = 6,
         platform_marketing = 7,
-        shop_owner = 21,
-        shop_staff = 22,
-        shop_noservice = 23,
-        pre_void = 100,
+        shop_owner = 201,
+        shop_staff = 202,
+        shop_noservice = 203,
+        pre_void = 1000,
     }
 }

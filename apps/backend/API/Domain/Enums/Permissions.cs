@@ -8,10 +8,10 @@
         VerifyAdmin = 1,
 
         //GroupShop
-        AddProduct = 100,
-        RemoveProduct = 101,
-        UpdateProduct = 102,
-        GetProduct = 103,
+        AddProduct = 1000,
+        RemoveProduct = 1001,
+        UpdateProduct = 1002,
+        GetProduct = 1003,
         //GroupUser
 
         //Group
