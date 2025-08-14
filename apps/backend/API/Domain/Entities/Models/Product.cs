@@ -35,13 +35,12 @@ public partial class Product
 
     [Column("product_ingredient")]
     [StringLength(255)]
-    public string ProductIngredient { get; set; } = null!;
+    public string? ProductIngredient { get; set; }
 
     [Column("product_weight")]
     [StringLength(255)]
     public string ProductWeight { get; set; } = null!;
 
-    [Required]
     [Column("product_islisted")]
     public bool ProductIslisted { get; set; }
 

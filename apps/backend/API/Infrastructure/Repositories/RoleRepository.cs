@@ -4,14 +4,14 @@ using API.Infrastructure.Database;
 
 namespace API.Infrastructure.Repositories
 {
-    public class RoleRepository:IRoleRepository
+    public class RoleRepository : IRoleRepository
     {
         private readonly OnlineshopContext _context;
         public RoleRepository(OnlineshopContext context)
         {
             _context = context;
         }
-        public IQueryable<Role> QueryRoles() 
+        public IQueryable<Role> QueryRoles()
         {
             return _context.Roles;
         }

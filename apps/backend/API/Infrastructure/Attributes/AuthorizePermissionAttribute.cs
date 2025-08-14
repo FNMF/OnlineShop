@@ -6,17 +6,19 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using API.Domain.Entities.Models;
-using API.Common.Models;
+using API.Domain.Enums;
 
 namespace API.Infrastructure.Attributes
 {
     [AttributeUsage(AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class AuthorizePermissionAttribute : Attribute, IAuthorizationFilter
     {
+        public RoleName Role { get; }
         public Permissions Permission { get; }
 
-        public AuthorizePermissionAttribute(Permissions permission)
+        public AuthorizePermissionAttribute(RoleName role, Permissions permission)
         {
+            Role = role;
             Permission = permission;
         }
 
@@ -37,17 +39,24 @@ namespace API.Infrastructure.Attributes
             {
                 var jwtToken = jwtHandler.ReadJwtToken(token);
                 var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-                var role = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
-
-                if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(role))
+                
+                if (string.IsNullOrEmpty(userId))
                 {
                     context.Result = new UnauthorizedResult();
                     return;
                 }
 
-                // 使用解析后的 userId 和 role 调用 RBAC 服务判断权限
-                var permissionService = context.HttpContext.RequestServices.GetService<IRbacService>();
-                if (!permissionService.HasPermissionAsync(userId, Permission).Result)
+                // 使用解析后的 userId 调用 RBAC 服务判断权限
+                var rbacService = context.HttpContext.RequestServices.GetService<IRbacService>();
+                
+                //先查询角色，再查询权限，减少不必要的权限查询
+                if (!rbacService.HasRoleAsync(userId, Role).Result)
+                {
+                    context.Result = new ForbidResult();
+                }
+
+                //再查询权限
+                if (!rbacService.HasPermissionAsync(userId, Permission).Result)
                 {
                     context.Result = new ForbidResult();
                 }

@@ -277,7 +277,6 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.ProductUuid).HasName("PRIMARY");
 
             entity.Property(e => e.ProductUuid).IsFixedLength();
-            entity.Property(e => e.ProductIslisted).HasDefaultValueSql("'1'");
             entity.Property(e => e.ProductMerchantuuid).IsFixedLength();
 
             entity.HasOne(d => d.ProductMerchantuu).WithMany(p => p.Products)

@@ -1,4 +1,6 @@
-﻿namespace API.Common.Models
+﻿using API.Domain.Enums;
+
+namespace API.Common.Models
 {
     public class CurrentPermission
     {

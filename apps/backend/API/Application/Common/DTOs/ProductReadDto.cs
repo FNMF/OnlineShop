@@ -7,7 +7,7 @@
         public decimal Price { get; }
         public int Stock { get; }
         public string? Description { get; }
-        public string Ingredient { get; }
+        public string? Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
         public bool IsAvailable { get; }

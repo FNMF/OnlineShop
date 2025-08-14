@@ -1,5 +1,7 @@
 ﻿using API.Application.MerchantCase.Interfaces;
 using API.Common.Interfaces;
+using API.Domain.Enums;
+using API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.MerchantCase.Controllers
@@ -18,8 +20,7 @@ namespace API.Api.MerchantCase.Controllers
         }    
 
         [HttpGet("")]
-        //todo
-        //这里需要添加我写的那个身份验证服务
+        [AuthorizePermission(RoleName.shop_owner, Permissions.GetProduct)]
         public async Task<IActionResult> GetAllProducts()
         {
             var result = await _merchantGetProductService.GetAllProducts();
@@ -34,10 +35,10 @@ namespace API.Api.MerchantCase.Controllers
         }
 
         [HttpPost("")]
-        //todo
-        //身份验证
+        [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
         public async Task<IActionResult> AddProduct()
         {
+            //todo未完成逻辑
             //var result = await _
             return Ok("添加商品的逻辑尚未实现，请稍后再试。");
         }

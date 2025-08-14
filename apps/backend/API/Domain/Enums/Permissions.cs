@@ -1,4 +1,4 @@
-﻿namespace API.Common.Models
+﻿namespace API.Domain.Enums
 {
     public enum Permissions
     {
@@ -8,7 +8,10 @@
         VerifyAdmin = 1,
 
         //GroupShop
-
+        AddProduct = 100,
+        RemoveProduct = 101,
+        UpdateProduct = 102,
+        GetProduct = 103,
         //GroupUser
 
         //Group
