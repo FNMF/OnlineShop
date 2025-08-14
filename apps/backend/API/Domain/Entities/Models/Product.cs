@@ -43,7 +43,7 @@ public partial class Product
 
     [Required]
     [Column("product_islisted")]
-    public bool? ProductIslisted { get; set; }
+    public bool ProductIslisted { get; set; }
 
     [Column("product_merchantuuid")]
     [MaxLength(16)]

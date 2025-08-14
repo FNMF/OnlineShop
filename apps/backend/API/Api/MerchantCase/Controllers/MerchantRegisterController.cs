@@ -6,11 +6,11 @@ namespace API.Api.MerchantCase.Controllers
 {
     [Route("api/merchant/register")]
     [ApiController]
-    public class MechantRegisterController:ControllerBase
+    public class MerchantRegisterController:ControllerBase
     {
         private readonly IMerchantRegisterService _merchantRegisterService;
 
-        public MechantRegisterController(IMerchantRegisterService merchantRegisterService)
+        public MerchantRegisterController(IMerchantRegisterService merchantRegisterService)
         {
             _merchantRegisterService = merchantRegisterService;
         }

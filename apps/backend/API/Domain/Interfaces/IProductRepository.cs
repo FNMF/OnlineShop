@@ -8,7 +8,7 @@ namespace API.Domain.Interfaces
         IQueryable<Product> QueryProducts();
         Task<bool> AddProductAsync(Product product);
         Task<bool> UpdateProductAsync(Product product);
-
+        Task<bool> DeleteProductAsync(Product product);
         /*
         Task<List<Product>> GetAllProductsByMerchantUuidAsync(Guid merchantuuid);
         Task<bool> CreateProductsByMerchantUuidAsync(CUProductDto dto, Guid merchanuuid);
