@@ -2,10 +2,12 @@
 using API.Application.Common.DTOs;
 using API.Application.Common.EventBus;
 using API.Application.MerchantCase.Interfaces;
+using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Events.MerchantCase;
 using API.Domain.Events.PlatformCase;
 using API.Domain.Services.Common.Interfaces;
+using System.Security.Claims;
 
 namespace API.Application.MerchantCase.Services
 {
@@ -13,12 +15,14 @@ namespace API.Application.MerchantCase.Services
     public class MerchantLoginService:IMerchantLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
+        private readonly JwtHelper _jwtHelper;
         private readonly EventBus _eventBus;
         private readonly ILogger<MerchantLoginService> _logger;
 
-        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, EventBus eventBus, ILogger<MerchantLoginService> logger)
+        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
+            _jwtHelper = jwtHelper;
             _eventBus = eventBus;
             _logger = logger;
         }
@@ -38,7 +42,10 @@ namespace API.Application.MerchantCase.Services
 
                 // 3. 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
                 // 例如，你可以通过 EventPublisher 触发一些事件
-                await _eventBus.PublishAsync(new MerchantLoginEvent(opt.Account));
+
+                var uuidString = _jwtHelper.AnalysisToken(isValid.Message, ClaimTypes.NameIdentifier).Message;
+                byte[] uuid = Guid.Parse(uuidString).ToByteArray();
+                await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
 
                 return Result.Success(isValid.Message);
             }

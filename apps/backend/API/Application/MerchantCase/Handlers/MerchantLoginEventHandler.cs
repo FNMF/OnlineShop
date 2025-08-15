@@ -18,9 +18,9 @@ namespace API.Application.MerchantCase.Handlers
         public async Task HandleAsync(MerchantLoginEvent @event,CancellationToken cancellation = default)
         {
             // 这里处理事件，例如记录日志
-            Console.WriteLine($"User '{@event.MerchantAdminAccount}' logged in.");
+            Console.WriteLine($"User '{@event.MerchantAdminUuid}' logged in.");
 
-            await _logService.AddLog(Domain.Enums.LogType.merchant, "商户管理员登录", @event.MerchantAdminAccount.ToString());
+            await _logService.AddLog(Domain.Enums.LogType.merchant, "商户管理员登录",@event.OccurrendOn.ToShortTimeString(), @event.MerchantAdminUuid);
             // 如果有其他处理（比如发送消息、记录到数据库等），可以继续处理
             await Task.CompletedTask;
         }

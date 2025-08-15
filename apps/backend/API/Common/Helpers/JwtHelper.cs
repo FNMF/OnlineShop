@@ -1,4 +1,5 @@
 ﻿using API.Common.Models;
+using API.Common.Models.Results;
 using API.Domain.Enums;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -69,6 +70,26 @@ namespace API.Common.Helpers
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        //没有验证的解析Token
+        public Result AnalysisToken(string token, string type)
+        {
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadJwtToken(token);
+                var claims = jwtToken.Claims.ToList();
+                var anything = claims.FirstOrDefault(c => c.Type == type);
+                if (anything == null)
+                {
+                    return Result.Fail(ResultCode.TokenInvalid,"解析的类别不存在");
+                }
+                return Result.Success(anything.Value);
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(ResultCode.TokenInvalid, $"Token 解析失败: {ex.Message}");
+            }
         }
     }
 }

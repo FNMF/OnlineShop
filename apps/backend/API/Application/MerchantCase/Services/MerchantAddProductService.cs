@@ -6,6 +6,7 @@ using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Enums;
+using API.Domain.Events.MerchantCase;
 using API.Domain.Services.LocalFilePart.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;
 
@@ -63,6 +64,9 @@ namespace API.Application.MerchantCase.Services
                 var products = result.Data.Select(p => new ProductReadDto
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductDescription,
                     p.ProductIngredient, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
+
+                // 触发商品添加事件
+                await _eventBus.PublishAsync(new MerchantAddProductEvent(_currentService.CurrentUuid, productUuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
 

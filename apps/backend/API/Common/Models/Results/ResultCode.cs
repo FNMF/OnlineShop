@@ -14,5 +14,6 @@
         NotExist = 602,             //用户不存在
         InfoExpire = 603,           //信息过期
         InfoExist = 604,            //信息已存在
+        TokenInvalid = 605,         //Token无效
     }
 }
