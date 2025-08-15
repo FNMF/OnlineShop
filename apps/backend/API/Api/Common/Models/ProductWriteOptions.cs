@@ -2,7 +2,7 @@
 
 namespace API.Api.Common.Models
 {
-    public class ProductCreateOptions
+    public class ProductWriteOptions
     {
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }

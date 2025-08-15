@@ -1,7 +1,6 @@
 ﻿using API.Api.Common.Models;
 using API.Application.Common.DTOs;
 using API.Application.MerchantCase.Interfaces;
-using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Enums;
@@ -11,49 +10,47 @@ using API.Domain.Services.ProductPart.Interfaces;
 
 namespace API.Application.MerchantCase.Services
 {
-    public class MerchantAddProductService: IMerchantAddProductService
+    public class MerchantUpdateProductService: IMerchantUpdateProductService
     {
-        private readonly IProductCreateService _productCreateService;
+        private readonly IProductUpdateService _productUpdateService;
         private readonly IProductReadService _productReadService;
-        private readonly ILocalFileCreateService _localFileCreateService;
+        private readonly ILocalFileUpdateService _localFileUpdateService;
+        private readonly ILocalFileReadService _localFileReadService;
         private readonly IClientIpService _clientIpService;
         private readonly ICurrentService _currentService;
         private readonly EventBus _eventBus;
-        private readonly ILogger<MerchantAddProductService> _logger;
+        private readonly ILogger<MerchantUpdateProductService> _logger;
 
-        public MerchantAddProductService(IProductCreateService productCreateService, IProductReadService productReadService, ILocalFileCreateService localFileCreateService, IClientIpService clientIpService, ICurrentService currentService, EventBus eventBus, ILogger<MerchantAddProductService> logger)
+        public MerchantUpdateProductService(IProductUpdateService productUpdateService, IProductReadService productReadService, ILocalFileUpdateService localFileUpdateService, ILocalFileReadService localFileReadService, IClientIpService clientIpService, ICurrentService currentService, EventBus eventBus, ILogger<MerchantUpdateProductService> logger)
         {
-            _productCreateService = productCreateService;
+            _productUpdateService = productUpdateService;
             _productReadService = productReadService;
-            _localFileCreateService = localFileCreateService;
+            _localFileUpdateService = localFileUpdateService;
+            _localFileReadService = localFileReadService;
             _clientIpService = clientIpService;
             _currentService = currentService;
             _eventBus = eventBus;
             _logger = logger;
         }
 
-        public async Task<Result<List<ProductReadDto>>> AddProduct(ProductWriteOptions opt)
+        public async Task<Result<List<ProductReadDto>>> UpdateProduct(Guid uuid, ProductWriteOptions opt)
         {
             try
             {
                 string ip = _clientIpService.GetClientIp();
-                byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
-                var file = new LocalFileCreateDto(opt.ProductCoverFile, productUuid, LocalfileObjectType.product_cover, _currentService.CurrentUuid, ip);
-                var fileResult = await _localFileCreateService.AddLocalFileAsync(file);
-
+                var existingFileResult = await _localFileReadService.GetProductCoverLocalFile(uuid);
+                var file = new LocalFileUpdateDto(opt.ProductCoverFile,_currentService.CurrentUuid ,ip,existingFileResult.Data.LocalfileUuid,uuid.ToByteArray(), LocalfileObjectType.product_cover);
+                var fileResult = await _localFileUpdateService.UpdateLocalFileAsync(file);
                 if (!fileResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(fileResult.Code, fileResult.Message);
                 }
-
-                var product = new ProductCreateDto(productUuid, opt.ProductName, opt.ProductPrice, opt.ProductStock, opt.ProductDescription, opt.ProductIngredient, opt.ProductWeight, opt.ProductIslisted, productUuid, fileResult.Data.LocalfilePath);
-                var productResult = await _productCreateService.AddProductAsync(product);
-
+                var product = new ProductUpdateDto(opt.ProductName, opt.ProductPrice, opt.ProductStock, opt.ProductDescription, opt.ProductIngredient, opt.ProductWeight, opt.ProductIslisted,_currentService.CurrentUuid,uuid.ToByteArray(), fileResult.Data.LocalfilePath);
+                var productResult = await _productUpdateService.UpdateProductAsync(product);
                 if (!productResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(productResult.Code, productResult.Message);
                 }
-
                 var result = await _productReadService.GetMerchantProducts();
                 if (!result.IsSuccess)
                 {
@@ -64,16 +61,14 @@ namespace API.Application.MerchantCase.Services
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductDescription,
                     p.ProductIngredient, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
-                // 触发商品添加事件
-                await _eventBus.PublishAsync(new MerchantAddProductEvent(_currentService.CurrentUuid, productUuid));
+                
+                 await _eventBus.PublishAsync(new MerchantUpdateProductEvent(_currentService.CurrentUuid, uuid.ToByteArray()));
 
                 return Result<List<ProductReadDto>>.Success(products);
-
-
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "添加商品出错");
+                _logger.LogError(ex, "更新商品出错");
                 return Result<List<ProductReadDto>>.Fail(ResultCode.ServerError, ex.Message);
             }
         }

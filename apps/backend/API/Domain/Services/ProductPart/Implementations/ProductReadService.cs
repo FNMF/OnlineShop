@@ -41,5 +41,25 @@ namespace API.Domain.Services.ProductPart.Implementations
                 return Result<List<Product>>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
+
+        public async Task<Result<Product>> GetProductByUuid(byte[] uuidBytes)
+        {
+            try
+            {
+                var product = await _ProductRepository.QueryProducts()
+                    .FirstOrDefaultAsync(p => p.ProductUuid == uuidBytes);
+
+                if (product == null)
+                {
+                    return Result<Product>.Fail(ResultCode.NotFound, "没有找到相关商品");
+                }
+                return Result<Product>.Success(product);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<Product>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
     }
 }

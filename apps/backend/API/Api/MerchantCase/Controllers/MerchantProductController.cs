@@ -9,16 +9,20 @@ namespace API.Api.MerchantCase.Controllers
 {
     [Route("api/merchant/products")]
     [ApiController]
-    public class MerchantProductController:ControllerBase
+    public class MerchantProductController : ControllerBase
     {
         private readonly IMerchantGetProductsService _merchantGetProductService;
         private readonly IMerchantAddProductService _merchantAddProductService;
+        private readonly IMerchantUpdateProductService _merchantUpdateProductService;
+        private readonly IMerchantRemoveProductService _merchantRemoveProductService;
 
 
-        public MerchantProductController(IMerchantGetProductsService merchantProductService, IMerchantAddProductService merchantAddProductService = null)
+        public MerchantProductController(IMerchantGetProductsService merchantProductService, IMerchantAddProductService merchantAddProductService, IMerchantUpdateProductService merchantUpdateProductService, IMerchantRemoveProductService merchantRemoveProductService)
         {
             _merchantGetProductService = merchantProductService;
             _merchantAddProductService = merchantAddProductService;
+            _merchantUpdateProductService = merchantUpdateProductService;
+            _merchantRemoveProductService = merchantRemoveProductService;
         }
 
         [HttpGet("")]
@@ -38,7 +42,7 @@ namespace API.Api.MerchantCase.Controllers
 
         [HttpPost("")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
-        public async Task<IActionResult> AddProduct([FromBody] ProductCreateOptions opt)
+        public async Task<IActionResult> AddProduct([FromBody] ProductWriteOptions opt)
         {
             var result = await _merchantAddProductService.AddProduct(opt);
             if (result.IsSuccess)
@@ -51,10 +55,34 @@ namespace API.Api.MerchantCase.Controllers
             }
         }
 
-        /* todo
-         * 未完成开发
-         * [HttpPatch("uuid")]
+        [HttpPatch("uuid")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]
-        public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] )*/
+        public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] ProductWriteOptions opt)
+        {
+            var result = await _merchantUpdateProductService.UpdateProduct(uuid, opt);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpDelete("uuid")]
+        [AuthorizePermission(RoleName.shop_owner, Permissions.RemoveProduct)]
+        public async Task<IActionResult> DeleteProduct(Guid uuid)
+        {
+            var result = await _merchantRemoveProductService.RemoveProduct(uuid);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
     }
 }

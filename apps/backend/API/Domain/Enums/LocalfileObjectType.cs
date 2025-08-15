@@ -3,9 +3,10 @@
     public enum LocalfileObjectType
     {
         merchant = 0,
-        product = 1,
-        user = 2,
-        platform = 3,
-        system = 4
+        product_cover = 1,
+        product_detail = 2,
+        user = 3,
+        platform = 4,
+        system = 5,
     }
 }

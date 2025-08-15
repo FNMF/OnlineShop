@@ -35,7 +35,7 @@ public partial class Localfile
     [MaxLength(16)]
     public byte[]? LocalfileObjectuuid { get; set; }
 
-    [Column("localfile_objecttype", TypeName = "enum('merchant','product','user','platform','system')")]
+    [Column("localfile_objecttype", TypeName = "enum('merchant','product_cover','product_detail','user','platform','system')")]
     public string LocalfileObjecttype { get; set; } = null!;
 
     [Column("localfile_mimetype")]

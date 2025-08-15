@@ -4,8 +4,8 @@ using API.Common.Models.Results;
 
 namespace API.Application.MerchantCase.Interfaces
 {
-    public interface IMerchantAddProductService
+    public interface IMerchantUpdateProductService
     {
-        Task<Result<List<ProductReadDto>>> AddProduct(ProductWriteOptions opt);
+        Task<Result<List<ProductReadDto>>> UpdateProduct(Guid uuid, ProductWriteOptions opt);
     }
 }

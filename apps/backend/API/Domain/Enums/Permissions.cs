@@ -2,7 +2,7 @@
 {
     public enum Permissions
     {
-        //enum('user', 'product', 'order', 'shop', 'warehouse', 'marketing', 'support', 'finance', 'system', 'other')
+        //enum('user', 'product_cover', 'order', 'shop', 'warehouse', 'marketing', 'support', 'finance', 'system', 'other')
         //GroupSystem
         AddAdmin = 0,
         VerifyAdmin = 1,
