@@ -1,10 +1,11 @@
 ﻿using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
+using API.Domain.Services.LocalFilePart.Interfaces;
 
 namespace API.Domain.Services.LocalFilePart.Implementations
 {
-    public class LocalFileReadService
+    public class LocalFileReadService: ILocalFileReadService
     {
         private readonly ILocalFileRepository _localFileRepository;
         private readonly ILogger<LocalFileReadService> _logger;
@@ -60,6 +61,7 @@ namespace API.Domain.Services.LocalFilePart.Implementations
             {
                 var localFiles = _localFileRepository.QueryLocalFiles()
                     .Where(p => p.LocalfileObjectuuid == productUuid.ToByteArray() && p.LocalfileType == Enums.LocalfileObjectType.product_detail.ToString() && p.LocalfileIsdeleted == false)
+                    .OrderBy(p => p.LocalfileSort)
                     .ToList();
                 if (localFiles == null || !localFiles.Any())
                 {

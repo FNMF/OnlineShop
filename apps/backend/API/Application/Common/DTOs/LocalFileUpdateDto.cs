@@ -10,8 +10,9 @@ namespace API.Application.Common.DTOs
         public byte[] LocalFileUuid { get; }
         public byte[] ObjectUuid { get; } 
         public LocalfileObjectType ObjectType { get; }
+        public int SortNumber { get; }
 
-        public LocalFileUpdateDto(IFormFile file, byte[] uploderUuid, string uploderIp, byte[] localFileUuid, byte[] objectUuid, LocalfileObjectType objectType)
+        public LocalFileUpdateDto(IFormFile file, byte[] uploderUuid, string uploderIp, byte[] localFileUuid, byte[] objectUuid, LocalfileObjectType objectType, int sortNumber)
         {
             File = file;
             UploderUuid = uploderUuid;
@@ -19,6 +20,7 @@ namespace API.Application.Common.DTOs
             LocalFileUuid = localFileUuid;
             ObjectUuid = objectUuid;
             ObjectType = objectType;
+            SortNumber = sortNumber;
         }
     }
 }

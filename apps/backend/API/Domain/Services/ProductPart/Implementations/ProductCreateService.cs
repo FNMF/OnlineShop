@@ -30,6 +30,9 @@ namespace API.Domain.Services.ProductPart.Implementations
 
                 await _productRepository.AddProductAsync(result.Data);
 
+
+
+
                 return result;
             }catch (Exception ex)
             {

@@ -38,12 +38,46 @@ namespace API.Application.MerchantCase.Services
             {
                 string ip = _clientIpService.GetClientIp();
                 byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
-                var file = new LocalFileCreateDto(opt.ProductCoverFile, productUuid, LocalfileObjectType.product_cover, _currentService.CurrentUuid, ip);
+
+                if (opt.ProductCoverFile == null || opt.ProductCoverFile.Length == 0)
+                {
+                    return Result<List<ProductReadDto>>.Fail(ResultCode.InvalidInput, "商品封面不能为空");
+                }
+                if(opt.ProductImages == null || opt.ProductImages.Count == 0)
+                {
+                    return Result<List<ProductReadDto>>.Fail(ResultCode.InvalidInput, "商品图片不能为空");
+                }
+
+                var file = new LocalFileCreateDto(opt.ProductCoverFile, productUuid, LocalfileObjectType.product_cover, _currentService.CurrentUuid, ip,0);
                 var fileResult = await _localFileCreateService.AddLocalFileAsync(file);
 
                 if (!fileResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(fileResult.Code, fileResult.Message);
+                }
+
+                var imagefiles = new List<LocalFileCreateDto>();
+
+                foreach (var image in opt.ProductImages)
+                {
+                    if (image == null )
+                        continue; // 跳过空文件
+
+                    var imageFileDto = new LocalFileCreateDto(
+                        image.ProductImage,
+                        productUuid,
+                        LocalfileObjectType.product_detail, // 区分封面和详情图
+                        _currentService.CurrentUuid,
+                        ip,
+                        image.SortNumber
+                    );
+
+                    imagefiles.Add(imageFileDto);
+                }
+                var imageFileResults = await _localFileCreateService.AddBatchLocalFilesAsync(imagefiles);
+                if (!imageFileResults.IsSuccess) 
+                {
+                    return Result<List<ProductReadDto>>.Fail(imageFileResults.Code, imageFileResults.Message);
                 }
 
                 var product = new ProductCreateDto(productUuid, opt.ProductName, opt.ProductPrice, opt.ProductStock, opt.ProductDescription, opt.ProductIngredient, opt.ProductWeight, opt.ProductIslisted, productUuid, fileResult.Data.LocalfilePath);
@@ -61,8 +95,7 @@ namespace API.Application.MerchantCase.Services
                 }
 
                 var products = result.Data.Select(p => new ProductReadDto
-                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductDescription,
-                    p.ProductIngredient, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
+                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
                 // 触发商品添加事件
                 await _eventBus.PublishAsync(new MerchantAddProductEvent(_currentService.CurrentUuid, productUuid));

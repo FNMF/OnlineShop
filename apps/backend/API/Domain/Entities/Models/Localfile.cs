@@ -55,4 +55,7 @@ public partial class Localfile
     [Column("localfile_uploadip")]
     [StringLength(50)]
     public string LocalfileUploadip { get; set; } = null!;
+
+    [Column("localfile_sort")]
+    public int LocalfileSort { get; set; }
 }

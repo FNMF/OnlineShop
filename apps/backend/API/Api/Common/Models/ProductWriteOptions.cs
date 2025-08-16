@@ -12,6 +12,13 @@ namespace API.Api.Common.Models
         public string ProductWeight { get; set; }
         public bool ProductIslisted { get; set; }
         public bool ProductIsavailable { get; set; }
-        public IFormFile ProductCoverFile { get; set; }
+        public IFormFile? ProductCoverFile { get; set; }
+        public List<ImageSortDto>? ProductImages { get; set; }
+
+        public class ImageSortDto
+        {
+            public IFormFile ProductImage { get; set; }
+            public int SortNumber { get; set; }
+        } 
     }
 }

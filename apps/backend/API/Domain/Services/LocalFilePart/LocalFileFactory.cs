@@ -74,6 +74,7 @@ namespace API.Domain.Services.LocalFilePart
 
         }
 
+        //不推荐直接Update方法，而是通过软删除加新增来替代Update
         public async Task<Result<Localfile>> Update(LocalFileUpdateDto dto)
         {
             if (dto.File == null || dto.File.Length == 0)

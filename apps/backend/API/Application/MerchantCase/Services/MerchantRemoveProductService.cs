@@ -53,8 +53,7 @@ namespace API.Application.MerchantCase.Services
                 }
 
                 var products = result.Data.Select(p => new ProductReadDto
-                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductDescription,
-                    p.ProductIngredient, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
+                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
                 await _eventBus.PublishAsync(new MerchantRemoveProductEvent(_currentService.CurrentUuid, uuid.ToByteArray()));
 

@@ -1,27 +1,32 @@
 ﻿namespace API.Application.Common.DTOs
 {
-    public class ProductReadDto     // 这是一个简化的产品读取数据传输对象，用于列表展示
+    public class ProductReadDetailDto
     {
         public byte[] ProductUuid { get; }
         public string Name { get; }
         public decimal Price { get; }
         public int Stock { get; }
+        public string? Description { get; }
+        public string? Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
         public bool IsAvailable { get; }
         public string? CoverUrl { get; }
+        public List<string> Images { get; }
 
-        public ProductReadDto(byte[] productUuid, string name, decimal price, int stock, string weight, bool isListed, bool isAvailable, string coverUrl)
+        public ProductReadDetailDto(byte[] productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl, List<string> images)
         {
             ProductUuid = productUuid;
             Name = name;
             Price = price;
             Stock = stock;
+            Description = description;
+            Ingredient = ingredient;
             Weight = weight;
             Islisted = isListed;
             IsAvailable = isAvailable;
             CoverUrl = coverUrl;
+            Images = images;
         }
-
     }
 }

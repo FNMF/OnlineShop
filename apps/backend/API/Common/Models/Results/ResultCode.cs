@@ -15,5 +15,6 @@
         InfoExpire = 603,           //信息过期
         InfoExist = 604,            //信息已存在
         TokenInvalid = 605,         //Token无效
+        InvalidInput = 606,         //输入不合法
     }
 }

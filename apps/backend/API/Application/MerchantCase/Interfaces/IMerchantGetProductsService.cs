@@ -7,5 +7,6 @@ namespace API.Application.MerchantCase.Interfaces
     public interface IMerchantGetProductsService
     {
         Task<Result<List<ProductReadDto>>> GetAllProducts();
+        Task<Result<ProductReadDetailDto>> GetProductByUuid(Guid uuid);
     }
 }

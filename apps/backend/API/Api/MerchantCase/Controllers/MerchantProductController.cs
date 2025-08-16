@@ -54,6 +54,20 @@ namespace API.Api.MerchantCase.Controllers
                 return BadRequest(result);
             }
         }
+        [HttpGet("uuid")]
+        [AuthorizePermission(RoleName.shop_owner,Permissions.GetProduct)]
+        public async Task<IActionResult> GetProductByUuid(Guid uuid)        //这个是获取单个商品的接口
+        {
+            var result = await _merchantGetProductService.GetProductByUuid(uuid);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
 
         [HttpPatch("uuid")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]

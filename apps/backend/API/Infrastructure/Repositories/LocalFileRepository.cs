@@ -17,7 +17,7 @@ namespace API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> AddBatchLocalFileAsync(List<Localfile> localFiles)
+        public async Task<bool> AddBatchLocalFilesAsync(List<Localfile> localFiles)
         {
             await _context.AddRangeAsync(localFiles);
             await _context.SaveChangesAsync();
@@ -26,6 +26,12 @@ namespace API.Infrastructure.Repositories
         public async Task<bool> UpdateLocalFileAsync(Localfile localfile)
         {
             _context.Update(localfile);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> UpdateBatchLocalFilesAsync(List<Localfile> localfiles)
+        {
+            _context.UpdateRange(localfiles);
             await _context.SaveChangesAsync();
             return true;
         }
