@@ -1,8 +1,7 @@
 ﻿using API.Application.Common.EventBus;
 using API.Common.Interfaces;
-using API.Domain.Events.MerchantCase;
 
-namespace API.Application.MerchantCase.Handlers
+namespace API.PastCode
 {
     public class MerchantAddProductEventHandler:IEventHandler<MerchantAddProductEvent>
     {

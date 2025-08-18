@@ -1,11 +1,10 @@
 ﻿using API.Application.Common.DTOs;
-using API.Application.MerchantCase.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Services.LocalFilePart.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;
 using System.Runtime.InteropServices;
 
-namespace API.Application.MerchantCase.Services
+namespace API.PastCode
 {
     public class MerchantGetProductsService:IMerchantGetProductsService
     {

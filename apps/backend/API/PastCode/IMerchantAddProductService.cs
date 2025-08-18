@@ -2,7 +2,7 @@
 using API.Application.Common.DTOs;
 using API.Common.Models.Results;
 
-namespace API.Application.MerchantCase.Interfaces
+namespace API.PastCode
 {
     public interface IMerchantAddProductService
     {

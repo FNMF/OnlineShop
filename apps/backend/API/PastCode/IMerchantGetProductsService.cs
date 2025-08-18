@@ -2,7 +2,7 @@
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 
-namespace API.Application.MerchantCase.Interfaces
+namespace API.PastCode
 {
     public interface IMerchantGetProductsService
     {

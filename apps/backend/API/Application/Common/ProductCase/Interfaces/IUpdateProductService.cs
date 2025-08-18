@@ -2,9 +2,9 @@
 using API.Application.Common.DTOs;
 using API.Common.Models.Results;
 
-namespace API.Application.MerchantCase.Interfaces
+namespace API.Application.Common.ProductCase.Interfaces
 {
-    public interface IMerchantUpdateProductService
+    public interface IUpdateProductService
     {
         Task<Result<List<ProductReadDto>>> UpdateProduct(Guid uuid, ProductWriteOptions opt);
     }

@@ -1,6 +1,5 @@
 ﻿using API.Api.Common.Models;
-using API.Application.MerchantCase.Interfaces;
-using API.Common.Interfaces;
+using API.Application.Common.ProductCase.Interfaces;
 using API.Domain.Enums;
 using API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
@@ -11,25 +10,25 @@ namespace API.Api.MerchantCase.Controllers
     [ApiController]
     public class MerchantProductController : ControllerBase
     {
-        private readonly IMerchantGetProductsService _merchantGetProductService;
-        private readonly IMerchantAddProductService _merchantAddProductService;
-        private readonly IMerchantUpdateProductService _merchantUpdateProductService;
-        private readonly IMerchantRemoveProductService _merchantRemoveProductService;
+        private readonly IGetProductService _getProductService;
+        private readonly IAddProductService _addProductService;
+        private readonly IUpdateProductService _updateProductService;
+        private readonly IRemoveProductService _removeProductService;
 
 
-        public MerchantProductController(IMerchantGetProductsService merchantProductService, IMerchantAddProductService merchantAddProductService, IMerchantUpdateProductService merchantUpdateProductService, IMerchantRemoveProductService merchantRemoveProductService)
+        public MerchantProductController(IGetProductService productService, IAddProductService addProductService, IUpdateProductService updateProductService, IRemoveProductService removeProductService)
         {
-            _merchantGetProductService = merchantProductService;
-            _merchantAddProductService = merchantAddProductService;
-            _merchantUpdateProductService = merchantUpdateProductService;
-            _merchantRemoveProductService = merchantRemoveProductService;
+            _getProductService = productService;
+            _addProductService = addProductService;
+            _updateProductService = updateProductService;
+            _removeProductService = removeProductService;
         }
 
         [HttpGet("")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.GetProduct)]
         public async Task<IActionResult> GetAllProducts()
         {
-            var result = await _merchantGetProductService.GetAllProducts();
+            var result = await _getProductService.GetAllProducts();
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -44,7 +43,7 @@ namespace API.Api.MerchantCase.Controllers
         [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
         public async Task<IActionResult> AddProduct([FromBody] ProductWriteOptions opt)
         {
-            var result = await _merchantAddProductService.AddProduct(opt);
+            var result = await _addProductService.AddProduct(opt);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -58,7 +57,7 @@ namespace API.Api.MerchantCase.Controllers
         [AuthorizePermission(RoleName.shop_owner,Permissions.GetProduct)]
         public async Task<IActionResult> GetProductByUuid(Guid uuid)        //这个是获取单个商品的接口
         {
-            var result = await _merchantGetProductService.GetProductByUuid(uuid);
+            var result = await _getProductService.GetProductByUuid(uuid);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -73,7 +72,7 @@ namespace API.Api.MerchantCase.Controllers
         [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]
         public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] ProductWriteOptions opt)
         {
-            var result = await _merchantUpdateProductService.UpdateProduct(uuid, opt);
+            var result = await _updateProductService.UpdateProduct(uuid, opt);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
@@ -88,7 +87,7 @@ namespace API.Api.MerchantCase.Controllers
         [AuthorizePermission(RoleName.shop_owner, Permissions.RemoveProduct)]
         public async Task<IActionResult> DeleteProduct(Guid uuid)
         {
-            var result = await _merchantRemoveProductService.RemoveProduct(uuid);
+            var result = await _removeProductService.RemoveProduct(uuid);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);

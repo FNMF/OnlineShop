@@ -78,10 +78,10 @@ namespace API
             });
 
             builder.Services.AddLogging();
-
+            //特殊名称服务注册
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            builder.Services.AddScoped<ICurrentService, CurrentService>();
-
+            builder.Services.AddScoped<IEventBus, EventBus>();
+            //通用名称服务注册
             builder.Services.Scan(scan => scan
                 .FromApplicationDependencies(dep => dep.FullName.StartsWith("API"))
                 .AddClasses(classes =>

@@ -1,9 +1,9 @@
 ﻿using API.Application.Common.DTOs;
 using API.Common.Models.Results;
 
-namespace API.Application.MerchantCase.Interfaces
+namespace API.Application.Common.ProductCase.Interfaces
 {
-    public interface IMerchantRemoveProductService
+    public interface IRemoveProductService
     {
         Task<Result<List<ProductReadDto>>> RemoveProduct(Guid uuid);
     }

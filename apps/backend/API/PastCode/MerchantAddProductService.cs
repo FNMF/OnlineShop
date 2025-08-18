@@ -1,6 +1,5 @@
 ﻿using API.Api.Common.Models;
 using API.Application.Common.DTOs;
-using API.Application.MerchantCase.Interfaces;
 using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
@@ -9,7 +8,7 @@ using API.Domain.Events.MerchantCase;
 using API.Domain.Services.LocalFilePart.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;
 
-namespace API.Application.MerchantCase.Services
+namespace API.PastCode
 {
     public class MerchantAddProductService : IMerchantAddProductService
     {

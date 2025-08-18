@@ -1,11 +1,13 @@
-﻿namespace API.Domain.Events.MerchantCase
+﻿using API.Domain.Events;
+
+namespace API.PastCode
 {
-    public class MerchantRemoveProductEvent:IDomainEvent
+    public class MerchantAddProductEvent:IDomainEvent
     {
         public byte[] MerchantAdminUuid { get; }
         public byte[] ProductUuid { get; }
         public DateTime OccurrendOn { get; }
-        public MerchantRemoveProductEvent(byte[] merchantAdminUuid, byte[] productUuid)
+        public MerchantAddProductEvent(byte[] merchantAdminUuid, byte[] productUuid)
         {
             OccurrendOn = DateTime.Now;
             MerchantAdminUuid = merchantAdminUuid;
