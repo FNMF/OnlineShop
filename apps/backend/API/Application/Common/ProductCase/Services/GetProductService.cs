@@ -23,11 +23,11 @@ namespace API.Application.Common.ProductCase.Services
             _logger = logger;
         }
 
-        public async Task<Result<List<ProductReadDto>>> GetAllProducts()
+        public async Task<Result<List<ProductReadDto>>> GetAllProducts(byte[]? productUuid = null)
         {
             try
             {
-                var result = await _productReadService.GetMerchantProducts();
+                var result = await _productReadService.GetMerchantProducts(productUuid);
 
                 if (result.IsSuccess)
                 {

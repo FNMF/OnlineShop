@@ -53,7 +53,7 @@ namespace API.Api.MerchantCase.Controllers
                 return BadRequest(result);
             }
         }
-        [HttpGet("uuid")]
+        [HttpGet("{uuid}")]
         [AuthorizePermission(RoleName.shop_owner,Permissions.GetProduct)]
         public async Task<IActionResult> GetProductByUuid(Guid uuid)        //这个是获取单个商品的接口
         {
@@ -68,7 +68,7 @@ namespace API.Api.MerchantCase.Controllers
             }
         }
 
-        [HttpPatch("uuid")]
+        [HttpPatch("{uuid}")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]
         public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] ProductWriteOptions opt)
         {
@@ -83,7 +83,7 @@ namespace API.Api.MerchantCase.Controllers
             }
         }
 
-        [HttpDelete("uuid")]
+        [HttpDelete("{uuid}")]
         [AuthorizePermission(RoleName.shop_owner, Permissions.RemoveProduct)]
         public async Task<IActionResult> DeleteProduct(Guid uuid)
         {

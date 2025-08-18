@@ -5,7 +5,7 @@ namespace API.Domain.Services.ProductPart.Interfaces
 {
     public interface IProductReadService
     {
-        Task<Result<List<Product>>> GetMerchantProducts();
+        Task<Result<List<Product>>> GetMerchantProducts(byte[]? productUuid = null);
         Task<Result<Product>> GetProductByUuid(byte[] uuidBytes);
     }
 }
