@@ -11,22 +11,20 @@ using API.Domain.Services.ProductPart.Interfaces;
 
 namespace API.Application.MerchantCase.Services
 {
-    public class MerchantAddProductService: IMerchantAddProductService
+    public class MerchantAddProductService : IMerchantAddProductService
     {
-        private readonly IProductCreateService _productCreateService;
+        private readonly IProductDomainService _productDomainService;
         private readonly IProductReadService _productReadService;
         private readonly ILocalFileCreateService _localFileCreateService;
-        private readonly IClientIpService _clientIpService;
         private readonly ICurrentService _currentService;
         private readonly EventBus _eventBus;
         private readonly ILogger<MerchantAddProductService> _logger;
 
-        public MerchantAddProductService(IProductCreateService productCreateService, IProductReadService productReadService, ILocalFileCreateService localFileCreateService, IClientIpService clientIpService, ICurrentService currentService, EventBus eventBus, ILogger<MerchantAddProductService> logger)
+        public MerchantAddProductService(IProductDomainService productDomainService, IProductReadService productReadService, ILocalFileCreateService localFileCreateService,ICurrentService currentService , EventBus eventBus, ILogger<MerchantAddProductService> logger)
         {
-            _productCreateService = productCreateService;
+            _productDomainService = productDomainService;
             _productReadService = productReadService;
             _localFileCreateService = localFileCreateService;
-            _clientIpService = clientIpService;
             _currentService = currentService;
             _eventBus = eventBus;
             _logger = logger;
@@ -36,19 +34,39 @@ namespace API.Application.MerchantCase.Services
         {
             try
             {
-                string ip = _clientIpService.GetClientIp();
-                byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
-
                 if (opt.ProductCoverFile == null || opt.ProductCoverFile.Length == 0)
                 {
                     return Result<List<ProductReadDto>>.Fail(ResultCode.InvalidInput, "商品封面不能为空");
                 }
-                if(opt.ProductImages == null || opt.ProductImages.Count == 0)
+                if (opt.ProductImages == null || opt.ProductImages.Count == 0)
                 {
                     return Result<List<ProductReadDto>>.Fail(ResultCode.InvalidInput, "商品图片不能为空");
                 }
+                byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
 
-                var file = new LocalFileCreateDto(opt.ProductCoverFile, productUuid, LocalfileObjectType.product_cover, _currentService.CurrentUuid, ip,0);
+                //LocalFile处理
+                var imageFiles = _productDomainService.PrepareImages(productUuid,opt);
+                var saveResult = await _localFileCreateService.AddBatchLocalFilesAsync(imageFiles);
+                if (!saveResult.IsSuccess)
+                {
+                    return Result<List<ProductReadDto>>.Fail(saveResult.Code, saveResult.Message);
+                }
+
+                //Product处理
+                var productResult = await _productDomainService.CreateProductAggregate(
+                new ProductCreateDto(productUuid, opt.ProductName, opt.ProductPrice, opt.ProductStock,
+                                     opt.ProductDescription, opt.ProductIngredient, opt.ProductWeight, opt.ProductIslisted,
+                                     productUuid, saveResult.Data.FirstOrDefault(f =>f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath),
+                imageFiles
+            );
+
+                if (!productResult.IsSuccess)
+                {
+                    return Result<List<ProductReadDto>>.Fail(productResult.Code, productResult.Message);
+                }
+
+                /* 这是旧代码
+                var file = new LocalFileCreateDto(opt.ProductCoverFile, productUuid, LocalfileObjectType.product_cover, _currentService.CurrentUuid, ip, 0);
                 var fileResult = await _localFileCreateService.AddLocalFileAsync(file);
 
                 if (!fileResult.IsSuccess)
@@ -60,7 +78,7 @@ namespace API.Application.MerchantCase.Services
 
                 foreach (var image in opt.ProductImages)
                 {
-                    if (image == null )
+                    if (image == null)
                         continue; // 跳过空文件
 
                     var imageFileDto = new LocalFileCreateDto(
@@ -75,7 +93,7 @@ namespace API.Application.MerchantCase.Services
                     imagefiles.Add(imageFileDto);
                 }
                 var imageFileResults = await _localFileCreateService.AddBatchLocalFilesAsync(imagefiles);
-                if (!imageFileResults.IsSuccess) 
+                if (!imageFileResults.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(imageFileResults.Code, imageFileResults.Message);
                 }
@@ -86,8 +104,8 @@ namespace API.Application.MerchantCase.Services
                 if (!productResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(productResult.Code, productResult.Message);
-                }
-
+                }*/
+                //获取更新后的商品列表
                 var result = await _productReadService.GetMerchantProducts();
                 if (!result.IsSuccess)
                 {

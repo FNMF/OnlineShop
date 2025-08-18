@@ -9,6 +9,8 @@ namespace API.Common.Helpers
         
         public static string CreateCode(string Phone)
         {
+            //todo
+            //这里仅用于测试
             var code = "655652";
             Codes[Phone] = (code, DateTime.UtcNow.AddMinutes(2));
             return code;
