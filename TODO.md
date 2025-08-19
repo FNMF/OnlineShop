@@ -5,3 +5,7 @@
 
 ##TODO
     商户Product类的Controller里面的Product为改成聚合，暂时用DTO存储其详情图。
+
+##TODO
+    LocalFileFactory中压缩图片的逻辑未正确处理，后续要考虑到文件大小和文件质量等。
+    

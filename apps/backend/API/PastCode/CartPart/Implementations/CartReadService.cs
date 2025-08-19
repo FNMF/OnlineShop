@@ -1,10 +1,10 @@
 ﻿using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
-using API.Domain.Services.CartPart.Interfaces;
+using API.PastCode.CartPart.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Domain.Services.CartPart.Implementations
+namespace API.PastCode.CartPart.Implementations
 {
     public class CartReadService:ICartReadService
     {

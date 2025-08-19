@@ -3,7 +3,7 @@ using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 
-namespace API.Domain.Services.CartPart
+namespace API.PastCode.CartPart
 {
     public class CartFactory
     {
@@ -32,7 +32,6 @@ namespace API.Domain.Services.CartPart
             {
                 CartUseruuid = dto.UserUuid,
                 CartProductuuid = dto.ProductUuid,
-                CartQuantity = dto.Quantity,
                 CartUuid = UuidV7Helper.NewUuidV7ToBtyes(),
                 CartTime = DateTime.Now,
             };
@@ -65,7 +64,6 @@ namespace API.Domain.Services.CartPart
             {
                 CartUseruuid = dto.UserUuid,
                 CartProductuuid = dto.ProductUuid,
-                CartQuantity = dto.Quantity,
                 CartUuid = dto.CartUuid,
                 CartTime = DateTime.Now,
             };

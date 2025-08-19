@@ -9,12 +9,16 @@
   <ItemGroup>
     <Compile Remove="Domain\Services\aaaExample\**" />
     <Compile Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <Compile Remove="PastCode\**" />
     <Content Remove="Domain\Services\aaaExample\**" />
     <Content Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <Content Remove="PastCode\**" />
     <EmbeddedResource Remove="Domain\Services\aaaExample\**" />
     <EmbeddedResource Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <EmbeddedResource Remove="PastCode\**" />
     <None Remove="Domain\Services\aaaExample\**" />
     <None Remove="Domain\Services\AddressPart\AddressUpdateFactory\**" />
+    <None Remove="PastCode\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,7 +38,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     <PackageReference Include="Scrutor" Version="6.1.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.10" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,9 +46,7 @@
     <Folder Include="Api\SystemCase\Controllers\" />
     <Folder Include="Api\SystemCase\Models\" />
     <Folder Include="Api\UserCase\Models\" />
-    <Folder Include="Application\Common\Handlers\" />
-    <Folder Include="Application\Common\Interfaces\" />
-    <Folder Include="Application\Common\Services\" />
+    <Folder Include="Application\Common\CartCase\Handlers\" />
     <Folder Include="Application\MerchantCase\DTOs\" />
     <Folder Include="Application\PlatformCase\DTOs\" />
     <Folder Include="Application\SystemCase\DTOs\" />
@@ -55,6 +57,7 @@
     <Folder Include="Application\UserCase\Handlers\" />
     <Folder Include="Application\UserCase\Interfaces\" />
     <Folder Include="Application\UserCase\Services\" />
+    <Folder Include="Domain\Aggregates\CartAggregate\CartEvents\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
     <Folder Include="Infrastructure\Database\" />

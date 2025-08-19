@@ -9,6 +9,8 @@ using API.Application.Common.DTOs;
 
 namespace API.Domain.Services.LocalFilePart
 {
+    //todo
+    //这里的部分逻辑有明显问题，比如传入的图片多次压缩，后续要解决
     public class LocalFileFactory: ILocalFileFactory
     {
         private static readonly string Root = Environment.GetEnvironmentVariable("WEB_ROOT")

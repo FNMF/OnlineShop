@@ -2,9 +2,10 @@
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
-using API.Domain.Services.CartPart.Interfaces;
+using API.PastCode.CartPart;
+using API.PastCode.CartPart.Interfaces;
 
-namespace API.Domain.Services.CartPart.Implementations
+namespace API.PastCode.CartPart.Implementations
 {
     public class CartUpdateService: ICartUpdateService
     {

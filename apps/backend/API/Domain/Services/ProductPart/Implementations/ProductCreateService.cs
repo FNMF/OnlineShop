@@ -28,10 +28,10 @@ namespace API.Domain.Services.ProductPart.Implementations
                     return Result<Product>.Fail(ResultCode.ValidationError, "输入数据不合法");
                 }
 
-                await _productRepository.AddProductAsync(result.Data);
-
-
-
+                if (!await _productRepository.AddProductAsync(result.Data)) 
+                {
+                    return Result<Product>.Fail(ResultCode.BusinessError, "创建商品时出错");
+                }
 
                 return result;
             }catch (Exception ex)

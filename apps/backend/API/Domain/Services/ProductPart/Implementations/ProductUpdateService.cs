@@ -27,7 +27,10 @@ namespace API.Domain.Services.ProductPart.Implementations
                     return Result<Product>.Fail(ResultCode.ValidationError, "输入数据不合法");
                 }
 
-                await _productRepository.UpdateProductAsync(result.Data);
+                if(!await _productRepository.UpdateProductAsync(result.Data))
+                {
+                    return Result<Product>.Fail(ResultCode.BusinessError, "更新商品时出错");
+                }
 
                 return result;
             }

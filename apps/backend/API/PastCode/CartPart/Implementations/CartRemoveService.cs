@@ -1,8 +1,8 @@
 ﻿using API.Common.Models.Results;
 using API.Domain.Interfaces;
-using API.Domain.Services.CartPart.Interfaces;
+using API.PastCode.CartPart.Interfaces;
 
-namespace API.Domain.Services.CartPart.Implementations
+namespace API.PastCode.CartPart.Implementations
 {
     public class CartRemoveService: ICartRemoveService
     {

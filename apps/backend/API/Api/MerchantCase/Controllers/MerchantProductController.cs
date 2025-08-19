@@ -2,6 +2,7 @@
 using API.Application.Common.ProductCase.Interfaces;
 using API.Domain.Enums;
 using API.Infrastructure.Attributes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.MerchantCase.Controllers
@@ -25,6 +26,7 @@ namespace API.Api.MerchantCase.Controllers
         }
 
         [HttpGet("")]
+        [Authorize]
         [AuthorizePermission(RoleName.shop_owner, Permissions.GetProduct)]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -40,6 +42,7 @@ namespace API.Api.MerchantCase.Controllers
         }
 
         [HttpPost("")]
+        [Authorize]
         [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
         public async Task<IActionResult> AddProduct([FromBody] ProductWriteOptions opt)
         {
@@ -54,6 +57,7 @@ namespace API.Api.MerchantCase.Controllers
             }
         }
         [HttpGet("{uuid}")]
+        [Authorize]
         [AuthorizePermission(RoleName.shop_owner,Permissions.GetProduct)]
         public async Task<IActionResult> GetProductByUuid(Guid uuid)        //这个是获取单个商品的接口
         {
@@ -69,6 +73,7 @@ namespace API.Api.MerchantCase.Controllers
         }
 
         [HttpPatch("{uuid}")]
+        [Authorize]
         [AuthorizePermission(RoleName.shop_owner, Permissions.UpdateProduct)]
         public async Task<IActionResult> UpdateProduct(Guid uuid, [FromBody] ProductWriteOptions opt)
         {
@@ -84,6 +89,7 @@ namespace API.Api.MerchantCase.Controllers
         }
 
         [HttpDelete("{uuid}")]
+        [Authorize]
         [AuthorizePermission(RoleName.shop_owner, Permissions.RemoveProduct)]
         public async Task<IActionResult> DeleteProduct(Guid uuid)
         {

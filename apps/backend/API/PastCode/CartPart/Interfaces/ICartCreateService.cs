@@ -2,7 +2,7 @@
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 
-namespace API.Domain.Services.CartPart.Interfaces
+namespace API.PastCode.CartPart.Interfaces
 {
     public interface ICartCreateService
     {

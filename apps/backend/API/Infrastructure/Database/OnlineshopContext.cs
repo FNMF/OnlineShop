@@ -29,6 +29,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Cart> Carts { get; set; }
 
+    public virtual DbSet<Cartitem> Cartitems { get; set; }
+
     public virtual DbSet<Coupon> Coupons { get; set; }
 
     public virtual DbSet<Delivery> Deliveries { get; set; }
@@ -146,13 +148,25 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.CartUuid).HasName("PRIMARY");
 
             entity.Property(e => e.CartUuid).IsFixedLength();
-            entity.Property(e => e.CartProductuuid).IsFixedLength();
-            entity.Property(e => e.CartQuantity).HasDefaultValueSql("'1'");
+            entity.Property(e => e.CartMerchantuuid).IsFixedLength();
             entity.Property(e => e.CartUseruuid).IsFixedLength();
 
             entity.HasOne(d => d.CartUseruu).WithMany(p => p.Carts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cart_user_user_uuid_fk");
+        });
+
+        modelBuilder.Entity<Cartitem>(entity =>
+        {
+            entity.HasKey(e => e.CartitemUuid).HasName("PRIMARY");
+
+            entity.Property(e => e.CartitemUuid).IsFixedLength();
+            entity.Property(e => e.CartitemCartuuid).IsFixedLength();
+            entity.Property(e => e.CartitemProductuuid).IsFixedLength();
+
+            entity.HasOne(d => d.CartitemCartuu).WithMany(p => p.Cartitems)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("cartitem_cart_cart_uuid_fk");
         });
 
         modelBuilder.Entity<Coupon>(entity =>

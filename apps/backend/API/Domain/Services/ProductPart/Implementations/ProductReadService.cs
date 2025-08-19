@@ -9,9 +9,9 @@ namespace API.Domain.Services.ProductPart.Implementations
 {
     public class ProductReadService:IProductReadService
     {
-        public readonly ICurrentService _currentService;
-        public readonly IProductRepository _ProductRepository;
-        public readonly ILogger<ProductReadService> _logger;
+        private readonly ICurrentService _currentService;
+        private readonly IProductRepository _ProductRepository;
+        private readonly ILogger<ProductReadService> _logger;
 
         public ProductReadService(ICurrentService currentService, IProductRepository productRepository, ILogger<ProductReadService> logger)
         {

@@ -6,11 +6,9 @@ using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Enums;
-using API.Domain.Events.MerchantCase;
 using API.Domain.Events.ProductCase;
 using API.Domain.Services.LocalFilePart.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;
-using API.PastCode;
 
 namespace API.Application.Common.ProductCase.Services
 {
@@ -21,9 +19,9 @@ namespace API.Application.Common.ProductCase.Services
         private readonly ILocalFileCreateService _localFileCreateService;
         private readonly ICurrentService _currentService;
         private readonly IEventBus _eventBus;
-        private readonly ILogger<MerchantAddProductService> _logger;
+        private readonly ILogger<AddProductService> _logger;
 
-        public AddProductService(IProductDomainService productDomainService, IProductReadService productReadService, ILocalFileCreateService localFileCreateService, ICurrentService currentService, IEventBus eventBus, ILogger<MerchantAddProductService> logger)
+        public AddProductService(IProductDomainService productDomainService, IProductReadService productReadService, ILocalFileCreateService localFileCreateService, ICurrentService currentService, IEventBus eventBus, ILogger<AddProductService> logger)
         {
             _productDomainService = productDomainService;
             _productReadService = productReadService;
@@ -48,7 +46,7 @@ namespace API.Application.Common.ProductCase.Services
                 byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
 
                 //LocalFile处理
-                var imageFiles = _productDomainService.PrepareImages(productUuid, opt);
+                var imageFiles = _productDomainService.PrepareImages(productUuid, opt).Data;
                 var saveResult = await _localFileCreateService.AddBatchLocalFilesAsync(imageFiles);
                 if (!saveResult.IsSuccess)
                 {

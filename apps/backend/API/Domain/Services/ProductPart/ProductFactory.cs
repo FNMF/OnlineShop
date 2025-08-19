@@ -34,8 +34,8 @@ namespace API.Domain.Services.ProductPart
             if (validationMessages.Any())
             {
                 return Result<Product>.Fail(ResultCode.ValidationError, string.Join(", ", validationMessages));
-            }
-            ;
+            };
+
             var product = new Product
             {
                 ProductName = dto.Name,

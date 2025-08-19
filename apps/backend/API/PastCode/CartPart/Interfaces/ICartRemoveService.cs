@@ -1,6 +1,6 @@
 ﻿using API.Common.Models.Results;
 
-namespace API.Domain.Services.CartPart.Interfaces
+namespace API.PastCode.CartPart.Interfaces
 {
     public interface ICartRemoveService
     {

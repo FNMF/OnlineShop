@@ -60,7 +60,7 @@ namespace API.PastCode
                     return Result<List<ProductReadDto>>.Fail(markDeleteResult.Code, markDeleteResult.Message);
 
                 // 构造新的封面+详情图 DTO
-                var newFiles = _productDomainService.PrepareImages(uuid.ToByteArray(), opt);
+                var newFiles = _productDomainService.PrepareImages(uuid.ToByteArray(), opt).Data;
 
                 // 上传新的文件
                 var uploadResult = await _localFileCreateService.AddBatchLocalFilesAsync(newFiles);

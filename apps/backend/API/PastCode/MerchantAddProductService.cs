@@ -44,7 +44,7 @@ namespace API.PastCode
                 byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
 
                 //LocalFile处理
-                var imageFiles = _productDomainService.PrepareImages(productUuid,opt);
+                var imageFiles = _productDomainService.PrepareImages(productUuid,opt).Data;
                 var saveResult = await _localFileCreateService.AddBatchLocalFilesAsync(imageFiles);
                 if (!saveResult.IsSuccess)
                 {

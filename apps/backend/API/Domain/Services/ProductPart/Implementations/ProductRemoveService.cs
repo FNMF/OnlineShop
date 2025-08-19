@@ -35,7 +35,10 @@ namespace API.Domain.Services.ProductPart.Implementations
                 }
 
                 product.ProductIsdeleted = true;
-                await _productRepository.UpdateProductAsync(product);
+                if (!await _productRepository.UpdateProductAsync(product)) 
+                {
+                    return Result.Fail(ResultCode.BusinessError, "移除商品时出错");
+                }
 
                 return Result.Success();
 
