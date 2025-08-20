@@ -9,11 +9,11 @@ namespace API.Domain.Aggregates.CartAggregate.Services
     public class CartCreateService: ICartCreateService
     {
         private readonly ICartRepository _cartRepository;
-        private readonly ILogger<CartCreateService> _cartCreateService;
+        private readonly ILogger<CartCreateService> _logger;
         public CartCreateService(ICartRepository cartRepository, ILogger<CartCreateService> cartCreateService)
         {
             _cartRepository = cartRepository;
-            _cartCreateService = cartCreateService;
+            _logger = cartCreateService;
         }
 
         public async Task<Result<CartMain>> CreateCartAsync(CartMain cartMain)
@@ -23,7 +23,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                 var cartResult = CartFactory.ToEntity(cartMain);
                 if (!cartResult.IsSuccess)
                 {
-                    return Result<CartMain>.Fail(ResultCode.ValidationError, "输入数据不合法");
+                    return Result<CartMain>.Fail(ResultCode.InvalidInput, "输入数据不合法");
                 }
                 if(!await _cartRepository.AddCartAsync(cartResult.Data))
                 {
@@ -34,7 +34,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             }
             catch (Exception ex)
             {
-                _cartCreateService.LogError(ex, "服务器错误");
+                _logger.LogError(ex, "服务器错误");
                 return Result<CartMain>.Fail(ResultCode.ServerError, "服务器错误");
             }
         }

@@ -12,11 +12,13 @@ namespace API.Api.UserCase.Controllers
     {
         private readonly IGetCartService _getCartService;
         private readonly IAddCartService _addCartService;
+        private readonly IRemoveCartService _removeCartService;
 
-        public UserCartController(IGetCartService readCartService, IAddCartService addCartService)
+        public UserCartController(IGetCartService readCartService, IAddCartService addCartService, IRemoveCartService removeCartService)
         {
             _getCartService = readCartService;
             _addCartService = addCartService;
+            _removeCartService = removeCartService;
         }
 
         [HttpGet("merchants/{merchantUuid}/carts")]
@@ -33,7 +35,7 @@ namespace API.Api.UserCase.Controllers
                 return BadRequest(result);
             }
         }
-
+        //创建用户在某个商户的首个购物车
         [HttpPost("merchants/products/{productUuid}")]
         [Authorize]
         public async Task<IActionResult> AddCart(Guid productUuid, [FromBody] CartWriteOptions opt)
@@ -42,6 +44,21 @@ namespace API.Api.UserCase.Controllers
             if (result.IsSuccess)
             {
                 return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+        //删除用户在某个商户的购物车
+        [HttpDelete("carts/{merchantUuid}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveCart(Guid merchantUuid)
+        {
+           var result = await _removeCartService.RemoveCart(merchantUuid);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
             }
             else
             {
