@@ -27,7 +27,7 @@ namespace API.Domain.Services.ProductPart.Implementations
         }
 
         //生成商品图片的DTO列表
-        public Result<List<LocalFileCreateDto>> PrepareImages(byte[] productUuid, ProductWriteOptions opt)
+        public Result<List<LocalFileCreateDto>> PrepareImages(Guid productUuid, ProductWriteOptions opt)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace API.Domain.Services.ProductPart.Implementations
                     return Result<List<LocalFileCreateDto>>.Fail(ResultCode.InvalidInput, "商品详情图不能为空");
 
                 string ip = _clientIpService.GetClientIp();
-                var currentUserId = _currentService.CurrentUuid;
+                var currentUserId = _currentService.RequiredUuid;
 
                 var result = new List<LocalFileCreateDto>();
 

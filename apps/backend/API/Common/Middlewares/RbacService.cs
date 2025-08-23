@@ -17,16 +17,16 @@ namespace API.Common.Middlewares
 
         public async Task<bool> HasPermissionAsync(string userId, Permissions permission)
         {
-            var userUuidBytes = new Guid(userId).ToByteArray();
-            var permissions = await _rolePermissionRepository.GetPermissionsByAdminIdAsync(userUuidBytes);
+            var userUuid = new Guid(userId);
+            var permissions = await _rolePermissionRepository.GetPermissionsByAdminIdAsync(userUuid);
 
             return permissions.Any(p => p.PermissionName == permission.ToString());
         }
 
         public async Task<bool> HasRoleAsync(string userId, RoleName role)
         {
-            var userUuidBytes = new Guid(userId).ToByteArray();
-            var roles = await _adminRoleRepository.GetRolesByAdminIdAsync(userUuidBytes);
+            var userUuid = new Guid(userId);
+            var roles = await _adminRoleRepository.GetRolesByAdminIdAsync(userUuid);
 
             return roles.Any(r => r.RoleName == role.ToString());
         }

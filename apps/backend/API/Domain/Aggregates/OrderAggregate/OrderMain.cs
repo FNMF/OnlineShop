@@ -4,9 +4,9 @@ namespace API.Domain.Aggregates.OrderAggregates
 {
     public class OrderMain
     {
-        public byte[] OrderUuid { get; set; }
-        public byte[] OrderUseruuid { get;set; }
-        public byte[] OrderPaymentuuid {  get; set; }
+        public Guid OrderUuid { get; set; }
+        public Guid OrderUseruuid { get;set; }
+        public Guid OrderPaymentuuid {  get; set; }
         public decimal OrderTotal { get; set; }
         public string OrderStatus { get; set; }
         public string OrderSid { get; set; }
@@ -62,7 +62,7 @@ namespace API.Domain.Aggregates.OrderAggregates
         }*/
 
         // 改变订单状态的业务逻辑
-        public void AddOrderItem(byte[] orderUuid, byte[] productId, int quantity, decimal unitPrice,string name)
+        public void AddOrderItem(Guid orderUuid, Guid productId, int quantity, decimal unitPrice,string name)
         {
             // 业务规则：检查是否已存在该产品
             var existingItem = _orderItems.FirstOrDefault(i => i.ProductUuid == productId);
@@ -76,7 +76,7 @@ namespace API.Domain.Aggregates.OrderAggregates
             }
             RecalculateTotal();
         }
-        public void RemoveOrderItem(byte[] productUuid) 
+        public void RemoveOrderItem(Guid productUuid) 
         {
             var item = _orderItems.FirstOrDefault(i =>i.ProductUuid == productUuid);
             if (item == null)
@@ -89,7 +89,7 @@ namespace API.Domain.Aggregates.OrderAggregates
 
         private void RecalculateTotal() => OrderTotal = _orderItems.Sum(i => i.SubTotal);
         
-        public void MarkAsPaid(byte[] paymentUuid)
+        public void MarkAsPaid(Guid paymentUuid)
         {
             if(OrderStatus != Enums.OrderStatus.created.ToString())
             {

@@ -16,7 +16,7 @@ namespace API.Domain.Services.LocalFilePart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveLocalFileAsync(byte[] localFileUuid)
+        public async Task<Result> RemoveLocalFileAsync(Guid localFileUuid)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace API.Domain.Services.LocalFilePart.Implementations
             }
         }
 
-        public async Task<Result> RemoveProductAllLocalFilesAsync(byte[] productUuid)
+        public async Task<Result> RemoveProductAllLocalFilesAsync(Guid productUuid)
         {
             try
             {

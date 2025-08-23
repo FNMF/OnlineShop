@@ -2,9 +2,9 @@
 {
     public class MerchantLoginEvent:IDomainEvent
     {
-        public byte[] MerchantAdminUuid { get;}
+        public Guid MerchantAdminUuid { get;}
         public DateTime OccurrendOn { get;}
-        public MerchantLoginEvent(byte[] merchantAdminUuid)
+        public MerchantLoginEvent(Guid merchantAdminUuid)
         {
             MerchantAdminUuid = merchantAdminUuid;
             OccurrendOn = DateTime.Now;

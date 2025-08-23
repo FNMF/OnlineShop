@@ -4,6 +4,6 @@ namespace API.Domain.Services.AuditPart.Interfaces
 {
     public interface IAuditRemoveService
     {
-        Task<Result> RemoveAuditAsync(byte[] auditUuid);
+        Task<Result> RemoveAuditAsync(Guid auditUuid);
     }
 }

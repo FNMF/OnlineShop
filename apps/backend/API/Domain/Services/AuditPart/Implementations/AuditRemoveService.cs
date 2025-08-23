@@ -16,7 +16,7 @@ namespace API.Domain.Services.AuditPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveAuditAsync(byte[] auditUuid)
+        public async Task<Result> RemoveAuditAsync(Guid auditUuid)
         {
             try
             {

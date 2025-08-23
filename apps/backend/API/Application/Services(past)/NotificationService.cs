@@ -58,7 +58,7 @@ namespace API.Application.Services
                             NotificationType =NotificationType.system.ToString(),
                             NotificationSendertype =NotificationSenderType.system.ToString(),
                             NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7ToBtyes()
+                            NotificationUuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
                         await _logService.AddLog(LogType.admin, "系统添加通知", "",notification.NotificationUuid);
@@ -77,7 +77,7 @@ namespace API.Application.Services
                             NotificationType = NotificationType.activity.ToString(),
                             NotificationSendertype = NotificationSenderType.platform.ToString(),
                             NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7ToBtyes()
+                            NotificationUuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
                         await _logService.AddLog(LogType.admin,"平台添加通知","",notification.NotificationUuid);
@@ -97,7 +97,7 @@ namespace API.Application.Services
                             NotificationSendertype = NotificationSenderType.merchant.ToString(),
                             NotificationSenderuuid = _currentService.CurrentUuid,
                             NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7ToBtyes()
+                            NotificationUuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
                         await _logService.AddLog(LogType.merchant,"商户添加通知", "",notification.NotificationUuid);
@@ -191,13 +191,13 @@ namespace API.Application.Services
                     throw new UnauthorizedAccessException("无权限删除通知");
                 }
 
-                if (notificationDeleteOptions == null || notificationDeleteOptions.UuidBytes == null)
+                if (notificationDeleteOptions == null || notificationDeleteOptions.Uuid == null)
                 {
                     throw new ArgumentNullException(nameof(notificationDeleteOptions), "缺少通知标识");
                 }
 
                 var notification = await _notificationRepository.QueryNotifications()
-                    .Where(n => n.NotificationUuid == notificationDeleteOptions.UuidBytes)
+                    .Where(n => n.NotificationUuid == notificationDeleteOptions.Uuid)
                     .FirstOrDefaultAsync();
 
                 if (notification == null)

@@ -2,7 +2,7 @@
 {
     public class ProductReadDetailDto
     {
-        public byte[] ProductUuid { get; }
+        public Guid ProductUuid { get; }
         public string Name { get; }
         public decimal Price { get; }
         public int Stock { get; }
@@ -14,7 +14,7 @@
         public string? CoverUrl { get; }
         public List<string> Images { get; }
 
-        public ProductReadDetailDto(byte[] productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl, List<string> images)
+        public ProductReadDetailDto(Guid productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl, List<string> images)
         {
             ProductUuid = productUuid;
             Name = name;

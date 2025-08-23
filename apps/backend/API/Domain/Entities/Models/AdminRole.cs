@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,16 +17,16 @@ public partial class AdminRole
 
     [Column("ar_adminuuid")]
     [MaxLength(16)]
-    public byte[] ArAdminuuid { get; set; } = null!;
+    public Guid ArAdminuuid { get; set; } 
 
     [Column("ar_roleid")]
     public int ArRoleid { get; set; }
 
     [ForeignKey("ArAdminuuid")]
     [InverseProperty("AdminRoles")]
-    public virtual Admin ArAdminuu { get; set; } = null!;
+    public virtual Admin ArAdminuu { get; set; } 
 
     [ForeignKey("ArRoleid")]
     [InverseProperty("AdminRoles")]
-    public virtual Role ArRole { get; set; } = null!;
+    public virtual Role ArRole { get; set; } 
 }

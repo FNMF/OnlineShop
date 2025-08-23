@@ -43,7 +43,7 @@ namespace API.Application.Common.ProductCase.Services
                 {
                     return Result<List<ProductReadDto>>.Fail(ResultCode.InvalidInput, "商品图片不能为空");
                 }
-                byte[] productUuid = UuidV7Helper.NewUuidV7ToBtyes();
+                var productUuid = UuidV7Helper.NewUuidV7();
 
                 //LocalFile处理
                 var imageFiles = _productDomainService.PrepareImages(productUuid, opt).Data;
@@ -76,7 +76,7 @@ namespace API.Application.Common.ProductCase.Services
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
                 // 触发商品添加事件
-                await _eventBus.PublishAsync(new AddProductEvent(_currentService.CurrentUuid,_currentService.CurrentType , productUuid));
+                await _eventBus.PublishAsync(new AddProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , productUuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
 

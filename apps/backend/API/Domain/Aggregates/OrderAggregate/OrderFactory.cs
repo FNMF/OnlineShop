@@ -42,7 +42,7 @@ namespace API.Domain.Aggregates.OrderAggregates
 
             var orderMain = new OrderMain
             {
-                OrderUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                OrderUuid = UuidV7Helper.NewUuidV7(),
                 OrderUseruuid = dto.OrderUseruuid,
                 OrderStatus = dto.OrderStatus,
                 OrderTotal = dto.OrderTotal,

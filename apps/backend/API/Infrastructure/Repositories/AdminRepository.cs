@@ -19,9 +19,9 @@ namespace API.Infrastructure.Repositories
         {
             return await _context.Admins.FirstOrDefaultAsync(a => a.AdminAccount == account && a.AdminIsdeleted == false);
         }
-        public async Task<Admin> GetAdminByUuidAsync(byte[] uuidBytes)
+        public async Task<Admin> GetAdminByUuidAsync(Guid uuid)
         {
-            return await _context.Admins.FirstOrDefaultAsync(a => a.AdminUuid == uuidBytes && a.AdminIsdeleted == false);
+            return await _context.Admins.FirstOrDefaultAsync(a => a.AdminUuid == uuid && a.AdminIsdeleted == false);
         }
         public async Task<Admin> GetAdminByPhoneAsync(string phone)
         {

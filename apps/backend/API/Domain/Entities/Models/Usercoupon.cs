@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,14 +14,14 @@ public partial class Usercoupon
     [Key]
     [Column("uc_uuid")]
     [MaxLength(16)]
-    public byte[] UcUuid { get; set; } = null!;
+    public Guid UcUuid { get; set; } 
 
     [Column("uc_couponid")]
     public int UcCouponid { get; set; }
 
     [Column("uc_useruuid")]
     [MaxLength(16)]
-    public byte[] UcUseruuid { get; set; } = null!;
+    public Guid UcUseruuid { get; set; } 
 
     [Column("uc_receivetime", TypeName = "datetime")]
     public DateTime UcReceivetime { get; set; }
@@ -30,7 +30,7 @@ public partial class Usercoupon
     public DateTime UcUsedtime { get; set; }
 
     [Column("uc_status", TypeName = "enum('unused','used','OT','invalidity')")]
-    public string UcStatus { get; set; } = null!;
+    public string UcStatus { get; set; } 
 
     [Column("uc_discountvalue")]
     [Precision(8, 2)]
@@ -44,9 +44,9 @@ public partial class Usercoupon
 
     [ForeignKey("UcCouponid")]
     [InverseProperty("Usercoupons")]
-    public virtual Coupon UcCoupon { get; set; } = null!;
+    public virtual Coupon UcCoupon { get; set; } 
 
     [ForeignKey("UcUseruuid")]
     [InverseProperty("Usercoupons")]
-    public virtual User UcUseruu { get; set; } = null!;
+    public virtual User UcUseruu { get; set; } 
 }

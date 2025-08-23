@@ -14,7 +14,7 @@ namespace API.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<Role>> GetRolesByAdminIdAsync(byte[] adminUuid)
+        public async Task<List<Role>> GetRolesByAdminIdAsync(Guid adminUuid)
         {
             var roles = await _context.AdminRoles
                 .Where(ar => ar.ArAdminuuid == adminUuid) // 根据 adminUuid 查找 Admin-Roles 关系

@@ -2,7 +2,7 @@
 {
     public class ProductReadDto     // 这是一个简化的产品读取数据传输对象，用于列表展示
     {
-        public byte[] ProductUuid { get; }
+        public Guid ProductUuid { get; }
         public string Name { get; }
         public decimal Price { get; }
         public int Stock { get; }
@@ -11,7 +11,7 @@
         public bool IsAvailable { get; }
         public string? CoverUrl { get; }
 
-        public ProductReadDto(byte[] productUuid, string name, decimal price, int stock, string weight, bool isListed, bool isAvailable, string coverUrl)
+        public ProductReadDto(Guid productUuid, string name, decimal price, int stock, string weight, bool isListed, bool isAvailable, string coverUrl)
         {
             ProductUuid = productUuid;
             Name = name;

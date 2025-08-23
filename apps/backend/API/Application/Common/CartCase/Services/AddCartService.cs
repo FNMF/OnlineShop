@@ -11,20 +11,14 @@ namespace API.Application.Common.CartCase.Services
 {
     public class AddCartService: IAddCartService
     {
-        private readonly ICurrentService _currentService;
         private readonly ICartCreateService _cartCreateService;
-        private readonly ICartReadService _cartReadService;
         private readonly ICartDomainService _cartDomainService;
-        private readonly IProductReadService _productReadService;
         private readonly ILogger<AddCartService> _logger;
 
-        public AddCartService(ICurrentService currentService, ICartCreateService cartCreateService, ICartReadService cartReadService, ICartDomainService cartDomainService, IProductReadService productReadService, ILogger<AddCartService> logger)
+        public AddCartService( ICartCreateService cartCreateService, ICartDomainService cartDomainService, ILogger<AddCartService> logger)
         {
-            _currentService = currentService;
             _cartCreateService = cartCreateService;
-            _cartReadService = cartReadService;
             _cartDomainService = cartDomainService;
-            _productReadService = productReadService;
             _logger = logger;
         }
 
@@ -33,6 +27,10 @@ namespace API.Application.Common.CartCase.Services
             try
             {
                 var cartMainResult = await _cartDomainService.CreateCartAggregate(opt);
+                if (!cartMainResult.IsSuccess)
+                {
+                    return Result<CartMain>.Fail(cartMainResult.Code, cartMainResult.Message);
+                }
 
                 var result = await _cartCreateService.CreateCartAsync(cartMainResult.Data);
                 if (!result.IsSuccess)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,17 +15,17 @@ public partial class Role
 
     [Column("role_name")]
     [StringLength(20)]
-    public string RoleName { get; set; } = null!;
+    public string RoleName { get; set; } 
 
     [Column("role_isbuildin")]
     public bool RoleIsbuildin { get; set; }
 
     [Column("role_displayname")]
     [StringLength(20)]
-    public string RoleDisplayname { get; set; } = null!;
+    public string RoleDisplayname { get; set; } 
 
     [Column("role_type", TypeName = "enum('system','platform','shop')")]
-    public string RoleType { get; set; } = null!;
+    public string RoleType { get; set; } 
 
     [InverseProperty("ArRole")]
     public virtual ICollection<AdminRole> AdminRoles { get; set; } = new List<AdminRole>();

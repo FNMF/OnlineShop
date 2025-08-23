@@ -41,7 +41,7 @@ namespace API.Domain.Services.AuditPart
                 AuditCreatedat = dto.AuditCreatedat,
                 AuditReviewedat = dto.AuditReviewedat,
                 AuditGroupuuid = dto.AuditGroupuuid,
-                AuditUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                AuditUuid = UuidV7Helper.NewUuidV7(),
                 AuditStatus = AuditStatus.pending.ToString(),
                 AuditReason = "未审核",
                 AuditIsdeleted = false,

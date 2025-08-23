@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,15 +14,15 @@ public partial class Orderitem
     [Key]
     [Column("orderitem_uuid")]
     [MaxLength(16)]
-    public byte[] OrderitemUuid { get; set; } = null!;
+    public Guid OrderitemUuid { get; set; } 
 
     [Column("orderitem_orderuuid")]
     [MaxLength(16)]
-    public byte[] OrderitemOrderuuid { get; set; } = null!;
+    public Guid OrderitemOrderuuid { get; set; } 
 
     [Column("orderitem_productuuid")]
     [MaxLength(16)]
-    public byte[] OrderitemProductuuid { get; set; } = null!;
+    public Guid OrderitemProductuuid { get; set; } 
 
     [Column("orderitem_quantity")]
     public int OrderitemQuantity { get; set; }
@@ -33,13 +33,13 @@ public partial class Orderitem
 
     [Column("orderitem_name")]
     [StringLength(50)]
-    public string OrderitemName { get; set; } = null!;
+    public string OrderitemName { get; set; } 
 
     [ForeignKey("OrderitemOrderuuid")]
     [InverseProperty("Orderitems")]
-    public virtual Order OrderitemOrderuu { get; set; } = null!;
+    public virtual Order OrderitemOrderuu { get; set; } 
 
     [ForeignKey("OrderitemProductuuid")]
     [InverseProperty("Orderitems")]
-    public virtual Product OrderitemProductuu { get; set; } = null!;
+    public virtual Product OrderitemProductuu { get; set; } 
 }

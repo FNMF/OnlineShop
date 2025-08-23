@@ -8,10 +8,10 @@
         public string City { get; }
         public string District { get; } 
         public string Detail { get; }
-        public byte[] UserUuid { get; }
-        public byte[] AddressUuid { get; }
+        public Guid UserUuid { get; }
+        public Guid AddressUuid { get; }
 
-        public AddressUpdateDto(string name, string phone, string province, string city, string district, string detail, byte[] userUuid, byte[] addressUuid)
+        public AddressUpdateDto(string name, string phone, string province, string city, string district, string detail, Guid userUuid, Guid addressUuid)
         {
             Name = name;
             Phone = phone;

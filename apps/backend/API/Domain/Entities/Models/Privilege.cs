@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,11 +15,11 @@ public partial class Privilege
 
     [Column("privilege_name")]
     [StringLength(50)]
-    public string PrivilegeName { get; set; } = null!;
+    public string PrivilegeName { get; set; } 
 
     [Column("privilege_displayname")]
     [StringLength(50)]
-    public string PrivilegeDisplayname { get; set; } = null!;
+    public string PrivilegeDisplayname { get; set; } 
 
     [InverseProperty("UpPrivilege")]
     public virtual ICollection<UserPrivilege> UserPrivileges { get; set; } = new List<UserPrivilege>();

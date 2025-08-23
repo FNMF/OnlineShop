@@ -43,7 +43,7 @@ namespace API.Domain.Services.AddressPart
                 AddressDistrict = dto.District,
                 AddressDetail = dto.Detail,
                 AddressUseruuid = dto.UserUuid,
-                AddressUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                AddressUuid = UuidV7Helper.NewUuidV7(),
                 AddressTime = DateTime.Now,
                 AddressIsdeleted = false,
             };

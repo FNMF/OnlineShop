@@ -2,6 +2,6 @@
 {
     public class AddressDeleteOptions
     {
-        public byte[] AddressUuid { get; set; }
+        public Guid AddressUuid { get; set; }
     }
 }

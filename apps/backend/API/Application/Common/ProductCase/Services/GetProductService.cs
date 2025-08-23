@@ -23,7 +23,7 @@ namespace API.Application.Common.ProductCase.Services
             _logger = logger;
         }
 
-        public async Task<Result<List<ProductReadDto>>> GetAllProducts(byte[]? productUuid = null)
+        public async Task<Result<List<ProductReadDto>>> GetAllProducts(Guid? productUuid = null)
         {
             try
             {
@@ -60,8 +60,7 @@ namespace API.Application.Common.ProductCase.Services
         {
             try
             {
-                var uuidBytes = uuid.ToByteArray();
-                var productResult = await _productReadService.GetProductByUuid(uuidBytes);
+                var productResult = await _productReadService.GetProductByUuid(uuid);
                 var imagesResult = await _localFileReadService.GetProductDetailLocalFiles(uuid);
                 if (productResult.IsSuccess)
                 {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,11 +13,11 @@ public partial class Payment
     [Key]
     [Column("payment_uuid")]
     [MaxLength(16)]
-    public byte[] PaymentUuid { get; set; } = null!;
+    public Guid PaymentUuid { get; set; } 
 
     [Column("payment_orderuuid")]
     [MaxLength(16)]
-    public byte[] PaymentOrderuuid { get; set; } = null!;
+    public Guid PaymentOrderuuid { get; set; } 
 
     [Column("payment_amout")]
     [Precision(8, 2)]
@@ -25,14 +25,14 @@ public partial class Payment
 
     [Column("payment_currency")]
     [StringLength(20)]
-    public string PaymentCurrency { get; set; } = null!;
+    public string PaymentCurrency { get; set; } 
 
     [Column("payment_status", TypeName = "enum('pending','accepted','rejected','exception')")]
-    public string PaymentStatus { get; set; } = null!;
+    public string PaymentStatus { get; set; } 
 
     [Column("payment_method")]
     [StringLength(50)]
-    public string PaymentMethod { get; set; } = null!;
+    public string PaymentMethod { get; set; } 
 
     [Column("payment_createdat", TypeName = "datetime")]
     public DateTime PaymentCreatedat { get; set; }
@@ -42,31 +42,31 @@ public partial class Payment
 
     [Column("payment_appid")]
     [StringLength(255)]
-    public string PaymentAppid { get; set; } = null!;
+    public string PaymentAppid { get; set; } 
 
     [Column("payment_mchid")]
     [StringLength(255)]
-    public string PaymentMchid { get; set; } = null!;
+    public string PaymentMchid { get; set; } 
 
     [Column("payment_outtradeno")]
     [StringLength(255)]
-    public string PaymentOuttradeno { get; set; } = null!;
+    public string PaymentOuttradeno { get; set; } 
 
     [Column("payment_transactionid")]
     [StringLength(255)]
-    public string PaymentTransactionid { get; set; } = null!;
+    public string PaymentTransactionid { get; set; } 
 
     [Column("payment_tradetype")]
     [StringLength(255)]
-    public string PaymentTradetype { get; set; } = null!;
+    public string PaymentTradetype { get; set; } 
 
     [Column("payment_banktype")]
     [StringLength(255)]
-    public string PaymentBanktype { get; set; } = null!;
+    public string PaymentBanktype { get; set; } 
 
     [Column("payment_openid")]
     [StringLength(255)]
-    public string PaymentOpenid { get; set; } = null!;
+    public string PaymentOpenid { get; set; } 
 
     [Column("payment_attach")]
     [StringLength(255)]
@@ -77,9 +77,9 @@ public partial class Payment
 
     [Column("payment_rawcallbackdata")]
     [StringLength(255)]
-    public string PaymentRawcallbackdata { get; set; } = null!;
+    public string PaymentRawcallbackdata { get; set; } 
 
     [ForeignKey("PaymentOrderuuid")]
     [InverseProperty("Payments")]
-    public virtual Order PaymentOrderuu { get; set; } = null!;
+    public virtual Order PaymentOrderuu { get; set; } 
 }

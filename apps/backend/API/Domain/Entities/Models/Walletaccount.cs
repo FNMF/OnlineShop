@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,11 +13,11 @@ public partial class Walletaccount
     [Key]
     [Column("wa_uuid")]
     [MaxLength(16)]
-    public byte[] WaUuid { get; set; } = null!;
+    public Guid WaUuid { get; set; } 
 
     [Column("wa_merchantuuid")]
     [MaxLength(16)]
-    public byte[] WaMerchantuuid { get; set; } = null!;
+    public Guid WaMerchantuuid { get; set; } 
 
     [Column("wa_available")]
     [Precision(10, 2)]
@@ -40,5 +40,5 @@ public partial class Walletaccount
 
     [ForeignKey("WaMerchantuuid")]
     [InverseProperty("Walletaccounts")]
-    public virtual Merchant WaMerchantuu { get; set; } = null!;
+    public virtual Merchant WaMerchantuu { get; set; } 
 }

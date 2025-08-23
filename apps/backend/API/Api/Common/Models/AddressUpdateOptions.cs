@@ -8,6 +8,6 @@
         public string City { get; set; }
         public string District { get; set; }
         public string Detail { get; set; }
-        public byte[] AddressUuid { get; set; }
+        public Guid AddressUuid { get; set; }
     }
 }

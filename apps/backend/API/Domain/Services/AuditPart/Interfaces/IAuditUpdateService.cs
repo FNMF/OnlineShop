@@ -6,7 +6,7 @@ namespace API.Domain.Services.AuditPart.Interfaces
 {
     public interface IAuditUpdateService
     {
-        Task<Result<Audit>> MarkAsApprovalAsync(byte[] auditUuid);
-        Task<Result<Audit>> MarkAsRejectionAsync(byte[] auditUuid, string reason);
+        Task<Result<Audit>> MarkAsApprovalAsync(Guid auditUuid);
+        Task<Result<Audit>> MarkAsRejectionAsync(Guid auditUuid, string reason);
     }
 }

@@ -8,9 +8,9 @@
         public string City { get; }
         public string District { get; }
         public string Detail { get; }
-        public byte[] UserUuid { get; }
+        public Guid UserUuid { get; }
 
-        public AddressCreateDto(string name, string phone, string province, string city, string district, string detail, byte[] userUuid)
+        public AddressCreateDto(string name, string phone, string province, string city, string district, string detail, Guid userUuid)
         {
             Name = name;
             Phone = phone;

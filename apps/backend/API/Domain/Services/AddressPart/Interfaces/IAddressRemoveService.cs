@@ -4,6 +4,6 @@ namespace API.Domain.Services.AddressPart.Interfaces
 {
     public interface IAddressRemoveService
     {
-        Task<Result> RemoveAddressAsync(byte[] addressUuid);
+        Task<Result> RemoveAddressAsync(Guid addressUuid);
     }
 }

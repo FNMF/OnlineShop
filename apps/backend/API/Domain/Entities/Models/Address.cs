@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,35 +13,35 @@ public partial class Address
     [Key]
     [Column("address_uuid")]
     [MaxLength(16)]
-    public byte[] AddressUuid { get; set; } = null!;
+    public Guid AddressUuid { get; set; }
 
     [Column("address_useruuid")]
     [MaxLength(16)]
-    public byte[] AddressUseruuid { get; set; } = null!;
+    public Guid AddressUseruuid { get; set; }
 
     [Column("address_name")]
     [StringLength(50)]
-    public string AddressName { get; set; } = null!;
+    public string AddressName { get; set; }
 
     [Column("address_phone")]
     [StringLength(255)]
-    public string AddressPhone { get; set; } = null!;
+    public string AddressPhone { get; set; }
 
     [Column("address_province")]
     [StringLength(50)]
-    public string AddressProvince { get; set; } = null!;
+    public string AddressProvince { get; set; }
 
     [Column("address_city")]
     [StringLength(50)]
-    public string AddressCity { get; set; } = null!;
+    public string AddressCity { get; set; }
 
     [Column("address_district")]
     [StringLength(50)]
-    public string AddressDistrict { get; set; } = null!;
+    public string AddressDistrict { get; set; }
 
     [Column("address_detail")]
     [StringLength(255)]
-    public string AddressDetail { get; set; } = null!;
+    public string AddressDetail { get; set; }
 
     [Column("address_time", TypeName = "datetime")]
     public DateTime AddressTime { get; set; }

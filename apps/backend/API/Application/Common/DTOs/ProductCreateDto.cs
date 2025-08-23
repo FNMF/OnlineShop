@@ -2,7 +2,7 @@
 {
     public class ProductCreateDto
     {
-        public byte[] Uuid { get; }
+        public Guid Uuid { get; }
         public string Name { get; }
         public decimal Price { get; }
         public int Stock { get; }
@@ -10,10 +10,10 @@
         public string Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
-        public byte[] MerchantUuid { get; }
+        public Guid MerchantUuid { get; }
         public string CoverUrl {  get; }
 
-        public ProductCreateDto(byte[] uuid,string name , decimal price, int stock ,string description , string ingredient, string weight, bool isListed, byte[] merchantUuid, string coverUrl)
+        public ProductCreateDto(Guid uuid,string name , decimal price, int stock ,string description , string ingredient, string weight, bool isListed, Guid merchantUuid, string coverUrl)
         {
             Uuid = uuid;
             Name = name;

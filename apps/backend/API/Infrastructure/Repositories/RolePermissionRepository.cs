@@ -13,7 +13,7 @@ namespace API.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<List<Permission>> GetPermissionsByAdminIdAsync(byte[] adminUuid)
+        public async Task<List<Permission>> GetPermissionsByAdminIdAsync(Guid adminUuid)
         {
             var permissions = await _context.AdminRoles
                 .Where(ar => ar.ArAdminuuid == adminUuid) // 先查出 Admin-Roles 关系

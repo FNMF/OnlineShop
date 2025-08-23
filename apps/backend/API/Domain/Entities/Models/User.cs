@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,16 +11,16 @@ public partial class User
 {
     [Column("user_name")]
     [StringLength(30)]
-    public string UserName { get; set; } = null!;
+    public string UserName { get; set; } 
 
     [Key]
     [Column("user_uuid")]
     [MaxLength(16)]
-    public byte[] UserUuid { get; set; } = null!;
+    public Guid UserUuid { get; set; } 
 
     [Column("user_openid")]
     [StringLength(28)]
-    public string UserOpenid { get; set; } = null!;
+    public string UserOpenid { get; set; } 
 
     [Column("user_bp")]
     public int UserBp { get; set; }
@@ -36,7 +36,7 @@ public partial class User
 
     [Column("user_phone")]
     [StringLength(20)]
-    public string UserPhone { get; set; } = null!;
+    public string UserPhone { get; set; } 
 
     [InverseProperty("AddressUseruu")]
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();

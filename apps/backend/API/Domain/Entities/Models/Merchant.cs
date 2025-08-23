@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,27 +13,27 @@ public partial class Merchant
     [Key]
     [Column("merchant_uuid")]
     [MaxLength(16)]
-    public byte[] MerchantUuid { get; set; } = null!;
+    public Guid MerchantUuid { get; set; } 
 
     [Column("merchant_name")]
     [StringLength(50)]
-    public string MerchantName { get; set; } = null!;
+    public string MerchantName { get; set; } 
 
     [Column("merchant_province")]
     [StringLength(50)]
-    public string MerchantProvince { get; set; } = null!;
+    public string MerchantProvince { get; set; } 
 
     [Column("merchant_city")]
     [StringLength(50)]
-    public string MerchantCity { get; set; } = null!;
+    public string MerchantCity { get; set; } 
 
     [Column("merchant_district")]
     [StringLength(50)]
-    public string MerchantDistrict { get; set; } = null!;
+    public string MerchantDistrict { get; set; } 
 
     [Column("merchant_detail")]
     [StringLength(255)]
-    public string MerchantDetail { get; set; } = null!;
+    public string MerchantDetail { get; set; } 
 
     [Column("merchant_businessstart", TypeName = "time")]
     public TimeOnly MerchantBusinessstart { get; set; }
@@ -43,7 +43,7 @@ public partial class Merchant
 
     [Column("merchant_adminuuid")]
     [MaxLength(16)]
-    public byte[] MerchantAdminuuid { get; set; } = null!;
+    public Guid MerchantAdminuuid { get; set; } 
 
     [Required]
     [Column("merchant_isclosed")]
@@ -57,7 +57,7 @@ public partial class Merchant
 
     [ForeignKey("MerchantAdminuuid")]
     [InverseProperty("Merchants")]
-    public virtual Admin MerchantAdminuu { get; set; } = null!;
+    public virtual Admin MerchantAdminuu { get; set; } 
 
     [InverseProperty("ProductMerchantuu")]
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();

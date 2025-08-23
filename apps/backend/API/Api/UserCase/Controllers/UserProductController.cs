@@ -20,7 +20,7 @@ namespace API.Api.UserCase.Controllers
         [Authorize]
         public async Task<IActionResult> GetAllProducts(Guid merchantUuid)
         {
-            var result = await _getProductService.GetAllProducts(merchantUuid.ToByteArray());
+            var result = await _getProductService.GetAllProducts(merchantUuid);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);

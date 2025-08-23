@@ -17,7 +17,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             _logger = logger;
         }
 
-        public async Task<Result<Cart>> GetCartByUuids(byte[] merchantUuid, byte[] userUuid)
+        public async Task<Result<Cart>> GetCartByUuids(Guid merchantUuid, Guid userUuid)
         {
             try
             {

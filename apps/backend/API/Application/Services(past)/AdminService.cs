@@ -23,8 +23,7 @@ namespace API.Application.Services
         {
             try
             {
-                byte[] uuidBytes = uuid.ToByteArray();
-                var admin = await _repository.GetAdminByUuidAsync(uuidBytes);
+                var admin = await _repository.GetAdminByUuidAsync(uuid);
                 if (admin == null) { _logger.LogWarning("管理员不存在"); return null; }
                 var radmin = new RAdminDto
                 {
@@ -67,8 +66,7 @@ namespace API.Application.Services
                     _logger.LogWarning("修改管理员时 DTO 为空");
                     return null;
                 }
-                byte[] uuidBytes = uuid.ToByteArray();
-                var admin = await _repository.GetAdminByUuidAsync(uuidBytes);
+                var admin = await _repository.GetAdminByUuidAsync(uuid);
 
                 if (admin == null)
                 {
@@ -77,7 +75,7 @@ namespace API.Application.Services
                 }
                 admin.AdminPhone = AESHelper.Encrypt(dto.phone);
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.AddLog(LogType.admin, "修改管理员信息", "无", uuidBytes, JsonSerializer.Serialize(dto));
+                await _logService.AddLog(LogType.admin, "修改管理员信息", "无", uuid, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
                 {
                     account = admin.AdminAccount,
@@ -98,8 +96,7 @@ namespace API.Application.Services
             try
             {
 
-                byte[] uuidBytes = uuid.ToByteArray();
-                var admin = await _repository.GetAdminByUuidAsync(uuidBytes);
+                var admin = await _repository.GetAdminByUuidAsync(uuid);
 
                 if (admin == null)
                 {
@@ -107,7 +104,7 @@ namespace API.Application.Services
                     return false;
                 }
                 await _repository.UpdateAdminAsync(admin);
-                await _logService.AddLog(LogType.admin, "删除管理员信息", "逻辑删除", uuidBytes, JsonSerializer.Serialize(admin));
+                await _logService.AddLog(LogType.admin, "删除管理员信息", "逻辑删除", uuid, JsonSerializer.Serialize(admin));
 
                 return true;
 

@@ -61,7 +61,7 @@ namespace API.Domain.Services.LocalFilePart
                 LocalfileSize = fileInfo.Length,
                 LocalfileType = dto.File.ContentType,
                 LocalfileCreatedat = DateTime.Now,
-                LocalfileUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                LocalfileUuid = UuidV7Helper.NewUuidV7(),
                 LocalfileObjectuuid = dto.ObjectUuid,
                 LocalfileObjecttype = dto.LocalfileObjectType.ToString().ToLowerInvariant(),
                 LocalfileUploaderuuid = dto.UploderUuid,

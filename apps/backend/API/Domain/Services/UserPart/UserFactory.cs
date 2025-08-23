@@ -38,7 +38,7 @@ namespace API.Domain.Services.UserPart
                 UserCredit = 50,
                 UserCreatedat = DateTime.Now,
                 UserIsdeleted = false,
-                UserUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                UserUuid = UuidV7Helper.NewUuidV7(),
             };
 
             return Result<User>.Success(user);

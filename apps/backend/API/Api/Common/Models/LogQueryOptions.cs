@@ -6,7 +6,7 @@ namespace API.Api.Common.Models
     {
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
-        public byte[]? UuidBytes { get; set; }
+        public Guid? Uuid { get; set; }
         public LogType? Type { get; set; }
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }

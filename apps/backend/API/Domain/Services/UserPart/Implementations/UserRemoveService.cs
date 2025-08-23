@@ -19,7 +19,7 @@ namespace API.Domain.Services.UserPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveUserAsync(byte[] userUuid)
+        public async Task<Result> RemoveUserAsync(Guid userUuid)
         {
             try
             {

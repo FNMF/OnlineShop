@@ -4,23 +4,23 @@ namespace API.Domain.Aggregates.CartAggregate
 {
     public class CartItem
     {
-        public byte[] CartItemUuid { get; private set; }
-        public byte[] ProductUuid { get; private set; }
+        public Guid CartItemUuid { get; private set; }
+        public Guid ProductUuid { get; private set; }
         public decimal Price { get; private set; }
         public int Quantity { get; private set; }
         public string CoverUrl { get; private set; }
         public string ProductName { get; private set; }
 
-        public CartItem(byte[] productUuid, decimal price, int quantity, string coverUrl, string productName)
+        public CartItem(Guid productUuid, decimal price, int quantity, string coverUrl, string productName)
         {
-            CartItemUuid = UuidV7Helper.NewUuidV7ToBtyes();
+            CartItemUuid = UuidV7Helper.NewUuidV7();
             ProductUuid = productUuid;
             Price = price;
             Quantity = quantity;
             CoverUrl = coverUrl;
             ProductName = productName;
         }
-        internal CartItem(byte[] cartItemUuid, byte[] productUuid, decimal price, int quantity, string coverUrl, string productName)
+        internal CartItem(Guid cartItemUuid, Guid productUuid, decimal price, int quantity, string coverUrl, string productName)
         {
             CartItemUuid = cartItemUuid;
             ProductUuid = productUuid;

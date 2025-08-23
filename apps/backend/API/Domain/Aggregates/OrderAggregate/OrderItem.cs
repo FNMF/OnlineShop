@@ -2,15 +2,15 @@
 {
     public class OrderItem
     {
-        public byte[] OrderUuid { get; private set; }
-        public byte[] ProductUuid { get; private set; }
+        public Guid OrderUuid { get; private set; }
+        public Guid ProductUuid { get; private set; }
         public int Quantity { get; private set; }
         public decimal UnitPrice { get; private set; }
         public string Name {  get; private set; }
 
         private OrderItem() { } // for EF
 
-        public OrderItem(byte[] orderUuid, byte[] productUuid, int quantity, decimal unitPrice, string name)
+        public OrderItem(Guid orderUuid, Guid productUuid, int quantity, decimal unitPrice, string name)
         {
             OrderUuid = orderUuid;
             ProductUuid = productUuid;

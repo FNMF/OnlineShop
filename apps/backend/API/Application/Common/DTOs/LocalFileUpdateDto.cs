@@ -5,14 +5,14 @@ namespace API.Application.Common.DTOs
     public class LocalFileUpdateDto
     {
         public IFormFile File { get; }
-        public byte[] UploderUuid { get; }
+        public Guid UploderUuid { get; }
         public string UploderIp { get; }
-        public byte[] LocalFileUuid { get; }
-        public byte[] ObjectUuid { get; } 
+        public Guid LocalFileUuid { get; }
+        public Guid ObjectUuid { get; } 
         public LocalfileObjectType ObjectType { get; }
         public int SortNumber { get; }
 
-        public LocalFileUpdateDto(IFormFile file, byte[] uploderUuid, string uploderIp, byte[] localFileUuid, byte[] objectUuid, LocalfileObjectType objectType, int sortNumber)
+        public LocalFileUpdateDto(IFormFile file, Guid uploderUuid, string uploderIp, Guid localFileUuid, Guid objectUuid, LocalfileObjectType objectType, int sortNumber)
         {
             File = file;
             UploderUuid = uploderUuid;

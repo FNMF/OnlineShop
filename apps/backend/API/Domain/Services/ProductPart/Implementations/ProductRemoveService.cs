@@ -16,7 +16,7 @@ namespace API.Domain.Services.ProductPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveProductAsync(byte[] productUuid)
+        public async Task<Result> RemoveProductAsync(Guid productUuid)
         {
             try
             {

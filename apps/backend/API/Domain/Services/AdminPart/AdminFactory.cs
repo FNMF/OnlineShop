@@ -40,7 +40,7 @@ namespace API.Domain.Services.AdminPart
                 AdminLastlogintime = DateTime.Now,
                 AdminLastlocation = dto.IpLocation,
                 AdminKey = RandomKeyHelper.GetIpKey(dto.IpLocation),
-                AdminUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                AdminUuid = UuidV7Helper.NewUuidV7(),
             };
 
             return Result<Admin>.Success(admin);

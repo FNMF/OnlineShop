@@ -7,8 +7,8 @@ namespace API.Common.Interfaces
     public interface ILogService
     {
         Task<bool> AddLog(LogType type, string description, string detail);
-        Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes);
-        Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes, string datajson);
+        Task<bool> AddLog(LogType type, string description, string detail, Guid objectuuidBytes);
+        Task<bool> AddLog(LogType type, string description, string detail, Guid objectuuidBytes, string datajson);
         Task<List<Log>> GetLogs(LogQueryOptions queryOptions);
         /*Task<List<Log>> GetLog(byte[] uuidBytes);
         Task<List<Log>> GetLog(byte[] uuidBytes, string type);

@@ -26,7 +26,7 @@ namespace API.Domain.Services.AddressPart.Implementations
                 var query = _addressRepository.QueryAddresses();
 
                 query = query
-                    .WhereIfNotNull(opt.UuidBytes, u => u.AddressUseruuid == opt.UuidBytes)
+                    .WhereIfNotNull(opt.Uuid, u => u.AddressUseruuid == opt.Uuid)
                     .WhereIfNotNull(opt.IsDeleted, u => u.AddressIsdeleted == opt.IsDeleted)
                     .OrderByDescending(u => u.AddressTime)
                     .PageBy(opt.PageNumber, opt.PageSize);
@@ -46,7 +46,7 @@ namespace API.Domain.Services.AddressPart.Implementations
             }
         }
 
-        public async Task<Result<Address>> GetAddress(byte[] addressUuid)
+        public async Task<Result<Address>> GetAddress(Guid addressUuid)
         {
             try
             {

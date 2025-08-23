@@ -28,21 +28,21 @@ namespace API.Domain.Aggregates.CartAggregate.Services
         {
             try
             {
-                var cartMainResult = await _cartReadService.GetCartByUuids(opt.MerchantUuid, _currentService.CurrentUuid);
+                var cartMainResult = await _cartReadService.GetCartByUuids(opt.MerchantUuid, _currentService.RequiredUuid);
                 if (cartMainResult.Code == ResultCode.NotFound)
                 {
                     var cartMain = new CartMain(
-                    _currentService.CurrentUuid,
+                    _currentService.RequiredUuid,
                     opt.MerchantUuid,
                     null
                     );
-                    if (!opt.Items.Any())
+                    if (opt.Items == null || !opt.Items.Any())
                     {
                         return Result<CartMain>.Fail(ResultCode.InvalidInput, "商品输入为空");
                     }
                     foreach (var item in opt.Items)
                     {
-                        var productResult = _productReadService.GetProductByUuid(item.ProductUuid).Result;
+                        var productResult = await _productReadService.GetProductByUuid(item.ProductUuid);
                         if (productResult.IsSuccess)
                         {
                             var cartItem = new CartItem(
@@ -62,7 +62,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                     var cartMain = CartFactory.ToAggregate(cartMainResult.Data).Data;
                     foreach (var item in opt.Items)
                     {
-                        var productResult = _productReadService.GetProductByUuid(item.ProductUuid).Result;
+                        var productResult = await _productReadService.GetProductByUuid(item.ProductUuid);
                         if (productResult.IsSuccess)
                         {
                             var cartItem = new CartItem(

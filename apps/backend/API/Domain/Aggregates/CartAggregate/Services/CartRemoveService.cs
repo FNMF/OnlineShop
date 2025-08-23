@@ -21,7 +21,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
         {
             try
             {
-                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.CartMerchantuuid == merchantUuid.ToByteArray()&&c.CartUseruuid == _currentService.CurrentUuid &&c.CartIsdeleted == false);
+                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.CartMerchantuuid == merchantUuid &&c.CartUseruuid == _currentService.CurrentUuid &&c.CartIsdeleted == false);
                 if (cart == null)
                 {
                     _logger.LogWarning("没有找到相关购物车");

@@ -16,7 +16,7 @@ namespace API.Domain.Services.MerchantPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveMerchantAsync(byte[] merchantUuid)
+        public async Task<Result> RemoveMerchantAsync(Guid merchantUuid)
         {
             try
             {

@@ -4,21 +4,21 @@ namespace API.Domain.Aggregates.CartAggregate
 {
     public class CartMain
     {
-        public byte[] CartUuid { get; private set; }
-        public byte[] UserUuid {  get; private set; }
-        public byte[] MerchantUuid { get; private set; }
+        public Guid CartUuid { get; private set; }
+        public Guid UserUuid {  get; private set; }
+        public Guid MerchantUuid { get; private set; }
         private readonly List<CartItem> _items = new List<CartItem>();
         public IReadOnlyList<CartItem> Items => _items.AsReadOnly();
 
-        public CartMain( byte[] userUuid, byte[] merchantUuid, List<CartItem> items)
+        public CartMain( Guid userUuid, Guid merchantUuid, List<CartItem> items)
         {
-            CartUuid = UuidV7Helper.NewUuidV7ToBtyes();
+            CartUuid = UuidV7Helper.NewUuidV7();
             UserUuid = userUuid;
             MerchantUuid = merchantUuid;
             _items = items;
         }
         //内部构造函数，用于从数据库中加载数据时使用
-        internal CartMain(byte[] cartUuid, byte[] userUuid, byte[] merchantUuid, List<CartItem> items)
+        internal CartMain(Guid cartUuid, Guid userUuid, Guid merchantUuid, List<CartItem> items)
         {
             CartUuid = cartUuid;
             UserUuid = userUuid;
@@ -42,7 +42,7 @@ namespace API.Domain.Aggregates.CartAggregate
 
         public void RemoveItem(Guid productUuid)
         {
-            var item = _items.FirstOrDefault(i => i.ProductUuid == productUuid.ToByteArray());
+            var item = _items.FirstOrDefault(i => i.ProductUuid == productUuid);
             if (item != null)
             {
                 _items.Remove(item);

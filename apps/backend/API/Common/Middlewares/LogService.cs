@@ -24,7 +24,7 @@ namespace API.Common.Middlewares
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                    LogUuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
                     LogDescription = description,
                     LogDetail = detail,
@@ -39,18 +39,18 @@ namespace API.Common.Middlewares
                 return false;
             }
         }
-        public async Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes)
+        public async Task<bool> AddLog(LogType type, string description, string detail, Guid objectUuid)
         {
             try
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                    LogUuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
                     LogDescription = description,
                     LogDetail = detail,
                     LogTime = DateTime.Now,
-                    LogObjectuuid = objectuuidBytes
+                    LogObjectuuid = objectUuid
                 };
                 await _logRepository.AddLogAsync(log);
                 return true;
@@ -61,19 +61,19 @@ namespace API.Common.Middlewares
                 return false;
             }
         }
-        public async Task<bool> AddLog(LogType type, string description, string detail, byte[] objectuuidBytes, string datajson)
+        public async Task<bool> AddLog(LogType type, string description, string detail, Guid objectUuid, string datajson)
         {
             try
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                    LogUuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
                     LogDescription = description,
                     LogDetail = detail,
                     LogTime = DateTime.Now,
                     LogDatajson = datajson,
-                    LogObjectuuid = objectuuidBytes
+                    LogObjectuuid = objectUuid
                 };
                 await _logRepository.AddLogAsync(log);
                 return true;
@@ -90,9 +90,9 @@ namespace API.Common.Middlewares
             {
                 var query = _logRepository.QueryLogs();
 
-                if (queryOptions.UuidBytes != null)
+                if (queryOptions.Uuid != null)
                 {
-                    query = query.Where(l => l.LogUuid == queryOptions.UuidBytes);
+                    query = query.Where(l => l.LogUuid == queryOptions.Uuid);
                 }
                 if (queryOptions.Type.HasValue)
                 {

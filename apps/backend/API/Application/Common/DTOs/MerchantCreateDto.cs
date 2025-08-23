@@ -9,8 +9,8 @@
         public string Detail { get; }
         public TimeOnly Businessstart { get; }
         public TimeOnly Businessend { get; }
-        public byte[] Adminuuid {  get; }
-        public MerchantCreateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, byte[] adminuuid)
+        public Guid Adminuuid {  get; }
+        public MerchantCreateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid)
         {
             Name = name;
             Province = province;

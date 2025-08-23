@@ -44,7 +44,7 @@ namespace API.Application.MerchantCase.Services
                 // 例如，你可以通过 EventPublisher 触发一些事件
 
                 var uuidString = _jwtHelper.AnalysisToken(isValid.Message, ClaimTypes.NameIdentifier).Message;
-                byte[] uuid = Guid.Parse(uuidString).ToByteArray();
+                var uuid = Guid.Parse(uuidString);
                 await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
 
                 return Result.Success(isValid.Message);

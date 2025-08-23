@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,18 +14,18 @@ public partial class Order
     [Key]
     [Column("order_uuid")]
     [MaxLength(16)]
-    public byte[] OrderUuid { get; set; } = null!;
+    public Guid OrderUuid { get; set; } 
 
     [Column("order_useruuid")]
     [MaxLength(16)]
-    public byte[] OrderUseruuid { get; set; } = null!;
+    public Guid OrderUseruuid { get; set; } 
 
     [Column("order_total")]
     [Precision(8, 2)]
     public decimal OrderTotal { get; set; }
 
     [Column("order_status", TypeName = "enum('created','paid','accepted','prepared','shipped','completed','cancelled','rejected','exception')")]
-    public string OrderStatus { get; set; } = null!;
+    public string OrderStatus { get; set; } 
 
     [Column("order_sid")]
     [StringLength(10)]
@@ -36,22 +36,22 @@ public partial class Order
 
     [Column("order_ma")]
     [StringLength(255)]
-    public string OrderMa { get; set; } = null!;
+    public string OrderMa { get; set; } 
 
     [Column("order_ua")]
     [StringLength(255)]
-    public string OrderUa { get; set; } = null!;
+    public string OrderUa { get; set; } 
 
     [Column("order_ucuuid")]
     [MaxLength(16)]
-    public byte[]? OrderUcuuid { get; set; }
+    public Guid? OrderUcuuid { get; set; }
 
     [Column("order_riderservice", TypeName = "enum('scheduled','immediate','preorder','pickup')")]
-    public string OrderRiderservice { get; set; } = null!;
+    public string OrderRiderservice { get; set; } 
 
     [Column("order_rider")]
     [StringLength(255)]
-    public string OrderRider { get; set; } = null!;
+    public string OrderRider { get; set; } 
 
     [Column("order_note", TypeName = "text")]
     public string? OrderNote { get; set; }
@@ -70,17 +70,17 @@ public partial class Order
 
     [Column("order_expectedtime")]
     [StringLength(255)]
-    public string OrderExpectedtime { get; set; } = null!;
+    public string OrderExpectedtime { get; set; } 
 
     [Column("order_channel", TypeName = "enum('alipay','wechat','bank','instore','other')")]
-    public string OrderChannel { get; set; } = null!;
+    public string OrderChannel { get; set; } 
 
     [Column("order_isdeleted")]
     public bool OrderIsdeleted { get; set; }
 
     [Column("order_paymentuuid")]
     [MaxLength(16)]
-    public byte[]? OrderPaymentuuid { get; set; }
+    public Guid? OrderPaymentuuid { get; set; }
 
     [ForeignKey("OrderUcuuid")]
     [InverseProperty("Orders")]
@@ -88,7 +88,7 @@ public partial class Order
 
     [ForeignKey("OrderUseruuid")]
     [InverseProperty("Orders")]
-    public virtual User OrderUseruu { get; set; } = null!;
+    public virtual User OrderUseruu { get; set; } 
 
     [InverseProperty("OrderitemOrderuu")]
     public virtual ICollection<Orderitem> Orderitems { get; set; } = new List<Orderitem>();

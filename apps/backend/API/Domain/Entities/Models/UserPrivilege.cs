@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,20 +14,20 @@ public partial class UserPrivilege
     [Key]
     [Column("up_uuid")]
     [MaxLength(16)]
-    public byte[] UpUuid { get; set; } = null!;
+    public Guid UpUuid { get; set; } 
 
     [Column("up_useruuid")]
     [MaxLength(16)]
-    public byte[] UpUseruuid { get; set; } = null!;
+    public Guid UpUseruuid { get; set; } 
 
     [Column("up_privilegeid")]
     public int UpPrivilegeid { get; set; }
 
     [ForeignKey("UpPrivilegeid")]
     [InverseProperty("UserPrivileges")]
-    public virtual Privilege UpPrivilege { get; set; } = null!;
+    public virtual Privilege UpPrivilege { get; set; } 
 
     [ForeignKey("UpUseruuid")]
     [InverseProperty("UserPrivileges")]
-    public virtual User UpUseruu { get; set; } = null!;
+    public virtual User UpUseruu { get; set; } 
 }

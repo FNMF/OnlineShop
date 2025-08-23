@@ -9,7 +9,7 @@ namespace API.Domain.Services.ProductPart.Interfaces
 {
     public interface IProductDomainService
     {
-        Result<List<LocalFileCreateDto>> PrepareImages(byte[] productUuid, ProductWriteOptions opt);
+        Result<List<LocalFileCreateDto>> PrepareImages(Guid productUuid, ProductWriteOptions opt);
         Task<Result<ProductAggregateResult>> CreateProductAggregate(ProductCreateDto dto, List<LocalFileCreateDto> imageFiles);
     }
 }

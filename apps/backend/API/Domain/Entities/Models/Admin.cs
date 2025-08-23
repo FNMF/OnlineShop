@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,30 +14,30 @@ public partial class Admin
     [Key]
     [Column("admin_uuid")]
     [MaxLength(16)]
-    public byte[] AdminUuid { get; set; } = null!;
+    public Guid AdminUuid { get; set; } 
 
     [Column("admin_account")]
     public int AdminAccount { get; set; }
 
     [Column("admin_phone")]
     [StringLength(20)]
-    public string AdminPhone { get; set; } = null!;
+    public string AdminPhone { get; set; } 
 
     [Column("admin_salt")]
     [StringLength(255)]
-    public string AdminSalt { get; set; } = null!;
+    public string AdminSalt { get; set; }
 
     [Column("admin_pwdhash")]
     [StringLength(255)]
-    public string AdminPwdhash { get; set; } = null!;
+    public string AdminPwdhash { get; set; } 
 
     [Column("admin_key")]
     [StringLength(10)]
-    public string AdminKey { get; set; } = null!;
+    public string AdminKey { get; set; } 
 
     [Column("admin_lastlocation")]
     [StringLength(255)]
-    public string AdminLastlocation { get; set; } = null!;
+    public string AdminLastlocation { get; set; } 
 
     [Column("admin_lastlogintime", TypeName = "datetime")]
     public DateTime AdminLastlogintime { get; set; }

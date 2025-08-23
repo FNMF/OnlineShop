@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,25 +13,25 @@ public partial class Cart
     [Key]
     [Column("cart_uuid")]
     [MaxLength(16)]
-    public byte[] CartUuid { get; set; } = null!;
+    public Guid CartUuid { get; set; } 
 
     [Column("cart_useruuid")]
     [MaxLength(16)]
-    public byte[] CartUseruuid { get; set; } = null!;
+    public Guid CartUseruuid { get; set; } 
 
     [Column("cart_time", TypeName = "datetime")]
     public DateTime CartTime { get; set; }
 
     [Column("cart_merchantuuid")]
     [MaxLength(16)]
-    public byte[] CartMerchantuuid { get; set; } = null!;
+    public Guid CartMerchantuuid { get; set; } 
 
     [Column("cart_isdeleted")]
     public bool CartIsdeleted { get; set; }
 
     [ForeignKey("CartUseruuid")]
     [InverseProperty("Carts")]
-    public virtual User CartUseruu { get; set; } = null!;
+    public virtual User CartUseruu { get; set; } 
 
     [InverseProperty("CartitemCartuu")]
     public virtual ICollection<Cartitem> Cartitems { get; set; } = new List<Cartitem>();

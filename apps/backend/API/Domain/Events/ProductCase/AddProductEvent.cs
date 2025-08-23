@@ -4,11 +4,11 @@ namespace API.Domain.Events.ProductCase
 {
     public class AddProductEvent : IDomainEvent
     {
-        public byte[] AdminUuid { get; }
+        public Guid AdminUuid { get; }
         public CurrentType CurrentType { get; }
-        public byte[] ProductUuid { get; }
+        public Guid ProductUuid { get; }
         public DateTime OccurrendOn { get; }
-        public AddProductEvent(byte[] adminUuid,CurrentType currentType, byte[] productUuid)
+        public AddProductEvent(Guid adminUuid,CurrentType currentType, Guid productUuid)
         {
             OccurrendOn = DateTime.Now;
             AdminUuid = adminUuid;

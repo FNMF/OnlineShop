@@ -16,7 +16,7 @@ namespace API.Domain.Services.AddressPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result> RemoveAddressAsync(byte[] addressUuid)
+        public async Task<Result> RemoveAddressAsync(Guid addressUuid)
         {
             try
             {

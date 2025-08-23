@@ -24,7 +24,7 @@ namespace API.Application.Common.CartCase.Services
         {
             try
             {
-                var cartResult = await _cartReadService.GetCartByUuids(merchantUuid.ToByteArray(), _currentService.CurrentUuid);
+                var cartResult = await _cartReadService.GetCartByUuids(merchantUuid, _currentService.RequiredUuid);
                 if (!cartResult.IsSuccess) 
                 {
                     _logger.LogWarning("没有找到相关购物车");

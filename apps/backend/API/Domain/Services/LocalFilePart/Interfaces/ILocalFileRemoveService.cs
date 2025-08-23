@@ -4,7 +4,7 @@ namespace API.Domain.Services.LocalFilePart.Interfaces
 {
     public interface ILocalFileRemoveService
     {
-        Task<Result> RemoveLocalFileAsync(byte[] localFileUuid);
-        Task<Result> RemoveProductAllLocalFilesAsync(byte[] productUuid);
+        Task<Result> RemoveLocalFileAsync(Guid localFileUuid);
+        Task<Result> RemoveProductAllLocalFilesAsync(Guid productUuid);
     }
 }

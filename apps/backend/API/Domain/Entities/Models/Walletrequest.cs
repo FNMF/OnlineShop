@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,18 +13,18 @@ public partial class Walletrequest
     [Key]
     [Column("wr_uuid")]
     [MaxLength(16)]
-    public byte[] WrUuid { get; set; } = null!;
+    public Guid WrUuid { get; set; } 
 
     [Column("wr_merchantuuid")]
     [MaxLength(16)]
-    public byte[] WrMerchantuuid { get; set; } = null!;
+    public Guid WrMerchantuuid { get; set; } 
 
     [Column("wr_amount")]
     [Precision(10, 2)]
     public decimal WrAmount { get; set; }
 
     [Column("wr_status", TypeName = "enum('pending','approved','rejected','paid')")]
-    public string WrStatus { get; set; } = null!;
+    public string WrStatus { get; set; } 
 
     [Column("wr_reason")]
     [StringLength(255)]
@@ -41,5 +41,5 @@ public partial class Walletrequest
 
     [ForeignKey("WrMerchantuuid")]
     [InverseProperty("Walletrequests")]
-    public virtual Merchant WrMerchantuu { get; set; } = null!;
+    public virtual Merchant WrMerchantuu { get; set; } 
 }

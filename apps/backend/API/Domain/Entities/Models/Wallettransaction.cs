@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,14 +13,14 @@ public partial class Wallettransaction
     [Key]
     [Column("wt_uuid")]
     [MaxLength(16)]
-    public byte[] WtUuid { get; set; } = null!;
+    public Guid WtUuid { get; set; } 
 
     [Column("wt_merchantuuid")]
     [MaxLength(16)]
-    public byte[] WtMerchantuuid { get; set; } = null!;
+    public Guid WtMerchantuuid { get; set; } 
 
     [Column("wt_type", TypeName = "enum('income','withdraw','refund','charge')")]
-    public string WtType { get; set; } = null!;
+    public string WtType { get; set; } 
 
     [Column("wt_amount")]
     [Precision(10, 2)]
@@ -36,7 +36,7 @@ public partial class Wallettransaction
 
     [Column("wt_objectuuid")]
     [MaxLength(16)]
-    public byte[]? WtObjectuuid { get; set; }
+    public Guid? WtObjectuuid { get; set; }
 
     [Column("wt_remark")]
     [StringLength(255)]
@@ -47,5 +47,5 @@ public partial class Wallettransaction
 
     [ForeignKey("WtMerchantuuid")]
     [InverseProperty("Wallettransactions")]
-    public virtual Merchant WtMerchantuu { get; set; } = null!;
+    public virtual Merchant WtMerchantuu { get; set; } 
 }

@@ -9,11 +9,11 @@
         public string Ingredient { get; }
         public string Weight { get; }
         public bool Islisted { get; }
-        public byte[] MerchantUuid { get; }
-        public byte[] ProductUuid { get; }
+        public Guid MerchantUuid { get; }
+        public Guid ProductUuid { get; }
         public string CoverUrl {  get; }
 
-        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, byte[] merchantUuid,byte[] productUuid, string coverUrl)
+        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, Guid merchantUuid,Guid productUuid, string coverUrl)
         {
             Name = name;
             Price = price;

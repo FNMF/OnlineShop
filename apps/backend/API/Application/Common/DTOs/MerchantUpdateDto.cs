@@ -11,9 +11,9 @@ namespace API.Application.Common.DTOs
         public string Detail { get; }
         public TimeOnly Businessstart { get; }
         public TimeOnly Businessend { get; }
-        public byte[] Adminuuid { get; }
-        public byte[] MerchantUuid { get; }
-        public MerchantUpdateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, byte[] adminuuid, byte[] merchantUuid)
+        public Guid Adminuuid { get; }
+        public Guid MerchantUuid { get; }
+        public MerchantUpdateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid, Guid merchantUuid)
         {
             Name = name;
             Province = province;

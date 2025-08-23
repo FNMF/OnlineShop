@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,15 +13,15 @@ public partial class Delivery
     [Key]
     [Column("delivery_uuid")]
     [MaxLength(16)]
-    public byte[] DeliveryUuid { get; set; } = null!;
+    public Guid DeliveryUuid { get; set; } 
 
     [Column("delivery_notificationuuid")]
     [MaxLength(16)]
-    public byte[] DeliveryNotificationuuid { get; set; } = null!;
+    public Guid DeliveryNotificationuuid { get; set; } 
 
     [Column("delivery_receiveruuid")]
     [MaxLength(16)]
-    public byte[] DeliveryReceiveruuid { get; set; } = null!;
+    public Guid DeliveryReceiveruuid { get; set; } 
 
     [Column("delivery_isread")]
     public bool DeliveryIsread { get; set; }
@@ -34,5 +34,5 @@ public partial class Delivery
 
     [ForeignKey("DeliveryNotificationuuid")]
     [InverseProperty("Deliveries")]
-    public virtual Notification DeliveryNotificationuu { get; set; } = null!;
+    public virtual Notification DeliveryNotificationuu { get; set; } 
 }

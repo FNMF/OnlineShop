@@ -20,7 +20,7 @@ namespace API.Api.UserCase.Controllers
             _addCartService = addCartService;
             _removeCartService = removeCartService;
         }
-
+        //获取用户在某个商户的购物车
         [HttpGet("merchants/{merchantUuid}/carts")]
         [Authorize]
         public async Task<IActionResult> GetAllCarts(Guid merchantUuid)
@@ -51,7 +51,7 @@ namespace API.Api.UserCase.Controllers
             }
         }
         //删除用户在某个商户的购物车
-        [HttpDelete("carts/{merchantUuid}")]
+        [HttpDelete("merchants/{merchantUuid}/carts")]
         [Authorize]
         public async Task<IActionResult> RemoveCart(Guid merchantUuid)
         {

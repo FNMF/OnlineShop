@@ -10,7 +10,7 @@ namespace API.Api.Common.Models
      */
     public class CreateNotificationInputDto
     {
-        public byte[]? ReceivedUuid { get; set; }
+        public Guid? ReceivedUuid { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime StartTime { get; set; }

@@ -34,17 +34,17 @@ namespace API.Application.Common.ProductCase.Services
         {
             try
             {
-                var productResult = await _productReadService.GetProductByUuid(uuid.ToByteArray());
+                var productResult = await _productReadService.GetProductByUuid(uuid);
                 if (!productResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(productResult.Code, productResult.Message);
                 }
-                var fileResult = await _localFileRemoveService.RemoveProductAllLocalFilesAsync(uuid.ToByteArray());
+                var fileResult = await _localFileRemoveService.RemoveProductAllLocalFilesAsync(uuid);
                 if (!fileResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(fileResult.Code, fileResult.Message);
                 }
-                var removeResult = await _productRemoveService.RemoveProductAsync(uuid.ToByteArray());
+                var removeResult = await _productRemoveService.RemoveProductAsync(uuid);
                 if (!removeResult.IsSuccess)
                 {
                     return Result<List<ProductReadDto>>.Fail(removeResult.Code, removeResult.Message);
@@ -58,7 +58,7 @@ namespace API.Application.Common.ProductCase.Services
                 var products = result.Data.Select(p => new ProductReadDto
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl)).ToList();
 
-                await _eventBus.PublishAsync(new RemoveProductEvent(_currentService.CurrentUuid, _currentService.CurrentType , uuid.ToByteArray()));
+                await _eventBus.PublishAsync(new RemoveProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
             }

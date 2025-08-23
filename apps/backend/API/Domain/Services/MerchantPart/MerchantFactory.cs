@@ -42,7 +42,7 @@ namespace API.Domain.Services.MerchantPart
                 MerchantBusinessstart = dto.Businessstart,
                 MerchantBusinessend = dto.Businessend,
                 MerchantAdminuuid = dto.Adminuuid,
-                MerchantUuid = UuidV7Helper.NewUuidV7ToBtyes(),
+                MerchantUuid = UuidV7Helper.NewUuidV7(),
                 MerchantIsclosed = false,
                 MerchantIsdeleted = false,
                 MerchantIsaudited = false,

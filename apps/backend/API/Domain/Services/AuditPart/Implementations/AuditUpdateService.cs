@@ -20,7 +20,7 @@ namespace API.Domain.Services.AuditPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result<Audit>> MarkAsApprovalAsync(byte[] auditUuid)
+        public async Task<Result<Audit>> MarkAsApprovalAsync(Guid auditUuid)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace API.Domain.Services.AuditPart.Implementations
                 return Result<Audit>.Fail(ResultCode.ServerError, "服务器错误");
             }
         }
-        public async Task<Result<Audit>> MarkAsRejectionAsync(byte[] auditUuid, string reason)
+        public async Task<Result<Audit>> MarkAsRejectionAsync(Guid auditUuid, string reason)
         {
             try
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,11 +12,11 @@ public partial class Auditgroup
     [Key]
     [Column("ag_uuid")]
     [MaxLength(16)]
-    public byte[] AgUuid { get; set; } = null!;
+    public Guid AgUuid { get; set; } 
 
     [Column("ag_submitteruuid")]
     [MaxLength(16)]
-    public byte[] AgSubmitteruuid { get; set; } = null!;
+    public Guid AgSubmitteruuid { get; set; } 
 
     [Column("ag_createdat", TypeName = "datetime")]
     public DateTime AgCreatedat { get; set; }

@@ -16,14 +16,25 @@ namespace API.Common.Middlewares
 
         private ClaimsPrincipal? ClaimsPrincipal => _httpContextAccessor.HttpContext?.User;
         public bool IsAuthenticated => ClaimsPrincipal?.Identity?.IsAuthenticated ?? false;
-        public byte[]? CurrentUuid
+        public Guid? CurrentUuid
         {
             get
             {
                 var uuidString = GetClaim(ClaimTypes.NameIdentifier);
-                return Guid.TryParse(uuidString, out var guid)
-                    ? guid.ToByteArray()
-                    : null;
+                Guid.TryParse(uuidString, out var guid);
+                return guid;
+            }
+        }
+        public Guid RequiredUuid
+        {
+            get
+            {
+                var uuid = CurrentUuid;
+                if (uuid == null)
+                {
+                    throw new UnauthorizedAccessException("Current UUID is required but not found.");
+                }
+                return uuid.Value;
             }
         }
         public string? CurrentName => GetClaim(ClaimTypes.Name);

@@ -4,6 +4,6 @@ namespace API.Domain.Services.UserPart.Interfaces
 {
     public interface IUserRemoveService
     {
-        Task<Result> RemoveUserAsync(byte[] userUuid);
+        Task<Result> RemoveUserAsync(Guid userUuid);
     }
 }

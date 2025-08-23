@@ -61,7 +61,7 @@ namespace API.Application.Common.ProductCase.Services
                     return Result<List<ProductReadDto>>.Fail(markDeleteResult.Code, markDeleteResult.Message);
 
                 // 构造新的封面+详情图 DTO
-                var newFiles = _productDomainService.PrepareImages(uuid.ToByteArray(), opt).Data;
+                var newFiles = _productDomainService.PrepareImages(uuid, opt).Data;
 
                 // 上传新的文件
                 var uploadResult = await _localFileCreateService.AddBatchLocalFilesAsync(newFiles);
@@ -77,8 +77,8 @@ namespace API.Application.Common.ProductCase.Services
                     opt.ProductIngredient,
                     opt.ProductWeight,
                     opt.ProductIslisted,
-                    _currentService.CurrentUuid,
-                    uuid.ToByteArray(),
+                    _currentService.RequiredUuid,
+                    uuid,
                     uploadResult.Data.First(f => f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath
                 );
 
@@ -102,7 +102,7 @@ namespace API.Application.Common.ProductCase.Services
                     p.ProductCoverurl
                 )).ToList();
 
-                await _eventBus.PublishAsync(new UpdateProductEvent(_currentService.CurrentUuid, _currentService.CurrentType , uuid.ToByteArray()));
+                await _eventBus.PublishAsync(new UpdateProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
             }

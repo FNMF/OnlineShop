@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,18 +12,18 @@ public partial class Notification
     [Key]
     [Column("notification_uuid")]
     [MaxLength(16)]
-    public byte[] NotificationUuid { get; set; } = null!;
+    public Guid NotificationUuid { get; set; } 
 
     [Column("notification_title")]
     [StringLength(255)]
-    public string NotificationTitle { get; set; } = null!;
+    public string NotificationTitle { get; set; } 
 
     [Column("notification_content")]
     [StringLength(255)]
-    public string NotificationContent { get; set; } = null!;
+    public string NotificationContent { get; set; } 
 
     [Column("notification_type", TypeName = "enum('order','system','activity')")]
-    public string NotificationType { get; set; } = null!;
+    public string NotificationType { get; set; } 
 
     [Column("notification_starttime", TypeName = "datetime")]
     public DateTime NotificationStarttime { get; set; }
@@ -32,14 +32,14 @@ public partial class Notification
     public bool NotificationIsdeleted { get; set; }
 
     [Column("notification_receivertype", TypeName = "enum('user','merchant','alluser','allmerchant')")]
-    public string NotificationReceivertype { get; set; } = null!;
+    public string NotificationReceivertype { get; set; } 
 
     [Column("notification_sendertype", TypeName = "enum('merchant','platform','system','other')")]
-    public string NotificationSendertype { get; set; } = null!;
+    public string NotificationSendertype { get; set; } 
 
     [Column("notification_senderuuid")]
     [MaxLength(16)]
-    public byte[]? NotificationSenderuuid { get; set; }
+    public Guid? NotificationSenderuuid { get; set; }
 
     [Column("notification_endtime", TypeName = "datetime")]
     public DateTime NotificationEndtime { get; set; }
