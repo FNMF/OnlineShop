@@ -17,16 +17,16 @@ public partial class AdminRole
 
     [Column("ar_adminuuid")]
     [MaxLength(16)]
-    public Guid ArAdminuuid { get; set; } 
+    public Guid ArAdminuuid { get; set; }
 
     [Column("ar_roleid")]
     public int ArRoleid { get; set; }
 
     [ForeignKey("ArAdminuuid")]
     [InverseProperty("AdminRoles")]
-    public virtual Admin ArAdminuu { get; set; } 
+    public virtual Admin ArAdminuu { get; set; } = null!;
 
     [ForeignKey("ArRoleid")]
     [InverseProperty("AdminRoles")]
-    public virtual Role ArRole { get; set; } 
+    public virtual Role ArRole { get; set; } = null!;
 }

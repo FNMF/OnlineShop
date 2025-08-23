@@ -13,15 +13,15 @@ public partial class Delivery
     [Key]
     [Column("delivery_uuid")]
     [MaxLength(16)]
-    public Guid DeliveryUuid { get; set; } 
+    public Guid DeliveryUuid { get; set; }
 
     [Column("delivery_notificationuuid")]
     [MaxLength(16)]
-    public Guid DeliveryNotificationuuid { get; set; } 
+    public Guid DeliveryNotificationuuid { get; set; }
 
     [Column("delivery_receiveruuid")]
     [MaxLength(16)]
-    public Guid DeliveryReceiveruuid { get; set; } 
+    public Guid DeliveryReceiveruuid { get; set; }
 
     [Column("delivery_isread")]
     public bool DeliveryIsread { get; set; }
@@ -34,5 +34,5 @@ public partial class Delivery
 
     [ForeignKey("DeliveryNotificationuuid")]
     [InverseProperty("Deliveries")]
-    public virtual Notification DeliveryNotificationuu { get; set; } 
+    public virtual Notification DeliveryNotificationuu { get; set; } = null!;
 }

@@ -13,32 +13,32 @@ public partial class Audit
     [Key]
     [Column("audit_uuid")]
     [MaxLength(16)]
-    public Guid AuditUuid { get; set; } 
+    public Guid AuditUuid { get; set; }
 
     [Column("audit_objectuuid")]
     [MaxLength(16)]
-    public Guid AuditObjectuuid { get; set; } 
+    public Guid AuditObjectuuid { get; set; }
 
     [Column("audit_type", TypeName = "enum('store','product','banner','comment','promotion')")]
-    public string AuditType { get; set; } 
+    public string AuditType { get; set; } = null!;
 
     [Column("audit_submitteruuid")]
     [MaxLength(16)]
-    public Guid AuditSubmitteruuid { get; set; } 
+    public Guid AuditSubmitteruuid { get; set; }
 
     [Column("audit_submitertype", TypeName = "enum('merchant','user')")]
-    public string AuditSubmitertype { get; set; } 
+    public string AuditSubmitertype { get; set; } = null!;
 
     [Column("audit_status", TypeName = "enum('pending','approval','rejection')")]
-    public string AuditStatus { get; set; } 
+    public string AuditStatus { get; set; } = null!;
 
     [Column("audit_reason")]
     [StringLength(255)]
-    public string AuditReason { get; set; } 
+    public string AuditReason { get; set; } = null!;
 
     [Column("audit_auditoruuid")]
     [MaxLength(16)]
-    public Guid AuditAuditoruuid { get; set; } 
+    public Guid AuditAuditoruuid { get; set; }
 
     [Column("audit_createdat", TypeName = "datetime")]
     public DateTime AuditCreatedat { get; set; }
@@ -48,12 +48,12 @@ public partial class Audit
 
     [Column("audit_groupuuid")]
     [MaxLength(16)]
-    public Guid AuditGroupuuid { get; set; } 
+    public Guid AuditGroupuuid { get; set; }
 
     [Column("audit_isdeleted")]
     public bool AuditIsdeleted { get; set; }
 
     [ForeignKey("AuditGroupuuid")]
     [InverseProperty("Audits")]
-    public virtual Auditgroup AuditGroupuu { get; set; } 
+    public virtual Auditgroup AuditGroupuu { get; set; } = null!;
 }

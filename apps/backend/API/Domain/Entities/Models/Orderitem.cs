@@ -14,15 +14,15 @@ public partial class Orderitem
     [Key]
     [Column("orderitem_uuid")]
     [MaxLength(16)]
-    public Guid OrderitemUuid { get; set; } 
+    public Guid OrderitemUuid { get; set; }
 
     [Column("orderitem_orderuuid")]
     [MaxLength(16)]
-    public Guid OrderitemOrderuuid { get; set; } 
+    public Guid OrderitemOrderuuid { get; set; }
 
     [Column("orderitem_productuuid")]
     [MaxLength(16)]
-    public Guid OrderitemProductuuid { get; set; } 
+    public Guid OrderitemProductuuid { get; set; }
 
     [Column("orderitem_quantity")]
     public int OrderitemQuantity { get; set; }
@@ -33,13 +33,13 @@ public partial class Orderitem
 
     [Column("orderitem_name")]
     [StringLength(50)]
-    public string OrderitemName { get; set; } 
+    public string OrderitemName { get; set; } = null!;
 
     [ForeignKey("OrderitemOrderuuid")]
     [InverseProperty("Orderitems")]
-    public virtual Order OrderitemOrderuu { get; set; } 
+    public virtual Order OrderitemOrderuu { get; set; } = null!;
 
     [ForeignKey("OrderitemProductuuid")]
     [InverseProperty("Orderitems")]
-    public virtual Product OrderitemProductuu { get; set; } 
+    public virtual Product OrderitemProductuu { get; set; } = null!;
 }

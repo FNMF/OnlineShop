@@ -21,27 +21,27 @@ public partial class Address
 
     [Column("address_name")]
     [StringLength(50)]
-    public string AddressName { get; set; }
+    public string AddressName { get; set; } = null!;
 
     [Column("address_phone")]
     [StringLength(255)]
-    public string AddressPhone { get; set; }
+    public string AddressPhone { get; set; } = null!;
 
     [Column("address_province")]
     [StringLength(50)]
-    public string AddressProvince { get; set; }
+    public string AddressProvince { get; set; } = null!;
 
     [Column("address_city")]
     [StringLength(50)]
-    public string AddressCity { get; set; }
+    public string AddressCity { get; set; } = null!;
 
     [Column("address_district")]
     [StringLength(50)]
-    public string AddressDistrict { get; set; }
+    public string AddressDistrict { get; set; } = null!;
 
     [Column("address_detail")]
     [StringLength(255)]
-    public string AddressDetail { get; set; }
+    public string AddressDetail { get; set; } = null!;
 
     [Column("address_time", TypeName = "datetime")]
     public DateTime AddressTime { get; set; }

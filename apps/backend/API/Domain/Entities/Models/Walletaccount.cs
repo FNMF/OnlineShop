@@ -13,11 +13,11 @@ public partial class Walletaccount
     [Key]
     [Column("wa_uuid")]
     [MaxLength(16)]
-    public Guid WaUuid { get; set; } 
+    public Guid WaUuid { get; set; }
 
     [Column("wa_merchantuuid")]
     [MaxLength(16)]
-    public Guid WaMerchantuuid { get; set; } 
+    public Guid WaMerchantuuid { get; set; }
 
     [Column("wa_available")]
     [Precision(10, 2)]
@@ -40,5 +40,5 @@ public partial class Walletaccount
 
     [ForeignKey("WaMerchantuuid")]
     [InverseProperty("Walletaccounts")]
-    public virtual Merchant WaMerchantuu { get; set; } 
+    public virtual Merchant WaMerchantuu { get; set; } = null!;
 }

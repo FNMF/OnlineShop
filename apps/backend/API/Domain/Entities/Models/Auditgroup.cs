@@ -12,11 +12,11 @@ public partial class Auditgroup
     [Key]
     [Column("ag_uuid")]
     [MaxLength(16)]
-    public Guid AgUuid { get; set; } 
+    public Guid AgUuid { get; set; }
 
     [Column("ag_submitteruuid")]
     [MaxLength(16)]
-    public Guid AgSubmitteruuid { get; set; } 
+    public Guid AgSubmitteruuid { get; set; }
 
     [Column("ag_createdat", TypeName = "datetime")]
     public DateTime AgCreatedat { get; set; }

@@ -11,16 +11,16 @@ public partial class User
 {
     [Column("user_name")]
     [StringLength(30)]
-    public string UserName { get; set; } 
+    public string UserName { get; set; } = null!;
 
     [Key]
     [Column("user_uuid")]
     [MaxLength(16)]
-    public Guid UserUuid { get; set; } 
+    public Guid UserUuid { get; set; }
 
     [Column("user_openid")]
     [StringLength(28)]
-    public string UserOpenid { get; set; } 
+    public string UserOpenid { get; set; } = null!;
 
     [Column("user_bp")]
     public int UserBp { get; set; }
@@ -36,7 +36,7 @@ public partial class User
 
     [Column("user_phone")]
     [StringLength(20)]
-    public string UserPhone { get; set; } 
+    public string UserPhone { get; set; } = null!;
 
     [InverseProperty("AddressUseruu")]
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();

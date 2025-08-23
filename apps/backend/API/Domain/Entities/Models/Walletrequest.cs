@@ -13,18 +13,18 @@ public partial class Walletrequest
     [Key]
     [Column("wr_uuid")]
     [MaxLength(16)]
-    public Guid WrUuid { get; set; } 
+    public Guid WrUuid { get; set; }
 
     [Column("wr_merchantuuid")]
     [MaxLength(16)]
-    public Guid WrMerchantuuid { get; set; } 
+    public Guid WrMerchantuuid { get; set; }
 
     [Column("wr_amount")]
     [Precision(10, 2)]
     public decimal WrAmount { get; set; }
 
     [Column("wr_status", TypeName = "enum('pending','approved','rejected','paid')")]
-    public string WrStatus { get; set; } 
+    public string WrStatus { get; set; } = null!;
 
     [Column("wr_reason")]
     [StringLength(255)]
@@ -41,5 +41,5 @@ public partial class Walletrequest
 
     [ForeignKey("WrMerchantuuid")]
     [InverseProperty("Walletrequests")]
-    public virtual Merchant WrMerchantuu { get; set; } 
+    public virtual Merchant WrMerchantuu { get; set; } = null!;
 }

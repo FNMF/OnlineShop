@@ -12,18 +12,18 @@ public partial class Notification
     [Key]
     [Column("notification_uuid")]
     [MaxLength(16)]
-    public Guid NotificationUuid { get; set; } 
+    public Guid NotificationUuid { get; set; }
 
     [Column("notification_title")]
     [StringLength(255)]
-    public string NotificationTitle { get; set; } 
+    public string NotificationTitle { get; set; } = null!;
 
     [Column("notification_content")]
     [StringLength(255)]
-    public string NotificationContent { get; set; } 
+    public string NotificationContent { get; set; } = null!;
 
     [Column("notification_type", TypeName = "enum('order','system','activity')")]
-    public string NotificationType { get; set; } 
+    public string NotificationType { get; set; } = null!;
 
     [Column("notification_starttime", TypeName = "datetime")]
     public DateTime NotificationStarttime { get; set; }
@@ -32,10 +32,10 @@ public partial class Notification
     public bool NotificationIsdeleted { get; set; }
 
     [Column("notification_receivertype", TypeName = "enum('user','merchant','alluser','allmerchant')")]
-    public string NotificationReceivertype { get; set; } 
+    public string NotificationReceivertype { get; set; } = null!;
 
     [Column("notification_sendertype", TypeName = "enum('merchant','platform','system','other')")]
-    public string NotificationSendertype { get; set; } 
+    public string NotificationSendertype { get; set; } = null!;
 
     [Column("notification_senderuuid")]
     [MaxLength(16)]

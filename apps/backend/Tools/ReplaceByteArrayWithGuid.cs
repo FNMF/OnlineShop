@@ -64,15 +64,22 @@ namespace Tools
                 string code = File.ReadAllText(file);
                 string original = code;
 
-                // ======== 类型替换 ========
+                // ======== 类型替换 + null! 清理 ========
+                // Guid
+                code = Regex.Replace(code,
+                    pattern + @"\s*\{\s*get;\s*set;\s*\}\s*=\s*null!;",
+                    @"Guid $1 { get; set; }",
+                    regexOptions);
+
+                // Guid?
+                code = Regex.Replace(code,
+                    pattern.Replace("byte\\[\\]", "byte\\[\\]\\?") + @"\s*\{\s*get;\s*set;\s*\}\s*=\s*null!;",
+                    @"Guid? $1 { get; set; }",
+                    regexOptions);
+
+                // 没有 = null!; 的情况
                 code = Regex.Replace(code, pattern, @"Guid $1", regexOptions);
                 code = Regex.Replace(code, pattern.Replace("byte\\[\\]", "byte\\[\\]\\?"), @"Guid? $1", regexOptions);
-
-                // ======== 移除 "= null!;" ========
-                // 仅移除非 virtual 的情况
-                code = Regex.Replace(code,
-                    @"(public\s+(?!virtual)\w+.*\{[^}]*\})\s*=\s*null!;",
-                    "$1");
 
                 // ======== 如果有修改，先备份再覆盖 ========
                 if (code != original)

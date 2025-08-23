@@ -12,10 +12,10 @@ public partial class Log
     [Key]
     [Column("log_uuid")]
     [MaxLength(16)]
-    public Guid LogUuid { get; set; } 
+    public Guid LogUuid { get; set; }
 
     [Column("log_type", TypeName = "enum('bp','credit','order','refund','user','product','admin','file','merchant','coupon')")]
-    public string LogType { get; set; } 
+    public string LogType { get; set; } = null!;
 
     [Column("log_objectuuid")]
     [MaxLength(16)]
@@ -23,7 +23,7 @@ public partial class Log
 
     [Column("log_description")]
     [StringLength(255)]
-    public string LogDescription { get; set; } 
+    public string LogDescription { get; set; } = null!;
 
     [Column("log_datajson")]
     [StringLength(255)]
@@ -34,5 +34,5 @@ public partial class Log
 
     [Column("log_detail")]
     [StringLength(255)]
-    public string LogDetail { get; set; } 
+    public string LogDetail { get; set; } = null!;
 }

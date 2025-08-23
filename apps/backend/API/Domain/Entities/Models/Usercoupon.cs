@@ -14,14 +14,14 @@ public partial class Usercoupon
     [Key]
     [Column("uc_uuid")]
     [MaxLength(16)]
-    public Guid UcUuid { get; set; } 
+    public Guid UcUuid { get; set; }
 
     [Column("uc_couponid")]
     public int UcCouponid { get; set; }
 
     [Column("uc_useruuid")]
     [MaxLength(16)]
-    public Guid UcUseruuid { get; set; } 
+    public Guid UcUseruuid { get; set; }
 
     [Column("uc_receivetime", TypeName = "datetime")]
     public DateTime UcReceivetime { get; set; }
@@ -30,7 +30,7 @@ public partial class Usercoupon
     public DateTime UcUsedtime { get; set; }
 
     [Column("uc_status", TypeName = "enum('unused','used','OT','invalidity')")]
-    public string UcStatus { get; set; } 
+    public string UcStatus { get; set; } = null!;
 
     [Column("uc_discountvalue")]
     [Precision(8, 2)]
@@ -44,9 +44,9 @@ public partial class Usercoupon
 
     [ForeignKey("UcCouponid")]
     [InverseProperty("Usercoupons")]
-    public virtual Coupon UcCoupon { get; set; } 
+    public virtual Coupon UcCoupon { get; set; } = null!;
 
     [ForeignKey("UcUseruuid")]
     [InverseProperty("Usercoupons")]
-    public virtual User UcUseruu { get; set; } 
+    public virtual User UcUseruu { get; set; } = null!;
 }

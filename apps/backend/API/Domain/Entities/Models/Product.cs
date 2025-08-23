@@ -13,11 +13,11 @@ public partial class Product
     [Key]
     [Column("product_uuid")]
     [MaxLength(16)]
-    public Guid ProductUuid { get; set; } 
+    public Guid ProductUuid { get; set; }
 
     [Column("product_name")]
     [StringLength(30)]
-    public string ProductName { get; set; } 
+    public string ProductName { get; set; } = null!;
 
     [Column("product_price")]
     [Precision(8, 2)]
@@ -39,14 +39,14 @@ public partial class Product
 
     [Column("product_weight")]
     [StringLength(255)]
-    public string ProductWeight { get; set; } 
+    public string ProductWeight { get; set; } = null!;
 
     [Column("product_islisted")]
     public bool ProductIslisted { get; set; }
 
     [Column("product_merchantuuid")]
     [MaxLength(16)]
-    public Guid ProductMerchantuuid { get; set; } 
+    public Guid ProductMerchantuuid { get; set; }
 
     [Column("product_coverurl")]
     [StringLength(255)]
@@ -66,5 +66,5 @@ public partial class Product
 
     [ForeignKey("ProductMerchantuuid")]
     [InverseProperty("Products")]
-    public virtual Merchant ProductMerchantuu { get; set; } 
+    public virtual Merchant ProductMerchantuu { get; set; } = null!;
 }

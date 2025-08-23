@@ -14,18 +14,18 @@ public partial class Order
     [Key]
     [Column("order_uuid")]
     [MaxLength(16)]
-    public Guid OrderUuid { get; set; } 
+    public Guid OrderUuid { get; set; }
 
     [Column("order_useruuid")]
     [MaxLength(16)]
-    public Guid OrderUseruuid { get; set; } 
+    public Guid OrderUseruuid { get; set; }
 
     [Column("order_total")]
     [Precision(8, 2)]
     public decimal OrderTotal { get; set; }
 
     [Column("order_status", TypeName = "enum('created','paid','accepted','prepared','shipped','completed','cancelled','rejected','exception')")]
-    public string OrderStatus { get; set; } 
+    public string OrderStatus { get; set; } = null!;
 
     [Column("order_sid")]
     [StringLength(10)]
@@ -36,22 +36,22 @@ public partial class Order
 
     [Column("order_ma")]
     [StringLength(255)]
-    public string OrderMa { get; set; } 
+    public string OrderMa { get; set; } = null!;
 
     [Column("order_ua")]
     [StringLength(255)]
-    public string OrderUa { get; set; } 
+    public string OrderUa { get; set; } = null!;
 
     [Column("order_ucuuid")]
     [MaxLength(16)]
     public Guid? OrderUcuuid { get; set; }
 
     [Column("order_riderservice", TypeName = "enum('scheduled','immediate','preorder','pickup')")]
-    public string OrderRiderservice { get; set; } 
+    public string OrderRiderservice { get; set; } = null!;
 
     [Column("order_rider")]
     [StringLength(255)]
-    public string OrderRider { get; set; } 
+    public string OrderRider { get; set; } = null!;
 
     [Column("order_note", TypeName = "text")]
     public string? OrderNote { get; set; }
@@ -70,10 +70,10 @@ public partial class Order
 
     [Column("order_expectedtime")]
     [StringLength(255)]
-    public string OrderExpectedtime { get; set; } 
+    public string OrderExpectedtime { get; set; } = null!;
 
     [Column("order_channel", TypeName = "enum('alipay','wechat','bank','instore','other')")]
-    public string OrderChannel { get; set; } 
+    public string OrderChannel { get; set; } = null!;
 
     [Column("order_isdeleted")]
     public bool OrderIsdeleted { get; set; }
@@ -88,7 +88,7 @@ public partial class Order
 
     [ForeignKey("OrderUseruuid")]
     [InverseProperty("Orders")]
-    public virtual User OrderUseruu { get; set; } 
+    public virtual User OrderUseruu { get; set; } = null!;
 
     [InverseProperty("OrderitemOrderuu")]
     public virtual ICollection<Orderitem> Orderitems { get; set; } = new List<Orderitem>();

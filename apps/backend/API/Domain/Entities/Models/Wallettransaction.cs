@@ -13,14 +13,14 @@ public partial class Wallettransaction
     [Key]
     [Column("wt_uuid")]
     [MaxLength(16)]
-    public Guid WtUuid { get; set; } 
+    public Guid WtUuid { get; set; }
 
     [Column("wt_merchantuuid")]
     [MaxLength(16)]
-    public Guid WtMerchantuuid { get; set; } 
+    public Guid WtMerchantuuid { get; set; }
 
     [Column("wt_type", TypeName = "enum('income','withdraw','refund','charge')")]
-    public string WtType { get; set; } 
+    public string WtType { get; set; } = null!;
 
     [Column("wt_amount")]
     [Precision(10, 2)]
@@ -47,5 +47,5 @@ public partial class Wallettransaction
 
     [ForeignKey("WtMerchantuuid")]
     [InverseProperty("Wallettransactions")]
-    public virtual Merchant WtMerchantuu { get; set; } 
+    public virtual Merchant WtMerchantuu { get; set; } = null!;
 }

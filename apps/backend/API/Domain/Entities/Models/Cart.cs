@@ -13,25 +13,25 @@ public partial class Cart
     [Key]
     [Column("cart_uuid")]
     [MaxLength(16)]
-    public Guid CartUuid { get; set; } 
+    public Guid CartUuid { get; set; }
 
     [Column("cart_useruuid")]
     [MaxLength(16)]
-    public Guid CartUseruuid { get; set; } 
+    public Guid CartUseruuid { get; set; }
 
     [Column("cart_time", TypeName = "datetime")]
     public DateTime CartTime { get; set; }
 
     [Column("cart_merchantuuid")]
     [MaxLength(16)]
-    public Guid CartMerchantuuid { get; set; } 
+    public Guid CartMerchantuuid { get; set; }
 
     [Column("cart_isdeleted")]
     public bool CartIsdeleted { get; set; }
 
     [ForeignKey("CartUseruuid")]
     [InverseProperty("Carts")]
-    public virtual User CartUseruu { get; set; } 
+    public virtual User CartUseruu { get; set; } = null!;
 
     [InverseProperty("CartitemCartuu")]
     public virtual ICollection<Cartitem> Cartitems { get; set; } = new List<Cartitem>();

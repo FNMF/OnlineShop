@@ -13,22 +13,22 @@ public partial class Cartitem
     [Key]
     [Column("cartitem_uuid")]
     [MaxLength(16)]
-    public Guid CartitemUuid { get; set; } 
+    public Guid CartitemUuid { get; set; }
 
     [Column("cartitem_cartuuid")]
     [MaxLength(16)]
-    public Guid CartitemCartuuid { get; set; } 
+    public Guid CartitemCartuuid { get; set; }
 
     [Column("cartitem_productuuid")]
     [MaxLength(16)]
-    public Guid CartitemProductuuid { get; set; } 
+    public Guid CartitemProductuuid { get; set; }
 
     [Column("cartitem_quantity")]
     public int CartitemQuantity { get; set; }
 
     [Column("cartitem_productname")]
     [StringLength(255)]
-    public string CartitemProductname { get; set; } 
+    public string CartitemProductname { get; set; } = null!;
 
     [Column("cartitem_productprice")]
     [Precision(8, 2)]
@@ -36,7 +36,7 @@ public partial class Cartitem
 
     [Column("cartitem_productcover")]
     [StringLength(255)]
-    public string CartitemProductcover { get; set; } 
+    public string CartitemProductcover { get; set; } = null!;
 
     [Column("cartitem_createdat", TypeName = "datetime")]
     public DateTime CartitemCreatedat { get; set; }
@@ -46,5 +46,5 @@ public partial class Cartitem
 
     [ForeignKey("CartitemCartuuid")]
     [InverseProperty("Cartitems")]
-    public virtual Cart CartitemCartuu { get; set; } 
+    public virtual Cart CartitemCartuu { get; set; } = null!;
 }

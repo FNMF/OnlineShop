@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,10 +15,10 @@ public partial class Coupon
 
     [Column("coupon_title")]
     [StringLength(50)]
-    public string CouponTitle { get; set; } 
+    public string CouponTitle { get; set; } = null!;
 
     [Column("coupon_type", TypeName = "enum('FM','discount')")]
-    public string CouponType { get; set; } 
+    public string CouponType { get; set; } = null!;
 
     [Column("coupon_value")]
     [Precision(5, 2)]
@@ -41,7 +41,7 @@ public partial class Coupon
     public int CouponLimit { get; set; }
 
     [Column("coupon_status", TypeName = "enum('NA','A','OT')")]
-    public string CouponStatus { get; set; } 
+    public string CouponStatus { get; set; } = null!;
 
     [Column("coupon_isdeleted")]
     public bool CouponIsdeleted { get; set; }

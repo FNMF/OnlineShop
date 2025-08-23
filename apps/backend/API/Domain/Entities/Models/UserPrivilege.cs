@@ -14,20 +14,20 @@ public partial class UserPrivilege
     [Key]
     [Column("up_uuid")]
     [MaxLength(16)]
-    public Guid UpUuid { get; set; } 
+    public Guid UpUuid { get; set; }
 
     [Column("up_useruuid")]
     [MaxLength(16)]
-    public Guid UpUseruuid { get; set; } 
+    public Guid UpUseruuid { get; set; }
 
     [Column("up_privilegeid")]
     public int UpPrivilegeid { get; set; }
 
     [ForeignKey("UpPrivilegeid")]
     [InverseProperty("UserPrivileges")]
-    public virtual Privilege UpPrivilege { get; set; } 
+    public virtual Privilege UpPrivilege { get; set; } = null!;
 
     [ForeignKey("UpUseruuid")]
     [InverseProperty("UserPrivileges")]
-    public virtual User UpUseruu { get; set; } 
+    public virtual User UpUseruu { get; set; } = null!;
 }
