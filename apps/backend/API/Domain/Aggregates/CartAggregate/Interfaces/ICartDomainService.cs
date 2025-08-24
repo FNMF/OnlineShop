@@ -6,5 +6,7 @@ namespace API.Domain.Aggregates.CartAggregate.Interfaces
     public interface ICartDomainService
     {
         Task<Result<CartMain>> CreateCartAggregate(CartWriteOptions opt);
+        Task<Result<CartMain>> UpdateCartAggregate(CartWriteOptions opt);
+        Task<Result> ValidationInput(CartWriteOptions opt);
     }
 }

@@ -11,5 +11,6 @@ namespace API.Domain.Services.ProductPart.Interfaces
     {
         Result<List<LocalFileCreateDto>> PrepareImages(Guid productUuid, ProductWriteOptions opt);
         Task<Result<ProductAggregateResult>> CreateProductAggregate(ProductCreateDto dto, List<LocalFileCreateDto> imageFiles);
+        Task<Result> ValidationMerchant(Guid merchantUuid, Guid productUuid);
     }
 }

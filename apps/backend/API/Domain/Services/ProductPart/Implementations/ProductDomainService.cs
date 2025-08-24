@@ -11,14 +11,16 @@ namespace API.Domain.Services.ProductPart.Implementations
 {
     public class ProductDomainService: IProductDomainService
     {
+        private readonly IProductReadService _productReadService;
         private readonly IProductCreateService _productCreateService;
         private readonly ILocalFileCreateService _localFileCreateService;
         private readonly ICurrentService _currentService;
         private readonly IClientIpService _clientIpService;
         private readonly ILogger<ProductDomainService> _logger;
 
-        public ProductDomainService(IProductCreateService productCreateService, ILocalFileCreateService localFileCreateService, ICurrentService currentService, IClientIpService clientIpService, ILogger<ProductDomainService> logger)
+        public ProductDomainService(IProductReadService productReadService, IProductCreateService productCreateService, ILocalFileCreateService localFileCreateService, ICurrentService currentService, IClientIpService clientIpService, ILogger<ProductDomainService> logger)
         {
+            _productReadService = productReadService;
             _productCreateService = productCreateService;
             _localFileCreateService = localFileCreateService;
             _currentService = currentService;
@@ -111,7 +113,31 @@ namespace API.Domain.Services.ProductPart.Implementations
             }
         }
         
-       
+        public async Task<Result> ValidationMerchant(Guid merchantUuid,Guid productUuid)
+        {
+            try
+            {
+                if (merchantUuid == Guid.Empty)
+                    return Result.Fail(ResultCode.InvalidInput, "商户UUID不能为空");
+                if (productUuid == Guid.Empty)
+                    return Result.Fail(ResultCode.InvalidInput, "商品UUID不能为空");
+                
+                var result = await _productReadService.GetProductByUuid(productUuid);
+
+                if (!result.IsSuccess)
+                    return Result.Fail(ResultCode.NotFound, "商品不存在或无效");
+                if (result.Data.ProductMerchantuuid != merchantUuid)
+                    return Result.Fail(ResultCode.InvalidInput, "商户UUID与商品不匹配");
+
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result.Fail(ResultCode.ServerError, $"验证商户失败: {ex.Message}");
+            }
+        }
+
         public class ProductAggregateResult
         {
             public Product Product { get; set; }

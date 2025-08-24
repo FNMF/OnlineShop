@@ -13,13 +13,15 @@ namespace API.Domain.Aggregates.CartAggregate.Services
     {
         private readonly ICartReadService _cartReadService;
         private readonly IProductReadService _productReadService;
+        private readonly IProductDomainService _productDomainService;
         private readonly ICurrentService _currentService;
         private readonly ILogger<CartDomainService> _logger;
 
-        public CartDomainService(ICartReadService cartReadService, IProductReadService productReadService, ICurrentService currentService, ILogger<CartDomainService> logger)
+        public CartDomainService(ICartReadService cartReadService, IProductReadService productReadService, IProductDomainService productDomainService,  ICurrentService currentService, ILogger<CartDomainService> logger)
         {
             _cartReadService = cartReadService;
             _productReadService = productReadService;
+            _productDomainService = productDomainService;
             _currentService = currentService;
             _logger = logger;
         }
@@ -52,7 +54,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                             productResult.Data.ProductCoverurl,
                             productResult.Data.ProductName
                             );
-                            cartMain.AddItem(cartItem);
+                            cartMain.UpdateItem(cartItem);
                         }
                     }
                     return Result<CartMain>.Success(cartMain);
@@ -72,7 +74,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                             productResult.Data.ProductCoverurl,
                             productResult.Data.ProductName
                             );
-                            cartMain.AddItem(cartItem);
+                            cartMain.UpdateItem(cartItem);
                         }
                     }
                     return Result<CartMain>.Success(cartMain);
@@ -85,6 +87,62 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                 _logger.LogError(ex, "服务器错误");
                 return Result<CartMain>.Fail(ResultCode.ServerError, ex.Message);
             }
+        }
+        public async Task<Result<CartMain>> UpdateCartAggregate(CartWriteOptions opt)
+        {
+            try
+            {
+                var cartMainResult = await _cartReadService.GetCartByUuids(opt.MerchantUuid, _currentService.RequiredUuid);
+                if (!cartMainResult.IsSuccess) 
+                {
+                    return Result<CartMain>.Fail(cartMainResult.Code, cartMainResult.Message);
+                }
+                var cartMain = CartFactory.ToAggregate(cartMainResult.Data).Data;
+                foreach(var item in opt.Items)
+                {
+                    var productResult = await _productReadService.GetProductByUuid(item.ProductUuid);
+                    if (productResult.IsSuccess)
+                    {
+                        var cartItem = new CartItem(
+                            item.ProductUuid,
+                            productResult.Data.ProductPrice,
+                            item.Quantity,
+                            productResult.Data.ProductCoverurl,
+                            productResult.Data.ProductName
+                        );
+                        cartMain.UpdateItem(cartItem);
+                    }
+                }
+                return Result<CartMain>.Success(cartMain);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<CartMain>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
+        public async Task<Result> ValidationInput(CartWriteOptions opt)
+        {
+            if (opt == null)
+            {
+                return Result.Fail(ResultCode.InvalidInput, "输入不能为空");
+            }
+            if (opt.MerchantUuid == Guid.Empty)
+            {
+                return Result.Fail(ResultCode.InvalidInput, "商户ID不能为空");
+            }
+            if (_currentService.RequiredUuid == Guid.Empty)
+            {
+                return Result.Fail(ResultCode.InvalidInput, "用户ID不能为空");
+            }
+            if (opt.Items == null || !opt.Items.Any())
+            {
+                return Result.Fail(ResultCode.InvalidInput, "购物车不能为空");
+            }
+            var result = await _productDomainService.ValidationMerchant(opt.MerchantUuid, opt.Items.FirstOrDefault().ProductUuid);
+            if (!result.IsSuccess)
+                return Result.Fail(ResultCode.InvalidInput, "商品不属于该商户");
+            return Result.Success();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace API.Domain.Aggregates.CartAggregate
             _items = items ?? new List<CartItem>();
         }
 
-        public void AddItem(CartItem item)
+        public void UpdateItem(CartItem item)
         {
             var existingItem = _items.FirstOrDefault(i => i.ProductUuid == item.ProductUuid);
 

@@ -15,7 +15,7 @@ namespace API.Application.Common.CartCase.Services
             _logger = logger;
         }
 
-        public async Task<Result> RemoveCart(Guid merchantUuid)
+        public async Task<Result> RemoveCartAsync(Guid merchantUuid)
         {
             try
             {
@@ -31,6 +31,24 @@ namespace API.Application.Common.CartCase.Services
             {
                 _logger.LogError(ex, "服务器错误");
                 return Result.Fail(ResultCode.ServerError,ex.Message);
+            }
+        }
+        public async Task<Result> RemoveCartItemAsync(Guid merchantUuid, Guid productUuid)
+        {
+            try
+            {
+                var result = await _cartRemoveService.RemoveCartItemAsync(merchantUuid, productUuid);
+                if (!result.IsSuccess)
+                {
+                    _logger.LogWarning("删除购物车商品失败: {Message}", result.Message);
+                    return result;
+                }
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }

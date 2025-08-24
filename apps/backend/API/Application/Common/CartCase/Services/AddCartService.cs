@@ -1,11 +1,8 @@
 ﻿using API.Api.Common.Models;
 using API.Application.Common.CartCase.Interfaces;
-using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Aggregates.CartAggregate;
 using API.Domain.Aggregates.CartAggregate.Interfaces;
-using API.Domain.Aggregates.CartAggregates;
-using API.Domain.Services.ProductPart.Interfaces;
 
 namespace API.Application.Common.CartCase.Services
 {
