@@ -1,5 +1,5 @@
 ﻿using API.Api.Common.Models;
-using API.Application.Common.ProductCase.Interfaces;
+using API.Application.ProductCase.Interfaces;
 using API.Domain.Enums;
 using API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Authorization;

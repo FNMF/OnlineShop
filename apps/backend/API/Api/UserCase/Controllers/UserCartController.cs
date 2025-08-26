@@ -1,6 +1,6 @@
 ﻿
 using API.Api.Common.Models;
-using API.Application.Common.CartCase.Interfaces;
+using API.Application.CartCase.Interfaces;
 using API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,8 +56,7 @@ namespace API.Api.UserCase.Controllers
         [HttpPatch("merchants/{merchantUuid}/carts/items/{productUuid}")]
         [Authorize]
         public async Task<IActionResult> UpdateCart(Guid merchantUuid,Guid productUuid, [FromBody] CartWriteOptions.CartItemWriteOptions opt)
-        {
-            //TODO
+        { 
             var result = await _updateCartService.UpdateCartAsync(new CartWriteOptions(merchantUuid, new List<CartWriteOptions.CartItemWriteOptions> { opt }));
             if (result.IsSuccess)
             {
@@ -72,7 +71,6 @@ namespace API.Api.UserCase.Controllers
         [Authorize]
         public async Task<IActionResult> RemoveCartItem(Guid merchantUuid, Guid productUuid)
         {
-            //TODO
             var result = await _removeCartService.RemoveCartItemAsync(merchantUuid, productUuid);
             if (result.IsSuccess)
             {

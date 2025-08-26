@@ -1,31 +1,52 @@
-﻿using API.Domain.Events;
+﻿using API.Common.Helpers;
 
 namespace API.Domain.Aggregates.OrderAggregates
 {
     public class OrderMain
     {
-        public Guid OrderUuid { get; set; }
-        public Guid OrderUseruuid { get;set; }
-        public Guid OrderPaymentuuid {  get; set; }
-        public decimal OrderTotal { get; set; }
-        public string OrderStatus { get; set; }
-        public string OrderSid { get; set; }
-        public DateTime OrderTime { get; set; }
-        public string OrderMa { get; set; }
-        public string OrderUa { get; set; }
-        public decimal OrderCost { get; set; }
-        public decimal OrderPackingcharge { get; set; }
-        public decimal OrderRidercost { get; set; }
+        public Guid OrderUuid { get; private set; }
+        public Guid OrderUseruuid { get; private set; }
+        public Guid OrderPaymentuuid {  get; private set; }
+        public decimal OrderTotal { get; private set; }
+        public string OrderStatus { get; private set; }
+        public string OrderSid { get; private set; }
+        public DateTime OrderTime { get; private set; }
+        public string OrderMa { get; private set; }
+        public string OrderUa { get; private set; }
+        public decimal OrderCost { get; private set; }
+        public decimal OrderPackingcharge { get; private set; }
+        public decimal OrderRidercost { get; private set; }
         public ICollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
         private readonly List<OrderItem> _orderItems = new List<OrderItem>();
 
         // 这里可以是值对象，如配送方式，商品信息等
-        public string OrderRiderservice { get; set; }
+        public string OrderRiderservice { get; private set; }
 
         // 构造函数
-        /*public OrderMain(byte[] orderUuid, byte[] orderUseruuid, decimal orderTotal, string orderStatus, string orderSid,
+        public OrderMain( Guid orderUseruuid, decimal orderTotal, string orderStatus, string orderSid,
                       DateTime orderTime, string orderMa, string orderUa, decimal orderCost, decimal orderPackingcharge,
-                      decimal orderRidercost, string orderRiderservice)
+                      decimal orderRidercost, string orderRiderservice, List<OrderItem> orderItems)
+        {
+            OrderUuid = UuidV7Helper.NewUuidV7();
+            OrderUseruuid = orderUseruuid;
+            OrderTotal = orderTotal;
+            OrderStatus = orderStatus;
+            OrderSid = orderSid;
+            OrderTime = orderTime;
+            OrderMa = orderMa;
+            OrderUa = orderUa;
+            OrderCost = orderCost;
+            OrderPackingcharge = orderPackingcharge;
+            OrderRidercost = orderRidercost;
+            OrderRiderservice = orderRiderservice;
+
+            _orderItems = orderItems;
+        }
+
+        //内部构造函数，用于从数据库中加载数据时使用
+        internal OrderMain(Guid orderUuid, Guid orderUseruuid, decimal orderTotal, string orderStatus, string orderSid,
+                      DateTime orderTime, string orderMa, string orderUa, decimal orderCost, decimal orderPackingcharge,
+                      decimal orderRidercost, string orderRiderservice, List<OrderItem> orderItems)
         {
             OrderUuid = orderUuid;
             OrderUseruuid = orderUseruuid;
@@ -39,9 +60,8 @@ namespace API.Domain.Aggregates.OrderAggregates
             OrderPackingcharge = orderPackingcharge;
             OrderRidercost = orderRidercost;
             OrderRiderservice = orderRiderservice;
-
-            OrderItems = new List<OrderItem>();
-        }*/
+            _orderItems = orderItems ?? new List<OrderItem>();
+        }
 
         // 创建订单时的业务逻辑
         /*public static OrderMain CreateOrder(byte[] orderUuid, byte[] orderUseruuid, decimal orderTotal, string orderStatus,

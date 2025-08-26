@@ -1,4 +1,4 @@
-﻿using API.Application.Common.ProductCase.Interfaces;
+﻿using API.Application.ProductCase.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;

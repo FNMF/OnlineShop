@@ -4,7 +4,9 @@ namespace API.Domain.Interfaces
 {
     public interface IOrderRepository
     {
-        Task<Order> GetOrderByUserUuidAsync(Guid useruuid);
-        // Task<Order> CreateOrderWithUuidAsync(Guid useruuid)
+        IQueryable<Order> QueryOrders();
+        Task<bool> AddOrderAsync(Order order);
+        Task<bool> UpdateOrderAsync(Order order);
+        Task<bool> RemoveOrderAsync(Order order);
     }
 }
