@@ -224,6 +224,7 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.NotificationUuid).HasName("PRIMARY");
 
             entity.Property(e => e.NotificationUuid).IsFixedLength();
+            entity.Property(e => e.NotificationObjectuuid).IsFixedLength();
             entity.Property(e => e.NotificationSenderuuid).IsFixedLength();
         });
 

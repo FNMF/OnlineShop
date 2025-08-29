@@ -1,4 +1,5 @@
-﻿using API.Application.OrderCase.Interfaces;
+﻿using API.Api.Common.Models;
+using API.Application.OrderCase.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
@@ -11,10 +12,12 @@ namespace API.Api.UserCase.Controllers
     {
         private readonly IUserGetAllOrdersService _userGetAllOrdersService;
         private readonly IUserGetOrderService _userGetOrderService;
-        public UserOrderController(IUserGetAllOrdersService userGetAllOrdersService, IUserGetOrderService userGetOrderService)
+        private readonly IUserPutOrderService _userPutOrderService;
+        public UserOrderController(IUserGetAllOrdersService userGetAllOrdersService, IUserGetOrderService userGetOrderService, IUserPutOrderService userPutOrderService)
         {
             _userGetAllOrdersService = userGetAllOrdersService;
             _userGetOrderService = userGetOrderService;
+            _userPutOrderService = userPutOrderService;
         }
 
         [HttpGet("orders")]
@@ -47,24 +50,33 @@ namespace API.Api.UserCase.Controllers
         }
         [HttpPost("orders")]
         [Authorize]
-        //TODO
-        public async Task<IActionResult> CreateOrder()//Options
+        public async Task<IActionResult> CreateOrder(OrderWriteOptions opt)
         {
-            return Ok("UserOrderController");
+            var result = await _userPutOrderService.UserPutOrder(opt);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
         }
         [HttpPatch("orders/{orderUuid}")]
         [Authorize]
-        //TODO
+        //TODO，这个要分状态机，不应该直接Update
         public async Task<IActionResult> UpdateOrder(Guid orderUuid)//Options
         {
             return Ok("UserOrderController");
         }
+
+        
         [HttpDelete("orders/{orderUuid}")]
         [Authorize]
-        //TODO
+        //TODO,这个可以不实现，订单一般都要留存记录
         public async Task<IActionResult> DeleteOrder(Guid orderUuid)
         {
-            return Ok("UserOrderController");
+            return BadRequest("NotAllowed");
         }
     }
 }

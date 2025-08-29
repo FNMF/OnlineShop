@@ -51,7 +51,7 @@ namespace API.Domain.Services.ProductPart
                 ProductTime = DateTime.Now,
                 ProductIsdeleted = false,
                 ProductIsaudited = false,
-                
+                ProductPackingfee = dto.PackingFee
             };
             return Result<Product>.Success(product);
         }
@@ -98,7 +98,7 @@ namespace API.Domain.Services.ProductPart
                 ProductTime = DateTime.Now,
                 ProductIsdeleted = false,
                 ProductIsaudited = false,
-
+                ProductPackingfee = dto.PackingFee
             };
 
             return Result<Product>.Success(product);

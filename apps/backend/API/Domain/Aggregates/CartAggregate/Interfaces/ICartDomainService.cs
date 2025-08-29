@@ -8,5 +8,6 @@ namespace API.Domain.Aggregates.CartAggregate.Interfaces
         Task<Result<CartMain>> CreateCartAggregate(CartWriteOptions opt);
         Task<Result<CartMain>> UpdateCartAggregate(CartWriteOptions opt);
         Task<Result> ValidationInput(CartWriteOptions opt);
+        Task<Result> ValidationRole(Guid userUuid, Guid cartUuid);
     }
 }

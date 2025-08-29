@@ -50,6 +50,10 @@ public partial class Notification
     [Column("notification_createdat", TypeName = "datetime")]
     public DateTime NotificationCreatedat { get; set; }
 
+    [Column("notification_objectuuid")]
+    [MaxLength(16)]
+    public Guid? NotificationObjectuuid { get; set; }
+
     [InverseProperty("DeliveryNotificationuu")]
     public virtual ICollection<Delivery> Deliveries { get; set; } = new List<Delivery>();
 }

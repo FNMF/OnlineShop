@@ -17,7 +17,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
         private readonly ICurrentService _currentService;
         private readonly ILogger<CartDomainService> _logger;
 
-        public CartDomainService(ICartReadService cartReadService, IProductReadService productReadService, IProductDomainService productDomainService,  ICurrentService currentService, ILogger<CartDomainService> logger)
+        public CartDomainService(ICartReadService cartReadService, IProductReadService productReadService, IProductDomainService productDomainService, ICurrentService currentService, ILogger<CartDomainService> logger)
         {
             _cartReadService = cartReadService;
             _productReadService = productReadService;
@@ -50,6 +50,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                             var cartItem = new CartItem(
                             item.ProductUuid,
                             productResult.Data.ProductPrice,
+                            productResult.Data.ProductPackingfee,
                             item.Quantity,
                             productResult.Data.ProductCoverurl,
                             productResult.Data.ProductName
@@ -70,6 +71,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                             var cartItem = new CartItem(
                             item.ProductUuid,
                             productResult.Data.ProductPrice,
+                            productResult.Data.ProductPackingfee,
                             item.Quantity,
                             productResult.Data.ProductCoverurl,
                             productResult.Data.ProductName
@@ -93,12 +95,12 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             try
             {
                 var cartMainResult = await _cartReadService.GetCartByUuids(opt.MerchantUuid, _currentService.RequiredUuid);
-                if (!cartMainResult.IsSuccess) 
+                if (!cartMainResult.IsSuccess)
                 {
                     return Result<CartMain>.Fail(cartMainResult.Code, cartMainResult.Message);
                 }
                 var cartMain = CartFactory.ToAggregate(cartMainResult.Data).Data;
-                foreach(var item in opt.Items)
+                foreach (var item in opt.Items)
                 {
                     var productResult = await _productReadService.GetProductByUuid(item.ProductUuid);
                     if (productResult.IsSuccess)
@@ -106,6 +108,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                         var cartItem = new CartItem(
                             item.ProductUuid,
                             productResult.Data.ProductPrice,
+                            productResult.Data.ProductPackingfee,
                             item.Quantity,
                             productResult.Data.ProductCoverurl,
                             productResult.Data.ProductName
@@ -142,6 +145,23 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             var result = await _productDomainService.ValidationMerchant(opt.MerchantUuid, opt.Items.FirstOrDefault().ProductUuid);
             if (!result.IsSuccess)
                 return Result.Fail(ResultCode.InvalidInput, "商品不属于该商户");
+            return Result.Success();
+        }
+        public async Task<Result> ValidationRole(Guid userUuid, Guid cartUuid)
+        {
+            if (userUuid == Guid.Empty)
+            {
+                return Result.Fail(ResultCode.InvalidInput, "用户ID不能为空");
+            }
+            if (cartUuid == Guid.Empty)
+            {
+                return Result.Fail(ResultCode.InvalidInput, "购物车ID不能为空");
+            }
+            if (_cartReadService.GetCartByUuid(cartUuid).Result.Data.CartUseruuid != userUuid)
+            {
+                return Result.Fail(ResultCode.Forbidden, "没有权限操作该购物车");
+            }
+
             return Result.Success();
         }
     }

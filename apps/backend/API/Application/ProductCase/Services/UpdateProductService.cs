@@ -79,7 +79,8 @@ namespace API.Application.ProductCase.Services
                     opt.ProductIslisted,
                     _currentService.RequiredUuid,
                     uuid,
-                    uploadResult.Data.First(f => f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath
+                    uploadResult.Data.First(f => f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath,
+                    opt.ProductPackingFee
                 );
 
                 var productResult = await _productUpdateService.UpdateProductAsync(productDto);
@@ -99,7 +100,8 @@ namespace API.Application.ProductCase.Services
                 p.ProductWeight,
                 p.ProductIslisted,
                     p.ProductIsavailable,
-                    p.ProductCoverurl
+                    p.ProductCoverurl,
+                    p.ProductPackingfee
                 )).ToList();
 
                 await _eventBus.PublishAsync(new UpdateProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));

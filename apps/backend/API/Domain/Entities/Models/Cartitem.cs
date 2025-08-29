@@ -44,6 +44,10 @@ public partial class Cartitem
     [Column("cartitem_isdeleted")]
     public bool CartitemIsdeleted { get; set; }
 
+    [Column("cartitem_packingfee")]
+    [Precision(8, 2)]
+    public decimal CartitemPackingfee { get; set; }
+
     [ForeignKey("CartitemCartuuid")]
     [InverseProperty("Cartitems")]
     public virtual Cart CartitemCartuu { get; set; } = null!;

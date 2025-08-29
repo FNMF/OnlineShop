@@ -32,6 +32,7 @@ namespace API.Domain.Aggregates.CartAggregates
                     CartitemUuid = item.CartItemUuid,
                     CartitemProductuuid = item.ProductUuid,
                     CartitemProductprice = item.Price,
+                    CartitemPackingfee = item.PackingFee,
                     CartitemQuantity = item.Quantity,
                     CartitemProductcover = item.CoverUrl,
                     CartitemProductname = item.ProductName,
@@ -48,6 +49,7 @@ namespace API.Domain.Aggregates.CartAggregates
                 item.CartitemUuid,
                 item.CartitemProductuuid,
                 item.CartitemProductprice,
+                item.CartitemPackingfee,
                 item.CartitemQuantity,
                 item.CartitemProductcover,
                 item.CartitemProductname

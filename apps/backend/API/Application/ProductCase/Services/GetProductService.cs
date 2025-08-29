@@ -39,7 +39,8 @@ namespace API.Application.ProductCase.Services
                     p.ProductWeight,
                     p.ProductIslisted,
                     p.ProductIsavailable,
-                    p.ProductCoverurl)).ToList();
+                    p.ProductCoverurl,
+                    p.ProductPackingfee)).ToList();
 
                     return Result<List<ProductReadDto>>.Success(products);
                 }
@@ -77,6 +78,7 @@ namespace API.Application.ProductCase.Services
                         product.ProductIslisted,
                         product.ProductIsavailable,
                         product.ProductCoverurl,
+                        product.ProductPackingfee,
                         imagesResult.IsSuccess ? imagesResult.Data.Select(i => i.LocalfilePath).ToList() : new List<string>()
                     );
                     return Result<ProductReadDetailDto>.Success(productDetail);

@@ -1,4 +1,5 @@
 ﻿using API.Common.Helpers;
+using API.Domain.Enums;
 
 namespace API.Domain.Aggregates.OrderAggregates
 {
@@ -8,7 +9,7 @@ namespace API.Domain.Aggregates.OrderAggregates
         public Guid OrderUseruuid { get; private set; }
         public Guid OrderPaymentuuid {  get; private set; }
         public decimal OrderTotal { get; private set; }
-        public string OrderStatus { get; private set; }
+        public OrderStatus OrderStatus { get; private set; }
         public string OrderSid { get; private set; }
         public DateTime OrderTime { get; private set; }
         public string OrderMa { get; private set; }
@@ -16,16 +17,18 @@ namespace API.Domain.Aggregates.OrderAggregates
         public decimal OrderCost { get; private set; }
         public decimal OrderPackingcharge { get; private set; }
         public decimal OrderRidercost { get; private set; }
+        public string? Note { get; private set; }
+        public string ExpectedTime { get; private set; }
         public ICollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
         private readonly List<OrderItem> _orderItems = new List<OrderItem>();
 
         // 这里可以是值对象，如配送方式，商品信息等
-        public string OrderRiderservice { get; private set; }
+        public OrderRiderService OrderRiderservice { get; private set; }
 
         // 构造函数
-        public OrderMain( Guid orderUseruuid, decimal orderTotal, string orderStatus, string orderSid,
+        public OrderMain( Guid orderUseruuid, decimal orderTotal, OrderStatus orderStatus, string orderSid,
                       DateTime orderTime, string orderMa, string orderUa, decimal orderCost, decimal orderPackingcharge,
-                      decimal orderRidercost, string orderRiderservice, List<OrderItem> orderItems)
+                      decimal orderRidercost, OrderRiderService orderRiderservice, string? note, string expectedTime, List<OrderItem> orderItems)
         {
             OrderUuid = UuidV7Helper.NewUuidV7();
             OrderUseruuid = orderUseruuid;
@@ -39,14 +42,16 @@ namespace API.Domain.Aggregates.OrderAggregates
             OrderPackingcharge = orderPackingcharge;
             OrderRidercost = orderRidercost;
             OrderRiderservice = orderRiderservice;
+            Note = note;
+            ExpectedTime = expectedTime;
 
             _orderItems = orderItems;
         }
 
         //内部构造函数，用于从数据库中加载数据时使用
-        internal OrderMain(Guid orderUuid, Guid orderUseruuid, decimal orderTotal, string orderStatus, string orderSid,
+        internal OrderMain(Guid orderUuid, Guid orderUseruuid, decimal orderTotal, OrderStatus orderStatus, string orderSid,
                       DateTime orderTime, string orderMa, string orderUa, decimal orderCost, decimal orderPackingcharge,
-                      decimal orderRidercost, string orderRiderservice, List<OrderItem> orderItems)
+                      decimal orderRidercost, OrderRiderService orderRiderservice, string? note, string expectedTime, List<OrderItem> orderItems)
         {
             OrderUuid = orderUuid;
             OrderUseruuid = orderUseruuid;
@@ -60,6 +65,8 @@ namespace API.Domain.Aggregates.OrderAggregates
             OrderPackingcharge = orderPackingcharge;
             OrderRidercost = orderRidercost;
             OrderRiderservice = orderRiderservice;
+            Note = note;
+            ExpectedTime = expectedTime;
             _orderItems = orderItems ?? new List<OrderItem>();
         }
 
@@ -82,7 +89,7 @@ namespace API.Domain.Aggregates.OrderAggregates
         }*/
 
         // 改变订单状态的业务逻辑
-        public void AddOrderItem(Guid orderUuid, Guid productId, int quantity, decimal unitPrice,string name)
+        public void AddOrderItem(Guid orderUuid, Guid productId, int quantity, decimal unitPrice,string name, decimal packingFee)
         {
             // 业务规则：检查是否已存在该产品
             var existingItem = _orderItems.FirstOrDefault(i => i.ProductUuid == productId);
@@ -92,7 +99,7 @@ namespace API.Domain.Aggregates.OrderAggregates
             }
             else
             {
-                _orderItems.Add(new OrderItem(orderUuid,productId, quantity, unitPrice,name));
+                _orderItems.Add(new OrderItem(orderUuid,productId, quantity, unitPrice,name, packingFee));
             }
             RecalculateTotal();
         }
@@ -111,68 +118,68 @@ namespace API.Domain.Aggregates.OrderAggregates
         
         public void MarkAsPaid(Guid paymentUuid)
         {
-            if(OrderStatus != Enums.OrderStatus.created.ToString())
+            if(OrderStatus != Enums.OrderStatus.created)
             {
                 throw new InvalidOperationException("订单必须是待支付状态才能支付");
             }
             OrderPaymentuuid = paymentUuid;
-            OrderStatus = Enums.OrderStatus.paid.ToString();
+            OrderStatus = Enums.OrderStatus.paid;
             //可添加领域事件
 
         }
         public void MarkAsAccepted()
         {
-            if (OrderStatus != Enums.OrderStatus.paid.ToString())
+            if (OrderStatus != Enums.OrderStatus.paid)
             {
                 throw new InvalidOperationException("订单必须是已支付状态才能接受");
             }
-            OrderStatus = Enums.OrderStatus.accepted.ToString();
+            OrderStatus = Enums.OrderStatus.accepted;
 
         }
         public void MarkAsPrepared()
         {
-            if (OrderStatus != Enums.OrderStatus.accepted.ToString())
+            if (OrderStatus != Enums.OrderStatus.accepted)
             {
                 throw new InvalidOperationException("订单必须是已接受状态才能准备完成"); 
             }
-            OrderStatus = Enums.OrderStatus.prepared.ToString();
+            OrderStatus = Enums.OrderStatus.prepared;
         }
         public void MarkAsShipped()
         {
-            if (OrderStatus != Enums.OrderStatus.prepared.ToString())
+            if (OrderStatus != Enums.OrderStatus.prepared)
             {
                 throw new InvalidOperationException("订单必须是已准备完成状态才能配送");
             }
-            OrderStatus = Enums.OrderStatus.shipped.ToString();
+            OrderStatus = Enums.OrderStatus.shipped;
             
         }
         public void MarkAsComleted()
         {
-            if (OrderStatus != Enums.OrderStatus.shipped.ToString())
+            if (OrderStatus != Enums.OrderStatus.shipped)
             {
                 throw new InvalidOperationException("订单必须是已配送状态才能完成");
             }
-            OrderStatus = Enums.OrderStatus.completed.ToString();
+            OrderStatus = Enums.OrderStatus.completed;
         }
         public void MarkAsCanceled(string reason)        //用户取消
         {
-            if (OrderStatus == Enums.OrderStatus.completed.ToString()|| OrderStatus == Enums.OrderStatus.rejected.ToString()|| OrderStatus == Enums.OrderStatus.completed.ToString())
+            if (OrderStatus == Enums.OrderStatus.completed || OrderStatus == Enums.OrderStatus.rejected || OrderStatus == Enums.OrderStatus.completed)
             {
                 throw new InvalidOperationException("订单必须是未完成状态才能取消");
             }
-            OrderStatus =  Enums.OrderStatus.canceled.ToString();
+            OrderStatus =  Enums.OrderStatus.canceled;
         }
         public void MarkAsRejected(string reason)
         {
-            if (OrderStatus != Enums.OrderStatus.paid.ToString())
+            if (OrderStatus != Enums.OrderStatus.paid)
             {
                 throw new InvalidOperationException("订单必须是已支付状态才能拒绝");
             }
-            OrderStatus = Enums.OrderStatus.rejected.ToString();
+            OrderStatus = Enums.OrderStatus.rejected;
         }
         public void MarkAsExecption(string ex)
         {
-            OrderStatus = Enums.OrderStatus.exception.ToString();
+            OrderStatus = Enums.OrderStatus.exception;
             //领域事件
         }
 

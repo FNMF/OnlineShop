@@ -7,24 +7,27 @@ namespace API.Domain.Aggregates.CartAggregate
         public Guid CartItemUuid { get; private set; }
         public Guid ProductUuid { get; private set; }
         public decimal Price { get; private set; }
+        public decimal PackingFee { get; private set; }
         public int Quantity { get; private set; }
         public string CoverUrl { get; private set; }
         public string ProductName { get; private set; }
 
-        public CartItem(Guid productUuid, decimal price, int quantity, string coverUrl, string productName)
+        public CartItem(Guid productUuid, decimal price,decimal packingFee , int quantity, string coverUrl, string productName)
         {
             CartItemUuid = UuidV7Helper.NewUuidV7();
             ProductUuid = productUuid;
             Price = price;
+            PackingFee = packingFee;
             Quantity = quantity;
             CoverUrl = coverUrl;
             ProductName = productName;
         }
-        internal CartItem(Guid cartItemUuid, Guid productUuid, decimal price, int quantity, string coverUrl, string productName)
+        internal CartItem(Guid cartItemUuid, Guid productUuid, decimal price,decimal packingFee, int quantity, string coverUrl, string productName)
         {
             CartItemUuid = cartItemUuid;
             ProductUuid = productUuid;
             Price = price;
+            PackingFee = packingFee;
             Quantity = quantity;
             CoverUrl = coverUrl;
             ProductName = productName;
@@ -41,5 +44,9 @@ namespace API.Domain.Aggregates.CartAggregate
             Price = price;
         }
 
+        internal void UpdatePackingFee(decimal packingFee)
+        {
+            PackingFee = packingFee;
+        }
     }
 }

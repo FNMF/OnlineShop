@@ -12,9 +12,10 @@
         public bool Islisted { get; }
         public bool IsAvailable { get; }
         public string? CoverUrl { get; }
+        public decimal PackingFee {  get; }
         public List<string> Images { get; }
 
-        public ProductReadDetailDto(Guid productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl, List<string> images)
+        public ProductReadDetailDto(Guid productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl,decimal packingFee, List<string> images)
         {
             ProductUuid = productUuid;
             Name = name;
@@ -26,6 +27,7 @@
             Islisted = isListed;
             IsAvailable = isAvailable;
             CoverUrl = coverUrl;
+            PackingFee = packingFee;
             Images = images;
         }
     }

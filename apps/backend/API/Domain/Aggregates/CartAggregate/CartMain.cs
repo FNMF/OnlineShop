@@ -53,5 +53,10 @@ namespace API.Domain.Aggregates.CartAggregate
         {
             return _items.Sum(i => i.Price * i.Quantity);
         }
+        
+        public decimal GetTotalPackingFee()
+        {
+            return _items.Sum(i => i.PackingFee * i.Quantity);
+        }
     }
 }

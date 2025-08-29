@@ -15,11 +15,9 @@ namespace API.Domain.Aggregates.OrderAggregates
         {
             var validations = new List<Func<OrderMainCreateDto, bool>>
             {
-                o => Enum.TryParse<OrderStatus>(dto.OrderStatus, true, out var result) && Enum.IsDefined(typeof(OrderStatus), result),
                 o => !string.IsNullOrEmpty(dto.OrderSid)&&dto.OrderSid.Length<10,
                 o => !string.IsNullOrEmpty(dto.OrderMa)&&dto.OrderMa.Length<255,
                 o => !string.IsNullOrEmpty(dto.OrderUa)&&dto.OrderUa.Length<255,
-                o => Enum.TryParse<OrderRiderService>(dto.OrderStatus, true, out var result) && Enum.IsDefined(typeof(OrderRiderService), result),
                 o => dto.OrderTotal>0&&Regex.IsMatch(o.OrderTotal.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
                 o => dto.OrderCost>0&&Regex.IsMatch(o.OrderCost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
                 o => dto.OrderPackingcharge>0&&Regex.IsMatch(o.OrderPackingcharge.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
@@ -54,6 +52,9 @@ namespace API.Domain.Aggregates.OrderAggregates
                 dto.OrderPackingcharge,
                 dto.OrderRidercost,
                 dto.OrderRiderservice,
+                dto.Note,
+                dto.OrderExpectedTime,
+                
                 new List<OrderItem>()
                 );
 
@@ -66,7 +67,7 @@ namespace API.Domain.Aggregates.OrderAggregates
                 OrderUuid = orderMain.OrderUuid,
                 OrderUseruuid = orderMain.OrderUseruuid,
                 OrderTotal = orderMain.OrderTotal,
-                OrderStatus = orderMain.OrderStatus,
+                OrderStatus = orderMain.OrderStatus.ToString(),
                 OrderSid = orderMain.OrderSid,
                 OrderTime = orderMain.OrderTime,
                 OrderMa = orderMain.OrderMa,
@@ -74,7 +75,7 @@ namespace API.Domain.Aggregates.OrderAggregates
                 OrderCost = orderMain.OrderCost,
                 OrderPackingcharge = orderMain.OrderPackingcharge,
                 OrderRidercost = orderMain.OrderRidercost,
-                OrderRiderservice = orderMain.OrderRiderservice,
+                OrderRiderservice = orderMain.OrderRiderservice.ToString(),
                 Orderitems = orderMain.OrderItems.Select(item => new Orderitem
                 {
                     OrderitemUuid = item.OrderItemUuid,
@@ -98,14 +99,15 @@ namespace API.Domain.Aggregates.OrderAggregates
                 oi.OrderitemProductuuid,
                 oi.OrderitemQuantity,
                 oi.OrderitemPrice,
-                oi.OrderitemName
+                oi.OrderitemName,
+                oi.OrderitemPackingfee
                 )).ToList() ?? new List<OrderItem>();
-
+            
             var orderMain = new OrderMain(
                 order.OrderUuid,
                 order.OrderUseruuid,
                 order.OrderTotal,
-                order.OrderStatus,
+                Enum.Parse<OrderStatus>(order.OrderStatus),
                 order.OrderSid ?? string.Empty,
                 order.OrderTime,
                 order.OrderMa,
@@ -113,7 +115,9 @@ namespace API.Domain.Aggregates.OrderAggregates
                 order.OrderCost,
                 order.OrderPackingcharge,
                 order.OrderRidercost,
-                order.OrderRiderservice,
+                Enum.Parse<OrderRiderService>(order.OrderRiderservice),
+                order.OrderNote,
+                order.OrderExpectedtime,
                 orderItems
             );
             return Result<OrderMain>.Success(orderMain);

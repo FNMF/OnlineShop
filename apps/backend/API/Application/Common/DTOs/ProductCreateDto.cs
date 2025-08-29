@@ -12,8 +12,9 @@
         public bool Islisted { get; }
         public Guid MerchantUuid { get; }
         public string CoverUrl {  get; }
+        public decimal PackingFee { get; }
 
-        public ProductCreateDto(Guid uuid,string name , decimal price, int stock ,string description , string ingredient, string weight, bool isListed, Guid merchantUuid, string coverUrl)
+        public ProductCreateDto(Guid uuid,string name , decimal price, int stock ,string description , string ingredient, string weight, bool isListed, Guid merchantUuid, string coverUrl, decimal packingFee)
         {
             Uuid = uuid;
             Name = name;
@@ -25,6 +26,7 @@
             Islisted = isListed;
             MerchantUuid = merchantUuid;
             CoverUrl = coverUrl;
+            PackingFee = packingFee;
         }
     }
 }

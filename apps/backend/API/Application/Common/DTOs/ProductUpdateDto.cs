@@ -12,8 +12,9 @@
         public Guid MerchantUuid { get; }
         public Guid ProductUuid { get; }
         public string CoverUrl {  get; }
+        public decimal PackingFee { get; }
 
-        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, Guid merchantUuid,Guid productUuid, string coverUrl)
+        public ProductUpdateDto(string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, Guid merchantUuid,Guid productUuid, string coverUrl, decimal packingFee)
         {
             Name = name;
             Price = price;
@@ -25,6 +26,7 @@
             MerchantUuid = merchantUuid;
             ProductUuid = productUuid;
             CoverUrl = coverUrl;
+            PackingFee = packingFee;
         }
     }
 }

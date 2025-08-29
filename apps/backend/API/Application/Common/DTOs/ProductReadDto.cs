@@ -10,8 +10,9 @@
         public bool Islisted { get; }
         public bool IsAvailable { get; }
         public string? CoverUrl { get; }
+        public decimal PackingFee {  get; }
 
-        public ProductReadDto(Guid productUuid, string name, decimal price, int stock, string weight, bool isListed, bool isAvailable, string coverUrl)
+        public ProductReadDto(Guid productUuid, string name, decimal price, int stock, string weight, bool isListed, bool isAvailable, string coverUrl, decimal packingFee)
         {
             ProductUuid = productUuid;
             Name = name;
@@ -21,6 +22,7 @@
             Islisted = isListed;
             IsAvailable = isAvailable;
             CoverUrl = coverUrl;
+            PackingFee = packingFee;
         }
 
     }

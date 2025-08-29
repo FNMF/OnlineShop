@@ -35,6 +35,10 @@ public partial class Orderitem
     [StringLength(50)]
     public string OrderitemName { get; set; } = null!;
 
+    [Column("orderitem_packingfee")]
+    [Precision(8, 2)]
+    public decimal OrderitemPackingfee { get; set; }
+
     [ForeignKey("OrderitemOrderuuid")]
     [InverseProperty("Orderitems")]
     public virtual Order OrderitemOrderuu { get; set; } = null!;

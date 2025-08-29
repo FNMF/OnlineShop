@@ -6,6 +6,7 @@ namespace API.Api.Common.Models
     {
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
+        public decimal ProductPackingFee {  get; set; }
         public int ProductStock { get; set; }
         public string? ProductDescription { get; set; }
         public string? ProductIngredient { get; set; }

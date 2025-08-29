@@ -37,5 +37,24 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                 return Result<Cart>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
+        public async Task<Result<Cart>> GetCartByUuid(Guid cartUuid)
+        {
+            try
+            {
+                var cart = await _cartRepository.QueryCarts()
+                    .FirstOrDefaultAsync(c => c.CartUuid == cartUuid && c.CartIsdeleted == false);
+                if (cart == null)
+                {
+                    _logger.LogWarning("没有找到相关购物车");
+                    return Result<Cart>.Fail(ResultCode.NotFound, "没有找到相关购物车");
+                }
+                return Result<Cart>.Success(cart);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<Cart>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
     }
 }

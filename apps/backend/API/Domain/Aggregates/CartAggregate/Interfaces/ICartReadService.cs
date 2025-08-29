@@ -6,5 +6,6 @@ namespace API.Domain.Aggregates.CartAggregate.Interfaces
     public interface ICartReadService
     {
         Task<Result<Cart>> GetCartByUuids(Guid merchantUuid, Guid userUuid);
+        Task<Result<Cart>> GetCartByUuid(Guid cartUuid);
     }
 }
