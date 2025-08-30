@@ -60,6 +60,7 @@
     <Folder Include="Application\UserCase\Interfaces\" />
     <Folder Include="Application\UserCase\Services\" />
     <Folder Include="Domain\Aggregates\CartAggregate\CartEvents\" />
+    <Folder Include="Domain\Aggregates\NotificationAggregate\NotificationEvents\" />
     <Folder Include="Domain\Events\SystemCase\" />
     <Folder Include="Domain\Events\UserCase\" />
     <Folder Include="Domain\Services\CouponPart\" />

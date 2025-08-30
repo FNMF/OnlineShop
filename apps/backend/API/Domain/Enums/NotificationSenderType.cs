@@ -2,9 +2,10 @@
 {
     public enum NotificationSenderType
     {
-        merchant = 0,
-        platform = 1,
-        system = 2,
-        other = 3
+        user = 0,
+        merchant = 1,
+        platform = 2,
+        system = 3,
+        other = 4
     }
 }
