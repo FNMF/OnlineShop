@@ -16,6 +16,12 @@ namespace API.Infrastructure.Repositories
         {
             return _context.Notifications;
         }
+        public IQueryable<Notification> QueryNotificationDeliveriesByUuidAsync(Guid uuid)
+        {
+            return _context.Notifications
+                .Where(n => n.Deliveries.Any(d => d.DeliveryReceiveruuid == uuid))
+                .Include(n => n.Deliveries.Where(d => d.DeliveryReceiveruuid == uuid));
+        }
         /*public async Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize)
         {
             if (pageSize <= 0) pageSize = 10;
