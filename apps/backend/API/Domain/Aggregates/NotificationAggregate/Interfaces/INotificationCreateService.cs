@@ -6,5 +6,6 @@ namespace API.Domain.Aggregates.NotificationAggregate.Interfaces
     public interface INotificationCreateService
     {
         Task<Result<NotificationMain>> AddNotificationAsync(NotificationCreateDto dto);
+        Result<NotificationMain> AddDeliveriesAsync(NotificationMain notificationMain, List<NotificationDelivery> deliveries);
     }
 }

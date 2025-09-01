@@ -5,6 +5,6 @@ namespace API.Domain.Aggregates.NotificationAggregate.Interfaces
 {
     public interface INotificationReadService
     {
-        Task<Result<List<NotificationMain>>> GetUserAllNotificationsAsync(NotificationQueryOptions opt);
+        Task<Result<List<NotificationMain>>> GetAllNotificationsByUuidAsync(NotificationQueryOptions opt);
     }
 }

@@ -55,7 +55,22 @@ namespace API.Domain.Aggregates.NotificationAggregate
             CreatedAt = createdAt;
             _deliveries = deliveries ?? new List<NotificationDelivery>();
         }
-
+        public void AddDelivery(NotificationDelivery notificationDelivery) 
+        {
+            var existingDelivery = _deliveries.FirstOrDefault(d => d.ReceiverUuid == notificationDelivery.ReceiverUuid);
+            if (existingDelivery == null) 
+            {
+                _deliveries.Add(notificationDelivery);
+            }
+        }
+        public void RemoveDelivery(Guid receiverUuid)
+        {
+            var delivery = _deliveries.FirstOrDefault(d => d.ReceiverUuid == receiverUuid);
+            if (delivery != null)
+            {
+                _deliveries.Remove(delivery);
+            }
+        }
         public void MarkAsDeleted()
         {
             IsDeleted = true;

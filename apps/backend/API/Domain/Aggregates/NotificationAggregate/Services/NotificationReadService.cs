@@ -17,7 +17,7 @@ namespace API.Domain.Aggregates.NotificationAggregate.Services
             _notificationRepository = notificationRepository;
             _logger = logger;
         }
-        public async Task<Result<List<NotificationMain>>> GetUserAllNotificationsAsync(NotificationQueryOptions opt)
+        public async Task<Result<List<NotificationMain>>> GetAllNotificationsByUuidAsync(NotificationQueryOptions opt)
         {
             try
             {

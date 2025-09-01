@@ -39,6 +39,25 @@ namespace API.Domain.Aggregates.NotificationAggregate.Services
                 return Result<NotificationMain>.Fail(ResultCode.ServerError, "服务器错误");
             }
         }
-
+        public Result<NotificationMain> AddDeliveriesAsync(NotificationMain notificationMain, List<NotificationDelivery> deliveries)
+        {
+            try
+            {
+                if (deliveries.Count == 0) 
+                {
+                    return Result<NotificationMain>.Fail(ResultCode.InvalidInput, "通知接收者不能为空");
+                }
+                foreach (var delivery in deliveries) 
+                {
+                    notificationMain.AddDelivery(delivery);
+                }
+                return Result<NotificationMain>.Success(notificationMain);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<NotificationMain>.Fail(ResultCode.ServerError, "服务器错误");
+            }
+        }
     }
 }
