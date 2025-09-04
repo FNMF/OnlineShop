@@ -1,3 +1,4 @@
+using API.Api.SignalR;
 using API.Application.Common.EventBus;
 using API.Common.Helpers;
 using API.Common.Interfaces;
@@ -90,11 +91,20 @@ namespace API
                             .AsImplementedInterfaces()
                             .WithScopedLifetime());
 
+            //注册SignalR
+            builder.Services.AddSignalR();
+
+            //配置反向代理中间件
+            //TODO,未完成
 
             var app = builder.Build();
 
 
             // Configure the HTTP request pipeline.
+
+            //Hub路由注册
+            app.MapHub<NotificationHub>("/hubs/notification");
+            app.MapHub<ChatHub>("/hubs/chat");
 
             app.UseHttpsRedirection();
 
