@@ -1,23 +1,21 @@
 ﻿using API.Application.Common.EventBus;
-using API.Application.MerchantCase.Handlers;
 using API.Common.Interfaces;
-using API.Domain.Events.MerchantCase;
 using API.Domain.Events.ProductCase;
 
 namespace API.Application.ProductCase.Handlers
 {
-    public class AddProductEventHandler : IEventHandler<AddProductEvent>
+    public class ProductAddEventHandler : IEventHandler<ProductAddEvent>
     {
         private readonly ILogService _logService;
-        private readonly ILogger<AddProductEventHandler> _logger;
+        private readonly ILogger<ProductAddEventHandler> _logger;
 
-        public AddProductEventHandler(ILogService logService, ILogger<AddProductEventHandler> logger)
+        public ProductAddEventHandler(ILogService logService, ILogger<ProductAddEventHandler> logger)
         {
             _logService = logService;
             _logger = logger;
         }
 
-        public async Task HandleAsync(AddProductEvent @event, CancellationToken cancellation = default)
+        public async Task HandleAsync(ProductAddEvent @event, CancellationToken cancellation = default)
         {
             switch (@event.CurrentType)
             {

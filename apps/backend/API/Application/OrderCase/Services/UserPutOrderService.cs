@@ -1,5 +1,6 @@
 ﻿using API.Api.Common.Models;
 using API.Application.Common.DTOs;
+using API.Application.Common.EventBus;
 using API.Application.Interfaces;
 using API.Application.OrderCase.Interfaces;
 using API.Common.Helpers;
@@ -9,11 +10,14 @@ using API.Domain.Aggregates.CartAggregate;
 using API.Domain.Aggregates.CartAggregate.Interfaces;
 using API.Domain.Aggregates.CartAggregates;
 using API.Domain.Aggregates.OrderAggregate.Interfaces;
+using API.Domain.Aggregates.OrderAggregate.OrderEvents;
 using API.Domain.Aggregates.OrderAggregates;
 using API.Domain.Enums;
 using API.Domain.Services.AddressPart.Interfaces;
 using API.Domain.Services.External;
+using API.Domain.Services.MerchantPart.Interfaces;
 using API.Domain.ValueObjects;
+using Microsoft.AspNetCore.Mvc.Razor.Internal;
 
 namespace API.Application.OrderCase.Services
 {
@@ -22,21 +26,23 @@ namespace API.Application.OrderCase.Services
         private readonly IOrderCreateService _orderCreateService;
         private readonly IOrderDomainService _orderDomainService;
         private readonly ICartReadService _cartReadService;
-        private readonly IMerchantService _merchantService;
+        private readonly IMerchantReadService _merchantReadService;
         private readonly IAddressReadService _addressReadService;
         private readonly IRiderFeeService _riderFeeService;
         private readonly ICurrentService _currentService;
+        private readonly IEventBus _eventBus;
         private readonly ILogger<UserPutOrderService> _logger;
 
-        public UserPutOrderService(IOrderCreateService orderCreateService, IOrderDomainService orderDomainService, ICartReadService cartReadService, IAddressReadService addressReadService,IMerchantService merchantService, IRiderFeeService riderFeeService, ICurrentService currentService, ILogger<UserPutOrderService> logger)
+        public UserPutOrderService(IOrderCreateService orderCreateService, IOrderDomainService orderDomainService, ICartReadService cartReadService, IAddressReadService addressReadService,IMerchantReadService merchantReadService, IRiderFeeService riderFeeService, ICurrentService currentService, IEventBus eventBus, ILogger<UserPutOrderService> logger)
         {
             _orderCreateService = orderCreateService;
             _orderDomainService = orderDomainService;
             _cartReadService = cartReadService;
-            _merchantService = merchantService;
+            _merchantReadService = merchantReadService;
             _addressReadService = addressReadService;
             _riderFeeService = riderFeeService;
             _currentService = currentService;
+            _eventBus = eventBus;
             _logger = logger;
         }
 
@@ -68,15 +74,14 @@ namespace API.Application.OrderCase.Services
                     _logger.LogWarning("没有找到相关地址");
                     return Result<OrderMain>.Fail(ResultCode.NotFound, "没有找到相关地址");
                 }
-                var merchantResult = await _merchantService.GetMerchantByUuidAsync(cartResult.Data.CartMerchantuuid);
-
+                var merchantResult = await _merchantReadService.GetMerchantByUuidAsync(cartResult.Data.CartMerchantuuid);
                 var orderUuid = UuidV7Helper.NewUuidV7();
-                var merchantAddress = merchantResult.MerchantCity + merchantResult.MerchantDistrict + merchantResult.MerchantDetail;
+                var merchantAddress = merchantResult.Data.MerchantCity + merchantResult.Data.MerchantDistrict + AESHelper.Decrypt(merchantResult.Data.MerchantDetail);
                 var userAddress = addressResult.Data.AddressCity + addressResult.Data.AddressDistrict + addressResult.Data.AddressDetail;
                 //TODO，这里需要添加优惠券服务、支付服务等
                 //CouponService
 
-                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.MerchantUuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
+                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.MerchantUuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
 
                 //PaymentService
 
@@ -114,6 +119,8 @@ namespace API.Application.OrderCase.Services
                 {
                     return Result<OrderMain>.Fail(orderCreateResult.Code, orderCreateResult.Message);
                 }
+                // 发布订单创建事件
+                await _eventBus.PublishAsync(new OrderCreateEvent(orderCreateResult.Data, merchantResult.Data.MerchantUuid));
 
                 return Result<OrderMain>.Success(orderCreateResult.Data);
             }

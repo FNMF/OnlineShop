@@ -4,18 +4,18 @@ using API.Domain.Events.ProductCase;
 
 namespace API.Application.ProductCase.Handlers
 {
-    public class UpdateProductEventHandler : IEventHandler<UpdateProductEvent>
+    public class ProductUpdateEventHandler : IEventHandler<ProductUpdateEvent>
     {
         private readonly ILogService _logService;
-        private readonly ILogger<UpdateProductEventHandler> _logger;
+        private readonly ILogger<ProductUpdateEventHandler> _logger;
 
-        public UpdateProductEventHandler(ILogService logService, ILogger<UpdateProductEventHandler> logger)
+        public ProductUpdateEventHandler(ILogService logService, ILogger<ProductUpdateEventHandler> logger)
         {
             _logService = logService;
             _logger = logger;
         }
 
-        public async Task HandleAsync(UpdateProductEvent @event, CancellationToken cancellation = default)
+        public async Task HandleAsync(ProductUpdateEvent @event, CancellationToken cancellation = default)
         {
             switch (@event.CurrentType)
             {

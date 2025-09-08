@@ -4,18 +4,18 @@ using API.Domain.Events.ProductCase;
 
 namespace API.Application.ProductCase.Handlers
 {
-    public class RemoveProductEventHandler : IEventHandler<RemoveProductEvent>
+    public class ProductRemoveEventHandler : IEventHandler<ProductRemoveEvent>
     {
         private readonly ILogService _logService;
-        private readonly ILogger<RemoveProductEventHandler> _logger;
+        private readonly ILogger<ProductRemoveEventHandler> _logger;
 
-        public RemoveProductEventHandler(ILogService logService, ILogger<RemoveProductEventHandler> logger)
+        public ProductRemoveEventHandler(ILogService logService, ILogger<ProductRemoveEventHandler> logger)
         {
             _logService = logService;
             _logger = logger;
         }
 
-        public async Task HandleAsync(RemoveProductEvent @event, CancellationToken cancellation = default)
+        public async Task HandleAsync(ProductRemoveEvent @event, CancellationToken cancellation = default)
         {
             switch (@event.CurrentType)
             {

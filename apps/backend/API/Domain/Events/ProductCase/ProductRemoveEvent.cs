@@ -2,15 +2,15 @@
 
 namespace API.Domain.Events.ProductCase
 {
-    public class UpdateProductEvent : IDomainEvent
+    public class ProductRemoveEvent : IDomainEvent
     {
         public Guid AdminUuid { get; }
         public CurrentType CurrentType { get; }
         public Guid ProductUuid { get; }
-        public DateTime OccurrendOn { get; }
-        public UpdateProductEvent(Guid adminUuid, CurrentType currentType, Guid productUuid)
+        public DateTime OccurredOn { get; }
+        public ProductRemoveEvent(Guid adminUuid, CurrentType currentType, Guid productUuid)
         {
-            OccurrendOn = DateTime.Now;
+            OccurredOn = DateTime.Now;
             AdminUuid = adminUuid;
             CurrentType = currentType;
             ProductUuid = productUuid;

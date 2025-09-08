@@ -76,7 +76,7 @@ namespace API.Application.ProductCase.Services
                     (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl, p.ProductPackingfee)).ToList();
 
                 // 触发商品添加事件
-                await _eventBus.PublishAsync(new AddProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , productUuid));
+                await _eventBus.PublishAsync(new ProductAddEvent(_currentService.RequiredUuid, _currentService.CurrentType , productUuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
 

@@ -14,3 +14,6 @@
 
 ##TODO
     API层的状态码返回目前是只有OK或BadRequest，后续可以考虑添加中间件，实现读取Result中的Code在API层返回正确的状态码。
+
+##TODO
+    Address类的Detail字段通过Factory创建或更新时使用了AES加密，后续使用的时候再通过AES解密。

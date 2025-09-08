@@ -3,11 +3,11 @@
     public class MerchantLoginEvent:IDomainEvent
     {
         public Guid MerchantAdminUuid { get;}
-        public DateTime OccurrendOn { get;}
+        public DateTime OccurredOn { get;}
         public MerchantLoginEvent(Guid merchantAdminUuid)
         {
             MerchantAdminUuid = merchantAdminUuid;
-            OccurrendOn = DateTime.Now;
+            OccurredOn = DateTime.Now;
         }
     }
 }

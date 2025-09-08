@@ -104,7 +104,7 @@ namespace API.Application.ProductCase.Services
                     p.ProductPackingfee
                 )).ToList();
 
-                await _eventBus.PublishAsync(new UpdateProductEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));
+                await _eventBus.PublishAsync(new ProductUpdateEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));
 
                 return Result<List<ProductReadDto>>.Success(products);
             }

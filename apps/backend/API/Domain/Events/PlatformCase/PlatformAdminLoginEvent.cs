@@ -3,11 +3,11 @@
     public class PlatformAdminLoginEvent : IDomainEvent
     {
         public int PlatformAdminAccount { get; }
-        public DateTime OccurrendOn { get; }
+        public DateTime OccurredOn { get; }
         public PlatformAdminLoginEvent(int platformAdminAccount)
         {
             PlatformAdminAccount = platformAdminAccount;
-            OccurrendOn = DateTime.Now;
+            OccurredOn = DateTime.Now;
         }
     }
 }
