@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ui.login.LoginActivity">
+
+    <!-- 背景部分 -->
+    <View
+        android:id="@+id/background_container"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@color/green_heavy"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- 欢迎语句 -->
+    <TextView
+        android:id="@+id/welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="欢迎使用"
+        android:textSize="40sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="@id/background_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 账号输入框 -->
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:hint="@string/prompt_account"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_container" />
+
+    <!-- 密码输入框 -->
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/prompt_password"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/username" />
+
+    <!-- 登录按钮 -->
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_sign_in"
+        app:layout_constraintBottom_toTopOf="@id/line_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password"
+        app:layout_constraintVertical_bias="0.2"
+        android:layout_marginTop="64dp"/>
+
+    <!-- “或”字 -->
+    <TextView
+        android:id="@+id/line_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-或-"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 手机号登录按钮 -->
+    <Button
+        android:id="@+id/phone_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手机号登录"
+        app:layout_constraintTop_toBottomOf="@id/line_or"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 左下角的“忘记密码”按钮 -->
+    <TextView
+        android:id="@+id/forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="忘记密码"
+        android:textColor="@color/purple_500"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="16dp"/>
+
+    <!-- 右下角的“联系客服”按钮 -->
+    <TextView
+        android:id="@+id/contact_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="联系客服"
+        android:textColor="@color/purple_500"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

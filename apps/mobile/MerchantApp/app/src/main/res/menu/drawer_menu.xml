@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_profile"
+        android:title="用户资料"
+        android:icon="@drawable/df"/>
+    <item
+        android:id="@+id/nav_shop_settings"
+        android:title="店铺设置"
+        android:icon="@drawable/df"/>
+    <item
+        android:id="@+id/nav_product_service"
+        android:title="产品服务"
+        android:icon="@drawable/df"/>
+    <item
+        android:id="@+id/nav_settings"
+        android:title="应用设置"
+        android:icon="@drawable/df"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:title="退出登录"
+        android:icon="@drawable/df"/>
+</menu>
