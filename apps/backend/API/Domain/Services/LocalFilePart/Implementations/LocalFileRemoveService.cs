@@ -27,14 +27,14 @@ namespace API.Domain.Services.LocalFilePart.Implementations
 
                 var query = _localFileRepository.QueryLocalFiles();
 
-                var localFile = query.FirstOrDefault(a => a.LocalfileUuid == localFileUuid && a.LocalfileIsdeleted == false);
+                var localFile = query.FirstOrDefault(a => a.Uuid == localFileUuid && a.IsDeleted == false);
 
                 if (localFile == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "商品不存在或已删除");
                 }
 
-                localFile.LocalfileIsdeleted = true;
+                localFile.IsDeleted = true;
                 await _localFileRepository.UpdateLocalFileAsync(localFile);
 
                 return Result.Success();
@@ -56,14 +56,14 @@ namespace API.Domain.Services.LocalFilePart.Implementations
                     return Result.Fail(ResultCode.ValidationError, "输入数据不合法");
                 }
                 var query = _localFileRepository.QueryLocalFiles();
-                var localFiles = query.Where(a => a.LocalfileObjectuuid == productUuid && a.LocalfileIsdeleted == false).ToList();
+                var localFiles = query.Where(a => a.ObjectUuid == productUuid && a.IsDeleted == false).ToList();
                 if (!localFiles.Any())
                 {
                     return Result.Fail(ResultCode.NotFound, "商品不存在或已删除");
                 }
                 foreach (var localFile in localFiles)
                 {
-                    localFile.LocalfileIsdeleted = true;
+                    localFile.IsDeleted = true;
                     await _localFileRepository.UpdateLocalFileAsync(localFile);
                 }
                 return Result.Success();

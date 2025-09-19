@@ -24,7 +24,7 @@ namespace API.Domain.Services.UserPart.Implementations
                 var query = _userRepository.QueryUsers();
 
                 var user = await query
-                    .FirstOrDefaultAsync(u => u.UserOpenid == openId);
+                    .FirstOrDefaultAsync(u => u.OpenId == openId);
 
                 if (user == null)
                 {

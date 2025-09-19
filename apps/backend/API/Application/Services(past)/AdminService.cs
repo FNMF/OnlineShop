@@ -27,14 +27,14 @@ namespace API.Application.Services
                 if (admin == null) { _logger.LogWarning("管理员不存在"); return null; }
                 var radmin = new RAdminDto
                 {
-                    phone = AESHelper.Decrypt(admin.AdminPhone),
-                    account = admin.AdminAccount
+                    phone = AESHelper.Decrypt(admin.Phone),
+                    account = admin.Account
                 };
                 return radmin;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "获取管理员信息时出错,AdminUuid:{Uuid}", uuid);
+                _logger.LogError(ex, "获取管理员信息时出错,Uuid:{Uuid}", uuid);
                 return null;
             }
         }
@@ -46,14 +46,14 @@ namespace API.Application.Services
                 if (admin == null) { _logger.LogWarning("管理员不存在"); return null; }
                 var radmin = new RAdminDto
                 {
-                    phone = AESHelper.Decrypt(admin.AdminPhone),
-                    account = admin.AdminAccount
+                    phone = AESHelper.Decrypt(admin.Phone),
+                    account = admin.Account
                 };
                 return radmin;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "获取管理员信息时出错,AdminAccount:{Account}", account);
+                _logger.LogError(ex, "获取管理员信息时出错,Account:{Account}", account);
                 return null;
             }
         }
@@ -73,13 +73,13 @@ namespace API.Application.Services
                     _logger.LogWarning("修改管理员时原管理员不存在或异常");
                     return null;
                 }
-                admin.AdminPhone = AESHelper.Encrypt(dto.phone);
+                admin.Phone = AESHelper.Encrypt(dto.phone);
                 await _repository.UpdateAdminAsync(admin);
                 await _logService.AddLog(LogType.admin, "修改管理员信息", "无", uuid, JsonSerializer.Serialize(dto));
                 var radmin = new RAdminDto
                 {
-                    account = admin.AdminAccount,
-                    phone = AESHelper.Decrypt(admin.AdminPhone)
+                    account = admin.Account,
+                    phone = AESHelper.Decrypt(admin.Phone)
 
                 };
                 return radmin;
@@ -119,8 +119,8 @@ namespace API.Application.Services
         {
             try
             {
-                var admin = new Admin { AdminLastlocation = dto.ipaddress,
-                    AdminLastlogintime = DateTime.Now,
+                var admin = new Admin { LastLocation = dto.ipaddress,
+                    LastLoginTime = DateTime.Now,
                 };
             }
         }*/

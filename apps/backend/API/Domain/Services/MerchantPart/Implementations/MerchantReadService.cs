@@ -20,7 +20,7 @@ namespace API.Domain.Services.MerchantPart.Implementations
             try 
             {
                 var merchant = _merchantRepository.QueryMerchants()
-                    .FirstOrDefault(m => m.MerchantUuid == uuid && m.MerchantIsdeleted == false);
+                    .FirstOrDefault(m => m.Uuid == uuid && m.IsDeleted == false);
                 if (merchant == null)
                 {
                     return Result<Merchant>.Fail(ResultCode.NotFound, "没有找到相关商户");

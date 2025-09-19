@@ -19,8 +19,8 @@ namespace API.Infrastructure.Repositories
         public IQueryable<Notification> QueryNotificationDeliveriesByUuidAsync(Guid uuid)
         {
             return _context.Notifications
-                .Where(n => n.Deliveries.Any(d => d.DeliveryReceiveruuid == uuid))
-                .Include(n => n.Deliveries.Where(d => d.DeliveryReceiveruuid == uuid));
+                .Where(n => n.Deliveries.Any(d => d.ReceiverUuid == uuid))
+                .Include(n => n.Deliveries.Where(d => d.ReceiverUuid == uuid));
         }
         /*public async Task<List<Notification>> GetUserAllNotificationsByUuidWithPagingAsync(byte[] uuidBytes, int pageNumber, int pageSize)
         {
@@ -28,7 +28,7 @@ namespace API.Infrastructure.Repositories
             if (pageNumber <= 0) pageNumber = 1;
 
             return await _context.Notifications
-                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceivertype == "user" || n.NotificationReceivertype == "alluser") && !n.NotificationIsdeleted)
+                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceiverType == "user" || n.NotificationReceiverType == "alluser") && !n.IsDeleted)
                 .OrderByDescending(n => n.NotificationTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -40,7 +40,7 @@ namespace API.Infrastructure.Repositories
             if (pageNumber <= 0) pageNumber = 1;
 
             return await _context.Notifications
-                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceivertype == "merchant" || n.NotificationReceivertype == "allmerchant") && !n.NotificationIsdeleted)
+                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceiverType == "merchant" || n.NotificationReceiverType == "allmerchant") && !n.IsDeleted)
                 .OrderByDescending(n => n.NotificationTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -52,7 +52,7 @@ namespace API.Infrastructure.Repositories
             if (pageNumber <= 0) pageNumber = 1;
 
             return await _context.Notifications
-                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceivertype == "user" || n.NotificationReceivertype == "alluser") && !n.NotificationIsdeleted && n.NotificationType == type)
+                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceiverType == "user" || n.NotificationReceiverType == "alluser") && !n.IsDeleted && n.NotificationType == type)
                 .OrderByDescending(n => n.NotificationTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -64,7 +64,7 @@ namespace API.Infrastructure.Repositories
             if (pageNumber <= 0) pageNumber = 1;
 
             return await _context.Notifications
-                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceivertype == "merchant" || n.NotificationReceivertype == "allmerchant") && !n.NotificationIsdeleted && n.NotificationType == type)
+                .Where(n => n.NotificationReceiveuuid == uuidBytes && (n.NotificationReceiverType == "merchant" || n.NotificationReceiverType == "allmerchant") && !n.IsDeleted && n.NotificationType == type)
                 .OrderByDescending(n => n.NotificationTime)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)

@@ -30,14 +30,14 @@ namespace API.Domain.Services.UserPart.Implementations
 
                 var query = _userRepository.QueryUsers();
 
-                var user = query.FirstOrDefault(a => a.UserUuid == userUuid && a.UserIsdeleted == false);
+                var user = query.FirstOrDefault(a => a.Uuid == userUuid && a.IsDeleted == false);
 
                 if (user == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "用户不存在或已删除");
                 }
 
-                user.UserIsdeleted = true;
+                user.IsDeleted = true;
                 await _userRepository.UpdateUserAsync(user);
 
                 return Result.Success();

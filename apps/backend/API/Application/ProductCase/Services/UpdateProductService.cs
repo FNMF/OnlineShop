@@ -79,7 +79,7 @@ namespace API.Application.ProductCase.Services
                     opt.ProductIslisted,
                     _currentService.RequiredUuid,
                     uuid,
-                    uploadResult.Data.First(f => f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath,
+                    uploadResult.Data.First(f => f.LocalfileObjectType == LocalfileObjectType.product_cover.ToString()).Path,
                     opt.ProductPackingFee
                 );
 
@@ -93,15 +93,15 @@ namespace API.Application.ProductCase.Services
                     return Result<List<ProductReadDto>>.Fail(result.Code, result.Message);
 
                 var products = result.Data.Select(p => new ProductReadDto(
-                    p.ProductUuid,
-                    p.ProductName,
-                    p.ProductPrice,
-                p.ProductStock,
-                p.ProductWeight,
-                p.ProductIslisted,
-                    p.ProductIsavailable,
-                    p.ProductCoverurl,
-                    p.ProductPackingfee
+                    p.Uuid,
+                    p.Name,
+                    p.Price,
+                p.Stock,
+                p.Weight,
+                p.IsListed,
+                    p.IsAvailable,
+                    p.CoverUrl,
+                    p.PackingFee
                 )).ToList();
 
                 await _eventBus.PublishAsync(new ProductUpdateEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));

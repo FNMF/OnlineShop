@@ -29,7 +29,7 @@ namespace API.Application.OrderCase.Services
                     _logger.LogWarning("没有找到相关订单");
                     return Result<OrderMain>.Fail(orderResult.Code, orderResult.Message);
                 }
-                if(orderResult.Data.OrderUseruuid != _currentService.RequiredUuid)
+                if(orderResult.Data.UserUuid != _currentService.RequiredUuid)
                 {
                     //这里是为了匹配是否是同一个人的订单，防止越权访问
                     _logger.LogWarning("没有找到相关订单");

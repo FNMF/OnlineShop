@@ -49,11 +49,11 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                         {
                             var cartItem = new CartItem(
                             item.ProductUuid,
-                            productResult.Data.ProductPrice,
-                            productResult.Data.ProductPackingfee,
+                            productResult.Data.Price,
+                            productResult.Data.PackingFee,
                             item.Quantity,
-                            productResult.Data.ProductCoverurl,
-                            productResult.Data.ProductName
+                            productResult.Data.CoverUrl,
+                            productResult.Data.Name
                             );
                             cartMain.UpdateItem(cartItem);
                         }
@@ -70,11 +70,11 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                         {
                             var cartItem = new CartItem(
                             item.ProductUuid,
-                            productResult.Data.ProductPrice,
-                            productResult.Data.ProductPackingfee,
+                            productResult.Data.Price,
+                            productResult.Data.PackingFee,
                             item.Quantity,
-                            productResult.Data.ProductCoverurl,
-                            productResult.Data.ProductName
+                            productResult.Data.CoverUrl,
+                            productResult.Data.Name
                             );
                             cartMain.UpdateItem(cartItem);
                         }
@@ -107,11 +107,11 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                     {
                         var cartItem = new CartItem(
                             item.ProductUuid,
-                            productResult.Data.ProductPrice,
-                            productResult.Data.ProductPackingfee,
+                            productResult.Data.Price,
+                            productResult.Data.PackingFee,
                             item.Quantity,
-                            productResult.Data.ProductCoverurl,
-                            productResult.Data.ProductName
+                            productResult.Data.CoverUrl,
+                            productResult.Data.Name
                         );
                         cartMain.UpdateItem(cartItem);
                     }
@@ -157,7 +157,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             {
                 return Result.Fail(ResultCode.InvalidInput, "购物车ID不能为空");
             }
-            if (_cartReadService.GetCartByUuid(cartUuid).Result.Data.CartUseruuid != userUuid)
+            if (_cartReadService.GetCartByUuid(cartUuid).Result.Data.UserUuid != userUuid)
             {
                 return Result.Fail(ResultCode.Forbidden, "没有权限操作该购物车");
             }

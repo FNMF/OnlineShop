@@ -34,13 +34,13 @@ namespace API.Domain.Services.AdminPart
 
             var admin = new Admin
             {
-                AdminPhone = dto.Phone,
-                AdminPwdhash = hash.Hash,
-                AdminSalt = hash.Salt,
-                AdminLastlogintime = DateTime.Now,
-                AdminLastlocation = dto.IpLocation,
-                AdminKey = RandomKeyHelper.GetIpKey(dto.IpLocation),
-                AdminUuid = UuidV7Helper.NewUuidV7(),
+                Phone = dto.Phone,
+                PasswordHash = hash.Hash,
+                Salt = hash.Salt,
+                LastLoginTime = DateTime.Now,
+                LastLocation = dto.IpLocation,
+                Key = RandomKeyHelper.GetIpKey(dto.IpLocation),
+                Uuid = UuidV7Helper.NewUuidV7(),
             };
 
             return Result<Admin>.Success(admin);

@@ -12,20 +12,20 @@ public partial class Auditgroup
     [Key]
     [Column("ag_uuid")]
     [MaxLength(16)]
-    public Guid AgUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("ag_submitteruuid")]
     [MaxLength(16)]
-    public Guid AgSubmitteruuid { get; set; }
+    public Guid SubmitterUuid { get; set; }
 
     [Column("ag_createdat", TypeName = "datetime")]
-    public DateTime AgCreatedat { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("ag_issingle")]
-    public bool AgIssingle { get; set; }
+    public bool IsSingle { get; set; }
 
     [Column("ag_isdeleted")]
-    public bool AgIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [InverseProperty("AuditGroupuu")]
     public virtual ICollection<Audit> Audits { get; set; } = new List<Audit>();

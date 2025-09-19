@@ -27,14 +27,14 @@ namespace API.Domain.Services.MerchantPart.Implementations
 
                 var query = _merchantRepository.QueryMerchants();
 
-                var merchant = query.FirstOrDefault(a =>a.MerchantUuid == merchantUuid && a.MerchantIsdeleted == false);
+                var merchant = query.FirstOrDefault(a =>a.Uuid == merchantUuid && a.IsDeleted == false);
 
                 if (merchant == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "商户不存在或已删除");
                 }
 
-                merchant.MerchantIsdeleted = true;
+                merchant.IsDeleted = true;
                 await _merchantRepository.UpdateMerchantAsync(merchant);
 
                 return Result.Success();

@@ -21,7 +21,7 @@ namespace API.Infrastructure.Repositories
                 .Join(
                     _context.Roles, // 连接 Roles 表
                     ar => ar.ArRoleid,
-                    r => r.RoleId,
+                    r => r.Id,
                     (ar, r) => r // 返回 Role 实体
                 )
                 .Distinct() // 去重，确保每个角色只出现一次

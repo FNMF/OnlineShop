@@ -33,24 +33,24 @@ namespace API.Infrastructure.Repositories
         public async Task<List<Merchant>> GetMerchantsByLocation(string province, string city)
         {
             return await _context.Merchants
-                .Where(m => m.MerchantProvince == province && m.MerchantCity == city)
+                .Where(m => m.Province == province && m.City == city)
                 .ToListAsync();
         }
         public async Task<List<Merchant>> FuzzySearchMerchants(string search)
         {
             return await _context.Merchants
-                .Where(m => m.MerchantName.Contains(search) || m.MerchantDetail.Contains(search))
+                .Where(m => m.Name.Contains(search) || m.Detail.Contains(search))
                 .ToListAsync();
         }
         public async Task<Merchant> GetMerchantByAdminUuid(byte[] uuidBytes)
         {
             return await _context.Merchants
-                .FirstOrDefaultAsync(m => m.MerchantAdminuuid == uuidBytes);
+                .FirstOrDefaultAsync(m => m.AdminUuid == uuidBytes);
         }
         public async Task<Merchant> GetMerchantByUuid(byte[] uuidBytes)
         {
             return await _context.Merchants
-                .FirstOrDefaultAsync(m => m.MerchantUuid == uuidBytes);
+                .FirstOrDefaultAsync(m => m.Uuid == uuidBytes);
         }
         public async Task<Merchant> AddMerchant(Merchant merchant)
         {

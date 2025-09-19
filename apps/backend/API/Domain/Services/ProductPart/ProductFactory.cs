@@ -38,20 +38,20 @@ namespace API.Domain.Services.ProductPart
 
             var product = new Product
             {
-                ProductName = dto.Name,
-                ProductPrice = dto.Price,
-                ProductStock = dto.Stock,
-                ProductDescription = dto.Description,
-                ProductIngredient = dto.Ingredient,
-                ProductWeight = dto.Weight,
-                ProductIslisted = dto.Islisted,
-                ProductMerchantuuid = dto.MerchantUuid,
-                ProductIsavailable=false,
-                ProductCoverurl= dto.CoverUrl,
-                ProductTime = DateTime.Now,
-                ProductIsdeleted = false,
-                ProductIsaudited = false,
-                ProductPackingfee = dto.PackingFee
+                Name = dto.Name,
+                Price = dto.Price,
+                Stock = dto.Stock,
+                Description = dto.Description,
+                Ingredient = dto.Ingredient,
+                Weight = dto.Weight,
+                IsListed = dto.Islisted,
+                MerchantUuid = dto.MerchantUuid,
+                IsAvailable=false,
+                CoverUrl= dto.CoverUrl,
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                IsAudited = false,
+                PackingFee = dto.PackingFee
             };
             return Result<Product>.Success(product);
         }
@@ -84,21 +84,21 @@ namespace API.Domain.Services.ProductPart
 
             var product = new Product
             {
-                ProductName = dto.Name,
-                ProductPrice = dto.Price,
-                ProductStock = dto.Stock,
-                ProductDescription = dto.Description,
-                ProductIngredient = dto.Ingredient,
-                ProductWeight = dto.Weight,
-                ProductIslisted = dto.Islisted,
-                ProductMerchantuuid = dto.MerchantUuid,
-                ProductUuid = dto.ProductUuid,
-                ProductIsavailable = false,
-                ProductCoverurl=dto.CoverUrl,
-                ProductTime = DateTime.Now,
-                ProductIsdeleted = false,
-                ProductIsaudited = false,
-                ProductPackingfee = dto.PackingFee
+                Name = dto.Name,
+                Price = dto.Price,
+                Stock = dto.Stock,
+                Description = dto.Description,
+                Ingredient = dto.Ingredient,
+                Weight = dto.Weight,
+                IsListed = dto.Islisted,
+                MerchantUuid = dto.MerchantUuid,
+                Uuid = dto.ProductUuid,
+                IsAvailable = false,
+                CoverUrl=dto.CoverUrl,
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                IsAudited = false,
+                PackingFee = dto.PackingFee
             };
 
             return Result<Product>.Success(product);

@@ -27,9 +27,9 @@ namespace API.Domain.Services.Common.Implementations
                 var admin = await _repository.GetAdminByAccountAsync(account);
 
                /*test
-                * Console.WriteLine(admin.AdminSalt);
-                Console.WriteLine(admin.AdminPwdhash);
-                Console.WriteLine(PwdHashHelper.Hashing(password, admin.AdminSalt));*/
+                * Console.WriteLine(admin.Salt);
+                Console.WriteLine(admin.PasswordHash);
+                Console.WriteLine(PwdHashHelper.Hashing(password, admin.Salt));*/
 
                 if (admin == null)
                 {
@@ -42,9 +42,9 @@ namespace API.Domain.Services.Common.Implementations
                     return Result.Fail(ResultCode.NotExist, "身份错误");
                 }
 
-                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.Salt))))
                 {
-                    string jwt = _jwtHelper.UserGenerateToken(null, admin.AdminUuid, account.ToString());
+                    string jwt = _jwtHelper.UserGenerateToken(null, admin.Uuid, account.ToString());
                     return Result.Success(jwt);
                 }
                 else
@@ -64,9 +64,9 @@ namespace API.Domain.Services.Common.Implementations
             {
                 var admin = await _repository.GetAdminByAccountAsync(account);
 
-                Console.WriteLine(admin.AdminSalt);
-                Console.WriteLine(admin.AdminPwdhash);
-                Console.WriteLine(PwdHashHelper.Hashing(password, admin.AdminSalt));
+                Console.WriteLine(admin.Salt);
+                Console.WriteLine(admin.PasswordHash);
+                Console.WriteLine(PwdHashHelper.Hashing(password, admin.Salt));
 
                 if (admin == null)
                 {
@@ -79,9 +79,9 @@ namespace API.Domain.Services.Common.Implementations
                     return Result.Fail(ResultCode.NotExist, "身份错误");
                 }
 
-                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.AdminPwdhash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.AdminSalt))))
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.Salt))))
                 {
-                    string jwt = _jwtHelper.UserGenerateToken(null, admin.AdminUuid, account.ToString());
+                    string jwt = _jwtHelper.UserGenerateToken(null, admin.Uuid, account.ToString());
                     return Result.Success(jwt);
                 }
                 else

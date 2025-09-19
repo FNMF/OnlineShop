@@ -27,13 +27,13 @@ namespace API.Domain.Aggregates.CartAggregate.Services
         {
             try
             {
-                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.CartMerchantuuid == merchantUuid &&c.CartUseruuid == _currentService.CurrentUuid &&c.CartIsdeleted == false);
+                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.MerchantUuid == merchantUuid &&c.UserUuid == _currentService.CurrentUuid &&c.IsDeleted == false);
                 if (cart == null)
                 {
                     _logger.LogWarning("没有找到相关购物车");
                     return Result.Fail(ResultCode.NotFound, "没有找到相关购物车");
                 }
-                cart.CartIsdeleted = true; // 标记为已删除
+                cart.IsDeleted = true; // 标记为已删除
                 if (!await _cartRepository.UpdateCartAsync(cart))
                 {
                     return Result.Fail(ResultCode.BusinessError, "删除购物车时出错");
@@ -56,7 +56,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
                     return Result.Fail(validationResult.Code, validationResult.Message);
                 }
 
-                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.CartMerchantuuid == merchantUuid && c.CartUseruuid == _currentService.CurrentUuid && c.CartIsdeleted == false);
+                var cart = _cartRepository.QueryCarts().FirstOrDefault(c => c.MerchantUuid == merchantUuid && c.UserUuid == _currentService.CurrentUuid && c.IsDeleted == false);
                 if (cart == null)
                 {
                     _logger.LogWarning("没有找到相关购物车");

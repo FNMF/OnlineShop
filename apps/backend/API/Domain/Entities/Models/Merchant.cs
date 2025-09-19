@@ -7,55 +7,55 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("merchant")]
-[Index("MerchantAdminuuid", Name = "merchant_admin_admin_uuid_fk")]
+[Index("AdminUuid", Name = "merchant_admin_admin_uuid_fk")]
 public partial class Merchant
 {
     [Key]
     [Column("merchant_uuid")]
     [MaxLength(16)]
-    public Guid MerchantUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("merchant_name")]
     [StringLength(50)]
-    public string MerchantName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Column("merchant_province")]
     [StringLength(50)]
-    public string MerchantProvince { get; set; } = null!;
+    public string Province { get; set; } = null!;
 
     [Column("merchant_city")]
     [StringLength(50)]
-    public string MerchantCity { get; set; } = null!;
+    public string City { get; set; } = null!;
 
     [Column("merchant_district")]
     [StringLength(50)]
-    public string MerchantDistrict { get; set; } = null!;
+    public string District { get; set; } = null!;
 
     [Column("merchant_detail")]
     [StringLength(255)]
-    public string MerchantDetail { get; set; } = null!;
+    public string Detail { get; set; } = null!;
 
     [Column("merchant_businessstart", TypeName = "time")]
-    public TimeOnly MerchantBusinessstart { get; set; }
+    public TimeOnly BusinessStart { get; set; }
 
     [Column("merchant_businessend", TypeName = "time")]
-    public TimeOnly MerchantBusinessend { get; set; }
+    public TimeOnly BusinessEnd { get; set; }
 
     [Column("merchant_adminuuid")]
     [MaxLength(16)]
-    public Guid MerchantAdminuuid { get; set; }
+    public Guid AdminUuid { get; set; }
 
     [Required]
     [Column("merchant_isclosed")]
-    public bool? MerchantIsclosed { get; set; }
+    public bool? IsClosed { get; set; }
 
     [Column("merchant_isdeleted")]
-    public bool MerchantIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("merchant_isaudited")]
-    public bool MerchantIsaudited { get; set; }
+    public bool IsAudited { get; set; }
 
-    [ForeignKey("MerchantAdminuuid")]
+    [ForeignKey("AdminUuid")]
     [InverseProperty("Merchants")]
     public virtual Admin MerchantAdminuu { get; set; } = null!;
 
@@ -63,11 +63,11 @@ public partial class Merchant
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
     [InverseProperty("WaMerchantuu")]
-    public virtual ICollection<Walletaccount> Walletaccounts { get; set; } = new List<Walletaccount>();
+    public virtual ICollection<WalletAccount> Walletaccounts { get; set; } = new List<WalletAccount>();
 
     [InverseProperty("WrMerchantuu")]
-    public virtual ICollection<Walletrequest> Walletrequests { get; set; } = new List<Walletrequest>();
+    public virtual ICollection<WalletRequest> Walletrequests { get; set; } = new List<WalletRequest>();
 
     [InverseProperty("WtMerchantuu")]
-    public virtual ICollection<Wallettransaction> Wallettransactions { get; set; } = new List<Wallettransaction>();
+    public virtual ICollection<WalletTransaction> Wallettransactions { get; set; } = new List<WalletTransaction>();
 }

@@ -12,6 +12,8 @@
         RemoveProduct = 1001,
         UpdateProduct = 1002,
         GetProduct = 1003,
+
+        GetOrder = 1004,
         //GroupUser
 
         //Group

@@ -50,18 +50,18 @@ namespace API.Application.Services
                         //系统业务逻辑
                         var notification = new Notification
                         {
-                            NotificationTitle = commandDto.Title,
-                            NotificationContent = commandDto.Content,
-                            NotificationStarttime =commandDto.StartTime,
-                            NotificationEndtime =commandDto.EndTime,
-                            NotificationCreatedat =DateTime.Now,
+                            Title = commandDto.Title,
+                            Content = commandDto.Content,
+                            StartTime =commandDto.StartTime,
+                            EndTime =commandDto.EndTime,
+                            CreatedAt =DateTime.Now,
                             NotificationType =NotificationType.system.ToString(),
-                            NotificationSendertype =NotificationSenderType.system.ToString(),
-                            NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7()
+                            NotificationSenderType =NotificationSenderType.system.ToString(),
+                            NotificationReceiverType = commandDto.ReceiverType.ToString(),
+                            Uuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
-                        await _logService.AddLog(LogType.admin, "系统添加通知", "",notification.NotificationUuid);
+                        await _logService.AddLog(LogType.admin, "系统添加通知", "",notification.Uuid);
                         return true;
                     }
                     else if (_currentService.CurrentType == CurrentType.Platform)
@@ -69,18 +69,18 @@ namespace API.Application.Services
                         // 平台业务逻辑
                         var notification = new Notification
                         {
-                            NotificationTitle = commandDto.Title,
-                            NotificationContent = commandDto.Content,
-                            NotificationStarttime = commandDto.StartTime,
-                            NotificationEndtime = commandDto.EndTime,
-                            NotificationCreatedat = DateTime.Now,
+                            Title = commandDto.Title,
+                            Content = commandDto.Content,
+                            StartTime = commandDto.StartTime,
+                            EndTime = commandDto.EndTime,
+                            CreatedAt = DateTime.Now,
                             NotificationType = NotificationType.activity.ToString(),
-                            NotificationSendertype = NotificationSenderType.platform.ToString(),
-                            NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7()
+                            NotificationSenderType = NotificationSenderType.platform.ToString(),
+                            NotificationReceiverType = commandDto.ReceiverType.ToString(),
+                            Uuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
-                        await _logService.AddLog(LogType.admin,"平台添加通知","",notification.NotificationUuid);
+                        await _logService.AddLog(LogType.admin,"平台添加通知","",notification.Uuid);
                         return true;
                     }
                     else if (_currentService.CurrentType == CurrentType.Merchant)
@@ -88,19 +88,19 @@ namespace API.Application.Services
                         // 商户业务逻辑
                         var notification = new Notification
                         {
-                            NotificationTitle = commandDto.Title,
-                            NotificationContent = commandDto.Content,
-                            NotificationStarttime = commandDto.StartTime,
-                            NotificationEndtime = commandDto.EndTime,
-                            NotificationCreatedat = DateTime.Now,
+                            Title = commandDto.Title,
+                            Content = commandDto.Content,
+                            StartTime = commandDto.StartTime,
+                            EndTime = commandDto.EndTime,
+                            CreatedAt = DateTime.Now,
                             NotificationType = NotificationType.activity.ToString(),
-                            NotificationSendertype = NotificationSenderType.merchant.ToString(),
-                            NotificationSenderuuid = _currentService.CurrentUuid,
-                            NotificationReceivertype = commandDto.ReceiverType.ToString(),
-                            NotificationUuid = UuidV7Helper.NewUuidV7()
+                            NotificationSenderType = NotificationSenderType.merchant.ToString(),
+                            SenderUuid = _currentService.CurrentUuid,
+                            NotificationReceiverType = commandDto.ReceiverType.ToString(),
+                            Uuid = UuidV7Helper.NewUuidV7()
                         };
                         await _notificationRepository.AddNotificationAsync(notification);
-                        await _logService.AddLog(LogType.merchant,"商户添加通知", "",notification.NotificationUuid);
+                        await _logService.AddLog(LogType.merchant,"商户添加通知", "",notification.Uuid);
                         return true;
                     }
                     else
@@ -140,11 +140,11 @@ namespace API.Application.Services
                 // 通用筛选条件
                 query = query
                     .WhereIfNotNull(notificationQueryOptions.Type, x => x.NotificationType == notificationQueryOptions.Type.ToString())
-                    .WhereIfNotNull(notificationQueryOptions.ReceiverType, x => x.NotificationReceivertype == notificationQueryOptions.ReceiverType.ToString())
-                    .WhereIfNotNull(notificationQueryOptions.Title, x => x.NotificationTitle.Contains(notificationQueryOptions.Title))
-                    .WhereIfNotNull(notificationQueryOptions.StartTime, x => x.NotificationStarttime >= notificationQueryOptions.StartTime)
-                    .WhereIfNotNull(notificationQueryOptions.EndTime, x => x.NotificationEndtime <= notificationQueryOptions.EndTime)
-                    .WhereIfNotNull(notificationQueryOptions.IsAudited, x => x.NotificationIsaudited == notificationQueryOptions.IsAudited);
+                    .WhereIfNotNull(notificationQueryOptions.ReceiverType, x => x.NotificationReceiverType == notificationQueryOptions.ReceiverType.ToString())
+                    .WhereIfNotNull(notificationQueryOptions.Title, x => x.Title.Contains(notificationQueryOptions.Title))
+                    .WhereIfNotNull(notificationQueryOptions.StartTime, x => x.StartTime >= notificationQueryOptions.StartTime)
+                    .WhereIfNotNull(notificationQueryOptions.EndTime, x => x.EndTime <= notificationQueryOptions.EndTime)
+                    .WhereIfNotNull(notificationQueryOptions.IsAudited, x => x.IsAudited == notificationQueryOptions.IsAudited);
 
                 // 鉴权过滤
                 if (_currentService.CurrentType == CurrentType.Merchant)
@@ -152,7 +152,7 @@ namespace API.Application.Services
                     // 限定只查看自己的通知
                     if (_currentService.CurrentUuid != null)
                     {
-                        query = query.Where(x => x.NotificationSenderuuid == _currentService.CurrentUuid);
+                        query = query.Where(x => x.SenderUuid == _currentService.CurrentUuid);
                     }
                     else
                     {
@@ -162,7 +162,7 @@ namespace API.Application.Services
                 else if (_currentService.CurrentType == CurrentType.Platform || _currentService.CurrentType == CurrentType.System)
                 {   
                     //只有平台或系统可以查看所有包括逻辑删除的通知
-                    query = query.WhereIfNotNull(notificationQueryOptions.IsDeleted, x =>x.NotificationIsdeleted == notificationQueryOptions.IsDeleted);
+                    query = query.WhereIfNotNull(notificationQueryOptions.IsDeleted, x =>x.IsDeleted == notificationQueryOptions.IsDeleted);
                 }
                 else if (_currentService.CurrentType == CurrentType.User)
                 {
@@ -170,7 +170,7 @@ namespace API.Application.Services
                 }
 
                 // 排序分页
-                query = query.OrderByDescending(x => x.NotificationCreatedat)
+                query = query.OrderByDescending(x => x.CreatedAt)
                              .PageBy(notificationQueryOptions.PageNumber, notificationQueryOptions.PageSize);
 
                 var result = await query.ToListAsync();
@@ -197,35 +197,35 @@ namespace API.Application.Services
                 }
 
                 var notification = await _notificationRepository.QueryNotifications()
-                    .Where(n => n.NotificationUuid == notificationDeleteOptions.Uuid)
+                    .Where(n => n.Uuid == notificationDeleteOptions.Uuid)
                     .FirstOrDefaultAsync();
 
                 if (notification == null)
                 {
                     throw new Exception("通知不存在");
                 }
-                if(notification.NotificationIsdeleted == true) 
+                if(notification.IsDeleted == true) 
                 {
                     throw new Exception("该通知已经被删除了");
                 }
 
                 // 鉴权：商户仅能删除自己的通知
-                if (_currentService.CurrentType == CurrentType.Merchant && (_currentService.CurrentUuid == null || notification.NotificationSenderuuid != _currentService.CurrentUuid))
+                if (_currentService.CurrentType == CurrentType.Merchant && (_currentService.CurrentUuid == null || notification.SenderUuid != _currentService.CurrentUuid))
                 {
                     throw new UnauthorizedAccessException("无法删除其他发送者的通知");
                 }
 
                 //逻辑删除，更改字段并更新数据
-                notification.NotificationIsdeleted = true;
+                notification.IsDeleted = true;
                 await _notificationRepository.UpdateNotificationAsync(notification);
                 
                 if(_currentService.CurrentType == CurrentType.Merchant)
                 {
-                    await _logService.AddLog(LogType.merchant, "手动删除通知", "", notification.NotificationUuid);
+                    await _logService.AddLog(LogType.merchant, "手动删除通知", "", notification.Uuid);
                 }
                 else
                 {
-                    await _logService.AddLog(LogType.admin, "手动删除通知", "", notification.NotificationUuid);
+                    await _logService.AddLog(LogType.admin, "手动删除通知", "", notification.Uuid);
                 }
 
                 return true;
@@ -245,7 +245,7 @@ namespace API.Application.Services
                 // 查询所有已过期但未被标记删除的通知
                 var expiredNotifications = await _notificationRepository
                     .QueryNotifications()
-                    .Where(n => n.NotificationEndtime < now.AddDays(-7) && n.NotificationIsdeleted == false)
+                    .Where(n => n.EndTime < now.AddDays(-7) && n.IsDeleted == false)
                     .ToListAsync();
 
                 if (!expiredNotifications.Any())
@@ -253,7 +253,7 @@ namespace API.Application.Services
 
                 foreach (var notification in expiredNotifications)
                 {
-                    notification.NotificationIsdeleted = true;
+                    notification.IsDeleted = true;
                 }
 
                 await _notificationRepository.SaveChangesAsync();

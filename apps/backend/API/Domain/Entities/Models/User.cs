@@ -11,32 +11,32 @@ public partial class User
 {
     [Column("user_name")]
     [StringLength(30)]
-    public string UserName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Key]
     [Column("user_uuid")]
     [MaxLength(16)]
-    public Guid UserUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("user_openid")]
     [StringLength(28)]
-    public string UserOpenid { get; set; } = null!;
+    public string OpenId { get; set; } = null!;
 
     [Column("user_bp")]
-    public int UserBp { get; set; }
+    public int BonusPoint { get; set; }
 
     [Column("user_credit")]
-    public int UserCredit { get; set; }
+    public int Credit { get; set; }
 
     [Column("user_createdat", TypeName = "datetime")]
-    public DateTime UserCreatedat { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("user_isdeleted")]
-    public bool UserIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("user_phone")]
     [StringLength(20)]
-    public string UserPhone { get; set; } = null!;
+    public string Phone { get; set; } = null!;
 
     [InverseProperty("AddressUseruu")]
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
@@ -54,5 +54,5 @@ public partial class User
     public virtual ICollection<UserPrivilege> UserPrivileges { get; set; } = new List<UserPrivilege>();
 
     [InverseProperty("UcUseruu")]
-    public virtual ICollection<Usercoupon> Usercoupons { get; set; } = new List<Usercoupon>();
+    public virtual ICollection<UserCoupon> Usercoupons { get; set; } = new List<UserCoupon>();
 }

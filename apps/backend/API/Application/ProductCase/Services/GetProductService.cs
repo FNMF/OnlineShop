@@ -32,15 +32,15 @@ namespace API.Application.ProductCase.Services
                 if (result.IsSuccess)
                 {
                     var products = result.Data.Select(p => new ProductReadDto
-                    (p.ProductUuid,
-                    p.ProductName,
-                    p.ProductPrice,
-                    p.ProductStock,
-                    p.ProductWeight,
-                    p.ProductIslisted,
-                    p.ProductIsavailable,
-                    p.ProductCoverurl,
-                    p.ProductPackingfee)).ToList();
+                    (p.Uuid,
+                    p.Name,
+                    p.Price,
+                    p.Stock,
+                    p.Weight,
+                    p.IsListed,
+                    p.IsAvailable,
+                    p.CoverUrl,
+                    p.PackingFee)).ToList();
 
                     return Result<List<ProductReadDto>>.Success(products);
                 }
@@ -68,18 +68,18 @@ namespace API.Application.ProductCase.Services
                     var product = productResult.Data;
                     var productDetail = new ProductReadDetailDto
                     (
-                        product.ProductUuid,
-                        product.ProductName,
-                        product.ProductPrice,
-                        product.ProductStock,
-                        product.ProductDescription,
-                        product.ProductIngredient,
-                        product.ProductWeight,
-                        product.ProductIslisted,
-                        product.ProductIsavailable,
-                        product.ProductCoverurl,
-                        product.ProductPackingfee,
-                        imagesResult.IsSuccess ? imagesResult.Data.Select(i => i.LocalfilePath).ToList() : new List<string>()
+                        product.Uuid,
+                        product.Name,
+                        product.Price,
+                        product.Stock,
+                        product.Description,
+                        product.Ingredient,
+                        product.Weight,
+                        product.IsListed,
+                        product.IsAvailable,
+                        product.CoverUrl,
+                        product.PackingFee,
+                        imagesResult.IsSuccess ? imagesResult.Data.Select(i => i.Path).ToList() : new List<string>()
                     );
                     return Result<ProductReadDetailDto>.Success(productDetail);
                 }

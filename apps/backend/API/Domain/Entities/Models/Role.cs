@@ -11,18 +11,18 @@ public partial class Role
 {
     [Key]
     [Column("role_id")]
-    public int RoleId { get; set; }
+    public int Id { get; set; }
 
     [Column("role_name")]
     [StringLength(20)]
-    public string RoleName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Column("role_isbuildin")]
-    public bool RoleIsbuildin { get; set; }
+    public bool IsBuildIn { get; set; }
 
     [Column("role_displayname")]
     [StringLength(20)]
-    public string RoleDisplayname { get; set; } = null!;
+    public string DisplayName { get; set; } = null!;
 
     [Column("role_type", TypeName = "enum('system','platform','shop')")]
     public string RoleType { get; set; } = null!;

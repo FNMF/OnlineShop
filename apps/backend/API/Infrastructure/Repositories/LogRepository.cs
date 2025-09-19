@@ -26,8 +26,8 @@ namespace API.Infrastructure.Repositories
             if (pageSize <= 0) pageSize = 10;
             if (pageNumber <= 0) pageNumber = 1;
 
-            return await _context.Logs.Where(l => l.LogObjectuuid == uuidBytes)
-                .OrderByDescending(l => l.LogTime)
+            return await _context.Logs.Where(l => l.ObjectUuid == uuidBytes)
+                .OrderByDescending(l => l.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -37,8 +37,8 @@ namespace API.Infrastructure.Repositories
             if (pageSize <= 0) pageSize = 10;
             if (pageNumber <= 0) pageNumber = 1;
 
-            return await _context.Logs.Where(l => l.LogObjectuuid == uuidBytes && l.LogType == type)
-                .OrderByDescending(l => l.LogTime)
+            return await _context.Logs.Where(l => l.ObjectUuid == uuidBytes && l.LogType == type)
+                .OrderByDescending(l => l.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -48,9 +48,9 @@ namespace API.Infrastructure.Repositories
             if (pageSize <= 0) pageSize = 10;
             if (pageNumber <= 0) pageNumber = 1;
 
-            return await _context.Logs.Where(l => l.LogObjectuuid == uuidBytes && l.LogType == type
-            && l.LogTime >= start && l.LogTime <= end)
-                .OrderByDescending(l => l.LogTime)
+            return await _context.Logs.Where(l => l.ObjectUuid == uuidBytes && l.LogType == type
+            && l.CreatedAt >= start && l.CreatedAt <= end)
+                .OrderByDescending(l => l.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -61,8 +61,8 @@ namespace API.Infrastructure.Repositories
             if (pageNumber <= 0) pageNumber = 1;
 
             return await _context.Logs.Where(l => l.LogType == type
-            && l.LogTime >= start && l.LogTime <= end)
-                .OrderByDescending(l => l.LogTime)
+            && l.CreatedAt >= start && l.CreatedAt <= end)
+                .OrderByDescending(l => l.CreatedAt)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();

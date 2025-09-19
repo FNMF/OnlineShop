@@ -21,7 +21,7 @@ namespace API.Domain.Services.LocalFilePart.Implementations
         {
             try
             {
-                var localFile = _localFileRepository.QueryLocalFiles().FirstOrDefault(p => p.LocalfileUuid == uuid &&p.LocalfileIsdeleted ==false);
+                var localFile = _localFileRepository.QueryLocalFiles().FirstOrDefault(p => p.Uuid == uuid &&p.IsDeleted ==false);
                 if (localFile == null)
                 {
                     return Result<Localfile>.Fail(ResultCode.NotFound, "文件未找到");
@@ -40,7 +40,7 @@ namespace API.Domain.Services.LocalFilePart.Implementations
         {
             try
             {
-                var localFile = _localFileRepository.QueryLocalFiles().FirstOrDefault(p => p.LocalfileObjectuuid == productUuid && p.LocalfileType == Enums.LocalfileObjectType.product_cover.ToString() && p.LocalfileIsdeleted == false);
+                var localFile = _localFileRepository.QueryLocalFiles().FirstOrDefault(p => p.ObjectUuid == productUuid && p.LocalfileType == Enums.LocalfileObjectType.product_cover.ToString() && p.IsDeleted == false);
                 if (localFile == null)
                 {
                     return Result<Localfile>.Fail(ResultCode.NotFound, "文件未找到");
@@ -60,8 +60,8 @@ namespace API.Domain.Services.LocalFilePart.Implementations
             try
             {
                 var localFiles = _localFileRepository.QueryLocalFiles()
-                    .Where(p => p.LocalfileObjectuuid == productUuid && p.LocalfileType == Enums.LocalfileObjectType.product_detail.ToString() && p.LocalfileIsdeleted == false)
-                    .OrderBy(p => p.LocalfileSort)
+                    .Where(p => p.ObjectUuid == productUuid && p.LocalfileType == Enums.LocalfileObjectType.product_detail.ToString() && p.IsDeleted == false)
+                    .OrderBy(p => p.SortNumber)
                     .ToList();
                 if (localFiles == null || !localFiles.Any())
                 {

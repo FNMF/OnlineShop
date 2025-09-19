@@ -7,39 +7,39 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("walletrequest")]
-[Index("WrMerchantuuid", Name = "walletrequest_merchant_merchant_uuid_fk")]
-public partial class Walletrequest
+[Index("MerchantUuid", Name = "walletrequest_merchant_merchant_uuid_fk")]
+public partial class WalletRequest
 {
     [Key]
     [Column("wr_uuid")]
     [MaxLength(16)]
-    public Guid WrUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("wr_merchantuuid")]
     [MaxLength(16)]
-    public Guid WrMerchantuuid { get; set; }
+    public Guid MerchantUuid { get; set; }
 
     [Column("wr_amount")]
     [Precision(10, 2)]
-    public decimal WrAmount { get; set; }
+    public decimal Amount { get; set; }
 
     [Column("wr_status", TypeName = "enum('pending','approved','rejected','paid')")]
-    public string WrStatus { get; set; } = null!;
+    public string WalletRequestStatus { get; set; } = null!;
 
     [Column("wr_reason")]
     [StringLength(255)]
-    public string? WrReason { get; set; }
+    public string? Reason { get; set; }
 
     [Column("wr_audittime", TypeName = "datetime")]
-    public DateTime? WrAudittime { get; set; }
+    public DateTime? AuditedAt { get; set; }
 
     [Column("wr_transfertime", TypeName = "datetime")]
-    public DateTime? WrTransfertime { get; set; }
+    public DateTime? TransferTime { get; set; }
 
     [Column("wr_createdat", TypeName = "datetime")]
-    public DateTime WrCreatedat { get; set; }
+    public DateTime CreatedAt { get; set; }
 
-    [ForeignKey("WrMerchantuuid")]
+    [ForeignKey("MerchantUuid")]
     [InverseProperty("Walletrequests")]
     public virtual Merchant WrMerchantuu { get; set; } = null!;
 }

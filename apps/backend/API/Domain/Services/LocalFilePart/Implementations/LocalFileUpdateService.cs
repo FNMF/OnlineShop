@@ -76,11 +76,11 @@ namespace API.Domain.Services.LocalFilePart.Implementations
         {
             try
             {
-                if (localfile == null || localfile.LocalfileUuid == null)
+                if (localfile == null || localfile.Uuid == null)
                 {
                     return Result.Fail(ResultCode.InvalidInput, "文件或文件UUID不能为空");
                 }
-                localfile.LocalfileIsdeleted = true;
+                localfile.IsDeleted = true;
                 await _localFileRepository.UpdateLocalFileAsync(localfile);
                 return Result.Success();
             }
@@ -101,11 +101,11 @@ namespace API.Domain.Services.LocalFilePart.Implementations
 
                 foreach (var file in localfiles)
                 {
-                    if (file.LocalfileUuid == null)
+                    if (file.Uuid == null)
                     {
                         return Result.Fail(ResultCode.InvalidInput, "文件UUID不能为空");
                     }
-                    file.LocalfileIsdeleted = true;
+                    file.IsDeleted = true;
                 }
                 await _localFileRepository.UpdateBatchLocalFilesAsync(localfiles);
                 return Result.Success();

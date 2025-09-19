@@ -7,46 +7,46 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("usercoupon")]
-[Index("UcCouponid", Name = "usercoupon_coupon_coupon_id_fk")]
-[Index("UcUseruuid", Name = "usercoupon_user_user_uuid_fk")]
-public partial class Usercoupon
+[Index("CouponId", Name = "usercoupon_coupon_coupon_id_fk")]
+[Index("UserUuid", Name = "usercoupon_user_user_uuid_fk")]
+public partial class UserCoupon
 {
     [Key]
     [Column("uc_uuid")]
     [MaxLength(16)]
-    public Guid UcUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("uc_couponid")]
-    public int UcCouponid { get; set; }
+    public int CouponId { get; set; }
 
     [Column("uc_useruuid")]
     [MaxLength(16)]
-    public Guid UcUseruuid { get; set; }
+    public Guid UserUuid { get; set; }
 
     [Column("uc_receivetime", TypeName = "datetime")]
-    public DateTime UcReceivetime { get; set; }
+    public DateTime ReceivedAt { get; set; }
 
     [Column("uc_usedtime", TypeName = "datetime")]
-    public DateTime UcUsedtime { get; set; }
+    public DateTime UsedAt { get; set; }
 
     [Column("uc_status", TypeName = "enum('unused','used','OT','invalidity')")]
-    public string UcStatus { get; set; } = null!;
+    public string UserCouponStatus { get; set; } = null!;
 
     [Column("uc_discountvalue")]
     [Precision(8, 2)]
-    public decimal? UcDiscountvalue { get; set; }
+    public decimal? DiscountValue { get; set; }
 
     [Column("uc_isdeleted")]
-    public bool UcIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [InverseProperty("OrderUcuu")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    [ForeignKey("UcCouponid")]
+    [ForeignKey("CouponId")]
     [InverseProperty("Usercoupons")]
     public virtual Coupon UcCoupon { get; set; } = null!;
 
-    [ForeignKey("UcUseruuid")]
+    [ForeignKey("UserUuid")]
     [InverseProperty("Usercoupons")]
     public virtual User UcUseruu { get; set; } = null!;
 }

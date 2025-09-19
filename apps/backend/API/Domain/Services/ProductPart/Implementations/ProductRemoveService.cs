@@ -27,14 +27,14 @@ namespace API.Domain.Services.ProductPart.Implementations
 
                 var query = _productRepository.QueryProducts();
 
-                var product = query.FirstOrDefault(a =>a.ProductUuid == productUuid && a.ProductIsdeleted == false);
+                var product = query.FirstOrDefault(a =>a.Uuid == productUuid && a.IsDeleted == false);
 
                 if (product == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "商品不存在或已删除");
                 }
 
-                product.ProductIsdeleted = true;
+                product.IsDeleted = true;
                 if (!await _productRepository.UpdateProductAsync(product)) 
                 {
                     return Result.Fail(ResultCode.BusinessError, "移除商品时出错");

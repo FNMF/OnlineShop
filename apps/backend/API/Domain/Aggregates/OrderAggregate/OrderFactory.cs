@@ -64,26 +64,26 @@ namespace API.Domain.Aggregates.OrderAggregates
         {
             var order = new Order
             {
-                OrderUuid = orderMain.OrderUuid,
-                OrderUseruuid = orderMain.OrderUseruuid,
-                OrderTotal = orderMain.OrderTotal,
+                Uuid = orderMain.OrderUuid,
+                UserUuid = orderMain.OrderUseruuid,
+                Total = orderMain.OrderTotal,
                 OrderStatus = orderMain.OrderStatus.ToString(),
-                OrderSid = orderMain.OrderSid,
-                OrderTime = orderMain.OrderTime,
-                OrderMa = orderMain.OrderMa,
-                OrderUa = orderMain.OrderUa,
-                OrderCost = orderMain.OrderCost,
-                OrderPackingcharge = orderMain.OrderPackingcharge,
-                OrderRidercost = orderMain.OrderRidercost,
-                OrderRiderservice = orderMain.OrderRiderservice.ToString(),
+                ShortId = orderMain.OrderSid,
+                CreatedAt = orderMain.OrderTime,
+                MerchantAddress = orderMain.OrderMa,
+                UserAddress = orderMain.OrderUa,
+                ListCost = orderMain.OrderCost,
+                PackingCost = orderMain.OrderPackingcharge,
+                RiderCost = orderMain.OrderRidercost,
+                OrderRiderService = orderMain.OrderRiderservice.ToString(),
                 Orderitems = orderMain.OrderItems.Select(item => new Orderitem
                 {
-                    OrderitemUuid = item.OrderItemUuid,
-                    OrderitemOrderuuid = orderMain.OrderUuid,
-                    OrderitemProductuuid = item.ProductUuid,
-                    OrderitemName = item.Name,
-                    OrderitemPrice = item.UnitPrice,
-                    OrderitemQuantity = item.Quantity,
+                    Uuid = item.OrderItemUuid,
+                    OrderUuid = orderMain.OrderUuid,
+                    ProductUuid = item.ProductUuid,
+                    Name = item.Name,
+                    Price = item.UnitPrice,
+                    Quantity = item.Quantity,
                 }).ToList()
             };
             return Result<Order>.Success(order);
@@ -95,29 +95,29 @@ namespace API.Domain.Aggregates.OrderAggregates
                 return Result<OrderMain>.Fail(ResultCode.NotFound, "订单不存在");
             }
             var orderItems = order.Orderitems?.Select(oi => new OrderItem(
-                oi.OrderitemUuid,
-                oi.OrderitemProductuuid,
-                oi.OrderitemQuantity,
-                oi.OrderitemPrice,
-                oi.OrderitemName,
-                oi.OrderitemPackingfee
+                oi.Uuid,
+                oi.ProductUuid,
+                oi.Quantity,
+                oi.Price,
+                oi.Name,
+                oi.PackingFee
                 )).ToList() ?? new List<OrderItem>();
             
             var orderMain = new OrderMain(
-                order.OrderUuid,
-                order.OrderUseruuid,
-                order.OrderTotal,
+                order.Uuid,
+                order.UserUuid,
+                order.Total,
                 Enum.Parse<OrderStatus>(order.OrderStatus),
-                order.OrderSid ?? string.Empty,
-                order.OrderTime,
-                order.OrderMa,
-                order.OrderUa,
-                order.OrderCost,
-                order.OrderPackingcharge,
-                order.OrderRidercost,
-                Enum.Parse<OrderRiderService>(order.OrderRiderservice),
-                order.OrderNote,
-                order.OrderExpectedtime,
+                order.ShortId ?? string.Empty,
+                order.CreatedAt,
+                order.MerchantAddress,
+                order.UserAddress,
+                order.ListCost,
+                order.PackingCost,
+                order.RiderCost,
+                Enum.Parse<OrderRiderService>(order.OrderRiderService),
+                order.Note,
+                order.ExpectedTime,
                 orderItems
             );
             return Result<OrderMain>.Success(orderMain);

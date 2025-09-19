@@ -34,18 +34,18 @@ namespace API.Domain.Services.MerchantPart
 
             var merchant = new Merchant
             {
-                MerchantName = dto.Name,
-                MerchantProvince = dto.Province,
-                MerchantCity = dto.City,
-                MerchantDistrict = dto.District,
-                MerchantDetail = AESHelper.Encrypt(dto.Detail),
-                MerchantBusinessstart = dto.Businessstart,
-                MerchantBusinessend = dto.Businessend,
-                MerchantAdminuuid = dto.Adminuuid,
-                MerchantUuid = UuidV7Helper.NewUuidV7(),
-                MerchantIsclosed = false,
-                MerchantIsdeleted = false,
-                MerchantIsaudited = false,
+                Name = dto.Name,
+                Province = dto.Province,
+                City = dto.City,
+                District = dto.District,
+                Detail = AESHelper.Encrypt(dto.Detail),
+                BusinessStart = dto.Businessstart,
+                BusinessEnd = dto.Businessend,
+                AdminUuid = dto.Adminuuid,
+                Uuid = UuidV7Helper.NewUuidV7(),
+                IsClosed = false,
+                IsDeleted = false,
+                IsAudited = false,
                 
             };
             return Result<Merchant>.Success(merchant);
@@ -78,18 +78,18 @@ namespace API.Domain.Services.MerchantPart
 
             var merchant = new Merchant
             {
-                MerchantName = dto.Name,
-                MerchantProvince = dto.Province,
-                MerchantCity = dto.City,
-                MerchantDistrict = dto.District,
-                MerchantDetail = AESHelper.Encrypt(dto.Detail),
-                MerchantBusinessstart = dto.Businessstart,
-                MerchantBusinessend = dto.Businessend,
-                MerchantAdminuuid = dto.Adminuuid,
-                MerchantUuid = dto.MerchantUuid,
-                MerchantIsclosed = false,
-                MerchantIsdeleted = false,
-                MerchantIsaudited = false,
+                Name = dto.Name,
+                Province = dto.Province,
+                City = dto.City,
+                District = dto.District,
+                Detail = AESHelper.Encrypt(dto.Detail),
+                BusinessStart = dto.Businessstart,
+                BusinessEnd = dto.Businessend,
+                AdminUuid = dto.Adminuuid,
+                Uuid = dto.MerchantUuid,
+                IsClosed = false,
+                IsDeleted = false,
+                IsAudited = false,
             };
 
             return Result<Merchant>.Success(merchant);

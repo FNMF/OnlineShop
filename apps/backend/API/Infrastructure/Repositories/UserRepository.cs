@@ -31,13 +31,13 @@ namespace API.Infrastructure.Repositories
         }
         /*public async Task<User> GetByUuidAsync(byte[] uuidBytes)       //通过uuid查询用户
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.UserUuid == uuidBytes);
+            return await _context.Users.FirstOrDefaultAsync(u => u.Uuid == uuidBytes);
 
         }
 
         public async Task<User> GetByOpenIdAsync(string openId)     //通过openid查询用户
         {
-            return await _context.Users.FirstOrDefaultAsync(u => u.UserOpenid == openId);
+            return await _context.Users.FirstOrDefaultAsync(u => u.OpenId == openId);
 
         }
 

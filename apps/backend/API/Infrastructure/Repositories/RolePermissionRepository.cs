@@ -20,19 +20,19 @@ namespace API.Infrastructure.Repositories
                 .Join(
                     _context.Roles, // 连接 Roles 表
                     ar => ar.ArRoleid,
-                    r => r.RoleId,
+                    r => r.Id,
             (ar, r) => r
             )
             .Join(
                     _context.RolePermissions, // 连接 Role-Permissions 表
-                    r => r.RoleId,
+                    r => r.Id,
                     rp => rp.RpRoleid,
                     (r, rp) => rp
             )
             .Join(
                     _context.Permissions, // 连接 Permissions 表
                     rp => rp.RpPermissionid,
-                    p => p.PermissionId,
+                    p => p.Id,
                     (rp, p) => p // 返回 Permission 实体
                 )
                 .Distinct() // 去重，因为一个 Admin 可能有多个 Role 和多个 Permission

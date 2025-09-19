@@ -26,9 +26,9 @@ namespace API.Domain.Services.AddressPart.Implementations
                 var query = _addressRepository.QueryAddresses();
 
                 query = query
-                    .WhereIfNotNull(opt.Uuid, u => u.AddressUseruuid == opt.Uuid)
-                    .WhereIfNotNull(opt.IsDeleted, u => u.AddressIsdeleted == opt.IsDeleted)
-                    .OrderByDescending(u => u.AddressTime)
+                    .WhereIfNotNull(opt.Uuid, u => u.UserUuid == opt.Uuid)
+                    .WhereIfNotNull(opt.IsDeleted, u => u.IsDeleted == opt.IsDeleted)
+                    .OrderByDescending(u => u.UpdatedAt)
                     .PageBy(opt.PageNumber, opt.PageSize);
 
                 if(!query.Any())
@@ -53,7 +53,7 @@ namespace API.Domain.Services.AddressPart.Implementations
                 var query = _addressRepository.QueryAddresses();
 
                 var address = await query
-                    .FirstOrDefaultAsync(u => addressUuid == u.AddressUseruuid);
+                    .FirstOrDefaultAsync(u => addressUuid == u.UserUuid);
 
                 if ( address == null )
                 {

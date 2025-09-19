@@ -56,7 +56,7 @@ namespace API.Application.OrderCase.Services
                     _logger.LogWarning("没有找到相关购物车");
                     return Result<OrderMain>.Fail(cartResult.Code, cartResult.Message);
                 }
-                if(cartResult.Data.CartUseruuid != _currentService.RequiredUuid)
+                if(cartResult.Data.UserUuid != _currentService.RequiredUuid)
                 {
                     _logger.LogWarning("没有找到相关购物车");
                     return Result<OrderMain>.Fail(ResultCode.NotFound, "没有找到相关购物车");
@@ -69,19 +69,19 @@ namespace API.Application.OrderCase.Services
                     _logger.LogWarning("没有找到相关地址");
                     return Result<OrderMain>.Fail(addressResult.Code, addressResult.Message);
                 }
-                if(addressResult.Data.AddressUseruuid != _currentService.RequiredUuid)
+                if(addressResult.Data.UserUuid != _currentService.RequiredUuid)
                 {
                     _logger.LogWarning("没有找到相关地址");
                     return Result<OrderMain>.Fail(ResultCode.NotFound, "没有找到相关地址");
                 }
-                var merchantResult = await _merchantReadService.GetMerchantByUuidAsync(cartResult.Data.CartMerchantuuid);
+                var merchantResult = await _merchantReadService.GetMerchantByUuidAsync(cartResult.Data.MerchantUuid);
                 var orderUuid = UuidV7Helper.NewUuidV7();
-                var merchantAddress = merchantResult.Data.MerchantCity + merchantResult.Data.MerchantDistrict + AESHelper.Decrypt(merchantResult.Data.MerchantDetail);
-                var userAddress = addressResult.Data.AddressCity + addressResult.Data.AddressDistrict + addressResult.Data.AddressDetail;
+                var merchantAddress = merchantResult.Data.City + merchantResult.Data.District + AESHelper.Decrypt(merchantResult.Data.Detail);
+                var userAddress = addressResult.Data.City + addressResult.Data.District + addressResult.Data.Detail;
                 //TODO，这里需要添加优惠券服务、支付服务等
                 //CouponService
 
-                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.MerchantUuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
+                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.Uuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
 
                 //PaymentService
 
@@ -120,7 +120,7 @@ namespace API.Application.OrderCase.Services
                     return Result<OrderMain>.Fail(orderCreateResult.Code, orderCreateResult.Message);
                 }
                 // 发布订单创建事件
-                await _eventBus.PublishAsync(new OrderCreateEvent(orderCreateResult.Data, merchantResult.Data.MerchantUuid));
+                await _eventBus.PublishAsync(new OrderCreateEvent(orderCreateResult.Data, merchantResult.Data.Uuid));
 
                 return Result<OrderMain>.Success(orderCreateResult.Data);
             }

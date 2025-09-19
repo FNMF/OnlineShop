@@ -12,50 +12,50 @@ public partial class Localfile
     [Key]
     [Column("localfile_uuid")]
     [MaxLength(16)]
-    public Guid LocalfileUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("localfile_name")]
     [StringLength(255)]
-    public string LocalfileName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Column("localfile_path")]
     [StringLength(255)]
-    public string LocalfilePath { get; set; } = null!;
+    public string Path { get; set; } = null!;
 
     [Column("localfile_type", TypeName = "enum('image','video','audio','log','other')")]
     public string LocalfileType { get; set; } = null!;
 
     [Column("localfile_createdat", TypeName = "datetime")]
-    public DateTime LocalfileCreatedat { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("localfile_isdeleted")]
-    public bool LocalfileIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("localfile_objectuuid")]
     [MaxLength(16)]
-    public Guid? LocalfileObjectuuid { get; set; }
+    public Guid? ObjectUuid { get; set; }
 
     [Column("localfile_objecttype", TypeName = "enum('merchant','product_cover','product_detail','user','platform','system')")]
-    public string LocalfileObjecttype { get; set; } = null!;
+    public string LocalfileObjectType { get; set; } = null!;
 
     [Column("localfile_mimetype")]
     [StringLength(50)]
-    public string LocalfileMimetype { get; set; } = null!;
+    public string MimeType { get; set; } = null!;
 
     [Column("localfile_size")]
-    public long LocalfileSize { get; set; }
+    public long Size { get; set; }
 
     [Column("localfile_isaudited")]
-    public bool LocalfileIsaudited { get; set; }
+    public bool IsAudited { get; set; }
 
     [Column("localfile_uploaderuuid")]
     [MaxLength(16)]
-    public Guid LocalfileUploaderuuid { get; set; }
+    public Guid UploaderUuid { get; set; }
 
     [Column("localfile_uploadip")]
     [StringLength(50)]
-    public string LocalfileUploadip { get; set; } = null!;
+    public string UploadIp { get; set; } = null!;
 
     [Column("localfile_sort")]
-    public int LocalfileSort { get; set; }
+    public int SortNumber { get; set; }
 }

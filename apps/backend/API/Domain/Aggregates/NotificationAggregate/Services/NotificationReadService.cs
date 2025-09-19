@@ -27,9 +27,9 @@ namespace API.Domain.Aggregates.NotificationAggregate.Services
                 }
 
                 var notifications = await _notificationRepository.QueryNotificationDeliveriesByUuidAsync(opt.Uuid.Value)
-                    .Where(n => n.NotificationIsdeleted == false)
-                    .Where(n => n.NotificationIsaudited == true)
-                    .OrderByDescending( n => n.NotificationCreatedat)
+                    .Where(n => n.IsDeleted == false)
+                    .Where(n => n.IsAudited == true)
+                    .OrderByDescending( n => n.CreatedAt)
                     .PageBy(opt.PageNumber, opt.PageSize)
                     .ToListAsync();
                 

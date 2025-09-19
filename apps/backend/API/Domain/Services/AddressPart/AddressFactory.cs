@@ -36,16 +36,16 @@ namespace API.Domain.Services.AddressPart
 
             var address = new Address
             {
-                AddressName = dto.Name,
-                AddressPhone = dto.Phone,
-                AddressProvince = dto.Province,
-                AddressCity = dto.City,
-                AddressDistrict = dto.District,
-                AddressDetail = AESHelper.Encrypt(dto.Detail),
-                AddressUseruuid = dto.UserUuid,
-                AddressUuid = UuidV7Helper.NewUuidV7(),
-                AddressTime = DateTime.Now,
-                AddressIsdeleted = false,
+                Name = dto.Name,
+                Phone = dto.Phone,
+                Province = dto.Province,
+                City = dto.City,
+                District = dto.District,
+                Detail = AESHelper.Encrypt(dto.Detail),
+                UserUuid = dto.UserUuid,
+                Uuid = UuidV7Helper.NewUuidV7(),
+                UpdatedAt = DateTime.Now,
+                IsDeleted = false,
             };
 
             return Result<Address>.Success(address);
@@ -79,16 +79,16 @@ namespace API.Domain.Services.AddressPart
 
             var address = new Address
             {
-                AddressName = dto.Name,
-                AddressPhone = dto.Phone,
-                AddressProvince = dto.Province,
-                AddressCity = dto.City,
-                AddressDistrict = dto.District,
-                AddressDetail = AESHelper.Encrypt(dto.Detail),
-                AddressUseruuid = dto.UserUuid,
-                AddressUuid = dto.AddressUuid,
-                AddressTime = DateTime.Now,
-                AddressIsdeleted = false,
+                Name = dto.Name,
+                Phone = dto.Phone,
+                Province = dto.Province,
+                City = dto.City,
+                District = dto.District,
+                Detail = AESHelper.Encrypt(dto.Detail),
+                UserUuid = dto.UserUuid,
+                Uuid = dto.AddressUuid,
+                UpdatedAt = DateTime.Now,
+                IsDeleted = false,
             };
 
             return Result<Address>.Success(address);

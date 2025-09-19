@@ -20,20 +20,20 @@ namespace API.Infrastructure.Repositories
         /*public async Task<List<Address>> GetAllAddressByUuidAsync(byte[] uuidBytes)
         {
             return await _context.Addresses
-                .Where(a => a.AddressUseruuid == uuidBytes && a.AddressIsdeleted == false)
+                .Where(a => a.Uuid == uuidBytes && a.IsDeleted == false)
                 .ToListAsync();
 
         }
         public async Task<List<Address>> GetAllIsdefaultAsync(byte[] uuidBytes)
         {
             return await _context.Addresses
-                .Where(a => a.AddressUseruuid == uuidBytes && a.AddressIsdefault == true && a.AddressIsdeleted == false)
+                .Where(a => a.Uuid == uuidBytes && a.AddressIsdefault == true && a.IsDeleted == false)
                         .ToListAsync();
         }
         public async Task<Address> GetAddressByUuidAsync(byte[] uuidBytes)
         {
             return await _context.Addresses
-                     .FirstOrDefaultAsync(a => a.AddressUuid == uuidBytes && a.AddressIsdeleted == false);
+                     .FirstOrDefaultAsync(a => a.Uuid == uuidBytes && a.IsDeleted == false);
         }*/
         public async Task<bool> AddAddressAsync(Address address)
         {

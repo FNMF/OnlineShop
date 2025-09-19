@@ -56,7 +56,7 @@ namespace API.Application.ProductCase.Services
                 }
 
                 var products = result.Data.Select(p => new ProductReadDto
-                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl, p.ProductPackingfee)).ToList();
+                    (p.Uuid, p.Name, p.Price, p.Stock, p.Weight, p.IsListed, p.IsAvailable, p.CoverUrl, p.PackingFee)).ToList();
 
                 await _eventBus.PublishAsync(new ProductRemoveEvent(_currentService.RequiredUuid, _currentService.CurrentType , uuid));
 

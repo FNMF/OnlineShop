@@ -33,18 +33,18 @@ namespace API.Domain.Services.AuditPart
             ;
             var audit = new Audit
             {
-                AuditObjectuuid = dto.AuditObjectuuid,
+                ObjectUuid = dto.AuditObjectuuid,
                 AuditType = dto.AuditType,
-                AuditSubmitteruuid = dto.AuditSubmitteruuid,
-                AuditSubmitertype = dto.AuditSubmitertype,
-                AuditAuditoruuid = dto.AuditAuditoruuid,
-                AuditCreatedat = dto.AuditCreatedat,
-                AuditReviewedat = dto.AuditReviewedat,
-                AuditGroupuuid = dto.AuditGroupuuid,
-                AuditUuid = UuidV7Helper.NewUuidV7(),
+                SubmitterUuid = dto.AuditSubmitteruuid,
+                SubmiterType = dto.AuditSubmitertype,
+                AuditorUuid = dto.AuditAuditoruuid,
+                CreatedAt = dto.AuditCreatedat,
+                ReviewedAt = dto.AuditReviewedat,
+                GroupUuid = dto.AuditGroupuuid,
+                Uuid = UuidV7Helper.NewUuidV7(),
                 AuditStatus = AuditStatus.pending.ToString(),
-                AuditReason = "未审核",
-                AuditIsdeleted = false,
+                Reason = "未审核",
+                IsDeleted = false,
             };
             return Result<Audit>.Success(audit);
         }

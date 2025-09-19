@@ -57,27 +57,27 @@ namespace API.Domain.Aggregates.NotificationAggregate
             }
             var notification = new Notification
             {
-                NotificationUuid = notificationMain.NotificationUuid,
+                Uuid = notificationMain.NotificationUuid,
                 NotificationType = notificationMain.Type.ToString(),
-                NotificationTitle = notificationMain.Title,
-                NotificationContent = notificationMain.Content,
-                NotificationStarttime = notificationMain.StartTime,
-                NotificationEndtime = notificationMain.EndTime,
-                NotificationReceivertype = notificationMain.NotificationReceiverType.ToString(),
-                NotificationObjectuuid = notificationMain.ObjectUuid,
-                NotificationSendertype = notificationMain.NotificationSenderType.ToString(),
-                NotificationSenderuuid = notificationMain.SenderUuid,
-                NotificationIsdeleted = notificationMain.IsDeleted,
-                NotificationIsaudited = notificationMain.IsAudited,
-                NotificationCreatedat = notificationMain.CreatedAt,
+                Title = notificationMain.Title,
+                Content = notificationMain.Content,
+                StartTime = notificationMain.StartTime,
+                EndTime = notificationMain.EndTime,
+                NotificationReceiverType = notificationMain.NotificationReceiverType.ToString(),
+                ObjectUuid = notificationMain.ObjectUuid,
+                NotificationSenderType = notificationMain.NotificationSenderType.ToString(),
+                SenderUuid = notificationMain.SenderUuid,
+                IsDeleted = notificationMain.IsDeleted,
+                IsAudited = notificationMain.IsAudited,
+                CreatedAt = notificationMain.CreatedAt,
                 Deliveries = notificationMain.Deliveries.Select(d => new Delivery
                 {
-                    DeliveryUuid = d.DeliveryUuid,
-                    DeliveryNotificationuuid = d.NotificationUuid,
-                    DeliveryReceiveruuid = d.ReceiverUuid,
-                    DeliveryIsread = d.IsRead,
-                    DeliveryReadat = d.CreatedAt,
-                    DeliveryCreatedat = d.CreatedAt
+                    Uuid = d.DeliveryUuid,
+                    NotificationUuid = d.NotificationUuid,
+                    ReceiverUuid = d.ReceiverUuid,
+                    IsRead = d.IsRead,
+                    ReadAt = d.CreatedAt,
+                    CreatedAt = d.CreatedAt
                 }).ToList()
             };
             return Result<Notification>.Success(notification);
@@ -90,26 +90,26 @@ namespace API.Domain.Aggregates.NotificationAggregate
                 return Result<NotificationMain>.Fail(ResultCode.InvalidInput, "输入为空");
             }
             var notificationMain = new NotificationMain(
-                notification.NotificationUuid,
+                notification.Uuid,
                 Enum.Parse<NotificationType>(notification.NotificationType),
-                notification.NotificationTitle,
-                notification.NotificationContent,
-                notification.NotificationStarttime,
-                notification.NotificationEndtime,
-                Enum.Parse<NotificationReceiverType>(notification.NotificationReceivertype),
-                notification.NotificationObjectuuid,
-                Enum.Parse<NotificationSenderType>(notification.NotificationSendertype),
-                notification.NotificationSenderuuid,
-                notification.NotificationIsdeleted,
-                notification.NotificationIsaudited,
-                notification.NotificationCreatedat,
+                notification.Title,
+                notification.Content,
+                notification.StartTime,
+                notification.EndTime,
+                Enum.Parse<NotificationReceiverType>(notification.NotificationReceiverType),
+                notification.ObjectUuid,
+                Enum.Parse<NotificationSenderType>(notification.NotificationSenderType),
+                notification.SenderUuid,
+                notification.IsDeleted,
+                notification.IsAudited,
+                notification.CreatedAt,
                 notification.Deliveries?.Select(d => new NotificationDelivery(
-                    d.DeliveryUuid,
-                    d.DeliveryNotificationuuid,
-                    d.DeliveryReceiveruuid,
-                    d.DeliveryIsread,
-                    d.DeliveryReadat,
-                    d.DeliveryCreatedat
+                    d.Uuid,
+                    d.NotificationUuid,
+                    d.ReceiverUuid,
+                    d.IsRead,
+                    d.ReadAt,
+                    d.CreatedAt
                 )).ToList() ?? new List<NotificationDelivery>()
             );
             return Result<NotificationMain>.Success(notificationMain);

@@ -17,15 +17,15 @@ namespace API.Infrastructure.Repositories
 
         public async Task<Admin> GetAdminByAccountAsync(int account)
         {
-            return await _context.Admins.FirstOrDefaultAsync(a => a.AdminAccount == account && a.AdminIsdeleted == false);
+            return await _context.Admins.FirstOrDefaultAsync(a => a.Account == account && a.IsDeleted == false);
         }
         public async Task<Admin> GetAdminByUuidAsync(Guid uuid)
         {
-            return await _context.Admins.FirstOrDefaultAsync(a => a.AdminUuid == uuid && a.AdminIsdeleted == false);
+            return await _context.Admins.FirstOrDefaultAsync(a => a.Uuid == uuid && a.IsDeleted == false);
         }
         public async Task<Admin> GetAdminByPhoneAsync(string phone)
         {
-            return await _context.Admins.FirstOrDefaultAsync(a => a.AdminPhone == phone && a.AdminIsdeleted == false);
+            return await _context.Admins.FirstOrDefaultAsync(a => a.Phone == phone && a.IsDeleted == false);
         }
         public async Task<Admin> AddAdminAsync(Admin admin)
         {
@@ -42,7 +42,7 @@ namespace API.Infrastructure.Repositories
         public async Task<RoleType> QueryRoleType(Admin admin)
         {
             var roleIds = await _context.Set<AdminRole>()
-                .Where(a => a.ArAdminuuid == admin.AdminUuid)
+                .Where(a => a.ArAdminuuid == admin.Uuid)
                 .Select(a => a.ArRoleid)
                 .ToListAsync();
 
@@ -50,7 +50,7 @@ namespace API.Infrastructure.Repositories
                 return RoleType.none;
 
             var roleTypes = await _context.Set<Role>()
-                .Where(r => roleIds.Contains(r.RoleId))
+                .Where(r => roleIds.Contains(r.Id))
                 .Select(r => r.RoleType)
                 .ToListAsync();
 
@@ -67,7 +67,7 @@ namespace API.Infrastructure.Repositories
         public async Task<Result> SetAsNoServiceAdmin(Admin admin)
         {
             var adminRoles = await _context.Set<AdminRole>()
-                 .Where(a => a.ArAdminuuid == admin.AdminUuid)
+                 .Where(a => a.ArAdminuuid == admin.Uuid)
                 .ToListAsync();
 
             if (adminRoles.Any())
@@ -76,7 +76,7 @@ namespace API.Infrastructure.Repositories
             }
 
             var noneRole = await _context.Set<Role>()
-                .FirstOrDefaultAsync(r => r.RoleName == RoleName.shop_noservice.ToString());
+                .FirstOrDefaultAsync(r => r.Name == RoleName.shop_noservice.ToString());
 
             if (noneRole == null)
             {
@@ -84,8 +84,8 @@ namespace API.Infrastructure.Repositories
             }
             var newAdminRole = new AdminRole
             {
-                ArAdminuuid = admin.AdminUuid,
-                ArRoleid = noneRole.RoleId
+                ArAdminuuid = admin.Uuid,
+                ArRoleid = noneRole.Id
             };
 
             await _context.Set<AdminRole>().AddAsync(newAdminRole);

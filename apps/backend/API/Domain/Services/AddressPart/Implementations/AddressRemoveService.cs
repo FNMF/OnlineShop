@@ -27,14 +27,14 @@ namespace API.Domain.Services.AddressPart.Implementations
 
                 var query = _addressRepository.QueryAddresses();
 
-                var address = query.FirstOrDefault(a =>a.AddressUuid == addressUuid && a.AddressIsdeleted == false);
+                var address = query.FirstOrDefault(a =>a.Uuid == addressUuid && a.IsDeleted == false);
 
                 if (address == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "地址不存在或已删除");
                 }
 
-                address.AddressIsdeleted = true;
+                address.IsDeleted = true;
                 await _addressRepository.UpdateAddressAsync(address);
 
                 return Result.Success();

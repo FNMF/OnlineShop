@@ -11,15 +11,15 @@ public partial class Permission
 {
     [Key]
     [Column("permission_id")]
-    public int PermissionId { get; set; }
+    public int Id { get; set; }
 
     [Column("permission_name")]
     [StringLength(50)]
-    public string PermissionName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     [Column("permission_displayname")]
     [StringLength(50)]
-    public string PermissionDisplayname { get; set; } = null!;
+    public string DisplayName { get; set; } = null!;
 
     [Column("permission_group", TypeName = "enum('user','product','order','shop','warehouse','marketing','support','finance','system','other')")]
     public string PermissionGroup { get; set; } = null!;

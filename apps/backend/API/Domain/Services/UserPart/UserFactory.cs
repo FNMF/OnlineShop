@@ -31,14 +31,14 @@ namespace API.Domain.Services.UserPart
 
             var user = new User
             {
-                UserName = dto.Name,
-                UserOpenid = dto.OpenId,
-                UserPhone = dto.Phone,
-                UserBp = 0,
-                UserCredit = 50,
-                UserCreatedat = DateTime.Now,
-                UserIsdeleted = false,
-                UserUuid = UuidV7Helper.NewUuidV7(),
+                Name = dto.Name,
+                OpenId = dto.OpenId,
+                Phone = dto.Phone,
+                BonusPoint = 0,
+                Credit = 50,
+                CreatedAt = DateTime.Now,
+                IsDeleted = false,
+                Uuid = UuidV7Helper.NewUuidV7(),
             };
 
             return Result<User>.Success(user);
@@ -68,11 +68,11 @@ namespace API.Domain.Services.UserPart
 
             var user = new User
             {
-                UserName = dto.Name,
-                UserOpenid = dto.OpenId,
-                UserPhone = dto.Phone,
-                UserBp =  dto.BpChange,
-                UserCredit = dto.CreditChange,
+                Name = dto.Name,
+                OpenId = dto.OpenId,
+                Phone = dto.Phone,
+                BonusPoint =  dto.BpChange,
+                Credit = dto.CreditChange,
             };
 
             return Result<User>.Success(user);

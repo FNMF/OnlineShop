@@ -20,7 +20,7 @@ namespace API.Common.Middlewares
             var userUuid = new Guid(userId);
             var permissions = await _rolePermissionRepository.GetPermissionsByAdminIdAsync(userUuid);
 
-            return permissions.Any(p => p.PermissionName == permission.ToString());
+            return permissions.Any(p => p.Name == permission.ToString());
         }
 
         public async Task<bool> HasRoleAsync(string userId, RoleName role)
@@ -28,7 +28,7 @@ namespace API.Common.Middlewares
             var userUuid = new Guid(userId);
             var roles = await _adminRoleRepository.GetRolesByAdminIdAsync(userUuid);
 
-            return roles.Any(r => r.RoleName == role.ToString());
+            return roles.Any(r => r.Name == role.ToString());
         }
     }
 }

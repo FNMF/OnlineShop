@@ -26,7 +26,7 @@ namespace API.Domain.Services.AuditPart.Implementations
             {
                 var query = _auditRepository.QueryAudits();
                 query = query
-                    .Where(a=>a.AuditUuid == auditUuid);
+                    .Where(a=>a.Uuid == auditUuid);
                 if (!query.Any())
                 {
                     return Result<Audit>.Fail(ResultCode.NotFound,"审核信息不存在");
@@ -49,14 +49,14 @@ namespace API.Domain.Services.AuditPart.Implementations
             {
                 var query = _auditRepository.QueryAudits();
                 query = query
-                    .Where(a => a.AuditUuid == auditUuid);
+                    .Where(a => a.Uuid == auditUuid);
                 if (!query.Any())
                 {
                     return Result<Audit>.Fail(ResultCode.NotFound, "审核信息不存在");
                 }
                 var audit = await query.FirstOrDefaultAsync();
                 audit.AuditStatus = AuditStatus.rejection.ToString();
-                audit.AuditReason = reason;
+                audit.Reason = reason;
                 await _auditRepository.UpdateAuditAsync(audit);
 
                 return Result<Audit>.Success(audit);

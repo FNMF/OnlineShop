@@ -11,44 +11,44 @@ public partial class Coupon
 {
     [Key]
     [Column("coupon_id")]
-    public int CouponId { get; set; }
+    public int Id { get; set; }
 
     [Column("coupon_title")]
     [StringLength(50)]
-    public string CouponTitle { get; set; } = null!;
+    public string Title { get; set; } = null!;
 
     [Column("coupon_type", TypeName = "enum('FM','discount')")]
     public string CouponType { get; set; } = null!;
 
     [Column("coupon_value")]
     [Precision(5, 2)]
-    public decimal CouponValue { get; set; }
+    public decimal Value { get; set; }
 
     [Column("coupon_minspent")]
     [Precision(8, 2)]
-    public decimal CouponMinspent { get; set; }
+    public decimal MinSpent { get; set; }
 
     [Column("coupon_startdate", TypeName = "datetime")]
-    public DateTime CouponStartdate { get; set; }
+    public DateTime StartTDate { get; set; }
 
     [Column("coupon_enddate", TypeName = "datetime")]
-    public DateTime CouponEnddate { get; set; }
+    public DateTime EndDate { get; set; }
 
     [Column("coupon_totalcount")]
-    public int CouponTotalcount { get; set; }
+    public int TotalCount { get; set; }
 
     [Column("coupon_limit")]
-    public int CouponLimit { get; set; }
+    public int Limit { get; set; }
 
     [Column("coupon_status", TypeName = "enum('NA','A','OT')")]
     public string CouponStatus { get; set; } = null!;
 
     [Column("coupon_isdeleted")]
-    public bool CouponIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("coupon_isaudited")]
-    public bool CouponIsaudited { get; set; }
+    public bool IsAudited { get; set; }
 
     [InverseProperty("UcCoupon")]
-    public virtual ICollection<Usercoupon> Usercoupons { get; set; } = new List<Usercoupon>();
+    public virtual ICollection<UserCoupon> Usercoupons { get; set; } = new List<UserCoupon>();
 }

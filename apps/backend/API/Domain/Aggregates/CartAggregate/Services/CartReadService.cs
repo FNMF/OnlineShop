@@ -22,7 +22,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             try
             {
                 var cart = await _cartRepository.QueryCarts()
-                    .FirstOrDefaultAsync(c => c.CartMerchantuuid == merchantUuid && c.CartUseruuid == userUuid &&c.CartIsdeleted == false );
+                    .FirstOrDefaultAsync(c => c.MerchantUuid == merchantUuid && c.UserUuid == userUuid &&c.IsDeleted == false );
 
                 if (cart == null)
                 {
@@ -42,7 +42,7 @@ namespace API.Domain.Aggregates.CartAggregate.Services
             try
             {
                 var cart = await _cartRepository.QueryCarts()
-                    .FirstOrDefaultAsync(c => c.CartUuid == cartUuid && c.CartIsdeleted == false);
+                    .FirstOrDefaultAsync(c => c.Uuid == cartUuid && c.IsDeleted == false);
                 if (cart == null)
                 {
                     _logger.LogWarning("没有找到相关购物车");

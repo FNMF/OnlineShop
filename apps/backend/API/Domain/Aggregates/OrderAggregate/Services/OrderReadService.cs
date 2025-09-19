@@ -21,7 +21,7 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
             try
             {
                 var orders = await _orderRepository.QueryOrders()
-                    .Where(o => o.OrderUseruuid == uuid && o.OrderIsdeleted == false)
+                    .Where(o => o.UserUuid == uuid && o.IsDeleted == false)
                     .ToListAsync();
                 if (!orders.Any())
                 {
@@ -41,7 +41,7 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
             try
             {
                 var order = await _orderRepository.QueryOrders()
-                    .FirstOrDefaultAsync(o => o.OrderUuid == uuid && o.OrderIsdeleted == false);
+                    .FirstOrDefaultAsync(o => o.Uuid == uuid && o.IsDeleted == false);
                 if (order == null)
                 {
                     _logger.LogWarning("没有找到相关订单");

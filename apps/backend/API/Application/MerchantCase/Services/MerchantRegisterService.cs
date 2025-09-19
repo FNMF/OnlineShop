@@ -51,7 +51,7 @@ namespace API.Application.MerchantCase.Services
 
                 await _eventBus.PublishAsync(new MerchantRegisterEvent(opt.Phone));
 
-                var returnDto = new AdminReadDto(opt.Phone,result.Data.AdminKey,result.Data.AdminUuid,result.Data.AdminAccount);
+                var returnDto = new AdminReadDto(opt.Phone,result.Data.Key,result.Data.Uuid,result.Data.Account);
 
                 return Result<AdminReadDto>.Success(returnDto);
             }

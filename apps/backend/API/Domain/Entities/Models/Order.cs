@@ -7,86 +7,86 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("order")]
-[Index("OrderUseruuid", Name = "order_user_user_uuid_fk")]
-[Index("OrderUcuuid", Name = "order_usercoupon_up_uuid_fk")]
+[Index("Uuid", Name = "order_user_user_uuid_fk")]
+[Index("UserCouponUuid", Name = "order_usercoupon_up_uuid_fk")]
 public partial class Order
 {
     [Key]
     [Column("order_uuid")]
     [MaxLength(16)]
-    public Guid OrderUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("order_useruuid")]
     [MaxLength(16)]
-    public Guid OrderUseruuid { get; set; }
+    public Guid UserUuid { get; set; }
 
     [Column("order_total")]
     [Precision(8, 2)]
-    public decimal OrderTotal { get; set; }
+    public decimal Total { get; set; }
 
     [Column("order_status", TypeName = "enum('created','paid','accepted','prepared','shipped','completed','cancelled','rejected','exception')")]
     public string OrderStatus { get; set; } = null!;
 
     [Column("order_sid")]
     [StringLength(10)]
-    public string? OrderSid { get; set; }
+    public string? ShortId { get; set; }
 
     [Column("order_time", TypeName = "datetime")]
-    public DateTime OrderTime { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("order_ma")]
     [StringLength(255)]
-    public string OrderMa { get; set; } = null!;
+    public string MerchantAddress { get; set; } = null!;
 
     [Column("order_ua")]
     [StringLength(255)]
-    public string OrderUa { get; set; } = null!;
+    public string UserAddress { get; set; } = null!;
 
     [Column("order_ucuuid")]
     [MaxLength(16)]
-    public Guid? OrderUcuuid { get; set; }
+    public Guid? UserCouponUuid { get; set; }
 
     [Column("order_riderservice", TypeName = "enum('scheduled','immediate','preorder','pickup')")]
-    public string OrderRiderservice { get; set; } = null!;
+    public string OrderRiderService { get; set; } = null!;
 
     [Column("order_rider")]
     [StringLength(255)]
-    public string OrderRider { get; set; } = null!;
+    public string Rider { get; set; } = null!;
 
     [Column("order_note", TypeName = "text")]
-    public string? OrderNote { get; set; }
+    public string? Note { get; set; }
 
     [Column("order_cost")]
     [Precision(8, 2)]
-    public decimal OrderCost { get; set; }
+    public decimal ListCost { get; set; }
 
     [Column("order_packingcharge")]
     [Precision(8, 2)]
-    public decimal OrderPackingcharge { get; set; }
+    public decimal PackingCost { get; set; }
 
     [Column("order_ridercost")]
     [Precision(8, 2)]
-    public decimal OrderRidercost { get; set; }
+    public decimal RiderCost { get; set; }
 
     [Column("order_expectedtime")]
     [StringLength(255)]
-    public string OrderExpectedtime { get; set; } = null!;
+    public string ExpectedTime { get; set; } = null!;
 
     [Column("order_channel", TypeName = "enum('alipay','wechat','bank','instore','other')")]
-    public string OrderChannel { get; set; } = null!;
+    public string Channel { get; set; } = null!;
 
     [Column("order_isdeleted")]
-    public bool OrderIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("order_paymentuuid")]
     [MaxLength(16)]
-    public Guid? OrderPaymentuuid { get; set; }
+    public Guid? PaymentUuid { get; set; }
 
-    [ForeignKey("OrderUcuuid")]
+    [ForeignKey("UserCouponUuid")]
     [InverseProperty("Orders")]
-    public virtual Usercoupon? OrderUcuu { get; set; }
+    public virtual UserCoupon? OrderUcuu { get; set; }
 
-    [ForeignKey("OrderUseruuid")]
+    [ForeignKey("Uuid")]
     [InverseProperty("Orders")]
     public virtual User OrderUseruu { get; set; } = null!;
 

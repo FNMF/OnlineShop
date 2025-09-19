@@ -7,48 +7,48 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("cartitem")]
-[Index("CartitemCartuuid", Name = "cartitem_cart_cart_uuid_fk")]
+[Index("CartUuid", Name = "cartitem_cart_cart_uuid_fk")]
 public partial class Cartitem
 {
     [Key]
     [Column("cartitem_uuid")]
     [MaxLength(16)]
-    public Guid CartitemUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("cartitem_cartuuid")]
     [MaxLength(16)]
-    public Guid CartitemCartuuid { get; set; }
+    public Guid CartUuid { get; set; }
 
     [Column("cartitem_productuuid")]
     [MaxLength(16)]
-    public Guid CartitemProductuuid { get; set; }
+    public Guid ProductUuid { get; set; }
 
     [Column("cartitem_quantity")]
-    public int CartitemQuantity { get; set; }
+    public int Quantity { get; set; }
 
     [Column("cartitem_productname")]
     [StringLength(255)]
-    public string CartitemProductname { get; set; } = null!;
+    public string ProductName { get; set; } = null!;
 
     [Column("cartitem_productprice")]
     [Precision(8, 2)]
-    public decimal CartitemProductprice { get; set; }
+    public decimal ProductPrice { get; set; }
 
     [Column("cartitem_productcover")]
     [StringLength(255)]
-    public string CartitemProductcover { get; set; } = null!;
+    public string ProductCover { get; set; } = null!;
 
     [Column("cartitem_createdat", TypeName = "datetime")]
-    public DateTime CartitemCreatedat { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("cartitem_isdeleted")]
-    public bool CartitemIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
     [Column("cartitem_packingfee")]
     [Precision(8, 2)]
-    public decimal CartitemPackingfee { get; set; }
+    public decimal PackingFee { get; set; }
 
-    [ForeignKey("CartitemCartuuid")]
+    [ForeignKey("CartUuid")]
     [InverseProperty("Cartitems")]
     public virtual Cart CartitemCartuu { get; set; } = null!;
 }

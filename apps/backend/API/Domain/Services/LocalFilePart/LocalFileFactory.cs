@@ -56,19 +56,19 @@ namespace API.Domain.Services.LocalFilePart
 
             var localFile = new Localfile
             {
-                LocalfileName = dto.File.FileName,
-                LocalfilePath = $"/uploads/{newFileName}",
-                LocalfileSize = fileInfo.Length,
+                Name = dto.File.FileName,
+                Path = $"/uploads/{newFileName}",
+                Size = fileInfo.Length,
                 LocalfileType = dto.File.ContentType,
-                LocalfileCreatedat = DateTime.Now,
-                LocalfileUuid = UuidV7Helper.NewUuidV7(),
-                LocalfileObjectuuid = dto.ObjectUuid,
-                LocalfileObjecttype = dto.LocalfileObjectType.ToString().ToLowerInvariant(),
-                LocalfileUploaderuuid = dto.UploderUuid,
-                LocalfileUploadip = dto.UploderIp,
-                LocalfileIsaudited = false,
-                LocalfileIsdeleted = false,
-                LocalfileMimetype = dto.File.ContentType,
+                CreatedAt = DateTime.Now,
+                Uuid = UuidV7Helper.NewUuidV7(),
+                ObjectUuid = dto.ObjectUuid,
+                LocalfileObjectType = dto.LocalfileObjectType.ToString().ToLowerInvariant(),
+                UploaderUuid = dto.UploderUuid,
+                UploadIp = dto.UploderIp,
+                IsAudited = false,
+                IsDeleted = false,
+                MimeType = dto.File.ContentType,
 
             };
 
@@ -117,17 +117,17 @@ namespace API.Domain.Services.LocalFilePart
 
             var localFile = new Localfile
             {
-                LocalfileName = dto.File.FileName,
-                LocalfilePath = $"/uploads/{newFileName}",
-                LocalfileSize = fileInfo.Length,
+                Name = dto.File.FileName,
+                Path = $"/uploads/{newFileName}",
+                Size = fileInfo.Length,
                 LocalfileType = dto.File.ContentType,
-                LocalfileCreatedat = DateTime.Now,
-                LocalfileUuid = dto.LocalFileUuid,
-                LocalfileUploaderuuid = dto.UploderUuid,
-                LocalfileUploadip = dto.UploderIp,
-                LocalfileIsaudited = false,
-                LocalfileIsdeleted = false,
-                LocalfileMimetype = dto.File.ContentType,
+                CreatedAt = DateTime.Now,
+                Uuid = dto.LocalFileUuid,
+                UploaderUuid = dto.UploderUuid,
+                UploadIp = dto.UploderIp,
+                IsAudited = false,
+                IsDeleted = false,
+                MimeType = dto.File.ContentType,
 
             };
 

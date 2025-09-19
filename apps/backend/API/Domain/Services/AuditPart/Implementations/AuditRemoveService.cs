@@ -27,14 +27,14 @@ namespace API.Domain.Services.AuditPart.Implementations
 
                 var query = _auditRepository.QueryAudits();
 
-                var audit = query.FirstOrDefault(a =>a.AuditUuid == auditUuid && a.AuditIsdeleted == false);
+                var audit = query.FirstOrDefault(a =>a.Uuid == auditUuid && a.IsDeleted == false);
 
                 if (audit == null)
                 {
                     return Result.Fail(ResultCode.NotFound, "审核记录不存在或已删除");
                 }
 
-                audit.AuditIsdeleted = true;
+                audit.IsDeleted = true;
                 await _auditRepository.UpdateAuditAsync(audit);
 
                 return Result.Success();

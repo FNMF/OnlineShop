@@ -126,7 +126,7 @@ namespace API.Domain.Services.ProductPart.Implementations
 
                 if (!result.IsSuccess)
                     return Result.Fail(ResultCode.NotFound, "商品不存在或无效");
-                if (result.Data.ProductMerchantuuid != merchantUuid)
+                if (result.Data.MerchantUuid != merchantUuid)
                     return Result.Fail(ResultCode.InvalidInput, "商户UUID与商品不匹配");
 
                 return Result.Success();

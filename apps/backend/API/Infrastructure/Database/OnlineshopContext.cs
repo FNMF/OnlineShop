@@ -65,13 +65,13 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<UserPrivilege> UserPrivileges { get; set; }
 
-    public virtual DbSet<Usercoupon> Usercoupons { get; set; }
+    public virtual DbSet<UserCoupon> Usercoupons { get; set; }
 
-    public virtual DbSet<Walletaccount> Walletaccounts { get; set; }
+    public virtual DbSet<WalletAccount> Walletaccounts { get; set; }
 
-    public virtual DbSet<Walletrequest> Walletrequests { get; set; }
+    public virtual DbSet<WalletRequest> Walletrequests { get; set; }
 
-    public virtual DbSet<Wallettransaction> Wallettransactions { get; set; }
+    public virtual DbSet<WalletTransaction> Wallettransactions { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -85,10 +85,10 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Address>(entity =>
         {
-            entity.HasKey(e => e.AddressUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.AddressUuid).IsFixedLength();
-            entity.Property(e => e.AddressUseruuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.UserUuid).IsFixedLength();
 
             entity.HasOne(d => d.AddressUseruu).WithMany(p => p.Addresses)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -97,11 +97,11 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Admin>(entity =>
         {
-            entity.HasKey(e => e.AdminUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.AdminUuid).IsFixedLength();
-            entity.Property(e => e.AdminAccount).ValueGeneratedOnAdd();
-            entity.Property(e => e.AdminKey).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.Account).ValueGeneratedOnAdd();
+            entity.Property(e => e.Key).IsFixedLength();
         });
 
         modelBuilder.Entity<AdminRole>(entity =>
@@ -121,14 +121,14 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Audit>(entity =>
         {
-            entity.HasKey(e => e.AuditUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.AuditUuid).IsFixedLength();
-            entity.Property(e => e.AuditAuditoruuid).IsFixedLength();
-            entity.Property(e => e.AuditGroupuuid).IsFixedLength();
-            entity.Property(e => e.AuditObjectuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.AuditorUuid).IsFixedLength();
+            entity.Property(e => e.GroupUuid).IsFixedLength();
+            entity.Property(e => e.ObjectUuid).IsFixedLength();
             entity.Property(e => e.AuditStatus).HasDefaultValueSql("'pending'");
-            entity.Property(e => e.AuditSubmitteruuid).IsFixedLength();
+            entity.Property(e => e.SubmitterUuid).IsFixedLength();
 
             entity.HasOne(d => d.AuditGroupuu).WithMany(p => p.Audits)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -137,19 +137,19 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Auditgroup>(entity =>
         {
-            entity.HasKey(e => e.AgUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.AgUuid).IsFixedLength();
-            entity.Property(e => e.AgSubmitteruuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.SubmitterUuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Cart>(entity =>
         {
-            entity.HasKey(e => e.CartUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.CartUuid).IsFixedLength();
-            entity.Property(e => e.CartMerchantuuid).IsFixedLength();
-            entity.Property(e => e.CartUseruuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
+            entity.Property(e => e.UserUuid).IsFixedLength();
 
             entity.HasOne(d => d.CartUseruu).WithMany(p => p.Carts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -158,11 +158,11 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Cartitem>(entity =>
         {
-            entity.HasKey(e => e.CartitemUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.CartitemUuid).IsFixedLength();
-            entity.Property(e => e.CartitemCartuuid).IsFixedLength();
-            entity.Property(e => e.CartitemProductuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.CartUuid).IsFixedLength();
+            entity.Property(e => e.ProductUuid).IsFixedLength();
 
             entity.HasOne(d => d.CartitemCartuu).WithMany(p => p.Cartitems)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -171,18 +171,18 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Coupon>(entity =>
         {
-            entity.HasKey(e => e.CouponId).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.Property(e => e.CouponStatus).HasDefaultValueSql("'NA'");
         });
 
         modelBuilder.Entity<Delivery>(entity =>
         {
-            entity.HasKey(e => e.DeliveryUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.DeliveryUuid).IsFixedLength();
-            entity.Property(e => e.DeliveryNotificationuuid).IsFixedLength();
-            entity.Property(e => e.DeliveryReceiveruuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.NotificationUuid).IsFixedLength();
+            entity.Property(e => e.ReceiverUuid).IsFixedLength();
 
             entity.HasOne(d => d.DeliveryNotificationuu).WithMany(p => p.Deliveries)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -191,28 +191,28 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Localfile>(entity =>
         {
-            entity.HasKey(e => e.LocalfileUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.LocalfileUuid).IsFixedLength();
-            entity.Property(e => e.LocalfileObjectuuid).IsFixedLength();
-            entity.Property(e => e.LocalfileUploaderuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.ObjectUuid).IsFixedLength();
+            entity.Property(e => e.UploaderUuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Log>(entity =>
         {
-            entity.HasKey(e => e.LogUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.LogUuid).IsFixedLength();
-            entity.Property(e => e.LogObjectuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.ObjectUuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Merchant>(entity =>
         {
-            entity.HasKey(e => e.MerchantUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.MerchantUuid).IsFixedLength();
-            entity.Property(e => e.MerchantAdminuuid).IsFixedLength();
-            entity.Property(e => e.MerchantIsclosed).HasDefaultValueSql("'1'");
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.AdminUuid).IsFixedLength();
+            entity.Property(e => e.IsClosed).HasDefaultValueSql("'1'");
 
             entity.HasOne(d => d.MerchantAdminuu).WithMany(p => p.Merchants)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -221,24 +221,24 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.NotificationUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.NotificationUuid).IsFixedLength();
-            entity.Property(e => e.NotificationObjectuuid).IsFixedLength();
-            entity.Property(e => e.NotificationSenderuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.ObjectUuid).IsFixedLength();
+            entity.Property(e => e.SenderUuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.OrderUuid).IsFixedLength();
-            entity.Property(e => e.OrderChannel).HasDefaultValueSql("'wechat'");
-            entity.Property(e => e.OrderExpectedtime).HasDefaultValueSql("'顺序配送'");
-            entity.Property(e => e.OrderPaymentuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.Channel).HasDefaultValueSql("'wechat'");
+            entity.Property(e => e.ExpectedTime).HasDefaultValueSql("'顺序配送'");
+            entity.Property(e => e.PaymentUuid).IsFixedLength();
             entity.Property(e => e.OrderStatus).HasDefaultValueSql("'created'");
-            entity.Property(e => e.OrderUcuuid).IsFixedLength();
-            entity.Property(e => e.OrderUseruuid).IsFixedLength();
+            entity.Property(e => e.UserCouponUuid).IsFixedLength();
+            entity.Property(e => e.UserUuid).IsFixedLength();
 
             entity.HasOne(d => d.OrderUcuu).WithMany(p => p.Orders).HasConstraintName("order_usercoupon_up_uuid_fk");
 
@@ -249,11 +249,11 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Orderitem>(entity =>
         {
-            entity.HasKey(e => e.OrderitemUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.OrderitemUuid).IsFixedLength();
-            entity.Property(e => e.OrderitemOrderuuid).IsFixedLength();
-            entity.Property(e => e.OrderitemProductuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.OrderUuid).IsFixedLength();
+            entity.Property(e => e.ProductUuid).IsFixedLength();
 
             entity.HasOne(d => d.OrderitemOrderuu).WithMany(p => p.Orderitems)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -266,10 +266,10 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Payment>(entity =>
         {
-            entity.HasKey(e => e.PaymentUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.PaymentUuid).IsFixedLength();
-            entity.Property(e => e.PaymentOrderuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.OrderUuid).IsFixedLength();
             entity.Property(e => e.PaymentStatus).HasDefaultValueSql("'pending'");
 
             entity.HasOne(d => d.PaymentOrderuu).WithMany(p => p.Payments)
@@ -279,20 +279,20 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Permission>(entity =>
         {
-            entity.HasKey(e => e.PermissionId).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
         });
 
         modelBuilder.Entity<Privilege>(entity =>
         {
-            entity.HasKey(e => e.PrivilegeId).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.ProductUuid).IsFixedLength();
-            entity.Property(e => e.ProductMerchantuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
 
             entity.HasOne(d => d.ProductMerchantuu).WithMany(p => p.Products)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -301,12 +301,12 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Refund>(entity =>
         {
-            entity.HasKey(e => e.RefundUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.RefundUuid).IsFixedLength();
-            entity.Property(e => e.RefundOrderuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.OrderUuid).IsFixedLength();
             entity.Property(e => e.RefundStatus).HasDefaultValueSql("'create'");
-            entity.Property(e => e.RefundUseruuid).IsFixedLength();
+            entity.Property(e => e.UserUuid).IsFixedLength();
 
             entity.HasOne(d => d.RefundOrderuu).WithMany(p => p.Refunds)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -319,7 +319,7 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PRIMARY");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
         });
 
         modelBuilder.Entity<RolePermission>(entity =>
@@ -337,11 +337,11 @@ public partial class OnlineshopContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.UserUuid).IsFixedLength();
-            entity.Property(e => e.UserCredit).HasDefaultValueSql("'50'");
-            entity.Property(e => e.UserOpenid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.Credit).HasDefaultValueSql("'50'");
+            entity.Property(e => e.OpenId).IsFixedLength();
         });
 
         modelBuilder.Entity<UserPrivilege>(entity =>
@@ -360,14 +360,14 @@ public partial class OnlineshopContext : DbContext
                 .HasConstraintName("user_privilege_user_user_uuid_fk");
         });
 
-        modelBuilder.Entity<Usercoupon>(entity =>
+        modelBuilder.Entity<UserCoupon>(entity =>
         {
-            entity.HasKey(e => e.UcUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.UcUuid).IsFixedLength();
-            entity.Property(e => e.UcDiscountvalue).HasDefaultValueSql("'0.00'");
-            entity.Property(e => e.UcStatus).HasDefaultValueSql("'unused'");
-            entity.Property(e => e.UcUseruuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.DiscountValue).HasDefaultValueSql("'0.00'");
+            entity.Property(e => e.UserCouponStatus).HasDefaultValueSql("'unused'");
+            entity.Property(e => e.UserUuid).IsFixedLength();
 
             entity.HasOne(d => d.UcCoupon).WithMany(p => p.Usercoupons)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -378,37 +378,37 @@ public partial class OnlineshopContext : DbContext
                 .HasConstraintName("usercoupon_user_user_uuid_fk");
         });
 
-        modelBuilder.Entity<Walletaccount>(entity =>
+        modelBuilder.Entity<WalletAccount>(entity =>
         {
-            entity.HasKey(e => e.WaUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.WaUuid).IsFixedLength();
-            entity.Property(e => e.WaMerchantuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
 
             entity.HasOne(d => d.WaMerchantuu).WithMany(p => p.Walletaccounts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("wallet_account_merchant_merchant_uuid_fk");
         });
 
-        modelBuilder.Entity<Walletrequest>(entity =>
+        modelBuilder.Entity<WalletRequest>(entity =>
         {
-            entity.HasKey(e => e.WrUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.WrUuid).IsFixedLength();
-            entity.Property(e => e.WrMerchantuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
 
             entity.HasOne(d => d.WrMerchantuu).WithMany(p => p.Walletrequests)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("walletrequest_merchant_merchant_uuid_fk");
         });
 
-        modelBuilder.Entity<Wallettransaction>(entity =>
+        modelBuilder.Entity<WalletTransaction>(entity =>
         {
-            entity.HasKey(e => e.WtUuid).HasName("PRIMARY");
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
-            entity.Property(e => e.WtUuid).IsFixedLength();
-            entity.Property(e => e.WtMerchantuuid).IsFixedLength();
-            entity.Property(e => e.WtObjectuuid).IsFixedLength();
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
+            entity.Property(e => e.ObjectUuid).IsFixedLength();
 
             entity.HasOne(d => d.WtMerchantuu).WithMany(p => p.Wallettransactions)
                 .OnDelete(DeleteBehavior.ClientSetNull)

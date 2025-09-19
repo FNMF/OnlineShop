@@ -57,7 +57,7 @@ namespace API.Application.ProductCase.Services
                 var productResult = await _productDomainService.CreateProductAggregate(
                 new ProductCreateDto(productUuid, opt.ProductName, opt.ProductPrice, opt.ProductStock,
                                      opt.ProductDescription, opt.ProductIngredient, opt.ProductWeight, opt.ProductIslisted,
-                                     productUuid, saveResult.Data.FirstOrDefault(f => f.LocalfileObjecttype == LocalfileObjectType.product_cover.ToString()).LocalfilePath,opt.ProductPackingFee),
+                                     productUuid, saveResult.Data.FirstOrDefault(f => f.LocalfileObjectType == LocalfileObjectType.product_cover.ToString()).Path,opt.ProductPackingFee),
                 imageFiles
             );
 
@@ -73,7 +73,7 @@ namespace API.Application.ProductCase.Services
                 }
 
                 var products = result.Data.Select(p => new ProductReadDto
-                    (p.ProductUuid, p.ProductName, p.ProductPrice, p.ProductStock, p.ProductWeight, p.ProductIslisted, p.ProductIsavailable, p.ProductCoverurl, p.ProductPackingfee)).ToList();
+                    (p.Uuid, p.Name, p.Price, p.Stock, p.Weight, p.IsListed, p.IsAvailable, p.CoverUrl, p.PackingFee)).ToList();
 
                 // 触发商品添加事件
                 await _eventBus.PublishAsync(new ProductAddEvent(_currentService.RequiredUuid, _currentService.CurrentType , productUuid));

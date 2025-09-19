@@ -7,51 +7,51 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("refund")]
-[Index("RefundOrderuuid", Name = "refund_order_order_uuid_fk")]
-[Index("RefundUseruuid", Name = "refund_user_user_uuid_fk")]
+[Index("OrderUuid", Name = "refund_order_order_uuid_fk")]
+[Index("Uuid", Name = "refund_user_user_uuid_fk")]
 public partial class Refund
 {
     [Key]
     [Column("refund_uuid")]
     [MaxLength(16)]
-    public Guid RefundUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("refund_useruuid")]
     [MaxLength(16)]
-    public Guid RefundUseruuid { get; set; }
+    public Guid UserUuid { get; set; }
 
     [Column("refund_orderuuid")]
     [MaxLength(16)]
-    public Guid RefundOrderuuid { get; set; }
+    public Guid OrderUuid { get; set; }
 
     [Column("refund_type", TypeName = "enum('returnof','refund','discount')")]
     public string RefundType { get; set; } = null!;
 
     [Column("refund_reason")]
     [StringLength(300)]
-    public string? RefundReason { get; set; }
+    public string? Reason { get; set; }
 
     [Column("refund_status", TypeName = "enum('create','review','pass','refuse')")]
     public string RefundStatus { get; set; } = null!;
 
     [Column("refund_amount")]
     [Precision(8, 2)]
-    public decimal RefundAmount { get; set; }
+    public decimal Amount { get; set; }
 
     [Column("refund_usercredit")]
-    public int RefundUsercredit { get; set; }
+    public int UpdateUserCredit { get; set; }
 
     [Column("refund_time", TypeName = "datetime")]
-    public DateTime RefundTime { get; set; }
+    public DateTime CreatedAt { get; set; }
 
     [Column("refund_isdeleted")]
-    public bool RefundIsdeleted { get; set; }
+    public bool IsDeleted { get; set; }
 
-    [ForeignKey("RefundOrderuuid")]
+    [ForeignKey("OrderUuid")]
     [InverseProperty("Refunds")]
     public virtual Order RefundOrderuu { get; set; } = null!;
 
-    [ForeignKey("RefundUseruuid")]
+    [ForeignKey("Uuid")]
     [InverseProperty("Refunds")]
     public virtual User RefundUseruu { get; set; } = null!;
 }

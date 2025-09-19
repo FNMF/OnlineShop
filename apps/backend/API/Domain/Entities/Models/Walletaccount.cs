@@ -7,38 +7,38 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Domain.Entities.Models;
 
 [Table("walletaccount")]
-[Index("WaMerchantuuid", Name = "wallet_account_merchant_merchant_uuid_fk")]
-public partial class Walletaccount
+[Index("MerchantUuid", Name = "wallet_account_merchant_merchant_uuid_fk")]
+public partial class WalletAccount
 {
     [Key]
     [Column("wa_uuid")]
     [MaxLength(16)]
-    public Guid WaUuid { get; set; }
+    public Guid Uuid { get; set; }
 
     [Column("wa_merchantuuid")]
     [MaxLength(16)]
-    public Guid WaMerchantuuid { get; set; }
+    public Guid MerchantUuid { get; set; }
 
     [Column("wa_available")]
     [Precision(10, 2)]
-    public decimal WaAvailable { get; set; }
+    public decimal Available { get; set; }
 
     [Column("wa_frozen")]
     [Precision(10, 2)]
-    public decimal WaFrozen { get; set; }
+    public decimal Frozen { get; set; }
 
     [Column("wa_totalincome")]
     [Precision(10, 2)]
-    public decimal WaTotalincome { get; set; }
+    public decimal TotalIncome { get; set; }
 
     [Column("wa_totalwithdraw")]
     [Precision(10, 2)]
-    public decimal WaTotalwithdraw { get; set; }
+    public decimal TotalWithdraw { get; set; }
 
     [Column("wa_updatedat", TypeName = "datetime")]
-    public DateTime WaUpdatedat { get; set; }
+    public DateTime UpdatedAt { get; set; }
 
-    [ForeignKey("WaMerchantuuid")]
+    [ForeignKey("MerchantUuid")]
     [InverseProperty("Walletaccounts")]
     public virtual Merchant WaMerchantuu { get; set; } = null!;
 }

@@ -23,21 +23,21 @@ namespace API.Domain.Aggregates.CartAggregates
         {
             var cart = new Cart
             {
-                CartUuid = cartMain.CartUuid,
-                CartUseruuid = cartMain.UserUuid,
-                CartMerchantuuid = cartMain.MerchantUuid,
+                Uuid = cartMain.CartUuid,
+                UserUuid = cartMain.UserUuid,
+                MerchantUuid = cartMain.MerchantUuid,
                 Cartitems = cartMain.Items.Select(item => new Cartitem
                 {
-                    CartitemCartuuid = cartMain.CartUuid,
-                    CartitemUuid = item.CartItemUuid,
-                    CartitemProductuuid = item.ProductUuid,
-                    CartitemProductprice = item.Price,
-                    CartitemPackingfee = item.PackingFee,
-                    CartitemQuantity = item.Quantity,
-                    CartitemProductcover = item.CoverUrl,
-                    CartitemProductname = item.ProductName,
-                    CartitemCreatedat = DateTime.Now,
-                    CartitemIsdeleted = false,
+                    CartUuid = cartMain.CartUuid,
+                    Uuid = item.CartItemUuid,
+                    ProductUuid = item.ProductUuid,
+                    ProductPrice = item.Price,
+                    PackingFee = item.PackingFee,
+                    Quantity = item.Quantity,
+                    ProductCover = item.CoverUrl,
+                    ProductName = item.ProductName,
+                    CreatedAt = DateTime.Now,
+                    IsDeleted = false,
                 }).ToList()
             };
             return Result<Cart>.Success(cart);
@@ -46,20 +46,20 @@ namespace API.Domain.Aggregates.CartAggregates
         {
             var items = cart.Cartitems.Select(item => new CartItem
             (
-                item.CartitemUuid,
-                item.CartitemProductuuid,
-                item.CartitemProductprice,
-                item.CartitemPackingfee,
-                item.CartitemQuantity,
-                item.CartitemProductcover,
-                item.CartitemProductname
+                item.Uuid,
+                item.ProductUuid,
+                item.ProductPrice,
+                item.PackingFee,
+                item.Quantity,
+                item.ProductCover,
+                item.ProductName
             )).ToList();
 
             var cartMain = new CartMain
             (
-                cart.CartUuid,
-                cart.CartUseruuid,
-                cart.CartMerchantuuid,
+                cart.Uuid,
+                cart.UserUuid,
+                cart.MerchantUuid,
                 items
             );
 

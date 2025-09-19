@@ -24,11 +24,11 @@ namespace API.Common.Middlewares
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7(),
+                    Uuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
-                    LogDescription = description,
-                    LogDetail = detail,
-                    LogTime = DateTime.Now
+                    Description = description,
+                    Detail = detail,
+                    CreatedAt = DateTime.Now
                 };
                 await _logRepository.AddLogAsync(log);
                 return true;
@@ -45,12 +45,12 @@ namespace API.Common.Middlewares
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7(),
+                    Uuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
-                    LogDescription = description,
-                    LogDetail = detail,
-                    LogTime = DateTime.Now,
-                    LogObjectuuid = objectUuid
+                    Description = description,
+                    Detail = detail,
+                    CreatedAt = DateTime.Now,
+                    ObjectUuid = objectUuid
                 };
                 await _logRepository.AddLogAsync(log);
                 return true;
@@ -67,13 +67,13 @@ namespace API.Common.Middlewares
             {
                 var log = new Log
                 {
-                    LogUuid = UuidV7Helper.NewUuidV7(),
+                    Uuid = UuidV7Helper.NewUuidV7(),
                     LogType = type.ToString(),
-                    LogDescription = description,
-                    LogDetail = detail,
-                    LogTime = DateTime.Now,
-                    LogDatajson = datajson,
-                    LogObjectuuid = objectUuid
+                    Description = description,
+                    Detail = detail,
+                    CreatedAt = DateTime.Now,
+                    DataJson = datajson,
+                    ObjectUuid = objectUuid
                 };
                 await _logRepository.AddLogAsync(log);
                 return true;
@@ -92,7 +92,7 @@ namespace API.Common.Middlewares
 
                 if (queryOptions.Uuid != null)
                 {
-                    query = query.Where(l => l.LogUuid == queryOptions.Uuid);
+                    query = query.Where(l => l.Uuid == queryOptions.Uuid);
                 }
                 if (queryOptions.Type.HasValue)
                 {
@@ -100,7 +100,7 @@ namespace API.Common.Middlewares
                 }
                 if (queryOptions.Start.HasValue && queryOptions.End.HasValue)
                 {
-                    query = query.Where(l => l.LogTime <= queryOptions.End.Value && l.LogTime >= queryOptions.Start);
+                    query = query.Where(l => l.CreatedAt <= queryOptions.End.Value && l.CreatedAt >= queryOptions.Start);
                 }
                 if (queryOptions.PageNumber.HasValue && queryOptions.PageSize.HasValue)
                 {
@@ -108,7 +108,7 @@ namespace API.Common.Middlewares
                     if (queryOptions.PageNumber <= 0) queryOptions.PageNumber = 1;
 
                     query = query
-                        .OrderByDescending(l => l.LogTime)
+                        .OrderByDescending(l => l.CreatedAt)
                         .Skip((queryOptions.PageNumber ?? 1 - 1) * queryOptions.PageSize ?? 10)
                         .Take(queryOptions.PageSize ?? 10);
                 }

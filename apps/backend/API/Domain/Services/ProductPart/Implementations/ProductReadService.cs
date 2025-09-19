@@ -26,7 +26,7 @@ namespace API.Domain.Services.ProductPart.Implementations
             {
                 var merchantUuid = productUuid ?? _currentService.RequiredUuid;
                 var products =await _ProductRepository.QueryProducts()
-                    .Where(p => p.ProductMerchantuuid == merchantUuid).ToListAsync();       //注意这里是对应商户的所有商品，不是不同商户的所有商品
+                    .Where(p => p.MerchantUuid == merchantUuid).ToListAsync();       //注意这里是对应商户的所有商品，不是不同商户的所有商品
 
                 if (products == null || products.Count == 0)
                 {
@@ -47,7 +47,7 @@ namespace API.Domain.Services.ProductPart.Implementations
             try
             {
                 var product = await _ProductRepository.QueryProducts()
-                    .FirstOrDefaultAsync(p => p.ProductUuid == uuid);
+                    .FirstOrDefaultAsync(p => p.Uuid == uuid);
 
                 if (product == null)
                 {
