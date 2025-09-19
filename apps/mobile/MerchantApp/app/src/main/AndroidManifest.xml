@@ -2,8 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"
+    <!-- 必要权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS"
         tools:targetApi="33" />
 
     <application
@@ -17,60 +24,66 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MerchantApp"
         tools:targetApi="31">
+
+        <!-- 下载服务 (前台服务，类型为 download) -->
         <service
             android:name=".service.DownloadService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
 
+        <!-- SignalR 长连接服务 -->
         <service
             android:name=".service.SignalRService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
 
+        <!-- 更新弹窗 Activity -->
         <activity
-            android:name=".ui.products.AddProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.sidemenu.ProductServiceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.sidemenu.ShopSettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login.phone.PhoneActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.sidemenu.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.sidemenu.ProfileActivity"
-            android:exported="false" />
+            android:name=".ui.update.UpdateDialogActivity"
+            android:exported="false"
+            android:theme="@style/Theme.App.TransparentActivity" />
+
+        <!-- 文件安装 Provider (用于安装 APK) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- 业务相关页面 -->
+        <activity android:name=".ui.products.AddProductActivity" android:exported="false" />
+        <activity android:name=".ui.sidemenu.ProductServiceActivity" android:exported="false" />
+        <activity android:name=".ui.sidemenu.ShopSettingsActivity" android:exported="false" />
+        <activity android:name=".ui.login.phone.PhoneActivity" android:exported="false" />
+        <activity android:name=".ui.sidemenu.SettingsActivity" android:exported="false" />
+        <activity android:name=".ui.sidemenu.ProfileActivity" android:exported="false" />
+
+        <!-- 启动页 (真正的 Launcher Activity) -->
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
             android:label="@string/title_activity_login" />
+
+        <!-- 主页面 -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name" />
     </application>
-
 
 </manifest>

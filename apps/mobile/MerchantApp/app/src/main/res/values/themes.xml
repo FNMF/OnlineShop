@@ -15,4 +15,14 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- 这里只添加透明对话框样式 -->
+    <style name="Theme.App.TransparentActivity" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <!-- 可选：调整对话框最小宽度 -->
+        <item name="android:windowMinWidthMajor">80%</item>
+        <item name="android:windowMinWidthMinor">80%</item>
+    </style>
 </resources>

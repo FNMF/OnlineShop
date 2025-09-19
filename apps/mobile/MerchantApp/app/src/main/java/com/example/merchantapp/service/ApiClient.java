@@ -21,7 +21,7 @@ public class ApiClient {
                         Request.Builder builder = original.newBuilder();
 
                         // 自动加上 token
-                        String token = UserManager.getInstance().getToken();
+                        String token = UserManager.getToken();
                         if (token != null) {
                             builder.header("Authorization", "Bearer " + token);
                         }

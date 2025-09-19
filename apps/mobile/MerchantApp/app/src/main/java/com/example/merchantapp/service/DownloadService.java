@@ -145,16 +145,51 @@ public class DownloadService extends Service {
     }
 
     private void downloadWithToast(String fileUrl) {
-        runOnUiThread(() -> Toast.makeText(this, "开始下载：" + fileUrl, Toast.LENGTH_SHORT).show());
-        try {
-            // 模拟下载过程
-            Thread.sleep(3000);
-            runOnUiThread(() -> Toast.makeText(this, "下载完成", Toast.LENGTH_SHORT).show());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            runOnUiThread(() -> Toast.makeText(this, "下载失败", Toast.LENGTH_SHORT).show());
-        }
-        stopSelf();
+        String filePath = getExternalFilesDir(null) + "/downloaded_file.zip";
+
+        new Thread(() -> {
+            try {
+                URL url = new URL(fileUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
+                int fileLength = connection.getContentLength();
+                InputStream input = new BufferedInputStream(connection.getInputStream());
+                FileOutputStream output = new FileOutputStream(filePath);
+
+                byte[] data = new byte[4096];
+                long total = 0;
+                int count;
+                int lastProgress = -1;
+
+                runOnUiThread(() -> Toast.makeText(this, "开始下载：" + fileUrl, Toast.LENGTH_SHORT).show());
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    if (fileLength > 0) {
+                        int progress = (int) (total * 100 / fileLength);
+                        if (progress % 10 == 0 && progress != lastProgress) { // 每10%提示一次
+                            int finalProgress = progress;
+                            runOnUiThread(() ->
+                                    Toast.makeText(this, "下载进度：" + finalProgress + "%", Toast.LENGTH_SHORT).show());
+                            lastProgress = progress;
+                        }
+                    }
+                    output.write(data, 0, count);
+                }
+
+                output.flush();
+                output.close();
+                input.close();
+
+                runOnUiThread(() -> Toast.makeText(this, "下载完成：" + filePath, Toast.LENGTH_LONG).show());
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(this, "下载失败", Toast.LENGTH_SHORT).show());
+            }
+
+            stopSelf();
+        }).start();
     }
 
     private void runOnUiThread(Runnable action) {
