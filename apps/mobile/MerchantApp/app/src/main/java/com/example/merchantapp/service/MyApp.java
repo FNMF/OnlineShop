@@ -12,6 +12,8 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         // 这里是全局初始化的地方
+        // 网络检测
+        GlobalNetworkService.init(this);
 
         // 例如：初始化对象管理
         UserManager.init(this);
@@ -21,12 +23,6 @@ public class MyApp extends Application {
         if (savedToken != null) {
             UserManager.saveToken(savedToken); // 这里其实可以省略
         }
-
-        // 启动 SignalR 前台服务
-        Intent serviceIntent = new Intent(this, SignalRService.class);
-        ContextCompat.startForegroundService(this, serviceIntent);
-
-
 
         // 初始化 Retrofit
         ApiClient.init("https://api.example.com/"); // TODO，改为后端地址
