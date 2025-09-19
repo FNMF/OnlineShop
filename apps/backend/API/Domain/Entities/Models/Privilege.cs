@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("privilege")]
+[Table("privileges")]
 public partial class Privilege
 {
     [Key]
-    [Column("privilege_id")]
+    [Column("id")]
     public int Id { get; set; }
 
-    [Column("privilege_name")]
+    [Column("name")]
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [Column("privilege_displayname")]
+    [Column("display_name")]
     [StringLength(50)]
     public string DisplayName { get; set; } = null!;
 

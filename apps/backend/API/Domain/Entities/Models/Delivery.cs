@@ -6,33 +6,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("delivery")]
-[Index("Uuid", Name = "delivery_notification_notification_uuid_fk")]
+[Table("deliveries")]
+[Index("NotificationUuid", Name = "delivery_notification_notification_uuid_fk")]
 public partial class Delivery
 {
     [Key]
-    [Column("delivery_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("delivery_notificationuuid")]
+    [Column("notification_uuid")]
     [MaxLength(16)]
     public Guid NotificationUuid { get; set; }
 
-    [Column("delivery_receiveruuid")]
+    [Column("receiver_uuid")]
     [MaxLength(16)]
     public Guid ReceiverUuid { get; set; }
 
-    [Column("delivery_isread")]
+    [Column("is_read")]
     public bool IsRead { get; set; }
 
-    [Column("delivery_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("delivery_readat", TypeName = "datetime")]
-    public DateTime ReadAt { get; set; }
+    [Column("read_at", TypeName = "datetime")]
+    public DateTime? ReadAt { get; set; }
 
-    [ForeignKey("Uuid")]
+    [ForeignKey("NotificationUuid")]
     [InverseProperty("Deliveries")]
-    public virtual Notification DeliveryNotificationuu { get; set; } = null!;
+    public virtual Notification NotificationUu { get; set; } = null!;
 }

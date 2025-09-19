@@ -6,44 +6,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("orderitem")]
+[Table("orderitems")]
 [Index("OrderUuid", Name = "orderitem_order_order_uuid_fk")]
-[Index("Uuid", Name = "orderitem_product_product_uuid_fk")]
+[Index("ProductUuid", Name = "orderitem_product_product_uuid_fk")]
 public partial class Orderitem
 {
     [Key]
-    [Column("orderitem_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("orderitem_orderuuid")]
+    [Column("order_uuid")]
     [MaxLength(16)]
     public Guid OrderUuid { get; set; }
 
-    [Column("orderitem_productuuid")]
+    [Column("product_uuid")]
     [MaxLength(16)]
     public Guid ProductUuid { get; set; }
 
-    [Column("orderitem_quantity")]
+    [Column("quantity")]
     public int Quantity { get; set; }
 
-    [Column("orderitem_price")]
+    [Column("price")]
     [Precision(8, 2)]
     public decimal Price { get; set; }
 
-    [Column("orderitem_name")]
+    [Column("name")]
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [Column("orderitem_packingfee")]
+    [Column("packing_fee")]
     [Precision(8, 2)]
     public decimal PackingFee { get; set; }
 
     [ForeignKey("OrderUuid")]
     [InverseProperty("Orderitems")]
-    public virtual Order OrderitemOrderuu { get; set; } = null!;
+    public virtual Order OrderUu { get; set; } = null!;
 
-    [ForeignKey("Uuid")]
+    [ForeignKey("ProductUuid")]
     [InverseProperty("Orderitems")]
-    public virtual Product OrderitemProductuu { get; set; } = null!;
+    public virtual Product ProductUu { get; set; } = null!;
 }

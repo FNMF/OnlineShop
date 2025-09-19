@@ -6,27 +6,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("auditgroup")]
+[Table("auditgroups")]
 public partial class Auditgroup
 {
     [Key]
-    [Column("ag_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("ag_submitteruuid")]
+    [Column("submitter_uuid")]
     [MaxLength(16)]
     public Guid SubmitterUuid { get; set; }
 
-    [Column("ag_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("ag_issingle")]
+    [Column("is_single")]
     public bool IsSingle { get; set; }
 
-    [Column("ag_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [InverseProperty("AuditGroupuu")]
+    [InverseProperty("GroupUu")]
     public virtual ICollection<Audit> Audits { get; set; } = new List<Audit>();
 }

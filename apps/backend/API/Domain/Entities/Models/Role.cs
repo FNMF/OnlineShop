@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("role")]
+[Table("roles")]
 public partial class Role
 {
     [Key]
-    [Column("role_id")]
+    [Column("id")]
     public int Id { get; set; }
 
-    [Column("role_name")]
+    [Column("name")]
     [StringLength(20)]
     public string Name { get; set; } = null!;
 
-    [Column("role_isbuildin")]
+    [Column("is_build_in")]
     public bool IsBuildIn { get; set; }
 
-    [Column("role_displayname")]
+    [Column("display_name")]
     [StringLength(20)]
     public string DisplayName { get; set; } = null!;
 

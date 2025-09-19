@@ -6,52 +6,52 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("refund")]
+[Table("refunds")]
 [Index("OrderUuid", Name = "refund_order_order_uuid_fk")]
-[Index("Uuid", Name = "refund_user_user_uuid_fk")]
+[Index("UserUuid", Name = "refund_user_user_uuid_fk")]
 public partial class Refund
 {
     [Key]
-    [Column("refund_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("refund_useruuid")]
+    [Column("user_uuid")]
     [MaxLength(16)]
     public Guid UserUuid { get; set; }
 
-    [Column("refund_orderuuid")]
+    [Column("order_uuid")]
     [MaxLength(16)]
     public Guid OrderUuid { get; set; }
 
     [Column("refund_type", TypeName = "enum('returnof','refund','discount')")]
     public string RefundType { get; set; } = null!;
 
-    [Column("refund_reason")]
+    [Column("reason")]
     [StringLength(300)]
     public string? Reason { get; set; }
 
     [Column("refund_status", TypeName = "enum('create','review','pass','refuse')")]
     public string RefundStatus { get; set; } = null!;
 
-    [Column("refund_amount")]
+    [Column("amount")]
     [Precision(8, 2)]
     public decimal Amount { get; set; }
 
-    [Column("refund_usercredit")]
+    [Column("update_user_credit")]
     public int UpdateUserCredit { get; set; }
 
-    [Column("refund_time", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("refund_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
     [ForeignKey("OrderUuid")]
     [InverseProperty("Refunds")]
-    public virtual Order RefundOrderuu { get; set; } = null!;
+    public virtual Order OrderUu { get; set; } = null!;
 
-    [ForeignKey("Uuid")]
+    [ForeignKey("UserUuid")]
     [InverseProperty("Refunds")]
-    public virtual User RefundUseruu { get; set; } = null!;
+    public virtual User UserUu { get; set; } = null!;
 }

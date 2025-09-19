@@ -2,8 +2,8 @@
 {
     public enum NotificationType
     {
-        order = 0,
-        system = 1,
-        activity = 2
+        order = 1,
+        system ,
+        activity
     }
 }

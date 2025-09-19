@@ -6,46 +6,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("wallettransaction")]
+[Table("wallet_transactions")]
 [Index("MerchantUuid", Name = "wallettransaction_merchant_merchant_uuid_fk")]
 public partial class WalletTransaction
 {
     [Key]
-    [Column("wt_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("wt_merchantuuid")]
+    [Column("merchant_uuid")]
     [MaxLength(16)]
     public Guid MerchantUuid { get; set; }
 
-    [Column("wt_type", TypeName = "enum('income','withdraw','refund','charge')")]
+    [Column("wallet_transaction_type", TypeName = "enum('income','withdraw','refund','charge')")]
     public string WalletTransactionType { get; set; } = null!;
 
-    [Column("wt_amount")]
+    [Column("amount")]
     [Precision(10, 2)]
     public decimal Amount { get; set; }
 
-    [Column("wt_before")]
+    [Column("before")]
     [Precision(10, 2)]
     public decimal Before { get; set; }
 
-    [Column("wt_after")]
+    [Column("after")]
     [Precision(10, 2)]
     public decimal After { get; set; }
 
-    [Column("wt_objectuuid")]
+    [Column("object_uuid")]
     [MaxLength(16)]
     public Guid? ObjectUuid { get; set; }
 
-    [Column("wt_remark")]
+    [Column("remark")]
     [StringLength(255)]
     public string? Remark { get; set; }
 
-    [Column("wt_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
     [ForeignKey("MerchantUuid")]
-    [InverseProperty("Wallettransactions")]
-    public virtual Merchant WtMerchantuu { get; set; } = null!;
+    [InverseProperty("WalletTransactions")]
+    public virtual Merchant MerchantUu { get; set; } = null!;
 }

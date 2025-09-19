@@ -6,56 +6,56 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("localfile")]
+[Table("localfiles")]
 public partial class Localfile
 {
     [Key]
-    [Column("localfile_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("localfile_name")]
+    [Column("name")]
     [StringLength(255)]
     public string Name { get; set; } = null!;
 
-    [Column("localfile_path")]
+    [Column("path")]
     [StringLength(255)]
     public string Path { get; set; } = null!;
 
     [Column("localfile_type", TypeName = "enum('image','video','audio','log','other')")]
     public string LocalfileType { get; set; } = null!;
 
-    [Column("localfile_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("localfile_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [Column("localfile_objectuuid")]
+    [Column("object_uuid")]
     [MaxLength(16)]
     public Guid? ObjectUuid { get; set; }
 
-    [Column("localfile_objecttype", TypeName = "enum('merchant','product_cover','product_detail','user','platform','system')")]
+    [Column("localfile_object_type", TypeName = "enum('merchant','product_cover','product_detail','user','platform','system')")]
     public string LocalfileObjectType { get; set; } = null!;
 
-    [Column("localfile_mimetype")]
+    [Column("mime_type")]
     [StringLength(50)]
     public string MimeType { get; set; } = null!;
 
-    [Column("localfile_size")]
+    [Column("size")]
     public long Size { get; set; }
 
-    [Column("localfile_isaudited")]
+    [Column("is_audited")]
     public bool IsAudited { get; set; }
 
-    [Column("localfile_uploaderuuid")]
+    [Column("uploader_uuid")]
     [MaxLength(16)]
     public Guid UploaderUuid { get; set; }
 
-    [Column("localfile_uploadip")]
+    [Column("upload_ip")]
     [StringLength(50)]
     public string UploadIp { get; set; } = null!;
 
-    [Column("localfile_sort")]
+    [Column("sort_number")]
     public int SortNumber { get; set; }
 }

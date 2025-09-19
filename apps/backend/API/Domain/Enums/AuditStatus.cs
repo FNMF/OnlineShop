@@ -2,8 +2,8 @@
 {
     public enum AuditStatus
     {
-        pending = 0,
-        approval = 1,
-        rejection = 2
+        pending = 1,
+        approval ,
+        rejection ,
     }
 }

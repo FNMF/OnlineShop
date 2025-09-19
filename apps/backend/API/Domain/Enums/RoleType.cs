@@ -2,9 +2,9 @@
 {
     public enum RoleType
     {
-        system = 0,
-        platform = 1,
-        shop = 2,
-        none =3,
+        system =1,
+        platform ,
+        shop,
+        none,
     }
 }

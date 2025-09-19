@@ -6,54 +6,54 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("audit")]
+[Table("audits")]
 [Index("GroupUuid", Name = "audit_auditgroup_ag_uuid_fk")]
 public partial class Audit
 {
     [Key]
-    [Column("audit_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("audit_objectuuid")]
+    [Column("object_uuid")]
     [MaxLength(16)]
     public Guid ObjectUuid { get; set; }
 
     [Column("audit_type", TypeName = "enum('store','product','banner','comment','promotion')")]
     public string AuditType { get; set; } = null!;
 
-    [Column("audit_submitteruuid")]
+    [Column("submitter_uuid")]
     [MaxLength(16)]
     public Guid SubmitterUuid { get; set; }
 
-    [Column("audit_submitertype", TypeName = "enum('merchant','user')")]
+    [Column("submiter_type", TypeName = "enum('merchant','user')")]
     public string SubmiterType { get; set; } = null!;
 
     [Column("audit_status", TypeName = "enum('pending','approval','rejection')")]
     public string AuditStatus { get; set; } = null!;
 
-    [Column("audit_reason")]
+    [Column("reason")]
     [StringLength(255)]
     public string Reason { get; set; } = null!;
 
-    [Column("audit_auditoruuid")]
+    [Column("auditor_uuid")]
     [MaxLength(16)]
     public Guid AuditorUuid { get; set; }
 
-    [Column("audit_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("audit_reviewedat", TypeName = "datetime")]
+    [Column("reviewed_at", TypeName = "datetime")]
     public DateTime ReviewedAt { get; set; }
 
-    [Column("audit_groupuuid")]
+    [Column("group_uuid")]
     [MaxLength(16)]
     public Guid GroupUuid { get; set; }
 
-    [Column("audit_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
     [ForeignKey("GroupUuid")]
     [InverseProperty("Audits")]
-    public virtual Auditgroup AuditGroupuu { get; set; } = null!;
+    public virtual Auditgroup GroupUu { get; set; } = null!;
 }

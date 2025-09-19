@@ -2,10 +2,10 @@
 {
     public enum OrderChannel
     {
-        alipay = 0,
-        wechat = 1,
-        bank = 2,
-        instore = 3,
-        other = 4
+        alipay = 1,
+        wechat ,
+        bank,
+        instore,
+        other
     }
 }

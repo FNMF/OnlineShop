@@ -6,33 +6,33 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("cart")]
-[Index("Uuid", Name = "cart_user_user_uuid_fk")]
+[Table("carts")]
+[Index("UserUuid", Name = "cart_user_user_uuid_fk")]
 public partial class Cart
 {
     [Key]
-    [Column("cart_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("cart_useruuid")]
+    [Column("user_uuid")]
     [MaxLength(16)]
     public Guid UserUuid { get; set; }
 
-    [Column("cart_time", TypeName = "datetime")]
+    [Column("updated_at", TypeName = "datetime")]
     public DateTime UpdatedAt { get; set; }
 
-    [Column("cart_merchantuuid")]
+    [Column("merchant_uuid")]
     [MaxLength(16)]
     public Guid MerchantUuid { get; set; }
 
-    [Column("cart_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [ForeignKey("Uuid")]
-    [InverseProperty("Carts")]
-    public virtual User CartUseruu { get; set; } = null!;
-
-    [InverseProperty("CartitemCartuu")]
+    [InverseProperty("CartUu")]
     public virtual ICollection<Cartitem> Cartitems { get; set; } = new List<Cartitem>();
+
+    [ForeignKey("UserUuid")]
+    [InverseProperty("Carts")]
+    public virtual User UserUu { get; set; } = null!;
 }

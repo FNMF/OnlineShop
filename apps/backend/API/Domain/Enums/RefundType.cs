@@ -2,8 +2,8 @@
 {
     public enum RefundType
     {
-        returnof = 0,
-        refund = 1,
-        discount = 2
+        returnof = 1,
+        refund ,
+        discount
     }
 }

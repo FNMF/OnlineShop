@@ -6,53 +6,53 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("user")]
+[Table("users")]
 public partial class User
 {
-    [Column("user_name")]
+    [Column("name")]
     [StringLength(30)]
     public string Name { get; set; } = null!;
 
     [Key]
-    [Column("user_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("user_openid")]
+    [Column("open_id")]
     [StringLength(28)]
     public string OpenId { get; set; } = null!;
 
-    [Column("user_bp")]
+    [Column("bonus_point")]
     public int BonusPoint { get; set; }
 
-    [Column("user_credit")]
+    [Column("credit")]
     public int Credit { get; set; }
 
-    [Column("user_createdat", TypeName = "datetime")]
+    [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
 
-    [Column("user_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [Column("user_phone")]
+    [Column("phone")]
     [StringLength(20)]
     public string Phone { get; set; } = null!;
 
-    [InverseProperty("AddressUseruu")]
+    [InverseProperty("UserUu")]
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 
-    [InverseProperty("CartUseruu")]
+    [InverseProperty("UserUu")]
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
-    [InverseProperty("OrderUseruu")]
+    [InverseProperty("UserUu")]
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    [InverseProperty("RefundUseruu")]
+    [InverseProperty("UserUu")]
     public virtual ICollection<Refund> Refunds { get; set; } = new List<Refund>();
+
+    [InverseProperty("UserUu")]
+    public virtual ICollection<UserCoupon> UserCoupons { get; set; } = new List<UserCoupon>();
 
     [InverseProperty("UpUseruu")]
     public virtual ICollection<UserPrivilege> UserPrivileges { get; set; } = new List<UserPrivilege>();
-
-    [InverseProperty("UcUseruu")]
-    public virtual ICollection<UserCoupon> Usercoupons { get; set; } = new List<UserCoupon>();
 }

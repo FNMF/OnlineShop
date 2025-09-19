@@ -2,15 +2,15 @@
 {
     public enum PermissionGroup
     {
-        user = 0,
-        product = 1,
-        order = 2,
-        shop = 3,
-        warehouse = 4,
-        marketing = 5,
-        support = 6,
-        finance = 7,
-        system = 8,
-        other = 9
+        user = 1,
+        product ,
+        order,
+        shop,
+        warehouse,
+        marketing,
+        support,
+        finance,
+        system,
+        other
     }
 }

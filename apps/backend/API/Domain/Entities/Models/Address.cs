@@ -6,50 +6,50 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Domain.Entities.Models;
 
-[Table("address")]
-[Index("Uuid", Name = "address_user_user_uuid_fk")]
+[Table("addresses")]
+[Index("UserUuid", Name = "address_user_user_uuid_fk")]
 public partial class Address
 {
     [Key]
-    [Column("address_uuid")]
+    [Column("uuid")]
     [MaxLength(16)]
     public Guid Uuid { get; set; }
 
-    [Column("address_useruuid")]
+    [Column("user_uuid")]
     [MaxLength(16)]
     public Guid UserUuid { get; set; }
 
-    [Column("address_name")]
+    [Column("name")]
     [StringLength(50)]
     public string Name { get; set; } = null!;
 
-    [Column("address_phone")]
+    [Column("phone")]
     [StringLength(255)]
     public string Phone { get; set; } = null!;
 
-    [Column("address_province")]
+    [Column("province")]
     [StringLength(50)]
     public string Province { get; set; } = null!;
 
-    [Column("address_city")]
+    [Column("city")]
     [StringLength(50)]
     public string City { get; set; } = null!;
 
-    [Column("address_district")]
+    [Column("district")]
     [StringLength(50)]
     public string District { get; set; } = null!;
 
-    [Column("address_detail")]
+    [Column("detail")]
     [StringLength(255)]
     public string Detail { get; set; } = null!;
 
-    [Column("address_time", TypeName = "datetime")]
+    [Column("updated_at", TypeName = "datetime")]
     public DateTime UpdatedAt { get; set; }
 
-    [Column("address_isdeleted")]
+    [Column("is_deleted")]
     public bool IsDeleted { get; set; }
 
-    [ForeignKey("Uuid")]
+    [ForeignKey("UserUuid")]
     [InverseProperty("Addresses")]
-    public virtual User AddressUseruu { get; set; } = null!;
+    public virtual User UserUu { get; set; } = null!;
 }
