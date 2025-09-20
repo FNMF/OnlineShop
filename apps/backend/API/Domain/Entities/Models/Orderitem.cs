@@ -39,6 +39,10 @@ public partial class Orderitem
     [Precision(8, 2)]
     public decimal PackingFee { get; set; }
 
+    [Column("merchant_uuid")]
+    [MaxLength(16)]
+    public Guid MerchantUuid { get; set; }
+
     [ForeignKey("OrderUuid")]
     [InverseProperty("Orderitems")]
     public virtual Order OrderUu { get; set; } = null!;

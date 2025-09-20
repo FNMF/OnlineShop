@@ -17,6 +17,7 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
                     orderMain.AddOrderItem(
                         orderMain.OrderUuid,
                         item.ProductUuid,
+                        cartMain.MerchantUuid,
                         item.Quantity,
                         item.Price,
                         item.ProductName,

@@ -6,6 +6,7 @@ namespace API.Domain.Aggregates.OrderAggregates
     {
         public Guid OrderItemUuid { get; private set; }
         public Guid ProductUuid { get; private set; }
+        public Guid MerchantUuid {  get; private set; }
         public int Quantity { get; private set; }
         public decimal UnitPrice { get; private set; }
         public string Name {  get; private set; }
@@ -13,19 +14,21 @@ namespace API.Domain.Aggregates.OrderAggregates
 
         private OrderItem() { } // for EF
 
-        public OrderItem(Guid productUuid, int quantity, decimal unitPrice, string name, decimal packingFee)
+        public OrderItem(Guid productUuid, Guid merchantUuid, int quantity, decimal unitPrice, string name, decimal packingFee)
         {
             OrderItemUuid = UuidV7Helper.NewUuidV7();
             ProductUuid = productUuid;
+            MerchantUuid = merchantUuid;
             Quantity = quantity;
             UnitPrice = unitPrice;
             Name = name;
             PackingFee = packingFee;
         }
-        internal OrderItem(Guid orderItemUuid, Guid productUuid, int quantity, decimal unitPrice, string name, decimal packingFee)
+        internal OrderItem(Guid orderItemUuid, Guid productUuid, Guid merchantUuid, int quantity, decimal unitPrice, string name, decimal packingFee)
         {
             OrderItemUuid = orderItemUuid;
             ProductUuid = productUuid;
+            MerchantUuid = merchantUuid;
             Quantity = quantity;
             UnitPrice = unitPrice;
             Name = name;

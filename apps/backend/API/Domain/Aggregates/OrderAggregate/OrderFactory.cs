@@ -15,13 +15,13 @@ namespace API.Domain.Aggregates.OrderAggregates
         {
             var validations = new List<Func<OrderMainCreateDto, bool>>
             {
-                o => !string.IsNullOrEmpty(dto.OrderSid)&&dto.OrderSid.Length<10,
-                o => !string.IsNullOrEmpty(dto.OrderMa)&&dto.OrderMa.Length<255,
-                o => !string.IsNullOrEmpty(dto.OrderUa)&&dto.OrderUa.Length<255,
+                o => !string.IsNullOrEmpty(dto.OrderShortId)&&dto.OrderShortId.Length<10,
+                o => !string.IsNullOrEmpty(dto.MerchantAddress)&&dto.MerchantAddress.Length<255,
+                o => !string.IsNullOrEmpty(dto.UserAddress)&&dto.UserAddress.Length<255,
                 o => dto.OrderTotal>0&&Regex.IsMatch(o.OrderTotal.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
-                o => dto.OrderCost>0&&Regex.IsMatch(o.OrderCost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
-                o => dto.OrderPackingcharge>0&&Regex.IsMatch(o.OrderPackingcharge.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
-                o => dto.OrderRidercost>0&&Regex.IsMatch(o.OrderRidercost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
+                o => dto.OrderListCost>0&&Regex.IsMatch(o.OrderListCost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
+                o => dto.PackingCost>0&&Regex.IsMatch(o.PackingCost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
+                o => dto.RiderCost>0&&Regex.IsMatch(o.RiderCost.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
             };
 
             var validationMessages = new List<string>();
@@ -41,19 +41,19 @@ namespace API.Domain.Aggregates.OrderAggregates
 
             var orderMain = new OrderMain(
                 UuidV7Helper.NewUuidV7(),
-                dto.OrderUseruuid,
+                dto.UserUuid,
                 dto.OrderTotal,
                 dto.OrderStatus,
-                dto.OrderSid,
+                dto.OrderShortId,
                 DateTime.Now,
-                dto.OrderMa,
-                dto.OrderUa,
-                dto.OrderCost,
-                dto.OrderPackingcharge,
-                dto.OrderRidercost,
-                dto.OrderRiderservice,
+                dto.MerchantAddress,
+                dto.UserAddress,
+                dto.OrderListCost,
+                dto.PackingCost,
+                dto.RiderCost,
+                dto.RiderService,
                 dto.Note,
-                dto.OrderExpectedTime,
+                dto.ExpectedTime,
                 
                 new List<OrderItem>()
                 );

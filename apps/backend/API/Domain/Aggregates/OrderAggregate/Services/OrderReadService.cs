@@ -36,6 +36,27 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
                 return Result<List<Order>>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
+        public async Task<Result<List<Order>>> MerchantGetAllOrdersByUuid(Guid uuid)
+        {
+            try
+            {
+                var orders = await _orderRepository.QueryOrders()
+                    .Where(o => o.Orderitems.Any(i => i.MerchantUuid == uuid) && o.IsDeleted == false)
+                    .Include(o => o.Orderitems.Where(i => i.MerchantUuid == uuid))
+                    .ToListAsync();
+                if (!orders.Any())
+                {
+                    _logger.LogWarning("没有找到相关订单");
+                    return Result<List<Order>>.Fail(ResultCode.NotFound, "没有找到相关订单");
+                }
+                return Result<List<Order>>.Success(orders);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<List<Order>>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
         public async Task<Result<Order>> GetOrderByUuid(Guid uuid)
         {
             try

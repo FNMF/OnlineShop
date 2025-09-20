@@ -89,17 +89,17 @@ namespace API.Domain.Aggregates.OrderAggregates
         }*/
 
         // 改变订单状态的业务逻辑
-        public void AddOrderItem(Guid orderUuid, Guid productId, int quantity, decimal unitPrice,string name, decimal packingFee)
+        public void AddOrderItem(Guid orderUuid, Guid productUuid, Guid merchantUuid, int quantity, decimal unitPrice,string name, decimal packingFee)
         {
             // 业务规则：检查是否已存在该产品
-            var existingItem = _orderItems.FirstOrDefault(i => i.ProductUuid == productId);
+            var existingItem = _orderItems.FirstOrDefault(i => i.ProductUuid == productUuid);
             if (existingItem != null)
             {
                 existingItem.AddQuantity(quantity);
             }
             else
             {
-                _orderItems.Add(new OrderItem(orderUuid,productId, quantity, unitPrice,name, packingFee));
+                _orderItems.Add(new OrderItem(orderUuid,productUuid, merchantUuid, quantity, unitPrice,name, packingFee));
             }
             RecalculateTotal();
         }

@@ -252,6 +252,7 @@ public partial class OnlineshopContext : DbContext
             entity.HasKey(e => e.Uuid).HasName("PRIMARY");
 
             entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.MerchantUuid).IsFixedLength();
             entity.Property(e => e.OrderUuid).IsFixedLength();
             entity.Property(e => e.ProductUuid).IsFixedLength();
 
