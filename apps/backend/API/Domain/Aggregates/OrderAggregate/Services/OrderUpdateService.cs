@@ -1,24 +1,20 @@
-﻿using API.Api.Common.Models;
-using API.Application.Common.DTOs;
-using API.Common.Models.Results;
+﻿using API.Common.Models.Results;
 using API.Domain.Aggregates.OrderAggregate.Interfaces;
 using API.Domain.Aggregates.OrderAggregates;
 using API.Domain.Interfaces;
 
 namespace API.Domain.Aggregates.OrderAggregate.Services
 {
-    public class OrderCreateService: IOrderCreateService
+    public class OrderUpdateService: IOrderUpdateService
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly ILogger<OrderCreateService> _logger;
-
-        public OrderCreateService(IOrderRepository orderRepository, ILogger<OrderCreateService> logger)
+        private readonly ILogger<OrderUpdateService> _logger;
+        public OrderUpdateService(IOrderRepository orderRepository, ILogger<OrderUpdateService> logger)
         {
             _orderRepository = orderRepository;
             _logger = logger;
         }
-
-        public async Task<Result<OrderMain>> CreateOrder(OrderMain orderMain)
+        public async Task<Result<OrderMain>> UpdateOrder(OrderMain orderMain)
         {
             try
             {
@@ -27,8 +23,8 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
                 {
                     return Result<OrderMain>.Fail(orderResult.Code, orderResult.Message);
                 }
-                await _orderRepository.AddOrderAsync(orderResult.Data);
-                if (!orderResult.IsSuccess) 
+                var updateResult = await _orderRepository.UpdateOrderAsync(orderResult.Data);
+                if (!updateResult)
                 {
                     return Result<OrderMain>.Fail(ResultCode.ServerError, "更新订单失败");
                 }
@@ -36,7 +32,7 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "创建订单失败");
+                _logger.LogError(ex, "更新订单失败");
                 return Result<OrderMain>.Fail(ResultCode.ServerError, ex.Message);
             }
         }

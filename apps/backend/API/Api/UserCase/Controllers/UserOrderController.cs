@@ -1,4 +1,5 @@
 ﻿using API.Api.Common.Models;
+using API.Api.UserCase.Models;
 using API.Application.OrderCase.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -13,11 +14,13 @@ namespace API.Api.UserCase.Controllers
         private readonly IUserGetAllOrdersService _userGetAllOrdersService;
         private readonly IUserGetOrderService _userGetOrderService;
         private readonly IUserPutOrderService _userPutOrderService;
-        public UserOrderController(IUserGetAllOrdersService userGetAllOrdersService, IUserGetOrderService userGetOrderService, IUserPutOrderService userPutOrderService)
+        private readonly IUserPayOrderService _userPayOrderService;
+        public UserOrderController(IUserGetAllOrdersService userGetAllOrdersService, IUserGetOrderService userGetOrderService, IUserPutOrderService userPutOrderService, IUserPayOrderService userPayOrderService)
         {
             _userGetAllOrdersService = userGetAllOrdersService;
             _userGetOrderService = userGetOrderService;
             _userPutOrderService = userPutOrderService;
+            _userPayOrderService = userPayOrderService;
         }
 
         [HttpGet("orders")]
@@ -50,9 +53,30 @@ namespace API.Api.UserCase.Controllers
         }
         [HttpPost("orders")]
         [Authorize]
-        public async Task<IActionResult> CreateOrder(OrderWriteOptions opt)
+        public async Task<IActionResult> CreateOrder([FromBody] OrderWriteOptions opt)
         {
             var result = await _userPutOrderService.UserPutOrder(opt);
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+        /// <summary>
+        /// 用户发起预支付，返回预支付参数
+        /// 需要第三方回调才修改订单信息等
+        /// </summary>
+        /// <param name="orderUuid"></param>
+        /// <param name="opt"></param>
+        /// <returns></returns>
+        [HttpPost("orders/{orderUuid}/payment")]
+        [Authorize]
+        public async Task<IActionResult> CreatePayment(Guid orderUuid, [FromBody] PaymentWriteOptions opt)
+        {
+            var result = await _userPayOrderService.UserPay(opt);
             if (result.IsSuccess)
             {
                 return Ok(result.Data);

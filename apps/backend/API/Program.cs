@@ -1,15 +1,13 @@
 using API.Api.SignalR;
 using API.Application.Common.EventBus;
 using API.Common.Helpers;
-using API.Common.Interfaces;
-using API.Common.Middlewares;
 using API.Common.Models;
-using API.Domain.Events.MerchantCase;
 using API.Infrastructure.Database;
-using Microsoft.AspNetCore.HttpOverrides;
+using API.Infrastructure.WechatPayV3;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using System.Text;
 
 namespace API
@@ -39,7 +37,7 @@ namespace API
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
-            
+
 
             builder.Services.AddControllers();
 
@@ -89,7 +87,7 @@ namespace API
                     };
                 });
 
-            
+
 
             builder.Services.AddAuthorization();
 
@@ -108,9 +106,27 @@ namespace API
                 .FromApplicationDependencies(dep => dep.FullName.StartsWith("API"))
                 .AddClasses(classes =>
                     classes.Where(type =>
-                        type.Name.EndsWith("Service") || type.Name.EndsWith("Repository")||type.Name.EndsWith("Factory")))
+                        type.Name.EndsWith("Service") || type.Name.EndsWith("Repository") || type.Name.EndsWith("Factory")))
                             .AsImplementedInterfaces()
                             .WithScopedLifetime());
+
+            //WechatPayV3
+            builder.Services.Configure<WeChatPayOptions>(
+    builder.Configuration.GetSection("WeChatPay"));
+
+            builder.Services.AddSingleton<WechatTenpayClient>(sp =>
+            {
+                var options = sp.GetRequiredService<IOptions<WeChatPayOptions>>().Value;
+
+                return new WechatTenpayClient(new WechatTenpayClientOptions()
+                {
+                    MerchantId = options.MchId,
+                    MerchantV3Secret = options.MchV3Key, // APIv3 Key，必填
+                    MerchantCertificateSerialNumber = options.MchCertificateSerialNumber,
+                    MerchantCertificatePrivateKey = options.MchPrivateKey
+                    // 其他可选配置按需设置
+                });
+            });
 
             //注册SignalR
             builder.Services.AddSignalR();

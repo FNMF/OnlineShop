@@ -24,7 +24,7 @@ namespace API.Domain.Services.UserPart.Implementations
                 var query = _userRepository.QueryUsers();
 
                 var user = await query
-                    .FirstOrDefaultAsync(u => u.OpenId == openId);
+                    .FirstOrDefaultAsync(u => u.OpenId == openId && u.IsDeleted == false);
 
                 if (user == null)
                 {
@@ -35,6 +35,27 @@ namespace API.Domain.Services.UserPart.Implementations
 
                 return result;
             }catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return Result<User>.Fail(ResultCode.ServerError, "服务器错误");
+            }
+        }
+
+        public async Task<Result<User>> GetUserByUuid(Guid uuid)
+        {
+            try
+            {
+                var query = _userRepository.QueryUsers();
+                var user = await query
+                    .FirstOrDefaultAsync(u => u.Uuid == uuid && u.IsDeleted == false);
+                if (user == null)
+                {
+                    return Result<User>.Fail(ResultCode.NotFound, "用户不存在或已删除");
+                }
+                var result = Result<User>.Success(user);
+                return result;
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
                 return Result<User>.Fail(ResultCode.ServerError, "服务器错误");
