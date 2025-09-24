@@ -3,6 +3,7 @@ using API.Application.Common.EventBus;
 using API.Common.Helpers;
 using API.Common.Models;
 using API.Infrastructure.Database;
+using API.Infrastructure.test;
 using API.Infrastructure.WechatPayV3;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -133,6 +134,8 @@ namespace API
 
             //配置反向代理中间件
             //TODO,未完成
+
+            
 
             var app = builder.Build();
 

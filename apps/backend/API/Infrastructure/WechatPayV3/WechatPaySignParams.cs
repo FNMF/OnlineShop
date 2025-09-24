@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace API.Application.OrderCase.DTOs
+namespace API.Infrastructure.WechatPayV3
 {
     public class WechatPaySignParams
     {

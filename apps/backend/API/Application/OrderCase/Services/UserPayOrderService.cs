@@ -1,5 +1,4 @@
 ﻿using API.Api.UserCase.Models;
-using API.Application.OrderCase.DTOs;
 using API.Application.OrderCase.Interfaces;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
@@ -24,9 +23,9 @@ namespace API.Application.OrderCase.Services
         private readonly IOrderUpdateService _orderUpdateService;
         private readonly IUserReadService _userReadService;
         private readonly ICurrentService _currentService;
-        private readonly IPaymentGateway _paymentGateway;
+        private readonly IWeChatPaymentGateway _paymentGateway;
         private readonly ILogger<UserPayOrderService> _logger;
-        public UserPayOrderService(IOrderReadService orderReadService, IOrderUpdateService orderUpdateService, IUserReadService userReadService, ICurrentService currentService, IPaymentGateway paymentGateway, ILogger<UserPayOrderService> logger)
+        public UserPayOrderService(IOrderReadService orderReadService, IOrderUpdateService orderUpdateService, IUserReadService userReadService, ICurrentService currentService, IWeChatPaymentGateway paymentGateway, ILogger<UserPayOrderService> logger)
         {
             _orderReadService = orderReadService;
             _orderUpdateService = orderUpdateService;

@@ -17,3 +17,6 @@
 
 ##TODO
     Address类的Detail字段通过Factory创建或更新时使用了AES加密，后续使用的时候再通过AES解密。
+
+##TODO
+    微信支付方面回调方面没做完，暂时搁置。

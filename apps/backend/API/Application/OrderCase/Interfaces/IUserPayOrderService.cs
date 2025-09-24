@@ -1,6 +1,6 @@
 ﻿using API.Api.UserCase.Models;
-using API.Application.OrderCase.DTOs;
 using API.Common.Models.Results;
+using API.Infrastructure.WechatPayV3;
 
 namespace API.Application.OrderCase.Interfaces
 {

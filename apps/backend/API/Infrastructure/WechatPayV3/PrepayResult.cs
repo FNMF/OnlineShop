@@ -1,6 +1,4 @@
-﻿using API.Application.OrderCase.DTOs;
-
-namespace API.Infrastructure.WechatPayV3
+﻿namespace API.Infrastructure.WechatPayV3
 {
     public class PrepayResult
     {
