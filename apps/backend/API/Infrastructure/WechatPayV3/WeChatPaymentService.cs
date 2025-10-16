@@ -33,7 +33,7 @@ public class WeChatPaymentService : IWeChatPaymentGateway
             AppId = _options.AppId,
             MerchantId = _options.MchId,
             Description = $"订单#{orderMain.OrderUuid}",
-            OutTradeNumber = orderMain.OrderUuid.ToString(),
+            OutTradeNumber = orderMain.OrderUuid.ToString("N"),
             NotifyUrl = _options.NotifyUrl,
             Amount = new CreatePayTransactionJsapiRequest.Types.Amount()
             {
@@ -63,6 +63,8 @@ public class WeChatPaymentService : IWeChatPaymentGateway
                 SignType = jsapiParams["signType"]
             };
 
+            // TODO，添加新建Payment的Event
+            
             return Result<PrepayResult>.Success(new PrepayResult
             {
                 PrepayId = response.PrepayId,

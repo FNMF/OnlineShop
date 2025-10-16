@@ -36,5 +36,27 @@ namespace API.Domain.Aggregates.OrderAggregate.Services
                 return Result<OrderMain>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
+        public Result<OrderMain> UpdateOrderNoCommit(OrderMain orderMain)
+        {
+            try
+            {
+                var orderResult = OrderFactory.ToEntity(orderMain);
+                if (!orderResult.IsSuccess)
+                {
+                    return Result<OrderMain>.Fail(orderResult.Code, orderResult.Message);
+                }
+                var updateResult = _orderRepository.UpdateOrderAsyncNoCommit(orderResult.Data);
+                if (!updateResult)
+                {
+                    return Result<OrderMain>.Fail(ResultCode.ServerError, "更新订单失败");
+                }
+                return Result<OrderMain>.Success(orderMain);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "更新订单失败");
+                return Result<OrderMain>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
     }
 }

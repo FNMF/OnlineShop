@@ -6,7 +6,9 @@ namespace API.Domain.Interfaces
     {
         IQueryable<Order> QueryOrders();
         Task<bool> AddOrderAsync(Order order);
+        Task<bool> AddOrderAsyncNoCommit(Order order);
         Task<bool> UpdateOrderAsync(Order order);
+        bool UpdateOrderAsyncNoCommit(Order order);
         Task<bool> RemoveOrderAsync(Order order);
     }
 }

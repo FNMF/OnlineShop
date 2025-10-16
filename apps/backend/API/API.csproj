@@ -47,6 +47,7 @@
     <Folder Include="Api\SystemCase\Controllers\" />
     <Folder Include="Api\SystemCase\Models\" />
     <Folder Include="Api\UserCase\Models\" />
+    <Folder Include="Application\CallBack\DTOs\" />
     <Folder Include="Application\CartCase\Handlers\" />
     <Folder Include="Application\MerchantCase\DTOs\" />
     <Folder Include="Application\OrderCase\DTOs\" />

@@ -21,11 +21,21 @@ namespace API.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<bool> AddOrderAsyncNoCommit(Order order)
+        {
+            await _context.Orders.AddAsync(order);
+            return true;
+        }
 
         public async Task<bool> UpdateOrderAsync(Order order)
         {
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
+            return true;
+        }
+        public bool UpdateOrderAsyncNoCommit(Order order)
+        {
+            _context.Orders.Update(order);
             return true;
         }
 

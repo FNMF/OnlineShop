@@ -25,20 +25,13 @@ public partial class Payment
 
     [Column("currency")]
     [StringLength(20)]
-    public string Currency { get; set; } = null!;
+    public string Currency { get; set; }
 
     [Column("payment_status", TypeName = "enum('pending','accepted','rejected','exception')")]
     public string PaymentStatus { get; set; } = null!;
 
-    [Column("method")]
-    [StringLength(50)]
-    public string Method { get; set; } = null!;
-
     [Column("created_at", TypeName = "datetime")]
     public DateTime CreatedAt { get; set; }
-
-    [Column("paid_at", TypeName = "datetime")]
-    public DateTime PaidAt { get; set; }
 
     [Column("app_id")]
     [StringLength(255)]
@@ -54,15 +47,15 @@ public partial class Payment
 
     [Column("transaction_id")]
     [StringLength(255)]
-    public string TransactionId { get; set; } = null!;
+    public string? TransactionId { get; set; }
 
     [Column("trade_type")]
     [StringLength(255)]
-    public string TradeType { get; set; } = null!;
+    public string? TradeType { get; set; }
 
     [Column("bank_type")]
     [StringLength(255)]
-    public string BankType { get; set; } = null!;
+    public string? BankType { get; set; }
 
     [Column("open_id")]
     [StringLength(255)]
@@ -73,11 +66,11 @@ public partial class Payment
     public string? Attach { get; set; }
 
     [Column("success_time", TypeName = "datetime")]
-    public DateTime SuccessTime { get; set; }
+    public DateTime? SuccessTime { get; set; }
 
     [Column("raw_call_back_data")]
     [StringLength(255)]
-    public string RawCallBackData { get; set; } = null!;
+    public string? RawCallBackData { get; set; }
 
     [ForeignKey("OrderUuid")]
     [InverseProperty("Payments")]
