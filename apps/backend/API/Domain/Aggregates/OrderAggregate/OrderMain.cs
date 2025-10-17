@@ -124,7 +124,6 @@ namespace API.Domain.Aggregates.OrderAggregates
             }
             OrderPaymentuuid = paymentUuid;
             OrderStatus = Enums.OrderStatus.paid;
-            //可添加领域事件
 
         }
         public void MarkAsAccepted()

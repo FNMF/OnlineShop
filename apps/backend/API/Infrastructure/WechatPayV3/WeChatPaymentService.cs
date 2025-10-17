@@ -9,20 +9,25 @@ using SKIT.FlurlHttpClient.Wechat.TenpayV3.Models;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text;
+using API.Application.Common.EventBus;
+using API.Domain.Events.PaymentCase;
 
 public class WeChatPaymentService : IWeChatPaymentGateway
 {
     private readonly WechatTenpayClient _client;
     private readonly WeChatPayOptions _options;
+    private readonly IEventBus _eventBus;
     private readonly ILogger<WeChatPaymentService> _logger;
 
     public WeChatPaymentService(
         WechatTenpayClient client,
         IOptions<WeChatPayOptions> options,
+        IEventBus eventBus,
         ILogger<WeChatPaymentService> logger)
     {
         _client = client;
         _options = options.Value;
+        _eventBus = eventBus;
         _logger = logger;
     }
 
@@ -63,8 +68,15 @@ public class WeChatPaymentService : IWeChatPaymentGateway
                 SignType = jsapiParams["signType"]
             };
 
-            // TODO，添加新建Payment的Event
-            
+            // 添加新建Payment的Event
+            await _eventBus.PublishAsync(new PaymentCreatedEvent
+                (
+                orderMain,
+                _options.AppId,
+                _options.MchId,
+                openId
+                ));
+
             return Result<PrepayResult>.Success(new PrepayResult
             {
                 PrepayId = response.PrepayId,
@@ -76,7 +88,7 @@ public class WeChatPaymentService : IWeChatPaymentGateway
             return Result<PrepayResult>.Fail(ResultCode.ServerError, "微信支付下单失败");
         }
     }
-    //下单操作，貌似是用于前端的
+    //下单操作，用于前端
     public async Task<CreatePayTransactionJsapiResponse> CreateJsapiTransactionAsync(CreatePayTransactionJsapiRequest req)
     {
         // 这里直接调用 SDK 提供的下单接口

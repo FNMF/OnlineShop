@@ -1,5 +1,7 @@
 ﻿using API.Application.CallBack.Interfaces;
+using API.Application.Common.EventBus;
 using API.Common.Models.Results;
+using API.Domain.Events.PaymentCase;
 using API.Infrastructure.WechatPayV3;
 
 namespace API.Application.CallBack.Services
@@ -7,12 +9,15 @@ namespace API.Application.CallBack.Services
     public class WeChatCallBackService: IWeChatCallBackService
     {
         private readonly IWeChatPaymentGateway _weChatPaymentGateway;
+        private readonly IEventBus _eventBus;
         private readonly ILogger<WeChatCallBackService> _logger;
         public WeChatCallBackService(
             IWeChatPaymentGateway weChatPaymentGateway,
+            IEventBus weEventBus,
             ILogger<WeChatCallBackService> logger)
         {
             _weChatPaymentGateway = weChatPaymentGateway;
+            _eventBus = weEventBus;
             _logger = logger;
         }
 
@@ -36,10 +41,9 @@ namespace API.Application.CallBack.Services
                     _logger.LogWarning("处理微信支付回调失败: {Message}", result.Message);
                     return Result<WechatTransaction>.Fail(result.Code, result.Message);
                 }
-                //TODO,添加业务处理逻辑，比如更新订单状态等
-                //Event之类的
 
-
+                //添加业务处理逻辑
+                await _eventBus.PublishAsync(new PaymentMarkAsPaidEvent(result.Data));
 
                 return result;
             }
