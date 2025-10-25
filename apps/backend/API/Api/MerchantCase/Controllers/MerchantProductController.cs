@@ -44,7 +44,7 @@ namespace API.Api.MerchantCase.Controllers
         [HttpPost("")]
         [Authorize]
         [AuthorizePermission(RoleName.shop_owner, Permissions.AddProduct)]
-        public async Task<IActionResult> AddProduct([FromBody] ProductWriteOptions opt)
+        public async Task<IActionResult> AddProduct([FromForm] ProductWriteOptions opt)
         {
             var result = await _addProductService.AddProduct(opt);
             if (result.IsSuccess)

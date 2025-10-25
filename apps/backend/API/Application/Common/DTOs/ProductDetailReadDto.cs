@@ -1,6 +1,6 @@
 ﻿namespace API.Application.Common.DTOs
 {
-    public class ProductReadDetailDto
+    public class ProductDetailReadDto
     {
         public Guid ProductUuid { get; }
         public string Name { get; }
@@ -15,7 +15,7 @@
         public decimal PackingFee {  get; }
         public List<string> Images { get; }
 
-        public ProductReadDetailDto(Guid productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl,decimal packingFee, List<string> images)
+        public ProductDetailReadDto(Guid productUuid, string name, decimal price, int stock, string description, string ingredient, string weight, bool isListed, bool isAvailable, string coverUrl,decimal packingFee, List<string> images)
         {
             ProductUuid = productUuid;
             Name = name;

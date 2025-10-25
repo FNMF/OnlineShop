@@ -57,7 +57,7 @@ namespace API.Application.ProductCase.Services
 
         }
 
-        public async Task<Result<ProductReadDetailDto>> GetProductByUuid(Guid uuid)
+        public async Task<Result<ProductDetailReadDto>> GetProductByUuid(Guid uuid)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace API.Application.ProductCase.Services
                 if (productResult.IsSuccess)
                 {
                     var product = productResult.Data;
-                    var productDetail = new ProductReadDetailDto
+                    var productDetail = new ProductDetailReadDto
                     (
                         product.Uuid,
                         product.Name,
@@ -81,17 +81,17 @@ namespace API.Application.ProductCase.Services
                         product.PackingFee,
                         imagesResult.IsSuccess ? imagesResult.Data.Select(i => i.Path).ToList() : new List<string>()
                     );
-                    return Result<ProductReadDetailDto>.Success(productDetail);
+                    return Result<ProductDetailReadDto>.Success(productDetail);
                 }
                 else
                 {
-                    return Result<ProductReadDetailDto>.Fail(productResult.Code, productResult.Message);
+                    return Result<ProductDetailReadDto>.Fail(productResult.Code, productResult.Message);
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<ProductReadDetailDto>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<ProductDetailReadDto>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }
