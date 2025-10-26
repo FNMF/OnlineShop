@@ -2,20 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="8dp">
 
+    <!-- 商品名称 -->
     <TextView
-        android:id="@+id/item_number"
+        android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:layout_marginEnd="16dp"
+        android:text="商品名称"
         android:textAppearance="?attr/textAppearanceListItem" />
 
+    <!-- 商品价格 -->
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/product_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
+        android:text="￥0.00"
+        android:textAppearance="?attr/textAppearanceListItem" />
+
+    <!-- 库存 -->
+    <TextView
+        android:id="@+id/product_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="库存"
         android:textAppearance="?attr/textAppearanceListItem" />
 
 </LinearLayout>

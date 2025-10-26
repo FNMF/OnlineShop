@@ -17,27 +17,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.merchantapp.R;
-import com.example.merchantapp.ui.products.placeholder.PlaceholderContent;
+import com.example.merchantapp.ui.ProductAdapter;
+import com.example.merchantapp.model.product.ProductRead;
+
+import java.util.List; // 引入你实际使用的数据类型
 
 /**
  * A fragment representing a list of Items.
  */
 public class ProductFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
+    private List<ProductRead> productList; // 定义商品列表
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ProductFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static ProductFragment newInstance(int columnCount) {
         ProductFragment fragment = new ProductFragment();
         Bundle args = new Bundle();
@@ -53,6 +49,9 @@ public class ProductFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        // 这里加载商品数据，假设你从某处加载了商品数据
+        // productList = fetchProductDataFromApi(); // 例如，调用后端接口获取商品列表
     }
 
     @Override
@@ -64,12 +63,19 @@ public class ProductFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
+
+            // 设置布局管理器（可以选择线性布局或网格布局）
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyProductRecyclerViewAdapter(PlaceholderContent.ITEMS));
+
+            // 检查是否已经成功获取商品数据
+            if (productList != null) {
+                // 将商品列表传递给适配器
+                recyclerView.setAdapter(new ProductAdapter(productList));  // 使用新适配器并传递商品数据
+            }
         }
         return view;
     }
@@ -84,5 +90,4 @@ public class ProductFragment extends Fragment {
             startActivity(intent);
         });
     }
-
 }
