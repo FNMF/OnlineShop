@@ -1,6 +1,7 @@
 package com.example.merchantapp.api.product;
 
 import com.example.merchantapp.model.product.ProductRead;
+import com.example.merchantapp.model.product.ProductReadDetail;
 import com.example.merchantapp.model.product.ProductWriteOptions;
 
 import java.util.List;
@@ -20,8 +21,9 @@ import retrofit2.http.Path;
 public interface ProductApiService {
     @GET("api/merchant/products")
     Call<List<ProductRead>> getProductReads();
+    // 这个是点击进入详情页面的api
     @GET("api/merchant/products/{uuid}")
-    Call<ProductRead> getProductByUuid(@Path("uuid") String uuid);
+    Call<ProductReadDetail> getProductByUuid(@Path("uuid") String uuid);
     @Multipart
     @POST("api/merchant/products")
     Call<ProductRead> addProduct(@Part("ProductName") RequestBody productName,

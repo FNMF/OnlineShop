@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.merchantapp.api.ApiClient;
 import com.example.merchantapp.model.product.ProductRead;
+import com.example.merchantapp.model.product.ProductReadDetail;
 
 import java.io.File;
 import java.util.List;
@@ -82,11 +83,11 @@ public class ProductRepository {
         });
     }
 
-    // 获取单个商品
-    public void getProductByUuid(String uuid, ProductCallback callback) {
-        apiService.getProductByUuid(uuid).enqueue(new Callback<ProductRead>() {
+    // 获取商品详情（返回 ProductReadDetail）
+    public void getProductDetail(String uuid, ProductDetailCallback callback) {
+        apiService.getProductByUuid(uuid).enqueue(new Callback<ProductReadDetail>() {
             @Override
-            public void onResponse(Call<ProductRead> call, Response<ProductRead> response) {
+            public void onResponse(Call<ProductReadDetail> call, Response<ProductReadDetail> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onSuccess(response.body());
                 } else {
@@ -95,11 +96,12 @@ public class ProductRepository {
             }
 
             @Override
-            public void onFailure(Call<ProductRead> call, Throwable t) {
+            public void onFailure(Call<ProductReadDetail> call, Throwable t) {
                 callback.onError("网络错误：" + t.getMessage());
             }
         });
     }
+
 
     // 更新
     public void updateProduct(
@@ -166,7 +168,11 @@ public class ProductRepository {
         void onSuccess(ProductRead product);
         void onError(String errorMsg);
     }
-
+    // Detail回调
+    public interface ProductDetailCallback {
+        void onSuccess(ProductReadDetail productDetail);
+        void onError(String errorMsg);
+    }
     public interface ProductListCallback {
         void onSuccess(List<ProductRead> products);
         void onError(String errorMsg);

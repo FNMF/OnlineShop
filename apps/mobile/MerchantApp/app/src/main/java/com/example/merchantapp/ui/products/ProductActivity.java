@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.merchantapp.R;
 import com.example.merchantapp.model.product.ProductRead;
-import com.example.merchantapp.ui.ProductAdapter;
 import com.example.merchantapp.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;

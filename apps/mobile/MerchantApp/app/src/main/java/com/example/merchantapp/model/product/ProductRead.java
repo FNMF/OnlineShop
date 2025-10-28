@@ -4,7 +4,14 @@ import java.math.BigDecimal;
 
 public class ProductRead {
     private String ProductUuid;
-
+    private String Name;
+    private BigDecimal Price;
+    private int Stock;
+    private String Weight;
+    private boolean IsListed;
+    private boolean IsAvailable;
+    private String CoverUrl;
+    private BigDecimal PackingFee;
     public String getProductUuid() {
         return ProductUuid;
     }
@@ -76,13 +83,4 @@ public class ProductRead {
     public void setPackingFee(BigDecimal packingFee) {
         PackingFee = packingFee;
     }
-
-    private String Name;
-    private BigDecimal Price;
-    private int Stock;
-    private String Weight;
-    private boolean IsListed;
-    private boolean IsAvailable;
-    private String CoverUrl;
-    private BigDecimal PackingFee;
 }

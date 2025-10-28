@@ -61,4 +61,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     // SignalR
     implementation("com.microsoft.signalr:signalr:6.0.1")
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
 }

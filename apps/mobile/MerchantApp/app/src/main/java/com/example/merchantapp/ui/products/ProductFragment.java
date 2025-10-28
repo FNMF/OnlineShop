@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.merchantapp.R;
-import com.example.merchantapp.ui.ProductAdapter;
 import com.example.merchantapp.model.product.ProductRead;
 
 import java.util.List; // 引入你实际使用的数据类型
