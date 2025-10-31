@@ -6,6 +6,7 @@ using API.Infrastructure.Database;
 using API.Infrastructure.test;
 using API.Infrastructure.WechatPayV3;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
@@ -152,7 +153,13 @@ namespace API
 
             app.UseAuthorization();
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "images")),
+                RequestPath = "/images"
+            });
+
 
             app.MapControllers();
 
