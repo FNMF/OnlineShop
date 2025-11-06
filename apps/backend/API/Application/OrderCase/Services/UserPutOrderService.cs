@@ -75,6 +75,17 @@ namespace API.Application.OrderCase.Services
                     return Result<OrderMain>.Fail(ResultCode.NotFound, "没有找到相关地址");
                 }
                 var merchantResult = await _merchantReadService.GetMerchantByUuidAsync(cartResult.Data.MerchantUuid);
+                if (!merchantResult.IsSuccess) 
+                {
+                    _logger.LogWarning("没有找到相关商户");
+                    return Result<OrderMain>.Fail(merchantResult.Code, merchantResult.Message);
+                }
+                if(merchantResult.Data.IsClosed.Value)
+                {
+                    _logger.LogWarning("商户已关闭，无法下单");
+                    return Result<OrderMain>.Fail(ResultCode.BusinessError, "商户已关闭，无法下单");
+                }
+                
                 var orderUuid = UuidV7Helper.NewUuidV7();
                 var merchantAddress = merchantResult.Data.City + merchantResult.Data.District + AESHelper.Decrypt(merchantResult.Data.Detail);
                 var userAddress = addressResult.Data.City + addressResult.Data.District + addressResult.Data.Detail;
@@ -84,6 +95,13 @@ namespace API.Application.OrderCase.Services
                 var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.Uuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
 
                 //PaymentService
+
+                //检测是否满足起送价
+                if(merchantResult.Data.MinDeliveryFee> cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee())
+                {
+                    _logger.LogWarning("订单未满足商户起送价");
+                    return Result<OrderMain>.Fail(ResultCode.BusinessError, "订单未满足商户起送价");
+                }
 
                 var orderTotal = cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee() +riderFeeResult.Data.Amount; 
                 var orderCreateDto = new OrderMainCreateDto(

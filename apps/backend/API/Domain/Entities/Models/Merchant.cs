@@ -55,6 +55,10 @@ public partial class Merchant
     [Column("is_audited")]
     public bool IsAudited { get; set; }
 
+    [Column("min_delivery_fee")]
+    [Precision(8, 2)]
+    public decimal MinDeliveryFee { get; set; }
+
     [ForeignKey("AdminUuid")]
     [InverseProperty("Merchants")]
     public virtual Admin AdminUu { get; set; } = null!;

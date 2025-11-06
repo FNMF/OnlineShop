@@ -16,6 +16,7 @@ namespace API.Domain.Services.MerchantPart
                 o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
                 o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
                 o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
+                o => o.MinDeliveryFee>=0,
             };
 
             var validationMessages = new List<string>();
@@ -46,7 +47,7 @@ namespace API.Domain.Services.MerchantPart
                 IsClosed = false,
                 IsDeleted = false,
                 IsAudited = false,
-                
+                MinDeliveryFee = dto.MinDeliveryFee
             };
             return Result<Merchant>.Success(merchant);
         }
@@ -59,6 +60,7 @@ namespace API.Domain.Services.MerchantPart
                 o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
                 o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
                 o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
+                o => o.MinDeliveryFee>=0,
             };
 
             var validationMessages = new List<string>();
@@ -90,6 +92,7 @@ namespace API.Domain.Services.MerchantPart
                 IsClosed = false,
                 IsDeleted = false,
                 IsAudited = false,
+                MinDeliveryFee = dto.MinDeliveryFee
             };
 
             return Result<Merchant>.Success(merchant);

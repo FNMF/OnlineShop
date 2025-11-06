@@ -25,7 +25,7 @@ public partial class Payment
 
     [Column("currency")]
     [StringLength(20)]
-    public string Currency { get; set; }
+    public string? Currency { get; set; }
 
     [Column("payment_status", TypeName = "enum('pending','accepted','rejected','exception')")]
     public string PaymentStatus { get; set; } = null!;
