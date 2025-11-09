@@ -55,9 +55,17 @@ public partial class Merchant
     [Column("is_audited")]
     public bool IsAudited { get; set; }
 
-    [Column("min_delivery_fee")]
+    [Column("delivery_fee")]
     [Precision(8, 2)]
-    public decimal MinDeliveryFee { get; set; }
+    public decimal DeliveryFee { get; set; }
+
+    [Column("minimum_order_amount")]
+    [Precision(8, 2)]
+    public decimal MinimumOrderAmount { get; set; }
+
+    [Column("free_delivery_threshold")]
+    [Precision(8, 2)]
+    public decimal? FreeDeliveryThreshold { get; set; }
 
     [ForeignKey("AdminUuid")]
     [InverseProperty("Merchants")]

@@ -13,8 +13,10 @@ namespace API.Application.Common.DTOs
         public TimeOnly Businessend { get; }
         public Guid Adminuuid { get; }
         public Guid MerchantUuid { get; }
-        public Decimal MinDeliveryFee { get; set; }
-        public MerchantUpdateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid, Guid merchantUuid, decimal minDeliveryFee)
+        public Decimal DeliveryFee { get; }
+        public Decimal MinimumOrderAmount { get; }
+        public Decimal? FreeDeliveryThreshold { get; }
+        public MerchantUpdateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid, Guid merchantUuid, Decimal deliveryFee, Decimal minOrderAmount, Decimal freeDeliveryThreshold)
         {
             Name = name;
             Province = province;
@@ -25,7 +27,9 @@ namespace API.Application.Common.DTOs
             Businessend = businessend;
             Adminuuid = adminuuid;
             MerchantUuid = merchantUuid;
-            MinDeliveryFee = minDeliveryFee;
+            DeliveryFee = deliveryFee;
+            MinimumOrderAmount = minOrderAmount;
+            FreeDeliveryThreshold = freeDeliveryThreshold;
         }
     }
 }

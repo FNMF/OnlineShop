@@ -73,7 +73,6 @@
     <Folder Include="Domain\Services\CouponPart\" />
     <Folder Include="wwwroot\" />
     <Folder Include="images\" />
-    <Folder Include="init-sql\" />
   </ItemGroup>
 
 </Project>

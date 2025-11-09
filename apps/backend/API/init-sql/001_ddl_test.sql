@@ -99,20 +99,22 @@ create table if not exists logs
 
 create table if not exists merchants
 (
-    uuid             binary(16)           not null
+    uuid                    binary(16)           not null
         primary key,
-    name             varchar(50)          not null,
-    province         varchar(50)          not null,
-    city             varchar(50)          not null,
-    district         varchar(50)          not null,
-    detail           varchar(255)         not null,
-    business_start   time                 not null,
-    business_end     time                 not null,
-    admin_uuid       binary(16)           not null,
-    is_closed        tinyint(1) default 1 not null,
-    is_deleted       tinyint(1) default 0 not null,
-    is_audited       tinyint(1) default 0 not null,
-    min_delivery_fee decimal(8, 2)        not null,
+    name                    varchar(50)          not null,
+    province                varchar(50)          not null,
+    city                    varchar(50)          not null,
+    district                varchar(50)          not null,
+    detail                  varchar(255)         not null,
+    business_start          time                 not null,
+    business_end            time                 not null,
+    admin_uuid              binary(16)           not null,
+    is_closed               tinyint(1) default 1 not null,
+    is_deleted              tinyint(1) default 0 not null,
+    is_audited              tinyint(1) default 0 not null,
+    delivery_fee            decimal(8, 2)        not null,
+    minimum_order_amount    decimal(8, 2)        not null,
+    free_delivery_threshold decimal(8, 2)        null,
     constraint merchant_admin_admin_uuid_fk
         foreign key (admin_uuid) references admins (uuid)
 );

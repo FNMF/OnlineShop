@@ -50,6 +50,7 @@ namespace API.Application.OrderCase.Services
         {
             try
             {
+                //检测状态防止脏数据
                 var cartResult =await _cartReadService.GetCartByUuid(opt.CartUuid);
                 if (!cartResult.IsSuccess)
                 {
@@ -85,41 +86,52 @@ namespace API.Application.OrderCase.Services
                     _logger.LogWarning("商户已关闭，无法下单");
                     return Result<OrderMain>.Fail(ResultCode.BusinessError, "商户已关闭，无法下单");
                 }
-                
+                //准备创建订单
                 var orderUuid = UuidV7Helper.NewUuidV7();
                 var merchantAddress = merchantResult.Data.City + merchantResult.Data.District + AESHelper.Decrypt(merchantResult.Data.Detail);
                 var userAddress = addressResult.Data.City + addressResult.Data.District + addressResult.Data.Detail;
-                //TODO，这里需要添加优惠券服务、支付服务等
-                //CouponService
-
-                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.Uuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
-
-                //PaymentService
-
                 //检测是否满足起送价
-                if(merchantResult.Data.MinDeliveryFee> cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee())
+                if (merchantResult.Data.MinimumOrderAmount> cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee())
                 {
                     _logger.LogWarning("订单未满足商户起送价");
                     return Result<OrderMain>.Fail(ResultCode.BusinessError, "订单未满足商户起送价");
                 }
+                //配送费服务
+                var riderFeeResult = await _riderFeeService.GetRiderFeeMainAsync(new RiderFeeCreateDto(_currentService.RequiredUuid, orderUuid, opt.AddressUuid, merchantResult.Data.Uuid, userAddress, merchantAddress, opt.ExpectedTime, opt.RiderService));
+                //TODO，暂时未接入第三方配送服务,所以先等于测试数据再等于商户设置数据
+                var riderFee = riderFeeResult.Data.Amount;
+                riderFee = merchantResult.Data.DeliveryFee;
+                //检测是否满足免配送费
+                if (merchantResult.Data.FreeDeliveryThreshold.HasValue && !(merchantResult.Data.FreeDeliveryThreshold.Value <= cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee()))
+                {
+                    riderFee = 0;
+                }
+                //TODO，这里需要添加优惠券服务、支付服务等
+                //CouponService
 
-                var orderTotal = cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee() +riderFeeResult.Data.Amount; 
+
+
+                //PaymentService
+
+
+
+                var orderTotal = cartMain.GetTotalPrice() + cartMain.GetTotalPackingFee() + riderFee;
                 var orderCreateDto = new OrderMainCreateDto(
-                    orderUuid,
-                    _currentService.RequiredUuid,
-                    orderTotal,
-                    OrderStatus.created,
-                    "订单未接收",
-                    DateTime.Now,
-                    merchantAddress,
-                    userAddress,
-                    orderTotal, /*-CouponDiscount*/
-                    cartMain.GetTotalPackingFee(),
-                    riderFeeResult.Data.Amount,
-                    opt.RiderService,
-                    opt.ExpectedTime,
-                    opt.Note
-                    );
+                        orderUuid,
+                        _currentService.RequiredUuid,
+                        orderTotal,
+                        OrderStatus.created,
+                        "订单未接收",
+                        DateTime.Now,
+                        merchantAddress,
+                        userAddress,
+                        orderTotal, /*-CouponDiscount*/
+                        cartMain.GetTotalPackingFee(),
+                        riderFeeResult.Data.Amount,//这里保存用于知道配送费，但是如果满足免配送费条件则不收费
+                        opt.RiderService,
+                        opt.ExpectedTime,
+                        opt.Note
+                        );
 
                 var orderMainResult = OrderFactory.CreateOrderMain(orderCreateDto);
                 if (!orderMainResult.IsSuccess)

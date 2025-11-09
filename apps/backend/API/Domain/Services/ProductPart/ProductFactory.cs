@@ -14,12 +14,12 @@ namespace API.Domain.Services.ProductPart
         {
             var validations = new List<Func<ProductCreateDto, bool>>
             {
-                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
+                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<=20,
                 o => o.Price>0&&Regex.IsMatch(o.Price.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
                 o => o.Stock>=0,
-                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<200,
-                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<100,
-                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<100,
+                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<=200,
+                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<=100,
+                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<=100,
             };
 
             var validationMessages = new List<string>();
@@ -59,12 +59,12 @@ namespace API.Domain.Services.ProductPart
         {
             var validations = new List<Func<ProductUpdateDto, bool>>
             {
-                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
+                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<=20,
                 o => o.Price>0&&Regex.IsMatch(o.Price.ToString(), @"^(?:\d{1,6}|\d{1,6}\.\d{1,2})$"),
                 o => o.Stock>=0,
-                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<200,
-                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<100,
-                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<100,
+                o => !string.IsNullOrEmpty(o.Description)&&o.Description.Length<=200,
+                o => !string.IsNullOrEmpty(o.Ingredient)&&o.Ingredient.Length<=100,
+                o => !string.IsNullOrEmpty(o.Weight)&&o.Weight.Length<=100,
             };
 
             var validationMessages = new List<string>();

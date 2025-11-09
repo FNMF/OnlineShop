@@ -10,8 +10,10 @@
         public TimeOnly Businessstart { get; }
         public TimeOnly Businessend { get; }
         public Guid Adminuuid {  get; }
-        public Decimal MinDeliveryFee { get; set; }
-        public MerchantCreateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid, Decimal minDeliveryFee)
+        public Decimal DeliveryFee { get; }
+        public Decimal MinimumOrderAmount { get; }
+        public Decimal? FreeDeliveryThreshold { get; }
+        public MerchantCreateDto(string name, string province, string city, string district, string detail, TimeOnly businessstart, TimeOnly businessend, Guid adminuuid, Decimal deliveryFee, Decimal minOrderAmount, Decimal freeDeliveryThreshold)
         {
             Name = name;
             Province = province;
@@ -21,7 +23,9 @@
             Businessstart = businessstart;
             Businessend = businessend;
             Adminuuid = adminuuid;
-            MinDeliveryFee = minDeliveryFee;
+            DeliveryFee = deliveryFee;
+            MinimumOrderAmount = minOrderAmount;
+            FreeDeliveryThreshold = freeDeliveryThreshold;
         }
     }
 }

@@ -11,12 +11,14 @@ namespace API.Domain.Services.MerchantPart
         {
             var validations = new List<Func<MerchantCreateDto, bool>>
             {
-                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
-                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
-                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
-                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
-                o => o.MinDeliveryFee>=0,
+                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<=20,
+                o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<=20,
+                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<=20,
+                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<=20,
+                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<=200,
+                o => o.DeliveryFee>=0,
+                o => o.MinimumOrderAmount>=0,
+                o => o.FreeDeliveryThreshold>=0||!o.FreeDeliveryThreshold.HasValue,
             };
 
             var validationMessages = new List<string>();
@@ -47,7 +49,9 @@ namespace API.Domain.Services.MerchantPart
                 IsClosed = false,
                 IsDeleted = false,
                 IsAudited = false,
-                MinDeliveryFee = dto.MinDeliveryFee
+                DeliveryFee = dto.DeliveryFee,
+                MinimumOrderAmount = dto.MinimumOrderAmount,
+                FreeDeliveryThreshold = dto.FreeDeliveryThreshold,
             };
             return Result<Merchant>.Success(merchant);
         }
@@ -55,12 +59,14 @@ namespace API.Domain.Services.MerchantPart
         {
             var validations = new List<Func<MerchantUpdateDto, bool>>
             {
-                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<20,
-                o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<20,
-                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<20,
-                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<20,
-                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<200,
-                o => o.MinDeliveryFee>=0,
+                o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<=20,
+                o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<=20,
+                o => !string.IsNullOrEmpty(o.City)&&o.City.Length<=20,
+                o => !string.IsNullOrEmpty(o.District)&&o.District.Length<=20,
+                o => !string.IsNullOrEmpty(o.Detail)&&o.Detail.Length<=200,
+                o => o.DeliveryFee>=0,
+                o => o.MinimumOrderAmount>=0,
+                o => o.FreeDeliveryThreshold>=0||!o.FreeDeliveryThreshold.HasValue,
             };
 
             var validationMessages = new List<string>();
@@ -92,7 +98,9 @@ namespace API.Domain.Services.MerchantPart
                 IsClosed = false,
                 IsDeleted = false,
                 IsAudited = false,
-                MinDeliveryFee = dto.MinDeliveryFee
+                DeliveryFee = dto.DeliveryFee,
+                MinimumOrderAmount = dto.MinimumOrderAmount,
+                FreeDeliveryThreshold = dto.FreeDeliveryThreshold,
             };
 
             return Result<Merchant>.Success(merchant);
