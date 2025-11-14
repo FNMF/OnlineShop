@@ -23,7 +23,7 @@ public class UpdateChecker {
     public static void checkForUpdate(Context context, int currentVersionCode) {
         new Thread(() -> {
             try {
-                URL url = new URL("https://example.com/api/app/version");//todo，改成后端api
+                URL url = new URL("https://api.vesev.top/api/android/appversion/latest");//todo，改成后端api
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setConnectTimeout(5000);
                 conn.setReadTimeout(5000);

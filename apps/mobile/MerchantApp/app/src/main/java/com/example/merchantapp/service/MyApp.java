@@ -25,7 +25,7 @@ public class MyApp extends Application {
         }
 
         // 初始化 Retrofit
-        ApiClient.init("https://api.example.com/"); // TODO，改为后端地址
+        ApiClient.init("https://api.vesev.top/"); // TODO，改为后端地址
 
         // 检查应用更新
         UpdateChecker.checkForUpdate(this, BuildConfig.VERSION_CODE);

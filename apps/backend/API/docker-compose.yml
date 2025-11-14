@@ -9,8 +9,9 @@ services:
     depends_on:
       - db
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ConnectionStrings__DefaultConnection=${ConnectionStrings__DefaultConnection}
+      - ASPNETCORE_ENVIRONMENT:Production
+      - ConnectionStrings__DefaultConnection:${ConnectionStrings__DefaultConnection}
+      - Jwt__SecretKey=${Jwt__SecretKey}
     volumes:
       - ./images:/app/images
 

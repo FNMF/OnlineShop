@@ -13,8 +13,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-noble AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["API.csproj", "."]
-RUN dotnet nuget add source https://mirror.nuget.cdn.azure.cn/v3/index.json -n nuget-cn
-RUN dotnet restore "./API.csproj" --source "https://mirror.nuget.cdn.azure.cn/v3/index.json"
+RUN dotnet restore "./API.csproj" 
 COPY . .
 WORKDIR "/src/."
 RUN dotnet build "./API.csproj" -c $BUILD_CONFIGURATION -o /app/build

@@ -31,7 +31,7 @@ public class NetworkUtils {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://your-api.com/") // TODO: 改成你的后端地址
+                .baseUrl("https://api.vesev.top/api/") // TODO: 改成你的后端地址
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -40,6 +40,8 @@ public class NetworkUtils {
         call.enqueue(new Callback<HealthResponse>() {
             @Override
             public void onResponse(Call<HealthResponse> call, Response<HealthResponse> response) {
+                System.out.println("CODE = " + response.code());
+                System.out.println("BODY = " + response.body());
                 if (response.isSuccessful() && response.body() != null) {
                     HealthResponse body = response.body();
                     if (body.success) {
@@ -61,7 +63,7 @@ public class NetworkUtils {
 
     // 健康检查接口
     public interface ApiService {
-        @retrofit2.http.GET("health") // 健康检查 API
+        @retrofit2.http.GET("ops/healthy/ping") // 健康检查 API
         Call<HealthResponse> ping();
     }
 
