@@ -6,7 +6,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "";//TODO,可以移至配置文件中，这里需要写成后端的api地址
+    private static final String BASE_URL = "https://api.vesev.top/";//TODO,可以移至配置文件中，这里需要写成后端的api地址
     private static Retrofit retrofit;
     public static Retrofit getClient(){
         if (retrofit == null){

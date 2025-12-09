@@ -1,57 +1,58 @@
 ﻿using API.Common.Models.Results;
 using API.Domain.Entities.Models;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using SixLabors.ImageSharp.Formats.Jpeg;
-using Image = SixLabors.ImageSharp.Image;
 using API.Common.Helpers;
 using API.Application.Common.DTOs;
 
 namespace API.Domain.Services.LocalFilePart
 {
     //todo
-    //这里的部分逻辑有明显问题，比如传入的图片多次压缩，后续要解决
+    //这里后续要添加对象存储支持，比如AWS S3，阿里云OSS等
     public class LocalFileFactory: ILocalFileFactory
     {
         private static readonly string Root = Environment.GetEnvironmentVariable("WEB_ROOT")
         ?? throw new Exception("WEB_ROOT not found");
+        private static readonly long MaxImageSize = 5 * 1024 * 1024;   // 5MB
+        private static readonly long MaxFileSize = 10 * 1024 * 1024;   // 10MB
+
+        private static readonly string[] AllowedImageTypes =
+        {
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+};
+
 
         public async Task<Result<Localfile>> Create(LocalFileCreateDto dto)
         {
             if (dto.File == null || dto.File.Length == 0)
                 return Result<Localfile>.Fail(ResultCode.ValidationError, "文件为空");
 
-            var uploadPath = Path.Combine(Root, "uploads");
-
-            if (!Directory.Exists(uploadPath))
-                Directory.CreateDirectory(uploadPath);
-
-            var fileExt = Path.GetExtension(dto.File.FileName);
-            var newFileName = Guid.NewGuid().ToString() + fileExt;
-            var filePath = Path.Combine(uploadPath, newFileName);
-
-            // 压缩逻辑（仅对图片处理）
+            // 基本大小校验
             if (dto.File.ContentType.StartsWith("image"))
             {
-                using var image = await Image.LoadAsync(dto.File.OpenReadStream());
+                if (!AllowedImageTypes.Contains(dto.File.ContentType))
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "不支持的图片格式");
 
-                // 例如：压缩到 80% 质量
-                var encoder = new JpegEncoder { Quality = 80 };
-
-                // 可选：调整尺寸（防止超大图）
-                if (image.Width > 1920)
-                {
-                    image.Mutate(x => x.Resize(1920, 0)); // 按宽等比缩放
-                }
-
-                await image.SaveAsync(filePath, encoder);
+                if (dto.File.Length > MaxImageSize)
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "图片大小不能超过 5MB");
             }
             else
             {
-                // 非图片直接保存
-                using var stream = new FileStream(filePath, FileMode.Create);
+                if (dto.File.Length > MaxFileSize)
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "文件大小不能超过 10MB");
+            }
+
+            var uploadPath = Path.Combine(Root, "uploads");
+            Directory.CreateDirectory(uploadPath);
+
+            var fileExt = Path.GetExtension(dto.File.FileName);
+            var newFileName = Guid.NewGuid() + fileExt;
+            var filePath = Path.Combine(uploadPath, newFileName);
+            await using (var stream = new FileStream(filePath, FileMode.Create))
+            {
                 await dto.File.CopyToAsync(stream);
             }
+
             var fileInfo = new FileInfo(filePath);
 
             var localFile = new Localfile
@@ -68,12 +69,10 @@ namespace API.Domain.Services.LocalFilePart
                 UploadIp = dto.UploderIp,
                 IsAudited = false,
                 IsDeleted = false,
-                MimeType = dto.File.ContentType,
-
+                MimeType = dto.File.ContentType
             };
 
             return Result<Localfile>.Success(localFile);
-
         }
 
         //不推荐直接Update方法，而是通过软删除加新增来替代Update
@@ -82,37 +81,32 @@ namespace API.Domain.Services.LocalFilePart
             if (dto.File == null || dto.File.Length == 0)
                 return Result<Localfile>.Fail(ResultCode.ValidationError, "文件为空");
 
-            var uploadPath = Path.Combine(Root, "uploads");
-
-            if (!Directory.Exists(uploadPath))
-                Directory.CreateDirectory(uploadPath);
-
-            var fileExt = Path.GetExtension(dto.File.FileName);
-            var newFileName = Guid.NewGuid().ToString() + fileExt;
-            var filePath = Path.Combine(uploadPath, newFileName);
-
-            // 压缩逻辑（仅对图片处理）
+            // 基本大小校验
             if (dto.File.ContentType.StartsWith("image"))
             {
-                using var image = await Image.LoadAsync(dto.File.OpenReadStream());
+                if (!AllowedImageTypes.Contains(dto.File.ContentType))
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "不支持的图片格式");
 
-                // 例如：压缩到 80% 质量
-                var encoder = new JpegEncoder { Quality = 80 };
-
-                // 可选：调整尺寸（防止超大图）
-                if (image.Width > 1920)
-                {
-                    image.Mutate(x => x.Resize(1920, 0)); // 按宽等比缩放
-                }
-
-                await image.SaveAsync(filePath, encoder);
+                if (dto.File.Length > MaxImageSize)
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "图片大小不能超过 5MB");
             }
             else
             {
-                // 非图片直接保存
-                using var stream = new FileStream(filePath, FileMode.Create);
+                if (dto.File.Length > MaxFileSize)
+                    return Result<Localfile>.Fail(ResultCode.ValidationError, "文件大小不能超过 10MB");
+            }
+
+            var uploadPath = Path.Combine(Root, "uploads");
+            Directory.CreateDirectory(uploadPath);
+
+            var fileExt = Path.GetExtension(dto.File.FileName);
+            var newFileName = Guid.NewGuid() + fileExt;
+            var filePath = Path.Combine(uploadPath, newFileName);
+            await using (var stream = new FileStream(filePath, FileMode.Create))
+            {
                 await dto.File.CopyToAsync(stream);
             }
+
             var fileInfo = new FileInfo(filePath);
 
             var localFile = new Localfile

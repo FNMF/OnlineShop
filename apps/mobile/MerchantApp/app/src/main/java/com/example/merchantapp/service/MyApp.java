@@ -13,7 +13,7 @@ public class MyApp extends Application {
         super.onCreate();
         // 这里是全局初始化的地方
         // 网络检测
-        GlobalNetworkService.init(this);
+        //GlobalNetworkService.init(this);
 
         // 例如：初始化对象管理
         UserManager.init(this);
