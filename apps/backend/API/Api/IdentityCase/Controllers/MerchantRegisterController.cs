@@ -1,10 +1,10 @@
-﻿using API.Api.MerchantCase.Models;
-using API.Application.MerchantCase.Interfaces;
+﻿using API.Api.IdentityCase.Models;
+using API.Application.IdentityCase.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Api.MerchantCase.Controllers
+namespace API.Api.IdentityCase.Controllers
 {
-    [Route("api/merchant/register")]
+    [Route("api/auth/register/merchant")]
     [ApiController]
     public class MerchantRegisterController:ControllerBase
     {

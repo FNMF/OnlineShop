@@ -4,7 +4,7 @@ using API.Application.PlatformCase.Interfaces;
 using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Events.PlatformCase;
-using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 
 namespace API.Application.PlatformCase.Services
 {

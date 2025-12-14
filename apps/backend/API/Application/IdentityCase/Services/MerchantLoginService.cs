@@ -1,33 +1,36 @@
-﻿using API.Api.MerchantCase.Models;
+﻿using API.Api.IdentityCase.Models;
 using API.Application.Common.DTOs;
 using API.Application.Common.EventBus;
-using API.Application.MerchantCase.Interfaces;
+using API.Application.IdentityCase.Interfaces;
 using API.Common.Helpers;
+using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Events.MerchantCase;
 using API.Domain.Events.PlatformCase;
-using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 using API.Domain.Services.RefreshTokenPart.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace API.Application.MerchantCase.Services
+namespace API.Application.IdentityCase.Services
 {
 
     public class MerchantLoginService : IMerchantLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
         private readonly IRefreshTokenReadService _refreshTokenReadService;
+        private readonly ICurrentService _currentService;
         private readonly JwtHelper _jwtHelper;
         private readonly EventBus _eventBus;
         private readonly ILogger<MerchantLoginService> _logger;
 
-        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, IRefreshTokenReadService refreshTokenReadService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
+        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, IRefreshTokenReadService refreshTokenReadService, ICurrentService currentService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
             _refreshTokenReadService = refreshTokenReadService;
+            _currentService = currentService;
             _jwtHelper = jwtHelper;
             _eventBus = eventBus;
             _logger = logger;
@@ -36,24 +39,12 @@ namespace API.Application.MerchantCase.Services
         {
             try
             {
-                if (string.IsNullOrEmpty(accessToken))
+                if (string.IsNullOrEmpty(accessToken)||string.IsNullOrEmpty(refreshToken))
                 {
                     return Result.Fail(ResultCode.InvalidInput, "无效的输入");
                 }
 
-                var principal = _jwtHelper.ValidateAccessTokenIgnoreExpiry(accessToken);
-                if (principal == null)
-                {
-                    return Result.Fail(ResultCode.TokenInvalid, "访问令牌无效");
-                }
-
-                var uuidClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
-                if (uuidClaim == null)
-                {
-                    return Result.Fail(ResultCode.TokenInvalid, "Token 缺少身份信息");
-                }
-
-                var uuid = Guid.Parse(uuidClaim.Value);
+                var uuid = _currentService.RequiredUuid;
 
                 var verifyResult = await _refreshTokenReadService.VerifyToken(uuid, refreshToken);
                 if (!verifyResult.IsSuccess)

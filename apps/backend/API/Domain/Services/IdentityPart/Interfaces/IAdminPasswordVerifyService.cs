@@ -1,6 +1,6 @@
 ﻿using API.Common.Models.Results;
 
-namespace API.Domain.Services.Common.Interfaces
+namespace API.Domain.Services.IdentityPart.Interfaces
 {
     public interface IAdminPasswordVerifyService
     {

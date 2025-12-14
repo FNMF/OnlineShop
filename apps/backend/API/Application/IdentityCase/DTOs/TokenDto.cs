@@ -1,4 +1,4 @@
-﻿namespace API.Application.MerchantCase.DTOs
+﻿namespace API.Application.IdentityCase.DTOs
 {
     public class TokenDto
     {

@@ -2,10 +2,10 @@
 using API.Common.Models.Results;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
-using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 using System.Security.Cryptography;
 
-namespace API.Domain.Services.Common.Implementations
+namespace API.Domain.Services.IdentityPart.Implementations
 {
     public class AdminPasswordVerifyService : IAdminPasswordVerifyService
     {

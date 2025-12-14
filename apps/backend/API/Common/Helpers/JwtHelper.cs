@@ -93,33 +93,5 @@ namespace API.Common.Helpers
             }
         }
 
-        public ClaimsPrincipal? ValidateAccessTokenIgnoreExpiry(string token)
-        {
-            try
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var principal = handler.ValidateToken(
-                    token,
-                    new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidateLifetime = false, // 无视时间验证信息
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(_settings.SecretKey)),
-                        ValidIssuer = _settings.Issuer,
-                        ValidAudience = _settings.Audience
-                    },
-                    out _);
-
-                return principal;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
     }
 }

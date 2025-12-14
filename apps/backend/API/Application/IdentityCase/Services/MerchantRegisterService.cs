@@ -1,18 +1,18 @@
-﻿using API.Api.MerchantCase.Models;
+﻿using API.Api.IdentityCase.Models;
 using API.Application.Common.DTOs;
 using API.Application.Common.EventBus;
+using API.Application.IdentityCase.DTOs;
+using API.Application.IdentityCase.Interfaces;
 using API.Application.Interfaces;
-using API.Application.MerchantCase.DTOs;
-using API.Application.MerchantCase.Interfaces;
 using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Events.MerchantCase;
 using API.Domain.Interfaces;
-using API.Domain.Services.AdminPart.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 using API.Domain.Services.RefreshTokenPart.Interfaces;
 
-namespace API.Application.MerchantCase.Services
+namespace API.Application.IdentityCase.Services
 {
     public class MerchantRegisterService:IMerchantRegisterService
     {

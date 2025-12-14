@@ -88,6 +88,20 @@ namespace API
 
             builder.Services.AddAuthorization();
 
+            builder.Services.AddAuthentication()
+    .AddJwtBearer("ExpiredAllowed", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = false, // ÔÊÐí¹ýÆÚ
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+    });
+
+
             builder.Services.AddDbContext<OnlineshopContext>(options =>
             {
                 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

@@ -4,13 +4,13 @@ using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models;
 using API.Domain.Enums;
-using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 using API.Domain.Services.UserPart.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace API.Application.Services
+namespace API.Domain.Services.IdentityPart.Implementations
 {
     public class AuthService : IAuthService
     {

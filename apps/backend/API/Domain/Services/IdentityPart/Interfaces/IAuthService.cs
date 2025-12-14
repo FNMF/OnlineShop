@@ -1,6 +1,6 @@
 ﻿using API.Application.Common.DTOs;
 
-namespace API.Domain.Services.Common.Interfaces
+namespace API.Domain.Services.IdentityPart.Interfaces
 {
     public interface IAuthService
     {

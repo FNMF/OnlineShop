@@ -1,11 +1,11 @@
 ﻿using API.Application.Common.DTOs;
-using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.IdentityPart.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Api.UserCase.Controllers
+namespace API.Api.IdentityCase.Controllers
 {
     [ApiController]
-    [Route("api/auth")]
+    [Route("api/auth/user")]
     public class WxAuthController : ControllerBase
     {
         private readonly IAuthService _authService;

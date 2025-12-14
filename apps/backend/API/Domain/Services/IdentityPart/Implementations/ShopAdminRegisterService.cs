@@ -4,10 +4,11 @@ using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Interfaces;
-using API.Domain.Services.AdminPart.Interfaces;
+using API.Domain.Services.AdminPart;
+using API.Domain.Services.IdentityPart.Interfaces;
 using System.Formats.Asn1;
 
-namespace API.Domain.Services.AdminPart.Implementations
+namespace API.Domain.Services.IdentityPart.Implementations
 {
     public class ShopAdminRegisterService: IShopAdminRegisterService
     {

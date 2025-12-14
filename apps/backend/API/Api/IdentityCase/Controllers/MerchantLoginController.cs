@@ -1,11 +1,12 @@
-﻿using API.Api.MerchantCase.Models;
+﻿using API.Api.IdentityCase.Models;
 using API.Api.PlatformCase.Models;
-using API.Application.MerchantCase.Interfaces;
+using API.Application.IdentityCase.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Api.MerchantCase.Controllers
+namespace API.Api.IdentityCase.Controllers
 {
-    [Route("api/merchant/login")]
+    [Route("api/auth/login/merchant")]
     [ApiController]
     public class MerchantLoginController:ControllerBase
     {
@@ -16,7 +17,8 @@ namespace API.Api.MerchantCase.Controllers
             _merchantLoginService = merchantLoginService;
         }
         [HttpPost("token")]
-        public async Task<IActionResult> LoginByToken([FromBody] String refreshToken)
+        [Authorize(AuthenticationSchemes = "ExpiredAllowed")]
+        public async Task<IActionResult> LoginByToken([FromBody] string refreshToken)
         {
             var accessToken = HttpContext.Request.Headers["Authorization"]
                     .FirstOrDefault()?

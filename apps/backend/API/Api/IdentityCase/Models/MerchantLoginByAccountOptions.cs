@@ -1,4 +1,4 @@
-﻿namespace API.Api.MerchantCase.Models
+﻿namespace API.Api.IdentityCase.Models
 {
     public class MerchantLoginByAccountOptions
     {

@@ -1,13 +1,11 @@
 ﻿using API.Api.Common.Models;
 using API.Application.Common.DTOs;
 using API.Application.Common.EventBus;
-using API.Application.MerchantCase.Services;
 using API.Application.ProductCase.Interfaces;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Domain.Enums;
-using API.Domain.Events.MerchantCase;
 using API.Domain.Events.ProductCase;
 using API.Domain.Services.LocalFilePart.Interfaces;
 using API.Domain.Services.ProductPart.Interfaces;

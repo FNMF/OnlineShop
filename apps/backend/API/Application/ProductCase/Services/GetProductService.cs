@@ -1,6 +1,5 @@
 ﻿using API.Application.Common.DTOs;
 using API.Application.Common.EventBus;
-using API.Application.MerchantCase.Services;
 using API.Application.ProductCase.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Services.LocalFilePart.Interfaces;

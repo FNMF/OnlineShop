@@ -2,7 +2,7 @@
 using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 
-namespace API.Domain.Services.AdminPart.Interfaces
+namespace API.Domain.Services.IdentityPart.Interfaces
 {
     public interface IShopAdminRegisterService
     {
