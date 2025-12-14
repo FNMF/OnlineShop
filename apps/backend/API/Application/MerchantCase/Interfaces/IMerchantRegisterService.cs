@@ -6,7 +6,7 @@ namespace API.Application.MerchantCase.Interfaces
 {
     public interface IMerchantRegisterService
     {
-        Task<Result<AdminReadDto>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt);
+        Task<Result<String>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt);
 
     }
 }

@@ -55,6 +55,8 @@ public partial class OnlineshopContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public virtual DbSet<Refund> Refunds { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -101,7 +103,6 @@ public partial class OnlineshopContext : DbContext
 
             entity.Property(e => e.Uuid).IsFixedLength();
             entity.Property(e => e.Account).ValueGeneratedOnAdd();
-            entity.Property(e => e.Key).IsFixedLength();
         });
 
         modelBuilder.Entity<AdminRole>(entity =>
@@ -298,6 +299,14 @@ public partial class OnlineshopContext : DbContext
             entity.HasOne(d => d.MerchantUu).WithMany(p => p.Products)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("product_merchant_merchant_uuid_fk");
+        });
+
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.HasKey(e => e.Uuid).HasName("PRIMARY");
+
+            entity.Property(e => e.Uuid).IsFixedLength();
+            entity.Property(e => e.TargetUuid).IsFixedLength();
         });
 
         modelBuilder.Entity<Refund>(entity =>

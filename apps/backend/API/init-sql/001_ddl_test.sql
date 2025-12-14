@@ -10,7 +10,6 @@ create table if not exists admins
     phone           varchar(20)          not null,
     salt            varchar(255)         not null,
     password_hash   varchar(255)         not null,
-    `key`           char(10)             not null,
     last_location   varchar(255)         not null,
     last_login_time datetime             not null,
     is_deleted      tinyint(1) default 0 not null,

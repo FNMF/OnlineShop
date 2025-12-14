@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace API.Common.Helpers
 {
-    public class PwdHashHelper
+    public class HashHelper
     {
         static private int saltSize = 16; //盐的大小
         static private int hashSize = 32; //加密字段大小

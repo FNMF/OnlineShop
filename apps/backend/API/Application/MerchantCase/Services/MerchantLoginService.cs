@@ -7,26 +7,69 @@ using API.Common.Models.Results;
 using API.Domain.Events.MerchantCase;
 using API.Domain.Events.PlatformCase;
 using API.Domain.Services.Common.Interfaces;
+using API.Domain.Services.RefreshTokenPart.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace API.Application.MerchantCase.Services
 {
-    
-    public class MerchantLoginService:IMerchantLoginService
+
+    public class MerchantLoginService : IMerchantLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
+        private readonly IRefreshTokenReadService _refreshTokenReadService;
         private readonly JwtHelper _jwtHelper;
         private readonly EventBus _eventBus;
         private readonly ILogger<MerchantLoginService> _logger;
 
-        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
+        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, IRefreshTokenReadService refreshTokenReadService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
+            _refreshTokenReadService = refreshTokenReadService;
             _jwtHelper = jwtHelper;
             _eventBus = eventBus;
             _logger = logger;
         }
-        
+        public async Task<Result> LoginByTokenAsync(string? accessToken, string refreshToken)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(accessToken))
+                {
+                    return Result.Fail(ResultCode.InvalidInput, "无效的输入");
+                }
+
+                var principal = _jwtHelper.ValidateAccessTokenIgnoreExpiry(accessToken);
+                if (principal == null)
+                {
+                    return Result.Fail(ResultCode.TokenInvalid, "访问令牌无效");
+                }
+
+                var uuidClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
+                if (uuidClaim == null)
+                {
+                    return Result.Fail(ResultCode.TokenInvalid, "Token 缺少身份信息");
+                }
+
+                var uuid = Guid.Parse(uuidClaim.Value);
+
+                var verifyResult = await _refreshTokenReadService.VerifyToken(uuid, refreshToken);
+                if (!verifyResult.IsSuccess)
+                {
+                    return Result.Fail(verifyResult.Code, verifyResult.Message);
+                }
+                await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
+
+                return Result.Success();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
         public async Task<Result> LoginByAccountAsync(MerchantLoginByAccountOptions opt)
         {
             try

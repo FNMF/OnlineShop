@@ -5,6 +5,7 @@ namespace API.Application.MerchantCase.Interfaces
 {
     public interface IMerchantLoginService
     {
+        Task<Result> LoginByTokenAsync(string accessToken, string refreshToken);
         Task<Result> LoginByAccountAsync(MerchantLoginByAccountOptions loginDto);
     }
 }

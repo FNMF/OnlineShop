@@ -29,7 +29,7 @@ namespace API.Domain.Services.AdminPart
                 return Result<Admin>.Fail(ResultCode.ValidationError, string.Join(", ", validationMessages));
             };
 
-            var hash = PwdHashHelper.HashandSalt(dto.Password);
+            var hash = HashHelper.HashandSalt(dto.Password);
 
 
             var admin = new Admin
@@ -39,7 +39,6 @@ namespace API.Domain.Services.AdminPart
                 Salt = hash.Salt,
                 LastLoginTime = DateTime.Now,
                 LastLocation = dto.IpLocation,
-                Key = RandomKeyHelper.GetIpKey(dto.IpLocation),
                 Uuid = UuidV7Helper.NewUuidV7(),
             };
 

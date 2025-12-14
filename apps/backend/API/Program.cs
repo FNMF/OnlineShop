@@ -47,12 +47,7 @@ namespace API
 
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-            builder.Services.AddSingleton<JwtHelper>(sp =>
-            {
-                var configuration = sp.GetRequiredService<IConfiguration>();
-                var settings = sp.GetRequiredService<IOptions<JwtSettings>>().Value;
-                return new JwtHelper(settings, configuration);
-            });
+            builder.Services.AddScoped<JwtHelper>();
 
             builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>

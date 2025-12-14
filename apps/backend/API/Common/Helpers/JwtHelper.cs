@@ -1,6 +1,7 @@
 ﻿using API.Common.Models;
 using API.Common.Models.Results;
 using API.Domain.Enums;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,85 +12,114 @@ namespace API.Common.Helpers
     public class JwtHelper
     {
         private readonly JwtSettings _settings;
-        private readonly IConfiguration _configuration;
 
-        public JwtHelper(JwtSettings settings, IConfiguration configuration)
+        public JwtHelper(IOptions<JwtSettings> options)
         {
-            _settings = settings;
-            _configuration = configuration;
+            _settings = options.Value;
+        }
+
+        private SigningCredentials GetCredentials()
+        {
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_settings.SecretKey));
+
+            return new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        }
+
+        private JwtSecurityToken CreateToken(IEnumerable<Claim> claims)
+        {
+            return new JwtSecurityToken(
+                issuer: _settings.Issuer,
+                audience: _settings.Audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(_settings.ExpiresMinutes),
+                signingCredentials: GetCredentials()
+            );
         }
 
         public string UserGenerateToken(string? openId, Guid uuid, string? name)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, uuid.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, uuid.ToString())
             };
-            if (!string.IsNullOrEmpty(openId))          //如果是微信小程序登录会有这个，但是因为如果Claim中有NULL值会报错，所以要拎出来写一个判断，防止报错
+
+            if (!string.IsNullOrEmpty(openId))
             {
                 claims.Add(new Claim("OpenId", openId));
             }
-            if(!string.IsNullOrEmpty(name))
+
+            if (!string.IsNullOrEmpty(name))
             {
-                claims.Add(new Claim(ClaimTypes.Name, name));           //如果有名字则add，如果没有则无视，理由同上
+                claims.Add(new Claim(ClaimTypes.Name, name));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _settings.Issuer,
-                audience: _settings.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(_settings.ExpiresMinutes),
-                signingCredentials: creds
-            );
-
+            var token = CreateToken(claims);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public string AdminGenerateToken(string Phone, Guid uuid, string account)
+        public string AdminGenerateToken(string phone, Guid uuid, int account)
         {
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, uuid.ToString()),
-                new Claim("Phone", Phone),
-                new Claim("Account", account),
+                new Claim("Phone", phone),
+                new Claim("Account", account.ToString())
             };
-             
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _settings.Issuer,
-                audience: _settings.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(_settings.ExpiresMinutes),
-                signingCredentials: creds
-            );
-
+            var token = CreateToken(claims);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        //没有验证的解析Token
+
+        // 无验证解析，仅用于非安全场景
         public Result AnalysisToken(string token, string type)
         {
             try
             {
                 var handler = new JwtSecurityTokenHandler();
                 var jwtToken = handler.ReadJwtToken(token);
-                var claims = jwtToken.Claims.ToList();
-                var anything = claims.FirstOrDefault(c => c.Type == type);
-                if (anything == null)
+
+                var claim = jwtToken.Claims.FirstOrDefault(c => c.Type == type);
+                if (claim == null)
                 {
-                    return Result.Fail(ResultCode.TokenInvalid,"解析的类别不存在");
+                    return Result.Fail(ResultCode.TokenInvalid, "解析的类别不存在");
                 }
-                return Result.Success(anything.Value);
+
+                return Result.Success(claim.Value);
             }
             catch (Exception ex)
             {
                 return Result.Fail(ResultCode.TokenInvalid, $"Token 解析失败: {ex.Message}");
             }
         }
+
+        public ClaimsPrincipal? ValidateAccessTokenIgnoreExpiry(string token)
+        {
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var principal = handler.ValidateToken(
+                    token,
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = false, // 无视时间验证信息
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(_settings.SecretKey)),
+                        ValidIssuer = _settings.Issuer,
+                        ValidAudience = _settings.Audience
+                    },
+                    out _);
+
+                return principal;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

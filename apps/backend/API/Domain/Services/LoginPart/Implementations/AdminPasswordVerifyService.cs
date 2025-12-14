@@ -29,7 +29,7 @@ namespace API.Domain.Services.Common.Implementations
                /*test
                 * Console.WriteLine(admin.Salt);
                 Console.WriteLine(admin.PasswordHash);
-                Console.WriteLine(PwdHashHelper.Hashing(password, admin.Salt));*/
+                Console.WriteLine(HashHelper.Hashing(password, admin.Salt));*/
 
                 if (admin == null)
                 {
@@ -42,7 +42,7 @@ namespace API.Domain.Services.Common.Implementations
                     return Result.Fail(ResultCode.NotExist, "身份错误");
                 }
 
-                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.Salt))))
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(HashHelper.Hashing(password, admin.Salt))))
                 {
                     string jwt = _jwtHelper.UserGenerateToken(null, admin.Uuid, account.ToString());
                     return Result.Success(jwt);
@@ -66,7 +66,7 @@ namespace API.Domain.Services.Common.Implementations
 
                 Console.WriteLine(admin.Salt);
                 Console.WriteLine(admin.PasswordHash);
-                Console.WriteLine(PwdHashHelper.Hashing(password, admin.Salt));
+                Console.WriteLine(HashHelper.Hashing(password, admin.Salt));
 
                 if (admin == null)
                 {
@@ -79,7 +79,7 @@ namespace API.Domain.Services.Common.Implementations
                     return Result.Fail(ResultCode.NotExist, "身份错误");
                 }
 
-                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(PwdHashHelper.Hashing(password, admin.Salt))))
+                if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(HashHelper.Hashing(password, admin.Salt))))
                 {
                     string jwt = _jwtHelper.UserGenerateToken(null, admin.Uuid, account.ToString());
                     return Result.Success(jwt);

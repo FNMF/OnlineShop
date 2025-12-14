@@ -31,10 +31,6 @@ public partial class Admin
     [StringLength(255)]
     public string PasswordHash { get; set; } = null!;
 
-    [Column("key")]
-    [StringLength(10)]
-    public string Key { get; set; } = null!;
-
     [Column("last_location")]
     [StringLength(255)]
     public string LastLocation { get; set; } = null!;
