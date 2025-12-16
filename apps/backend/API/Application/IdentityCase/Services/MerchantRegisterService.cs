@@ -33,7 +33,7 @@ namespace API.Application.IdentityCase.Services
             _shopAdminRegisterService = shopAdminRegisterService;
         }
 
-        public async Task<Result<TokenDto>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt)
+        public async Task<Result<TokenResult>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt)
         {
             try
             {
@@ -44,16 +44,18 @@ namespace API.Application.IdentityCase.Services
                 if (!isValid.IsSuccess)
                 {
                     // 2. 密码验证失败，返回错误信息
-                    return Result<TokenDto>.Fail(isValid.Code,isValid.Message);
+                    return Result<TokenResult>.Fail(isValid.Code,isValid.Message);
                 }
 
                 var dto = new ShopAdminCreateDto(opt.Phone,opt.Password,_clientIpService.GetClientIp());
 
-                var result = _shopAdminRegisterService.Register(dto).Result;
+                var result = await _shopAdminRegisterService.Register(dto);
                 if (!result.IsSuccess)
                 {
-                    return Result<TokenDto>.Fail(ResultCode.InfoExist, result.Message);
+                    return Result<TokenResult>.Fail(ResultCode.InfoExist, result.Message);
                 }
+                var admin = result.Data;
+                var merchantReadDto = new AdminReadDto(admin.Phone, admin.Uuid, admin.Account);
 
                 await _eventBus.PublishAsync(new MerchantRegisterEvent(opt.Phone));
                 // 访问令牌
@@ -62,18 +64,18 @@ namespace API.Application.IdentityCase.Services
                 var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
-                    return Result<TokenDto>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
+                    return Result<TokenResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
                 }
 
-                var tokenDto = new TokenDto(adminJwt, refreshTokenResult.Data, 1200);
+                var tokenDto = new TokenResult(adminJwt, refreshTokenResult.Data, 1200, merchantReadDto);
 
-                return Result<TokenDto>.Success(tokenDto);
+                return Result<TokenResult>.Success(tokenDto);
                 
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<TokenDto>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<TokenResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }

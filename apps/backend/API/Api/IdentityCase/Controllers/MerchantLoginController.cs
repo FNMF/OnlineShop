@@ -56,5 +56,23 @@ namespace API.Api.IdentityCase.Controllers
                 return Unauthorized(result); // 登录失败的错误信息
             }
         }
+
+        [HttpPost("phone")]
+        public async Task<IActionResult> LoginByValidationCode([FromBody] MerchantLoginByValidationCodeOptions opt)
+        {
+            if (opt == null)
+            {
+                return BadRequest("无效的请求数据");
+            }
+            var result = await _merchantLoginService.LoginByPhoneAsync(opt);
+            if (result.IsSuccess)
+            {
+                return Ok(result); // 返回登录成功的结果（比如 Token 等）
+            }
+            else
+            {
+                return Unauthorized(result); // 登录失败的错误信息
+            }
+        }
     }
 }

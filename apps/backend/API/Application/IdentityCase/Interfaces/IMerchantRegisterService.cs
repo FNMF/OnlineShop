@@ -7,7 +7,7 @@ namespace API.Application.IdentityCase.Interfaces
 {
     public interface IMerchantRegisterService
     {
-        Task<Result<TokenDto>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt);
+        Task<Result<TokenResult>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt);
 
     }
 }
