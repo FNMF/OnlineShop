@@ -85,12 +85,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- 手机号登录按钮 -->
+    <!-- 验证码登录按钮 -->
     <Button
         android:id="@+id/phone_login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="手机号登录"
+        android:text="验证码登录"
         app:layout_constraintTop_toBottomOf="@id/line_or"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

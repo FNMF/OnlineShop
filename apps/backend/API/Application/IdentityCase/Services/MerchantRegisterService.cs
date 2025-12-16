@@ -56,9 +56,9 @@ namespace API.Application.IdentityCase.Services
                 }
 
                 await _eventBus.PublishAsync(new MerchantRegisterEvent(opt.Phone));
-
+                // 访问令牌
                 var adminJwt = _jwtHelper.AdminGenerateToken(opt.Phone, result.Data.Uuid, result.Data.Account);
-
+                // 刷新令牌
                 var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {

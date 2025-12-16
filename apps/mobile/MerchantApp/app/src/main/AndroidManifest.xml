@@ -62,7 +62,7 @@
         <activity android:name=".ui.products.AddProductActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ProductServiceActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ShopSettingsActivity" android:exported="false" />
-        <activity android:name=".ui.login.phone.PhoneActivity" android:exported="false" />
+        <activity android:name=".ui.login.PhoneActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.SettingsActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ProfileActivity" android:exported="false" />
 

@@ -24,7 +24,7 @@ namespace API.Application.IdentityCase.Services
             _logger = logger;
         }
 
-        public async Task<Result<String>> RefreshTokenAsync(string refreshToken)
+        public async Task<Result<String>> RefreshTokenAsync(string refreshToken)        // 目前只需要给商户管理员刷新token
         {
             try
             {

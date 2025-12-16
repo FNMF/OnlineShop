@@ -1,4 +1,4 @@
-package com.example.merchantapp.ui.login.phone;
+package com.example.merchantapp.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.merchantapp.R;
 import com.example.merchantapp.ui.SplashActivity;
-import com.example.merchantapp.ui.login.LoginActivity;
 
 public class PhoneActivity extends AppCompatActivity {
 

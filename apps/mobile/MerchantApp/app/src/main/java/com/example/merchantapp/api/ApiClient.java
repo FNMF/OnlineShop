@@ -1,5 +1,6 @@
 package com.example.merchantapp.api;
 
+import com.example.merchantapp.api.auth.AuthApiService;
 import com.example.merchantapp.api.product.ProductApiService;
 
 import retrofit2.Retrofit;
@@ -20,5 +21,10 @@ public class ApiClient {
     //注册Api
     public static ProductApiService getProductService() {
         return getClient().create(ProductApiService.class);
+    }
+
+    // Auth
+    public static AuthApiService getAuthService(){
+        return  getClient().create(AuthApiService.class);
     }
 }
