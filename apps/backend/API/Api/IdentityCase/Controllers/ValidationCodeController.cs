@@ -1,4 +1,5 @@
-﻿using API.Common.Helpers;
+﻿using API.Api.IdentityCase.Models;
+using API.Common.Helpers;
 using API.Domain.Services.External;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,14 +15,14 @@ namespace API.Api.IdentityCase.Controllers
             _validationCodeService = validationCodeService;
         }
         [HttpPost("apply")]
-        public async Task<IActionResult> CodeApply([FromBody] String phone)
+        public async Task<IActionResult> CodeApply([FromBody] ValidationCodeOptions opt)
         {
-            var isValied = PhoneNumberFactory.ValidationPhoneNumber(phone);
+            var isValied = PhoneNumberFactory.ValidationPhoneNumber(opt.Phone);
             if (!isValied.IsSuccess)
             {
                 return BadRequest(isValied);
             }
-            var result = await _validationCodeService.GenerateValidationCodeAsync(phone);
+            var result = await _validationCodeService.GenerateValidationCodeAsync(opt.Phone);
             if (!result.IsSuccess)
             {
                 return BadRequest(result);

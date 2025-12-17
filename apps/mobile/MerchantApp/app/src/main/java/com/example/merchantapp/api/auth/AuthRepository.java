@@ -36,7 +36,7 @@ public class AuthRepository {
                 .enqueue(callback);
     }
     public void sendCode(String phone,
-                             Callback<Void> callback){
+                         Callback<Void> callback){
         api.sendCode(new SendCodeRequest(phone))
                 .enqueue(callback);
     }
