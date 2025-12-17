@@ -2,6 +2,7 @@ using API.Api.SignalR;
 using API.Application.Common.EventBus;
 using API.Common.Helpers;
 using API.Common.Models;
+using API.Domain.Services.External;
 using API.Infrastructure.Database;
 using API.Infrastructure.test;
 using API.Infrastructure.WechatPayV3;
