@@ -18,9 +18,4 @@ public class LoginViewModel extends ViewModel {
                                Callback<LoginResponse> callback) {
         repository.loginByAccount(account,password, callback);
     }
-
-    public void loginByPhone(String refreshToken,
-                             Callback<LoginResponse> callback) {
-        repository.loginByToken(refreshToken, callback);
-    }
 }

@@ -81,7 +81,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goMain() {
-        startActivity(new Intent(this, MainActivity.class));
+        // 清栈不让返回登录页
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        startActivity(intent);
         finish();
     }
 
