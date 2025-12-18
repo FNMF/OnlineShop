@@ -14,26 +14,28 @@ using API.Domain.Services.RefreshTokenPart.Interfaces;
 
 namespace API.Application.IdentityCase.Services
 {
-    public class MerchantRegisterService:IMerchantRegisterService
+    public class MerchantRegisterService : IMerchantRegisterService
     {
         private readonly EventBus _eventBus;
         private readonly IClientIpService _clientIpService;
+        private readonly ICurrentService _currentService;
         private readonly IShopAdminRegisterService _shopAdminRegisterService;
         private readonly IRefreshTokenCreateService _refreshTokenCreateService;
         private readonly JwtHelper _jwtHelper;
         private readonly ILogger<MerchantRegisterService> _logger;
 
-        public MerchantRegisterService(EventBus eventBus, IClientIpService clientIpService, IShopAdminRegisterService shopAdminRegisterService, IRefreshTokenCreateService refreshTokenCreateService, JwtHelper jwtHelper, ILogger<MerchantRegisterService> logger)
+        public MerchantRegisterService(EventBus eventBus, IClientIpService clientIpService, ICurrentService currentService, IShopAdminRegisterService shopAdminRegisterService, IRefreshTokenCreateService refreshTokenCreateService, JwtHelper jwtHelper, ILogger<MerchantRegisterService> logger)
         {
             _eventBus = eventBus;
             _clientIpService = clientIpService;
+            _currentService = currentService;
             _logger = logger;
             _refreshTokenCreateService = refreshTokenCreateService;
             _jwtHelper = jwtHelper;
             _shopAdminRegisterService = shopAdminRegisterService;
         }
 
-        public async Task<Result<TokenResult>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt)
+        public async Task<Result<AuthResult>> RegisterByPhoneAsync(MerchantRegisterByPhoneOptions opt)
         {
             try
             {
@@ -44,15 +46,15 @@ namespace API.Application.IdentityCase.Services
                 if (!isValid.IsSuccess)
                 {
                     // 2. 密码验证失败，返回错误信息
-                    return Result<TokenResult>.Fail(isValid.Code,isValid.Message);
+                    return Result<AuthResult>.Fail(isValid.Code, isValid.Message);
                 }
 
-                var dto = new ShopAdminCreateDto(opt.Phone,opt.Password,_clientIpService.GetClientIp());
+                var dto = new ShopAdminCreateDto(opt.Phone, opt.Password, _clientIpService.GetClientIp());
 
                 var result = await _shopAdminRegisterService.Register(dto);
                 if (!result.IsSuccess)
                 {
-                    return Result<TokenResult>.Fail(ResultCode.InfoExist, result.Message);
+                    return Result<AuthResult>.Fail(ResultCode.InfoExist, result.Message);
                 }
                 var admin = result.Data;
                 var merchantReadDto = new AdminReadDto(admin.Phone, admin.Uuid, admin.Account);
@@ -64,18 +66,56 @@ namespace API.Application.IdentityCase.Services
                 var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
-                    return Result<TokenResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
+                    return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
                 }
 
-                var tokenDto = new TokenResult(adminJwt, refreshTokenResult.Data, 1200, merchantReadDto);
+                var tokenDto = new LoginTokenResult(adminJwt, refreshTokenResult.Data, 1200, merchantReadDto);
+                // 这里的 true 表示这是一个新注册的用户，但是已经完成注册流程，所以算作登录，返回LoginTokenResult
+                var authDto = new AuthResult(true, tokenDto, null);
+                return Result<AuthResult>.Success(authDto);
 
-                return Result<TokenResult>.Success(tokenDto);
-                
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<TokenResult>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
+        public async Task<Result<AuthResult>> RegisterByTempAsync(MerchantRegisterByTempOptions opt)
+        {
+            try
+            {
+                var phone = _currentService.CurrentPhone;
+                if (string.IsNullOrEmpty(phone))
+                {
+                    return Result<AuthResult>.Fail(ResultCode.InvalidInput, "无效的手机号");
+                }
+                var dto = new ShopAdminCreateDto(phone, opt.Password, _clientIpService.GetClientIp());
+                var result = await _shopAdminRegisterService.Register(dto);
+                if (!result.IsSuccess)
+                {
+                    return Result<AuthResult>.Fail(ResultCode.InfoExist, result.Message);
+                }
+                var admin = result.Data;
+                var merchantReadDto = new AdminReadDto(admin.Phone, admin.Uuid, admin.Account);
+                await _eventBus.PublishAsync(new MerchantRegisterEvent(phone));
+                // 访问令牌
+                var adminJwt = _jwtHelper.AdminGenerateToken(phone, result.Data.Uuid, result.Data.Account);
+                // 刷新令牌
+                var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
+                if (!refreshTokenResult.IsSuccess)
+                {
+                    return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
+                }
+                var tokenDto = new LoginTokenResult(adminJwt, refreshTokenResult.Data, 1200, merchantReadDto);
+                var authDto = new AuthResult(true, tokenDto, null);
+                return Result<AuthResult>.Success(authDto);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "服务器错误");
+                return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }

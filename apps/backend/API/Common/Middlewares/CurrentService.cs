@@ -38,6 +38,7 @@ namespace API.Common.Middlewares
             }
         }
         public string? CurrentName => GetClaim(ClaimTypes.Name);
+        public string? CurrentPhone => GetClaim(ClaimTypes.MobilePhone);
         public CurrentType CurrentType
         {
             get

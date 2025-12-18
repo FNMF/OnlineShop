@@ -39,5 +39,29 @@ namespace API.Domain.Services.AdminPart.Implementations
                 return Result<AdminReadDto>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
+
+        public async Task<Result<AdminReadDto>> GetAdminByPhone(String phone)
+        {
+            try
+            {
+                var admin = await _adminRepository.GetAdminByPhoneAsync(phone);
+                if (admin == null)
+                {
+                    _logger.LogWarning("管理员不存在");
+                    return Result<AdminReadDto>.Fail(ResultCode.NotExist, "管理员不存在");
+                }
+                var dto = new AdminReadDto(
+                    admin.Phone,
+                    admin.Uuid,
+                    admin.Account);
+
+                return Result<AdminReadDto>.Success(dto);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "获取管理员信息时出错");
+                return Result<AdminReadDto>.Fail(ResultCode.ServerError, ex.Message);
+            }
+        }
     }
 }

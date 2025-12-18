@@ -8,6 +8,7 @@ namespace API.Common.Interfaces
         Guid? CurrentUuid { get; }
         Guid RequiredUuid { get; }
         string? CurrentName { get; }
+        string? CurrentPhone { get; }
         CurrentType CurrentType { get; }
 
     }

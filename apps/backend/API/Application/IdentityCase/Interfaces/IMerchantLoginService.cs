@@ -6,8 +6,8 @@ namespace API.Application.IdentityCase.Interfaces
 {
     public interface IMerchantLoginService
     {
-        Task<Result<TokenResult>> LoginByTokenAsync(string accessToken, string refreshToken);
-        Task<Result<TokenResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt);
-        Task<Result<TokenResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt);
+        Task<Result<AuthResult>> LoginByTokenAsync(string accessToken, string refreshToken);
+        Task<Result<AuthResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt);
+        Task<Result<AuthResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt);
     }
 }

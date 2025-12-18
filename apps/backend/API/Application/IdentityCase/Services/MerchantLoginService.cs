@@ -43,13 +43,13 @@ namespace API.Application.IdentityCase.Services
             _eventBus = eventBus;
             _logger = logger;
         }
-        public async Task<Result<TokenResult>> LoginByTokenAsync(string? accessToken, string refreshToken)
+        public async Task<Result<AuthResult>> LoginByTokenAsync(string? accessToken, string refreshToken)
         {
             try
             {
                 if (string.IsNullOrEmpty(accessToken)||string.IsNullOrEmpty(refreshToken))
                 {
-                    return Result<TokenResult>.Fail(ResultCode.InvalidInput, "无效的输入");
+                    return Result<AuthResult>.Fail(ResultCode.InvalidInput, "无效的输入");
                 }
 
                 var uuid = _currentService.RequiredUuid;
@@ -57,7 +57,7 @@ namespace API.Application.IdentityCase.Services
                 var verifyResult = await _refreshTokenReadService.VerifyToken(uuid, refreshToken);
                 if (!verifyResult.IsSuccess)
                 {
-                    return Result<TokenResult>.Fail(verifyResult.Code, verifyResult.Message);
+                    return Result<AuthResult>.Fail(verifyResult.Code, verifyResult.Message);
                 }
 
                 var result = await _shopAdminReadService.GetAdminByUuid(uuid);
@@ -66,23 +66,25 @@ namespace API.Application.IdentityCase.Services
 
                 var adminJwt = _jwtHelper.AdminGenerateToken(admin.Phone, admin.Uuid, admin.Account);
 
-                var tokenDto = new TokenResult(
+                var tokenDto = new LoginTokenResult(
                     adminJwt,
                     refreshToken,
                     1200,
                     merchantReadDto
                 );
+
+                var authDto = new AuthResult(false,tokenDto, null);
                 await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
 
-                return Result<TokenResult>.Success(tokenDto);
+                return Result<AuthResult>.Success(authDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<TokenResult>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
-        public async Task<Result<TokenResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt)
+        public async Task<Result<AuthResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt)
         {
             try
             {
@@ -92,14 +94,13 @@ namespace API.Application.IdentityCase.Services
                 if (!isValid.IsSuccess)
                 {
                     // 2. 密码验证失败，返回错误信息
-                    return Result<TokenResult>.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
+                    return Result<AuthResult>.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
                 }
 
                 // 3. 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
-                // 例如，你可以通过 EventPublisher 触发一些事件
+                // 例如，通过 EventPublisher 触发一些事件
 
-                var uuidString = _jwtHelper.AnalysisToken(isValid.Message, ClaimTypes.NameIdentifier).Message;
-                var uuid = Guid.Parse(uuidString);
+                var uuid= _currentService.RequiredUuid;
 
                 var result = await _shopAdminReadService.GetAdminByUuid(uuid);
                 var admin = result.Data;
@@ -110,40 +111,58 @@ namespace API.Application.IdentityCase.Services
                 var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
-                    return Result<TokenResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
+                    return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
                 }
 
-                var tokenDto = new TokenResult(
+                var tokenDto = new LoginTokenResult(
                 adminJwt,
                     refreshTokenResult.Data,
                     1200,
                     merchantReadDto
                 );
-
+                var authDto = new AuthResult(false, tokenDto, null);
                 await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
 
-                return Result<TokenResult>.Success(tokenDto);
+                return Result<AuthResult>.Success(authDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<TokenResult>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
-        public async Task<Result<TokenResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt)
+        public async Task<Result<AuthResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt)
         {
             try
             {
-                // 1. 调用 ValidationCodeHelper 服务来验证手机号和验证码
+                // 调用 ValidationCodeHelper 服务来验证手机号和验证码
                 var isValid = ValidationCodeHelper.ValidateCode(opt.Phone,opt.ValidationCode);
                 if (!isValid.IsSuccess)
                 {
-                    // 2. 验证失败，返回错误信息
-                    return Result<TokenResult>.Fail(ResultCode.LoginVerifyError, "手机号或验证码错误");
+                    // 验证失败，返回错误信息
+                    return Result<AuthResult>.Fail(ResultCode.LoginVerifyError, "手机号或验证码错误");
                 }
-                // 3. 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
-                var uuidString = _jwtHelper.AnalysisToken(isValid.Message, ClaimTypes.NameIdentifier).Message;
-                var uuid = Guid.Parse(uuidString);
+
+                // 判断手机号是否存在
+                var phoneResult = await _shopAdminReadService.GetAdminByPhone(opt.Phone);
+                // 如果是新用户则返回注册临时令牌
+                if (phoneResult.Code == ResultCode.NotExist)
+                {
+                    var tempToken = _jwtHelper.GenerateRegisterTempToken(opt.Phone);
+                    var registerTokenDto = new RegisterTokenResult(
+                        tempToken,
+                        300
+                    );
+                    var registerAuthDto = new AuthResult(true, null, registerTokenDto);
+                    return Result<AuthResult>.Success(registerAuthDto);
+                }
+                // 如果查询失败，返回错误信息
+                if (!phoneResult.IsSuccess)
+                {
+                    return Result<AuthResult>.Fail(phoneResult.Code, phoneResult.Message);
+                }
+                // 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
+                var uuid = _currentService.RequiredUuid;
 
                 var result = await _shopAdminReadService.GetAdminByUuid(uuid);
                 var admin = result.Data;
@@ -154,23 +173,24 @@ namespace API.Application.IdentityCase.Services
                 var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
-                    return Result<TokenResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
+                    return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
                 }
 
-                var tokenDto = new TokenResult(
+                var tokenDto = new LoginTokenResult(
                     adminJwt,
                     refreshTokenResult.Data,
                     1200,
                     merchantReadDto
                 );
 
+                var loginAuthDto = new AuthResult(false, tokenDto, null);
                 await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
-                return Result<TokenResult>.Success(tokenDto);
+                return Result<AuthResult>.Success(loginAuthDto);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "服务器错误");
-                return Result<TokenResult>.Fail(ResultCode.ServerError, ex.Message);
+                return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }

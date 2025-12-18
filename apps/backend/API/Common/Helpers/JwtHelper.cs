@@ -36,6 +36,16 @@ namespace API.Common.Helpers
                 signingCredentials: GetCredentials()
             );
         }
+        private JwtSecurityToken CreateShortLivedToken(IEnumerable<Claim> claims, int minutes)
+        {
+            return new JwtSecurityToken(
+                issuer: _settings.Issuer,
+                audience: _settings.Audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(minutes),
+                signingCredentials: GetCredentials()
+            );
+        }
 
         public string UserGenerateToken(string? openId, Guid uuid, string? name)
         {
@@ -93,5 +103,16 @@ namespace API.Common.Helpers
             }
         }
 
+        public string GenerateRegisterTempToken(string phone)
+        {
+            var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.MobilePhone, phone),
+                    new Claim("Type", "RegisterTemp")
+                };
+            var token = CreateShortLivedToken(claims, 5); // 5分钟有效期
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
     }
 }

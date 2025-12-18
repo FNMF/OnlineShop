@@ -6,5 +6,6 @@ namespace API.Domain.Services.AdminPart.Interfaces
     public interface IShopAdminReadService
     {
         Task<Result<AdminReadDto>> GetAdminByUuid(Guid uuid);
+        Task<Result<AdminReadDto>> GetAdminByPhone(String phone);
     }
 }

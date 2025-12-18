@@ -6,6 +6,7 @@ using API.Domain.Services.External;
 using API.Infrastructure.Database;
 using API.Infrastructure.test;
 using API.Infrastructure.WechatPayV3;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
@@ -50,6 +51,7 @@ namespace API
 
             builder.Services.AddScoped<JwtHelper>();
 
+            builder.Services.AddAuthorization();
             builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
@@ -87,21 +89,49 @@ namespace API
 
 
 
-            builder.Services.AddAuthorization();
-
             builder.Services.AddAuthentication()
-    .AddJwtBearer("ExpiredAllowed", options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateIssuerSigningKey = true,
-            ValidateLifetime = false, // 允许过期
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-        };
-    });
+                .AddJwtBearer("ExpiredAllowed", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = false, // 允许过期
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                    };
+                 });
+            // 短时效注册令牌认证方案---注册时使用
+            builder.Services.AddAuthentication()
+                .AddJwtBearer("RegisterTempToken", options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.FromMinutes(2), // 允许2分钟的时间偏差
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+                    };
 
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = context =>
+                        {
+                            var tokenType = context.Principal?
+                                .FindFirst("Type")?
+                                .Value;
+
+                            if (tokenType != "RegisterTemp")
+                            {
+                                context.Fail("Not a RegisterTemp token.");
+                            }
+
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
 
             builder.Services.AddDbContext<OnlineshopContext>(options =>
             {
