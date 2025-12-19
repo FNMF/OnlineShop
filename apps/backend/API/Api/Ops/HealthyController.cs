@@ -19,13 +19,55 @@ namespace API.Api.Ops
         {
             try
             {
-                // 尝试执行简单查询
-                var canConnect = _dbContext.Database.CanConnect();
-                return Ok(new { dbConnected = canConnect });
+                // 尝试执行最简单的查询
+                var testQuery = _dbContext.Roles.FirstOrDefault(); // 或 SELECT 1
+                return Ok(new
+                {
+                    dbConnected = true,
+                    testResult = testQuery != null ? new { id = testQuery.Id, name = testQuery.Name } : null
+                });
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException dbEx)
+            {
+                var innerMessages = new List<string>();
+                var inner = dbEx.InnerException;
+                while (inner != null)
+                {
+                    innerMessages.Add(inner.Message);
+                    inner = inner.InnerException;
+                }
+
+                return StatusCode(500, new
+                {
+                    dbConnected = false,
+                    errorType = "DbUpdateException",
+                    errorMessage = dbEx.Message,
+                    innerErrors = innerMessages,
+                    stackTrace = dbEx.StackTrace
+                });
+            }
+            catch (MySql.Data.MySqlClient.MySqlException mySqlEx)
+            {
+                var innerMessages = new List<string>();
+                var inner = mySqlEx.InnerException;
+                while (inner != null)
+                {
+                    innerMessages.Add(inner.Message);
+                    inner = inner.InnerException;
+                }
+
+                return StatusCode(500, new
+                {
+                    dbConnected = false,
+                    errorType = "MySqlException",
+                    errorNumber = mySqlEx.Number,
+                    errorMessage = mySqlEx.Message,
+                    innerErrors = innerMessages,
+                    stackTrace = mySqlEx.StackTrace
+                });
             }
             catch (Exception ex)
             {
-                // 提取 inner exception 链
                 var innerMessages = new List<string>();
                 var inner = ex.InnerException;
                 while (inner != null)
@@ -34,16 +76,17 @@ namespace API.Api.Ops
                     inner = inner.InnerException;
                 }
 
-                // 返回详细调试信息（避免泄露密码等敏感信息）
                 return StatusCode(500, new
                 {
                     dbConnected = false,
+                    errorType = "Exception",
                     errorMessage = ex.Message,
                     innerErrors = innerMessages,
                     stackTrace = ex.StackTrace
                 });
             }
         }
+
 
         [HttpGet("api")]
         public IActionResult PingApi()
