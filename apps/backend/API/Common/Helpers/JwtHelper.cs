@@ -16,6 +16,8 @@ namespace API.Common.Helpers
         public JwtHelper(IOptions<JwtSettings> options)
         {
             _settings = options.Value;
+            if (_settings.SecretKey == null)
+                throw new Exception("JwtSettings.SecretKey is NULL");
         }
 
         private SigningCredentials GetCredentials()

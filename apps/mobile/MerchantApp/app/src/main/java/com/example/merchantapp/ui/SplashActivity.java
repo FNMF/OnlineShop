@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.merchantapp.R;
-import com.example.merchantapp.ui.login.LoginActivity;
+import com.example.merchantapp.ui.auth.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

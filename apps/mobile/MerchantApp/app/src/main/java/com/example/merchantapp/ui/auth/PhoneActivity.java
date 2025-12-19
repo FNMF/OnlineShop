@@ -1,4 +1,4 @@
-package com.example.merchantapp.ui.login;
+package com.example.merchantapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.databinding.ActivityPhoneBinding;
+import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
+import com.example.merchantapp.model.auth.RegisterResponse;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.MainActivity;
 import com.example.merchantapp.ui.SplashActivity;
-import com.example.merchantapp.ui.login.PhoneViewModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,36 +106,54 @@ public class PhoneActivity extends AppCompatActivity {
 
     private void doPhoneLogin() {
         String phone = binding.phoneNumber.getText().toString().trim();
-        String code = binding.verificationCode.getText().toString().trim();
+        String validationCode = binding.verificationCode.getText().toString().trim();
 
-        if (phone.isEmpty() || code.isEmpty()) {
+        if (phone.isEmpty() || validationCode.isEmpty()) {
             toast("请输入手机号和验证码");
             return;
         }
 
-        viewModel.loginByValidationCode(phone, code, new Callback<LoginResponse>() {
+        viewModel.loginByValidationCode(phone, validationCode, new Callback<AuthResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call,
-                                   Response<LoginResponse> response) {
+            public void onResponse(Call<AuthResponse> call,
+                                   Response<AuthResponse> response) {
 
-                if (response.isSuccessful() && response.body() != null) {
-                    LoginResponse body = response.body();
+                if (!response.isSuccessful() || response.body() == null) {
+                    toast("验证码错误或已过期");
+                    return;
+                }
+
+                AuthResponse body = response.body();
+
+                if (body.isNewUser()) {
+                    // 新用户 → 去设置密码
+                    RegisterResponse register = body.getRegisterResponse();
+
+                    Intent intent = new Intent(PhoneActivity.this,
+                            RegisterPasswordActivity.class);
+
+                    intent.putExtra("tempToken", register.getTempToken());
+                    intent.putExtra("expiresIn", register.getExpiresIn());
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    // 老用户 → 正常登录
+                    LoginResponse login = body.getLoginResponse();
 
                     TokenManager.save(
                             PhoneActivity.this,
-                            body.getAccessToken(),
-                            body.getRefreshToken(),
-                            body.getMerchant()
+                            login.getAccessToken(),
+                            login.getRefreshToken(),
+                            login.getMerchant()
                     );
 
                     goMain();
-                } else {
-                    toast("验证码错误或已过期");
                 }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<AuthResponse> call, Throwable t) {
                 toast("网络错误，请稍后重试");
             }
         });

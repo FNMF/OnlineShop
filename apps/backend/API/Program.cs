@@ -34,20 +34,11 @@ namespace API
 
             builder.Services.AddScoped<EventBus>();
 
-            // 自动注册所有 Handler 实现类
-            builder.Services.Scan(scan => scan
-                .FromApplicationDependencies()
-                .AddClasses(classes => classes.AssignableTo(typeof(IEventHandler<>)))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
-
-
-
             builder.Services.AddControllers();
 
             builder.Services.AddHttpClient();
 
-            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 
             builder.Services.AddScoped<JwtHelper>();
 
@@ -151,6 +142,13 @@ namespace API
                         type.Name.EndsWith("Service") || type.Name.EndsWith("Repository") || type.Name.EndsWith("Factory")))
                             .AsImplementedInterfaces()
                             .WithScopedLifetime());
+
+            // 自动注册所有 Handler 实现类
+            builder.Services.Scan(scan => scan
+                .FromApplicationDependencies()
+                .AddClasses(classes => classes.AssignableTo(typeof(IEventHandler<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
 
             //WechatPayV3
             builder.Services.Configure<WeChatPayOptions>(

@@ -2,9 +2,9 @@ package com.example.merchantapp.api.auth;
 
 public class LoginByValidationCodeRequest {
     public String phone;
-    public String code;
-    public LoginByValidationCodeRequest(String phone , String code){
+    public String validationCode;
+    public LoginByValidationCodeRequest(String phone , String validationCode){
         this.phone = phone;
-        this.code = code;
+        this.validationCode = validationCode;
     }
 }

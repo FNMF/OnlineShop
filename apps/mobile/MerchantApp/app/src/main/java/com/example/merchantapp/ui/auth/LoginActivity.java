@@ -1,4 +1,4 @@
-package com.example.merchantapp.ui.login;
+package com.example.merchantapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.databinding.ActivityLoginBinding;
-import com.example.merchantapp.model.auth.LoginResponse;
+import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.MainActivity;
 import com.example.merchantapp.ui.SplashActivity;
@@ -51,20 +51,20 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        loginViewModel.loginByAccount(username,password, new Callback<LoginResponse>() {
+        loginViewModel.loginByAccount(username,password, new Callback<AuthResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call,
-                                   Response<LoginResponse> response) {
+            public void onResponse(Call<AuthResponse> call,
+                                   Response<AuthResponse> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    LoginResponse body = response.body();
+                    AuthResponse body = response.body();
 
                     // 保存 token & 商户信息
                     TokenManager.save(
                             LoginActivity.this,
-                            body.getAccessToken(),
-                            body.getRefreshToken(),
-                            body.getMerchant()
+                            body.getLoginResponse().getAccessToken(),
+                            body.getLoginResponse().getRefreshToken(),
+                            body.getLoginResponse().getMerchant()
                     );
 
                     goMain();
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<AuthResponse> call, Throwable t) {
                 toast("网络错误，请稍后重试");
             }
         });
