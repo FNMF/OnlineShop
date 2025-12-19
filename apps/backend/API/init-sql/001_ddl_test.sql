@@ -189,21 +189,21 @@ create table if not exists products
         foreign key (merchant_uuid) references merchants (uuid)
 );
 
-create definer = root@localhost trigger before_insert_product
-    before insert
-    on products
-    for each row
+DELIMITER //
+
+CREATE DEFINER=`root`@`localhost` TRIGGER before_insert_product
+BEFORE INSERT ON products
+FOR EACH ROW
 BEGIN
     DECLARE last_no INT;
-
-    -- 查找该商户当前最大编号
     SELECT COALESCE(MAX(id), 0) INTO last_no
     FROM products
     WHERE merchant_uuid = NEW.merchant_uuid;
-
-    -- 新记录编号 = 当前最大 + 1
     SET NEW.id = last_no + 1;
 END;
+//
+
+DELIMITER ;
 
 create table if not exists refresh_tokens
 (
