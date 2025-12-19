@@ -9,4 +9,4 @@ INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VA
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (201, 'shop_owner', 1, '商户管理员', 'shop');
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (202, 'shop_staff', 1, '商户员工', 'shop');
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (203, 'shop_noservice', 1, '没服务的商户', 'shop');
-INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (1000, 'pre_void', 1, '留空用于分割新角色', 'system');
+INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (1000, 'pre_void', 1, '留空分割', 'system');
