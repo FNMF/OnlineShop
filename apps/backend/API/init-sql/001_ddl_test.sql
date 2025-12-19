@@ -151,11 +151,10 @@ create table if not exists deliveries
 
 create table if not exists permissions
 (
-    id               int auto_increment
-        primary key,
-    name             varchar(50)                                                                                                  not null,
-    display_name     varchar(50)                                                                                                  not null,
-    permission_group enum ('user', 'product', 'order', 'shop', 'warehouse', 'marketing', 'support', 'finance', 'system', 'other') not null
+     id               INT NOT NULL PRIMARY KEY,
+    name             VARCHAR(50) NOT NULL,
+    display_name     VARCHAR(50) NOT NULL,
+    permission_group ENUM ('user', 'product', 'order', 'shop', 'warehouse', 'marketing', 'support', 'finance', 'system', 'other') NOT NULL
 );
 
 create table if not exists privileges
@@ -217,36 +216,33 @@ create table if not exists refresh_tokens
 
 create table if not exists roles
 (
-    id           int auto_increment
-        primary key,
-    name         varchar(20)                         not null,
-    is_build_in  tinyint(1) default 0                not null,
-    display_name varchar(20)                         not null,
-    role_type    enum ('system', 'platform', 'shop') not null
+    id           INT NOT NULL PRIMARY KEY,
+    name         VARCHAR(20)                         NOT NULL,
+    is_build_in  TINYINT(1) DEFAULT 0                NOT NULL,
+    display_name VARCHAR(20)                         NOT NULL,
+    role_type    ENUM ('system', 'platform', 'shop') NOT NULL
 );
 
 create table if not exists admin_role
 (
-    ar_id        int auto_increment
-        primary key,
-    ar_adminuuid binary(16) not null,
-    ar_roleid    int        not null,
-    constraint admin_role_admin_admin_uuid_fk
-        foreign key (ar_adminuuid) references admins (uuid),
-    constraint admin_role_role_role_id_fk
-        foreign key (ar_roleid) references roles (id)
+    ar_id        INT NOT NULL PRIMARY KEY,
+    ar_adminuuid BINARY(16) NOT NULL,
+    ar_roleid    INT NOT NULL,
+    CONSTRAINT admin_role_admin_admin_uuid_fk
+        FOREIGN KEY (ar_adminuuid) REFERENCES admins (uuid),
+    CONSTRAINT admin_role_role_role_id_fk
+        FOREIGN KEY (ar_roleid) REFERENCES roles (id)
 );
 
 create table if not exists role_permission
 (
-    rp_id           int auto_increment
-        primary key,
-    rp_roleid       int not null,
-    rp_permissionid int not null,
-    constraint role_permission_permission_permission_id_fk
-        foreign key (rp_permissionid) references permissions (id),
-    constraint role_permission_role_role_id_fk
-        foreign key (rp_roleid) references roles (id)
+    rp_id           INT NOT NULL PRIMARY KEY,
+    rp_roleid       INT NOT NULL,
+    rp_permissionid INT NOT NULL,
+    CONSTRAINT role_permission_permission_permission_id_fk
+        FOREIGN KEY (rp_permissionid) REFERENCES permissions (id),
+    CONSTRAINT role_permission_role_role_id_fk
+        FOREIGN KEY (rp_roleid) REFERENCES roles (id)
 );
 
 create table if not exists users

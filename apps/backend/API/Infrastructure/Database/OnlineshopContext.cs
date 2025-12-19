@@ -82,7 +82,7 @@ public partial class OnlineshopContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8mb4_0900_ai_ci")
+            .UseCollation("utf8mb4_unicode_ci")
             .HasCharSet("utf8mb4");
 
         modelBuilder.Entity<Address>(entity =>
@@ -109,6 +109,7 @@ public partial class OnlineshopContext : DbContext
         {
             entity.HasKey(e => e.ArId).HasName("PRIMARY");
 
+            entity.Property(e => e.ArId).ValueGeneratedNever();
             entity.Property(e => e.ArAdminuuid).IsFixedLength();
 
             entity.HasOne(d => d.ArAdminuu).WithMany(p => p.AdminRoles)
@@ -282,6 +283,8 @@ public partial class OnlineshopContext : DbContext
         modelBuilder.Entity<Permission>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<Privilege>(entity =>
@@ -330,11 +333,15 @@ public partial class OnlineshopContext : DbContext
         modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
         });
 
         modelBuilder.Entity<RolePermission>(entity =>
         {
             entity.HasKey(e => e.RpId).HasName("PRIMARY");
+
+            entity.Property(e => e.RpId).ValueGeneratedNever();
 
             entity.HasOne(d => d.RpPermission).WithMany(p => p.RolePermissions)
                 .OnDelete(DeleteBehavior.ClientSetNull)
