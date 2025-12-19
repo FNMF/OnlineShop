@@ -25,10 +25,26 @@ namespace API.Api.Ops
             }
             catch (Exception ex)
             {
-                // 不要泄露敏感信息
-                return StatusCode(500, new { dbConnected = false, error = ex.Message });
+                // 提取 inner exception 链
+                var innerMessages = new List<string>();
+                var inner = ex.InnerException;
+                while (inner != null)
+                {
+                    innerMessages.Add(inner.Message);
+                    inner = inner.InnerException;
+                }
+
+                // 返回详细调试信息（避免泄露密码等敏感信息）
+                return StatusCode(500, new
+                {
+                    dbConnected = false,
+                    errorMessage = ex.Message,
+                    innerErrors = innerMessages,
+                    stackTrace = ex.StackTrace
+                });
             }
         }
+
         [HttpGet("api")]
         public IActionResult PingApi()
         {
