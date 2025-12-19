@@ -189,17 +189,31 @@ create table if not exists products
         foreign key (merchant_uuid) references merchants (uuid)
 );
 
-DELIMITER //
-CREATE TRIGGER before_insert_product
-BEFORE INSERT ON products
-FOR EACH ROW
+create definer = root@localhost trigger before_insert_product
+    before insert
+    on products
+    for each row
 BEGIN
     DECLARE last_no INT;
-    SELECT COALESCE(MAX(id), 0) INTO last_no FROM products WHERE merchant_uuid = NEW.merchant_uuid;
-    SET NEW.id = last_no + 1;
-END//
-DELIMITER ;
 
+    -- 查找该商户当前最大编号
+    SELECT COALESCE(MAX(id), 0) INTO last_no
+    FROM products
+    WHERE merchant_uuid = NEW.merchant_uuid;
+
+    -- 新记录编号 = 当前最大 + 1
+    SET NEW.id = last_no + 1;
+END;
+
+create table if not exists refresh_tokens
+(
+    uuid        binary(16)   not null
+        primary key,
+    target_uuid binary(16)   not null,
+    expires_at  datetime     not null,
+    token       varchar(255) not null,
+    is_revoked  tinyint(1)   not null
+);
 
 create table if not exists roles
 (
@@ -454,4 +468,6 @@ create table if not exists wallet_transactions
     constraint wallettransaction_merchant_merchant_uuid_fk
         foreign key (merchant_uuid) references merchants (uuid)
 );
+
+
 
