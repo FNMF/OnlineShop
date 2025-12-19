@@ -3,26 +3,24 @@ version: '3.8'
 services:
   api:
     build: .
-    container_name: my-api
     ports:
       - "8080:8080"
     depends_on:
-       db:
+      db:
         condition: service_healthy
     environment:
-      - ASPNETCORE_ENVIRONMENT:Production
-      - ConnectionStrings__DefaultConnection:${ConnectionStrings__DefaultConnection}
-      - Jwt__SecretKey=${Jwt__SecretKey}
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=db;Port=3306;Database=onlineshop;User=root;Password=123456;AllowPublicKeyRetrieval=True;"
+      Jwt__SecretKey: ${Jwt__SecretKey}
     volumes:
       - ./images:/app/images
 
   db:
     image: mysql:8.0
-    container_name: my-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: onlineshop
     ports:
       - "3306:3306"
     volumes:
