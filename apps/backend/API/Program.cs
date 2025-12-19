@@ -20,7 +20,7 @@ namespace API
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -180,37 +180,7 @@ namespace API
 
             var app = builder.Build();
 
-            // 等数据库
-            await WaitForDatabaseAsync(app);
-            static async Task WaitForDatabaseAsync(WebApplication app)
-            {
-                using var scope = app.Services.CreateScope();
-                var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-                var connStr = config.GetConnectionString("DefaultConnection");
-
-                Console.WriteLine("Waiting for database...");
-
-                var maxRetry = 30;
-                var delay = TimeSpan.FromSeconds(2);
-
-                for (int i = 0; i < maxRetry; i++)
-                {
-                    try
-                    {
-                        using var conn = new MySqlConnector.MySqlConnection(connStr);
-                        await conn.OpenAsync();
-                        Console.WriteLine("Database is ready.");
-                        return;
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"DB not ready ({i + 1}/{maxRetry}): {ex.Message}");
-                        await Task.Delay(delay);
-                    }
-                }
-
-                throw new Exception("Database not available after retries.");
-            }
+            
             // Configure the HTTP request pipeline.
 
             //Hub路由注册
