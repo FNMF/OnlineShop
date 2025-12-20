@@ -128,7 +128,6 @@ namespace API
 
             builder.Services.AddDbContext<OnlineshopContext>(options =>
             {
-                var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
                 // AutoDetect云端莫名其妙报错，改用明确版本
                 // options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
                 options.UseMySql(

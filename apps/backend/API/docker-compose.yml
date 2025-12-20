@@ -10,7 +10,7 @@ services:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__DefaultConnection: "Server=db;Port=3306;Database=onlineshop;User=root;Password=123456;AllowPublicKeyRetrieval=True;"
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
       Jwt__SecretKey: ${Jwt__SecretKey}
     volumes:
       - ./images:/app/images
@@ -19,8 +19,8 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: onlineshop
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "3306:3306"
     volumes:
