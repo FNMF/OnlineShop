@@ -2,7 +2,7 @@ package com.example.merchantapp.api.product;
 
 import android.util.Log;
 
-import com.example.merchantapp.api.ApiClient;
+import com.example.merchantapp.service.ApiClient;
 import com.example.merchantapp.model.product.ProductRead;
 import com.example.merchantapp.model.product.ProductReadDetail;
 
@@ -17,7 +17,7 @@ public class ProductRepository {
     private final ProductApiService apiService;
 
     public ProductRepository() {
-        this.apiService = ApiClient.getClient().create(ProductApiService.class);
+        this.apiService = ApiClient.getProductService();
     }
 
     /**

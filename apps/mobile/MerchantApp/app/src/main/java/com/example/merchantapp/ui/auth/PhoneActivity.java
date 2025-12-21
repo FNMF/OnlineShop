@@ -3,12 +3,14 @@ package com.example.merchantapp.ui.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.databinding.ActivityPhoneBinding;
+import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.model.auth.RegisterResponse;
@@ -58,9 +60,9 @@ public class PhoneActivity extends AppCompatActivity {
         // 防止连续点击
         binding.sendVerificationCode.setEnabled(false);
 
-        viewModel.sendCode(phone, new Callback<Void>() {
+        viewModel.sendCode(phone, new Callback<ApiResponse<Object>>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ApiResponse<Object>> call, Response<ApiResponse<Object>> response) {
                 if (response.isSuccessful()) {
                     toast("验证码已发送");
                     startCountDown(); // 成功才开始倒计时
@@ -71,8 +73,9 @@ public class PhoneActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<Object>> call, Throwable t) {
                 toast("网络错误");
+                Log.e("NET", "sendCode failed", t);
                 binding.sendVerificationCode.setEnabled(true);
             }
         });
@@ -113,47 +116,46 @@ public class PhoneActivity extends AppCompatActivity {
             return;
         }
 
-        viewModel.loginByValidationCode(phone, validationCode, new Callback<AuthResponse>() {
+        viewModel.loginByValidationCode(phone, validationCode, new Callback<ApiResponse<AuthResponse>>() {
             @Override
-            public void onResponse(Call<AuthResponse> call,
-                                   Response<AuthResponse> response) {
+            public void onResponse(Call<ApiResponse<AuthResponse>> call,
+                                   Response<ApiResponse<AuthResponse>> response) {
 
                 if (!response.isSuccessful() || response.body() == null) {
                     toast("验证码错误或已过期");
                     return;
                 }
 
-                AuthResponse body = response.body();
+                    ApiResponse<AuthResponse> wrapper = response.body();
+                    AuthResponse body = wrapper.getData();
 
-                if (body.isNewUser()) {
+                if (Boolean.TRUE.equals(body.isNewUser())) {
                     // 新用户 → 去设置密码
                     RegisterResponse register = body.getRegisterResponse();
-
-                    Intent intent = new Intent(PhoneActivity.this,
-                            RegisterPasswordActivity.class);
-
-                    intent.putExtra("tempToken", register.getTempToken());
-                    intent.putExtra("expiresIn", register.getExpiresIn());
-                    startActivity(intent);
-                    finish();
-
+                    if (register != null) {
+                        TokenManager.saveTempToken(PhoneActivity.this, register.getTempToken());
+                        Intent intent = new Intent(PhoneActivity.this, RegisterPasswordActivity.class);
+                        intent.putExtra("tempToken", register.getTempToken());
+                        intent.putExtra("expiresIn", register.getExpiresIn());
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        toast("无法获取新用户信息，请重新获取验证码");
+                    }
                 } else {
-                    // 老用户 → 正常登录
                     LoginResponse login = body.getLoginResponse();
-
-                    TokenManager.save(
-                            PhoneActivity.this,
-                            login.getAccessToken(),
-                            login.getRefreshToken(),
-                            login.getMerchant()
-                    );
-
-                    goMain();
+                    if (login != null) {
+                        TokenManager.saveLogin(PhoneActivity.this, login.getAccessToken(), login.getRefreshToken(), login.getMerchant());
+                        goMain();
+                    } else {
+                        toast("登录失败，请稍后重试");
+                    }
                 }
+
             }
 
             @Override
-            public void onFailure(Call<AuthResponse> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
                 toast("网络错误，请稍后重试");
             }
         });

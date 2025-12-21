@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.databinding.ActivityLoginBinding;
+import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.MainActivity;
@@ -51,16 +52,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        loginViewModel.loginByAccount(username,password, new Callback<AuthResponse>() {
+        loginViewModel.loginByAccount(username,password, new Callback<ApiResponse<AuthResponse>>() {
             @Override
-            public void onResponse(Call<AuthResponse> call,
-                                   Response<AuthResponse> response) {
+            public void onResponse(Call<ApiResponse<AuthResponse>> call,
+                                   Response<ApiResponse<AuthResponse>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    AuthResponse body = response.body();
+                    ApiResponse<AuthResponse> wrapper = response.body();
+                    AuthResponse body = wrapper.getData();
 
                     // 保存 token & 商户信息
-                    TokenManager.save(
+                    TokenManager.saveLogin(
                             LoginActivity.this,
                             body.getLoginResponse().getAccessToken(),
                             body.getLoginResponse().getRefreshToken(),
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AuthResponse> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
                 toast("网络错误，请稍后重试");
             }
         });

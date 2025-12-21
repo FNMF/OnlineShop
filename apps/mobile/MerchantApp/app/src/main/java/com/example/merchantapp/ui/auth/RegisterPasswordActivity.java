@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.R;
+import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
+import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.MainActivity;
 
 import retrofit2.Call;
@@ -58,13 +60,23 @@ public class RegisterPasswordActivity extends AppCompatActivity {
             return;
         }
 
-        viewModel.registerPassword(pwd1, new Callback<AuthResponse>() {
+        viewModel.registerPassword(pwd1, new Callback<ApiResponse<AuthResponse>>() {
             @Override
-            public void onResponse(Call<AuthResponse> call,
-                                   Response<AuthResponse> response) {
+            public void onResponse(Call<ApiResponse<AuthResponse>> call,
+                                   Response<ApiResponse<AuthResponse>> response) {
 
                 if (response.isSuccessful()) {
                     toast("注册成功");
+
+                    ApiResponse<AuthResponse> wrapper = response.body();
+                    AuthResponse body = wrapper.getData();
+
+                    TokenManager.saveLogin(
+                            RegisterPasswordActivity.this,
+                            body.getLoginResponse().getAccessToken(),
+                            body.getLoginResponse().getRefreshToken(),
+                            body.getLoginResponse().getMerchant()
+                    );
 
                     // 注册完成 → 进 Main，清栈
                     goMainAndClearStack();
@@ -75,7 +87,7 @@ public class RegisterPasswordActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AuthResponse> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
                 toast("网络错误，请稍后重试");
             }
         });

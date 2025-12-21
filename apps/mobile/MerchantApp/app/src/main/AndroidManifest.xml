@@ -58,11 +58,19 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- Auth相关页面 -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+
+        <activity android:name=".ui.auth.PhoneActivity" android:exported="false" />
+        <activity android:name=".ui.auth.RegisterPasswordActivity" android:exported="false" />
+
         <!-- 业务相关页面 -->
         <activity android:name=".ui.products.AddProductActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ProductServiceActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ShopSettingsActivity" android:exported="false" />
-        <activity android:name=".ui.auth.PhoneActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.SettingsActivity" android:exported="false" />
         <activity android:name=".ui.sidemenu.ProfileActivity" android:exported="false" />
 
@@ -76,10 +84,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.auth.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
+
 
         <!-- 主页面 -->
         <activity

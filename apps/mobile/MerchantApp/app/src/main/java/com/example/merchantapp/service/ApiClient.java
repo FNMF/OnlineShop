@@ -1,48 +1,60 @@
 package com.example.merchantapp.service;
 
-import okhttp3.Interceptor;
+import com.example.merchantapp.api.auth.AuthApiService;
+import com.example.merchantapp.api.product.ProductApiService;
+
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.io.IOException;
 public class ApiClient {
-    private static Retrofit retrofit;
 
-    public static void init(String baseUrl) {
-        // 初始化 OkHttp
-        OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request original = chain.request();
-                        Request.Builder builder = original.newBuilder();
+    private static final String BASE_URL = "https://api.vesev.top/";
 
-                        // 自动加上 token
-                        String token = UserManager.getToken();
-                        if (token != null) {
-                            builder.header("Authorization", "Bearer " + token);
-                        }
+    private static Retrofit authRetrofit;      // 带拦截器（业务用）
+    private static Retrofit rawRetrofit;       // 不带拦截器（刷新用）
 
-                        return chain.proceed(builder.build());
-                    }
-                })
-                .build();
+    /* ===== 普通业务 Retrofit（自动加 token + 自动 refresh） ===== */
+    public static Retrofit getAuthRetrofit() {
+        if (authRetrofit == null) {
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .addInterceptor(new AuthInterceptor(MyApp.appContext()))
+                    .authenticator(new TokenAuthenticator(MyApp.appContext()))
+                    .build();
 
-        // 初始化 Retrofit
-        retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create()) // Gson 解析
-                .build();
+            authRetrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return authRetrofit;
     }
 
-    public static Retrofit getRetrofit() {
-        if (retrofit == null) {
-            throw new IllegalStateException("ApiClient 未初始化，请先调用 ApiClient.init()");
+    /* ===== 裸 Retrofit（只给 refresh 用） ===== */
+    public static Retrofit getRawRetrofit() {
+        if (rawRetrofit == null) {
+            rawRetrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
-        return retrofit;
+        return rawRetrofit;
+    }
+
+    /* ===== Services ===== */
+
+    public static AuthApiService getAuthService() {
+        return getAuthRetrofit().create(AuthApiService.class);
+    }
+
+    public static AuthApiService getRawAuthService() {
+        return getRawRetrofit().create(AuthApiService.class);
+    }
+
+    public static ProductApiService getProductService() {
+        return getAuthRetrofit().create(ProductApiService.class);
     }
 }
+
+
