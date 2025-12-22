@@ -9,8 +9,8 @@ namespace API.Infrastructure.Repositories
 {
     public class AdminRepository : IAdminRepository
     {
-        private readonly OnlineshopContext _context;
-        public AdminRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public AdminRepository(OnlineShopContext context)
         {
             _context = context;
         }

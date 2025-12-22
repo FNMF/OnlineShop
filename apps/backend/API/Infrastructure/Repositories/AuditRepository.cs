@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class AuditRepository:IAuditRepository
     {
-        private readonly OnlineshopContext _context;
-        public AuditRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public AuditRepository(OnlineShopContext context)
         {
             _context = context;
         }

@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class LocalFileRepository: ILocalFileRepository
     {
-        public readonly OnlineshopContext _context;
-        public LocalFileRepository(OnlineshopContext context)
+        public readonly OnlineShopContext _context;
+        public LocalFileRepository(OnlineShopContext context)
         {
             _context = context;
         }

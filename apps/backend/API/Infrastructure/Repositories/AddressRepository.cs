@@ -7,9 +7,9 @@ namespace API.Infrastructure.Repositories
 {
     public class AddressRepository : IAddressRepository
     {
-        private readonly OnlineshopContext _context;
+        private readonly OnlineShopContext _context;
 
-        public AddressRepository(OnlineshopContext context)
+        public AddressRepository(OnlineShopContext context)
         {
             _context = context;
         }

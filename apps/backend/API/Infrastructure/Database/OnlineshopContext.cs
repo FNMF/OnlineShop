@@ -6,13 +6,13 @@ using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace API.Infrastructure.Database;
 
-public partial class OnlineshopContext : DbContext
+public partial class OnlineShopContext : DbContext
 {
-    public OnlineshopContext()
+    public OnlineShopContext()
     {
     }
 
-    public OnlineshopContext(DbContextOptions<OnlineshopContext> options)
+    public OnlineShopContext(DbContextOptions<OnlineShopContext> options)
         : base(options)
     {
     }

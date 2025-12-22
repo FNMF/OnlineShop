@@ -5,8 +5,8 @@ namespace API.Infrastructure.Repositories
 {
     public class UnitOfRepository: IUnitOfRepository
     {
-        private readonly OnlineshopContext _context;
-        public UnitOfRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public UnitOfRepository(OnlineShopContext context)
         {
             _context = context;
         }

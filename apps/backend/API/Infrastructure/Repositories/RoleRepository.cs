@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class RoleRepository : IRoleRepository
     {
-        private readonly OnlineshopContext _context;
-        public RoleRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public RoleRepository(OnlineShopContext context)
         {
             _context = context;
         }

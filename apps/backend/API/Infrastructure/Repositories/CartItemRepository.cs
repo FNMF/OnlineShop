@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class CartItemRepository: ICartItemRepository
     {
-        private readonly OnlineshopContext _context;
-        public CartItemRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public CartItemRepository(OnlineShopContext context)
         {
             _context = context;
         }

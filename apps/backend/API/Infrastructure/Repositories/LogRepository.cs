@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class LogRepository : ILogRepository
     {
-        private readonly OnlineshopContext _context;
-        public LogRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public LogRepository(OnlineShopContext context)
         {
             _context = context;
         }

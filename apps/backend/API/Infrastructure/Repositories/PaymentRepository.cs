@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class PaymentRepository: IPaymentRepsitory
     {
-        private readonly OnlineshopContext _context;
-        public PaymentRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public PaymentRepository(OnlineShopContext context)
         {
             _context = context;
         }

@@ -6,8 +6,8 @@ namespace API.Infrastructure.Repositories
 {
     public class OrderRepository: IOrderRepository
     {
-        private readonly OnlineshopContext _context;
-        public OrderRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public OrderRepository(OnlineShopContext context)
         {
             _context = context;
         }

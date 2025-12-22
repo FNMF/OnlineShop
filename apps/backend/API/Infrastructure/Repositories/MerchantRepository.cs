@@ -7,9 +7,9 @@ namespace API.Infrastructure.Repositories
 {
     public class MerchantRepository : IMerchantRepository
     {
-        private readonly OnlineshopContext _context;
+        private readonly OnlineShopContext _context;
 
-        public MerchantRepository(OnlineshopContext context)
+        public MerchantRepository(OnlineShopContext context)
         {
             _context = context;
         }

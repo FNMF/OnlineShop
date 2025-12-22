@@ -7,9 +7,9 @@ namespace API.Api.Ops
     [ApiController]
     public class HealthyController:ControllerBase
     {
-        private readonly OnlineshopContext _dbContext;
+        private readonly OnlineShopContext _dbContext;
 
-        public HealthyController(OnlineshopContext dbContext)
+        public HealthyController(OnlineShopContext dbContext)
         {
             _dbContext = dbContext;
         }

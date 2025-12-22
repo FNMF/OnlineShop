@@ -5,8 +5,8 @@ namespace API.Infrastructure.Repositories
 {
     public class RefreshTokenRepository : IRefreshTokenRepository
     {
-        private readonly OnlineshopContext _context;
-        public RefreshTokenRepository(OnlineshopContext context) { _context = context; }
+        private readonly OnlineShopContext _context;
+        public RefreshTokenRepository(OnlineShopContext context) { _context = context; }
         public IQueryable<Domain.Entities.Models.RefreshToken> QueryRefreshTokens()
         {
             return _context.RefreshTokens;

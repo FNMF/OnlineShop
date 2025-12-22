@@ -7,8 +7,8 @@ namespace API.Infrastructure.Repositories
 {
     public class NotificationRepository : INotificationRepository
     {
-        private readonly OnlineshopContext _context;
-        public NotificationRepository(OnlineshopContext context)
+        private readonly OnlineShopContext _context;
+        public NotificationRepository(OnlineShopContext context)
         {
             _context = context;
         }

@@ -7,9 +7,9 @@ namespace API.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly OnlineshopContext _context;
+        private readonly OnlineShopContext _context;
 
-        public UserRepository(OnlineshopContext context)
+        public UserRepository(OnlineShopContext context)
         {
             _context = context;
         }
