@@ -2,19 +2,14 @@ using API.Api.SignalR;
 using API.Application.Common.EventBus;
 using API.Common.Helpers;
 using API.Common.Models;
-using API.Domain.Services.External;
 using API.Infrastructure.Database;
-using API.Infrastructure.test;
 using API.Infrastructure.WechatPayV3;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SKIT.FlurlHttpClient.Wechat.TenpayV3;
 using System.Text;
-using MySqlConnector;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace API
 {
@@ -85,12 +80,15 @@ namespace API
             builder.Services.AddAuthentication()
                 .AddJwtBearer("ExpiredAllowed", options =>
                 {
+                    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
                         ValidateLifetime = false, // 允许过期
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
                     };
                  });
@@ -98,31 +96,18 @@ namespace API
             builder.Services.AddAuthentication()
                 .AddJwtBearer("RegisterTempToken", options =>
                 {
+                    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
                         ValidateLifetime = true,
+                        ValidIssuer = jwtSettings.Issuer,
+                        ValidAudience = jwtSettings.Audience,
+
                         ClockSkew = TimeSpan.FromMinutes(2), // 允许2分钟的时间偏差
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-                    };
-
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnTokenValidated = context =>
-                        {
-                            var tokenType = context.Principal?
-                                .FindFirst("Type")?
-                                .Value;
-
-                            if (tokenType != "RegisterTemp")
-                            {
-                                context.Fail("Not a RegisterTemp token.");
-                            }
-
-                            return Task.CompletedTask;
-                        }
                     };
                 });
 
