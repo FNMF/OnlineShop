@@ -100,15 +100,13 @@ namespace API.Application.IdentityCase.Services
                 // 3. 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
                 // 例如，通过 EventPublisher 触发一些事件
 
-                var uuid= _currentService.RequiredUuid;
+                var admin = isValid.Data;
 
-                var result = await _shopAdminReadService.GetAdminByUuid(uuid);
-                var admin = result.Data;
                 var merchantReadDto = new AdminReadDto(admin.Phone, admin.Uuid, admin.Account);
 
                 var adminJwt = _jwtHelper.AdminGenerateToken(admin.Phone, admin.Uuid, admin.Account);
 
-                var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
+                var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(admin.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
                     return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
@@ -121,7 +119,7 @@ namespace API.Application.IdentityCase.Services
                     merchantReadDto
                 );
                 var authDto = new AuthResult(false, tokenDto, null);
-                await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
+                await _eventBus.PublishAsync(new MerchantLoginEvent(admin.Uuid));
 
                 return Result<AuthResult>.Success(authDto);
             }
@@ -162,15 +160,22 @@ namespace API.Application.IdentityCase.Services
                     return Result<AuthResult>.Fail(phoneResult.Code, phoneResult.Message);
                 }
                 // 登录成功，生成一些登录后的业务操作，比如生成 Token 或者事件处理
-                var uuid = _currentService.RequiredUuid;
+                var admin = phoneResult.Data;
 
-                var result = await _shopAdminReadService.GetAdminByUuid(uuid);
-                var admin = result.Data;
-                var merchantReadDto = new AdminReadDto(admin.Phone, admin.Uuid, admin.Account);
+                var merchantReadDto = new AdminReadDto(
+                    admin.Phone,
+                    admin.Uuid,
+                    admin.Account
+                );
 
-                var adminJwt = _jwtHelper.AdminGenerateToken(admin.Phone, admin.Uuid, admin.Account);
+                var adminJwt = _jwtHelper.AdminGenerateToken(
+                    admin.Phone,
+                    admin.Uuid,
+                    admin.Account
+                );
 
-                var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(result.Data.Uuid);
+
+                var refreshTokenResult = await _refreshTokenCreateService.AddWeekRefreshTokenAsnyc(admin.Uuid);
                 if (!refreshTokenResult.IsSuccess)
                 {
                     return Result<AuthResult>.Fail(ResultCode.ServerError, "创建刷新令牌失败");
@@ -184,7 +189,7 @@ namespace API.Application.IdentityCase.Services
                 );
 
                 var loginAuthDto = new AuthResult(false, tokenDto, null);
-                await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
+                await _eventBus.PublishAsync(new MerchantLoginEvent(admin.Uuid));
                 return Result<AuthResult>.Success(loginAuthDto);
             }
             catch (Exception ex)

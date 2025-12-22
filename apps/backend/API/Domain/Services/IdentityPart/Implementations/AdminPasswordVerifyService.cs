@@ -1,4 +1,5 @@
-﻿using API.Common.Helpers;
+﻿using API.Application.Common.DTOs;
+using API.Common.Helpers;
 using API.Common.Models.Results;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
@@ -58,7 +59,7 @@ namespace API.Domain.Services.IdentityPart.Implementations
             }
         }
 
-        public async Task<Result> VerifyShopPasswordAsync(int account, string password)
+        public async Task<Result<AdminReadDto>> VerifyShopPasswordAsync(int account, string password)
         {
             try
             {
@@ -71,28 +72,31 @@ namespace API.Domain.Services.IdentityPart.Implementations
                 if (admin == null)
                 {
                     _logger.LogWarning("管理员不存在");
-                    return Result.Fail(ResultCode.NotExist, "管理员不存在");
+                    return Result<AdminReadDto>.Fail(ResultCode.NotExist, "管理员不存在");
                 }
                 if (await _repository.QueryRoleType(admin) != RoleType.shop)
                 {
                     _logger.LogWarning("身份错误");
-                    return Result.Fail(ResultCode.NotExist, "身份错误");
+                    return Result<AdminReadDto>.Fail(ResultCode.NotExist, "身份错误");
                 }
 
                 if (CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(admin.PasswordHash), Convert.FromBase64String(HashHelper.Hashing(password, admin.Salt))))
                 {
-                    string jwt = _jwtHelper.UserGenerateToken(null, admin.Uuid, account.ToString());
-                    return Result.Success(jwt);
+                    var dto = new AdminReadDto(
+                        admin.Phone,
+                        admin.Uuid,
+                        admin.Account);
+                    return Result<AdminReadDto>.Success(dto);
                 }
                 else
                 {
-                    return Result.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
+                    return Result<AdminReadDto>.Fail(ResultCode.LoginVerifyError, "用户名或密码错误");
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "验证密码时出错");
-                return Result.Fail(ResultCode.ServerError, ex.Message);
+                return Result<AdminReadDto>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
     }
