@@ -18,6 +18,7 @@ import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.auth.LoginActivity;
+import com.example.merchantapp.ui.auth.PhoneActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +27,7 @@ import retrofit2.Response;
 public class SplashActivity extends AppCompatActivity {
 
     private MerchantRepository merchantRepository;
+    private String refreshToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +40,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private void autoLogin() {
         if (!TokenManager.hasRefreshToken(this)) {
-            goLogin();
+            goPhone();
             return;
         }
+        refreshToken = TokenManager.getRefreshToken(this);
 
         merchantRepository.getMerchantProfile(
                 new Callback<ApiResponse<AuthResponse>>() {
@@ -54,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
                                 || response.body().getData() == null) {
 
                             TokenManager.clearAll(SplashActivity.this);
-                            goLogin();
+                            goPhone();
                             return;
                         }
 
@@ -63,14 +66,14 @@ public class SplashActivity extends AppCompatActivity {
 
                         if (login == null) {
                             TokenManager.clearAll(SplashActivity.this);
-                            goLogin();
+                            goPhone();
                             return;
                         }
 
                         TokenManager.saveLogin(
                                 SplashActivity.this,
                                 login.getAccessToken(),
-                                login.getRefreshToken(),
+                                refreshToken,
                                 login.getMerchant()
                         );
 
@@ -82,7 +85,7 @@ public class SplashActivity extends AppCompatActivity {
                             Call<ApiResponse<AuthResponse>> call,
                             Throwable t
                     ) {
-                        goLogin();
+                        goPhone();
                     }
                 });
     }
@@ -94,8 +97,8 @@ public class SplashActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goLogin() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    private void goPhone() {
+        Intent intent = new Intent(this, PhoneActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
