@@ -3,7 +3,7 @@ package com.example.merchantapp.service;
 import android.content.Context;
 
 import com.example.merchantapp.api.auth.AuthApiService;
-import com.example.merchantapp.api.auth.LoginByTokenRequest;
+import com.example.merchantapp.api.auth.RefreshTokenRequest;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
@@ -42,7 +42,7 @@ public class TokenAuthenticator implements Authenticator {
         }
 
         retrofit2.Response<ApiResponse<AuthResponse>> refreshResp =
-                rawAuthApi.loginByToken(new LoginByTokenRequest(refreshToken))
+                rawAuthApi.refreshToken(new RefreshTokenRequest(refreshToken))
                         .execute();
 
         if (!refreshResp.isSuccessful() || refreshResp.body() == null) {

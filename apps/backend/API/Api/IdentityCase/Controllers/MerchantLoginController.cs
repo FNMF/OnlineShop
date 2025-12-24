@@ -18,7 +18,7 @@ namespace API.Api.IdentityCase.Controllers
         }
         [HttpPost("token")]
         [Authorize(AuthenticationSchemes = "ExpiredAllowed")]
-        public async Task<IActionResult> LoginByToken([FromBody] string refreshToken)
+        public async Task<IActionResult> RefreshToken([FromBody] string refreshToken)
         {
             var accessToken = HttpContext.Request.Headers["Authorization"]
                     .FirstOrDefault()?
@@ -27,14 +27,14 @@ namespace API.Api.IdentityCase.Controllers
             {
                 return BadRequest("无效的请求数据");
             }
-            var result = await _merchantLoginService.LoginByTokenAsync(accessToken, refreshToken);
+            var result = await _merchantLoginService.RefreshTokenAsync(accessToken, refreshToken);
             if (result.IsSuccess)
             {
-                return Ok(result); // 返回登录成功的结果（比如 Token 等）
+                return Ok(result); // 返回刷新成功的结果（比如 Token 等）
             }
             else
             {
-                return Unauthorized(result); // 登录失败的错误信息
+                return Unauthorized(result); // 刷新失败的错误信息
             }
         }
         [HttpPost("account")]

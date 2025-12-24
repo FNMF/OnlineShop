@@ -47,6 +47,10 @@ public class TokenManager {
                 .getString(KEY_ACCESS, null);
     }
 
+    public static boolean hasRefreshToken(Context c) {
+        return getRefreshToken(c) != null;
+    }
+
     public static String getRefreshToken(Context c) {
         return c.getSharedPreferences(PREF, Context.MODE_PRIVATE)
                 .getString(KEY_REFRESH, null);

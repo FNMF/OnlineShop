@@ -16,9 +16,9 @@ public interface AuthApiService {
     @POST("/api/auth/login/merchant/phone")
     Call<ApiResponse<AuthResponse>> loginByValidationCode(@Body LoginByValidationCodeRequest body);
 
-    // Token登录
+    // Token刷新
     @POST("/api/auth/login/merchant/token")
-    Call<ApiResponse<AuthResponse>> loginByToken(@Body LoginByTokenRequest body);
+    Call<ApiResponse<AuthResponse>> refreshToken(@Body RefreshTokenRequest body);
 
     // 申请验证码
     @POST("/api/auth/code/apply")

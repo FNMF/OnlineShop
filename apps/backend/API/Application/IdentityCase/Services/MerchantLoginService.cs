@@ -43,7 +43,7 @@ namespace API.Application.IdentityCase.Services
             _eventBus = eventBus;
             _logger = logger;
         }
-        public async Task<Result<AuthResult>> LoginByTokenAsync(string? accessToken, string refreshToken)
+        public async Task<Result<AuthResult>> RefreshTokenAsync(string? accessToken, string refreshToken)
         {
             try
             {

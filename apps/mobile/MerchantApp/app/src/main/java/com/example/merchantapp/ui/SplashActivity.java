@@ -11,34 +11,93 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.merchantapp.R;
+import com.example.merchantapp.api.auth.AuthRepository;
+import com.example.merchantapp.api.merchant.MerchantRepository;
+import com.example.merchantapp.model.ApiResponse;
+import com.example.merchantapp.model.auth.AuthResponse;
+import com.example.merchantapp.model.auth.LoginResponse;
+import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.auth.LoginActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private MerchantRepository merchantRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        merchantRepository = new MerchantRepository();
 
-        //模拟身份验证跳转功能
-        //TODO，改成识别是否有token之类的然后跳转对应界面
-        Button btnToMain = findViewById(R.id.btnToMain);
-        Button btnToLogin = findViewById(R.id.btnToLogin);
+        autoLogin();
+        }
 
-        btnToMain.setOnClickListener(v -> {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            finish();
-        });
+    private void autoLogin() {
+        if (!TokenManager.hasRefreshToken(this)) {
+            goLogin();
+            return;
+        }
 
-        btnToLogin.setOnClickListener(v -> {
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            finish();
-        });
+        merchantRepository.getMerchantProfile(
+                new Callback<ApiResponse<AuthResponse>>() {
+                    @Override
+                    public void onResponse(
+                            Call<ApiResponse<AuthResponse>> call,
+                            Response<ApiResponse<AuthResponse>> response
+                    ) {
+                        if (!response.isSuccessful()
+                                || response.body() == null
+                                || response.body().getData() == null) {
+
+                            TokenManager.clearAll(SplashActivity.this);
+                            goLogin();
+                            return;
+                        }
+
+                        AuthResponse body = response.body().getData();
+                        LoginResponse login = body.getLoginResponse();
+
+                        if (login == null) {
+                            TokenManager.clearAll(SplashActivity.this);
+                            goLogin();
+                            return;
+                        }
+
+                        TokenManager.saveLogin(
+                                SplashActivity.this,
+                                login.getAccessToken(),
+                                login.getRefreshToken(),
+                                login.getMerchant()
+                        );
+
+                        goMain();
+                    }
+
+                    @Override
+                    public void onFailure(
+                            Call<ApiResponse<AuthResponse>> call,
+                            Throwable t
+                    ) {
+                        goLogin();
+                    }
+                });
+    }
+
+    private void goMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void goLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
