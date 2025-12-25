@@ -1,21 +1,21 @@
 ﻿using API.Application.Common.DTOs;
 using API.Application.IdentityCase.DTOs;
-using API.Application.MerchantCase.Interfaces;
+using API.Application.IdentityCase.Interfaces;
 using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Services.AdminPart.Interfaces;
 using Microsoft.AspNetCore.Identity.Data;
 
-namespace API.Application.MerchantCase.Services
+namespace API.Application.IdentityCase.Services
 {
-    public class MerchantProfileService:IMerchantProfileService
+    public class ShopAdminProfileService:IShopAdminProfileService
     {
         private readonly IShopAdminReadService _shopAdminReadService;
         private readonly ICurrentService _currentService;
         private readonly JwtHelper _jwtHelper;
-        private readonly ILogger<MerchantProfileService> _logger;
-        public MerchantProfileService(IShopAdminReadService shopAdminReadService, ICurrentService currentService, JwtHelper jwtHelper, ILogger<MerchantProfileService> logger)
+        private readonly ILogger<ShopAdminProfileService> _logger;
+        public ShopAdminProfileService(IShopAdminReadService shopAdminReadService, ICurrentService currentService, JwtHelper jwtHelper, ILogger<ShopAdminProfileService> logger)
         {
             _shopAdminReadService = shopAdminReadService;
             _currentService = currentService;

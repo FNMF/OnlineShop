@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.IdentityCase.Controllers
 {
-    [Route("api/auth/login/merchant")]
+    [Route("api/auth/login/shop_admin")]
     [ApiController]
-    public class MerchantLoginController:ControllerBase
+    public class ShopAdminLoginController:ControllerBase
     {
-        private readonly IMerchantLoginService _merchantLoginService;
+        private readonly IShopAdminLoginService _shopAdminLoginService;
 
-        public MerchantLoginController(IMerchantLoginService merchantLoginService)
+        public ShopAdminLoginController(IShopAdminLoginService shopAdminLoginService)
         {
-            _merchantLoginService = merchantLoginService;
+            _shopAdminLoginService = shopAdminLoginService;
         }
         [HttpPost("token")]
         [Authorize(AuthenticationSchemes = "ExpiredAllowed")]
@@ -27,7 +27,7 @@ namespace API.Api.IdentityCase.Controllers
             {
                 return BadRequest("无效的请求数据");
             }
-            var result = await _merchantLoginService.RefreshTokenAsync(accessToken, refreshToken);
+            var result = await _shopAdminLoginService.RefreshTokenAsync(accessToken, refreshToken);
             if (result.IsSuccess)
             {
                 return Ok(result); // 返回刷新成功的结果（比如 Token 等）
@@ -39,14 +39,14 @@ namespace API.Api.IdentityCase.Controllers
         }
         [HttpPost("account")]
         //[AuthorizePermission(Permissions.VerifyAdmin)]
-        public async Task<IActionResult> LoginByAccount([FromBody] MerchantLoginByAccountOptions opt)
+        public async Task<IActionResult> LoginByAccount([FromBody] ShopAdminLoginByAccountOptions opt)
         {
             if (opt == null)
             {
                 return BadRequest("无效的请求数据");
             }
 
-            var result = await _merchantLoginService.LoginByAccountAsync(opt);
+            var result = await _shopAdminLoginService.LoginByAccountAsync(opt);
             if (result.IsSuccess)
             {
                 return Ok(result); // 返回登录成功的结果（比如 Token 等）
@@ -58,13 +58,13 @@ namespace API.Api.IdentityCase.Controllers
         }
 
         [HttpPost("phone")]
-        public async Task<IActionResult> LoginByValidationCode([FromBody] MerchantLoginByValidationCodeOptions opt)
+        public async Task<IActionResult> LoginByValidationCode([FromBody] ShopAdminLoginByValidationCodeOptions opt)
         {
             if (opt == null)
             {
                 return BadRequest("无效的请求数据");
             }
-            var result = await _merchantLoginService.LoginByPhoneAsync(opt);
+            var result = await _shopAdminLoginService.LoginByPhoneAsync(opt);
             if (result.IsSuccess)
             {
                 return Ok(result); // 返回登录成功的结果（比如 Token 等）

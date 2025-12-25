@@ -1,20 +1,21 @@
-﻿using API.Common.Interfaces;
+﻿using API.Application.Common.EventBus;
+using API.Common.Interfaces;
 using API.Domain.Events.MerchantCase;
 
-namespace API.Application.MerchantCase.Handlers
+namespace API.Application.IdentityCase.Handlers
 {
-    public class MerchantRegisterEventHandler
+    public class ShopAdminRegisterEventHandler:IEventHandler<ShopAdminRegisterEvent>
     {
         private readonly ILogService _logService;
-        private readonly ILogger<MerchantRegisterEventHandler> _logger;
+        private readonly ILogger<ShopAdminRegisterEventHandler> _logger;
 
-        public MerchantRegisterEventHandler(ILogService logService, ILogger<MerchantRegisterEventHandler> logger)
+        public ShopAdminRegisterEventHandler(ILogService logService, ILogger<ShopAdminRegisterEventHandler> logger)
         {
             _logService = logService;
             _logger = logger;
         }
 
-        public async Task HandleAsync(MerchantRegisterEvent @event, CancellationToken cancellation = default)
+        public async Task HandleAsync(ShopAdminRegisterEvent @event, CancellationToken cancellation = default)
         {
             // 这里处理事件，例如记录日志
             Console.WriteLine($"User '{@event.Phone}' registed.");

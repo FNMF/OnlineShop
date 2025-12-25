@@ -5,26 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.IdentityCase.Controllers
 {
-    [Route("api/auth/register/merchant")]
+    [Route("api/auth/register/shop_admin")]
     [ApiController]
-    public class MerchantRegisterController:ControllerBase
+    public class ShopAdminRegisterController:ControllerBase
     {
-        private readonly IMerchantRegisterService _merchantRegisterService;
+        private readonly IShopAdminRegisterService _shopAdminRegisterService;
 
-        public MerchantRegisterController(IMerchantRegisterService merchantRegisterService)
+        public ShopAdminRegisterController(IShopAdminRegisterService merchantRegisterService)
         {
-            _merchantRegisterService = merchantRegisterService;
+            _shopAdminRegisterService = merchantRegisterService;
         }
 
         [HttpPost("phone")]
-        public async Task<IActionResult> RegisterByPhone([FromBody] MerchantRegisterByPhoneOptions opt)
+        public async Task<IActionResult> RegisterByPhone([FromBody] ShopAdminRegisterByPhoneOptions opt)
         {
             if (opt == null)
             {
                 return BadRequest("无效的请求数据");
             }
 
-            var result = await _merchantRegisterService.RegisterByPhoneAsync(opt);
+            var result = await _shopAdminRegisterService.RegisterByPhoneAsync(opt);
             if (result.IsSuccess)
             {
                 return Ok(result); 
@@ -37,13 +37,13 @@ namespace API.Api.IdentityCase.Controllers
 
         [HttpPost("temp")]
         [Authorize(AuthenticationSchemes = "RegisterTempToken")]
-        public async Task<IActionResult> RegisterByTemp([FromBody] MerchantRegisterByTempOptions opt)
+        public async Task<IActionResult> RegisterByTemp([FromBody] ShopAdminRegisterByTempOptions opt)
         {
             if (opt == null)
             {
                 return BadRequest("无效的请求数据");
             }
-            var result = await _merchantRegisterService.RegisterByTempAsync(opt);
+            var result = await _shopAdminRegisterService.RegisterByTempAsync(opt);
             if (result.IsSuccess)
             {
                 return Ok(result);

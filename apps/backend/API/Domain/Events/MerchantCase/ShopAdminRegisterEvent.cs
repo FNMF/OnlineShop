@@ -1,10 +1,10 @@
 ﻿namespace API.Domain.Events.MerchantCase
 {
-    public class MerchantRegisterEvent:IDomainEvent
+    public class ShopAdminRegisterEvent:IDomainEvent
     {
         public string Phone { get; }
         public DateTime OccurredOn { get; }
-        public MerchantRegisterEvent(string phone)
+        public ShopAdminRegisterEvent(string phone)
         {
             Phone = phone;
             OccurredOn = DateTime.Now;

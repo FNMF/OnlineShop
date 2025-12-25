@@ -2,20 +2,20 @@
 using API.Common.Interfaces;
 using API.Domain.Events.MerchantCase;
 
-namespace API.Application.MerchantCase.Handlers
+namespace API.Application.IdentityCase.Handlers
 {
-    public class MerchantLoginEventHandler:IEventHandler<MerchantLoginEvent>
+    public class ShopAdminLoginEventHandler:IEventHandler<ShopAdminLoginEvent>
     {
         private readonly ILogService _logService;
-        private readonly ILogger<MerchantLoginEventHandler> _logger;
+        private readonly ILogger<ShopAdminLoginEventHandler> _logger;
 
-        public MerchantLoginEventHandler(ILogService logService, ILogger<MerchantLoginEventHandler> logger)
+        public ShopAdminLoginEventHandler(ILogService logService, ILogger<ShopAdminLoginEventHandler> logger)
         {
             _logService = logService;
             _logger = logger;
         }
 
-        public async Task HandleAsync(MerchantLoginEvent @event,CancellationToken cancellation = default)
+        public async Task HandleAsync(ShopAdminLoginEvent @event,CancellationToken cancellation = default)
         {
             // 这里处理事件，例如记录日志
             Console.WriteLine($"User '{@event.MerchantAdminUuid}' logged in.");

@@ -4,10 +4,10 @@ using API.Common.Models.Results;
 
 namespace API.Application.IdentityCase.Interfaces
 {
-    public interface IMerchantLoginService
+    public interface IShopAdminLoginService
     {
         Task<Result<AuthResult>> RefreshTokenAsync(string accessToken, string refreshToken);
-        Task<Result<AuthResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt);
-        Task<Result<AuthResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt);
+        Task<Result<AuthResult>> LoginByAccountAsync(ShopAdminLoginByAccountOptions opt);
+        Task<Result<AuthResult>> LoginByPhoneAsync(ShopAdminLoginByValidationCodeOptions opt);
     }
 }

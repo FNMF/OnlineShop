@@ -26,14 +26,14 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private MerchantRepository merchantRepository;
+    private AuthRepository authRepository;
     private String refreshToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
-        merchantRepository = new MerchantRepository();
+        authRepository = new AuthRepository();
 
         autoLogin();
         }
@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         refreshToken = TokenManager.getRefreshToken(this);
 
-        merchantRepository.getMerchantProfile(
+        authRepository.getMerchantProfile(
                 new Callback<ApiResponse<AuthResponse>>() {
                     @Override
                     public void onResponse(

@@ -1,9 +1,9 @@
 ﻿using API.Application.IdentityCase.DTOs;
 using API.Common.Models.Results;
 
-namespace API.Application.MerchantCase.Interfaces
+namespace API.Application.IdentityCase.Interfaces
 {
-    public interface IMerchantProfileService
+    public interface IShopAdminProfileService
     {
         Task<Result<AuthResult>> GetShopAdminProfile();
     }

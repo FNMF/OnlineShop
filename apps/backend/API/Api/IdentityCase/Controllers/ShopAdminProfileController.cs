@@ -1,17 +1,17 @@
-﻿using API.Application.MerchantCase.Interfaces;
+﻿using API.Application.IdentityCase.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Api.MerchantCase.Controllers
+namespace API.Api.IdentityCase.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/merchant")]
-    public class MerchantOperateController:ControllerBase
+    [Microsoft.AspNetCore.Mvc.Route("api/shop_admin")]
+    public class ShopAdminProfileController:ControllerBase
     {
         /*
         * TODO,添加商户申请成为内测商户接口
         private readonly IMerchantOperateService _merchantOperateService;
-        public MerchantOperateController(IMerchantOperateService merchantOperateService)
+        public ShopAdminProfileController(IMerchantOperateService merchantOperateService)
         {
             _merchantOperateService = merchantOperateService;
         }
@@ -20,8 +20,8 @@ namespace API.Api.MerchantCase.Controllers
         {
 
         }*/
-        private readonly IMerchantProfileService _merchantProfileService;
-        public MerchantOperateController(IMerchantProfileService merchantProfileService)
+        private readonly IShopAdminProfileService _merchantProfileService;
+        public ShopAdminProfileController(IShopAdminProfileService merchantProfileService)
         {
             _merchantProfileService = merchantProfileService;
         }

@@ -1,8 +1,7 @@
 ﻿namespace API.Api.IdentityCase.Models
 {
-    public class MerchantLoginByAccountOptions
+    public class ShopAdminRegisterByTempOptions
     {
-        public int Account { get; set; }
         public string Password { get; set; }
     }
 }

@@ -49,7 +49,10 @@ public class AuthRepository {
                 .enqueue(callback);
     }
 
-    /* ===== refresh token（不要在 Repository 用，交给 Authenticator） ===== */
+    /* ===== 获取当前用户信息 ===== */
+    public void getMerchantProfile(Callback<ApiResponse<AuthResponse>> callback){
+        authApi.GetMerchantProfile().enqueue(callback);
+    }
 }
 
 

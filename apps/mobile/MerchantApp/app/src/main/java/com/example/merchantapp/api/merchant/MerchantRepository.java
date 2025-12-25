@@ -13,7 +13,5 @@ public class MerchantRepository {
         this.authApi = ApiClient.getMerchantService();
     }
 
-    public void getMerchantProfile(Callback<ApiResponse<AuthResponse>> callback){
-        authApi.GetMerchantProfile().enqueue(callback);
-    }
+
 }

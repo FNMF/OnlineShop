@@ -21,7 +21,7 @@ using System.Security.Claims;
 namespace API.Application.IdentityCase.Services
 {
 
-    public class MerchantLoginService : IMerchantLoginService
+    public class ShopAdminLoginService : IShopAdminLoginService
     {
         private readonly IAdminPasswordVerifyService _adminPasswordVerifyService;
         private readonly IRefreshTokenReadService _refreshTokenReadService;
@@ -30,9 +30,9 @@ namespace API.Application.IdentityCase.Services
         private readonly ICurrentService _currentService;
         private readonly JwtHelper _jwtHelper;
         private readonly EventBus _eventBus;
-        private readonly ILogger<MerchantLoginService> _logger;
+        private readonly ILogger<ShopAdminLoginService> _logger;
 
-        public MerchantLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, IRefreshTokenReadService refreshTokenReadService, IShopAdminReadService shopAdminReadService, IRefreshTokenCreateService refreshTokenCreateService, ICurrentService currentService, JwtHelper jwtHelper, EventBus eventBus, ILogger<MerchantLoginService> logger)
+        public ShopAdminLoginService(IAdminPasswordVerifyService adminPasswordVerifyService, IRefreshTokenReadService refreshTokenReadService, IShopAdminReadService shopAdminReadService, IRefreshTokenCreateService refreshTokenCreateService, ICurrentService currentService, JwtHelper jwtHelper, EventBus eventBus, ILogger<ShopAdminLoginService> logger)
         {
             _adminPasswordVerifyService = adminPasswordVerifyService;
             _refreshTokenReadService = refreshTokenReadService;
@@ -74,7 +74,7 @@ namespace API.Application.IdentityCase.Services
                 );
 
                 var authDto = new AuthResult(false,tokenDto, null);
-                await _eventBus.PublishAsync(new MerchantLoginEvent(uuid));
+                await _eventBus.PublishAsync(new ShopAdminLoginEvent(uuid));
 
                 return Result<AuthResult>.Success(authDto);
             }
@@ -84,7 +84,7 @@ namespace API.Application.IdentityCase.Services
                 return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
-        public async Task<Result<AuthResult>> LoginByAccountAsync(MerchantLoginByAccountOptions opt)
+        public async Task<Result<AuthResult>> LoginByAccountAsync(ShopAdminLoginByAccountOptions opt)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace API.Application.IdentityCase.Services
                     merchantReadDto
                 );
                 var authDto = new AuthResult(false, tokenDto, null);
-                await _eventBus.PublishAsync(new MerchantLoginEvent(admin.Uuid));
+                await _eventBus.PublishAsync(new ShopAdminLoginEvent(admin.Uuid));
 
                 return Result<AuthResult>.Success(authDto);
             }
@@ -129,7 +129,7 @@ namespace API.Application.IdentityCase.Services
                 return Result<AuthResult>.Fail(ResultCode.ServerError, ex.Message);
             }
         }
-        public async Task<Result<AuthResult>> LoginByPhoneAsync(MerchantLoginByValidationCodeOptions opt)
+        public async Task<Result<AuthResult>> LoginByPhoneAsync(ShopAdminLoginByValidationCodeOptions opt)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace API.Application.IdentityCase.Services
                 );
 
                 var loginAuthDto = new AuthResult(false, tokenDto, null);
-                await _eventBus.PublishAsync(new MerchantLoginEvent(admin.Uuid));
+                await _eventBus.PublishAsync(new ShopAdminLoginEvent(admin.Uuid));
                 return Result<AuthResult>.Success(loginAuthDto);
             }
             catch (Exception ex)
