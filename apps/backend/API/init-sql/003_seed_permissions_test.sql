@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 INSERT INTO onlineshop.permissions (id, name, display_name, permission_group) VALUES (0, 'AddAdmin', '创建管理员', 'system');
 INSERT INTO onlineshop.permissions (id, name, display_name, permission_group) VALUES (1, 'VerifyAdmin', '验证管理员身份', 'system');
 INSERT INTO onlineshop.permissions (id, name, display_name, permission_group) VALUES (1000, 'AddProduct', '新增商品', 'shop');

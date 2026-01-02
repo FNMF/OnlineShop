@@ -57,8 +57,6 @@
     <Folder Include="Application\CartCase\Handlers\" />
     <Folder Include="Application\MerchantCase\DTOs\" />
     <Folder Include="Application\MerchantCase\Handlers\" />
-    <Folder Include="Application\MerchantCase\Interfaces\" />
-    <Folder Include="Application\MerchantCase\Services\" />
     <Folder Include="Application\OrderCase\DTOs\" />
     <Folder Include="Application\PaymentCase\Interfaces\" />
     <Folder Include="Application\PaymentCase\Services\" />

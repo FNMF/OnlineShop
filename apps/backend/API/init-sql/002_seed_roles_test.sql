@@ -1,3 +1,5 @@
+SET NAMES utf8mb4;
+
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (0, 'developer', 0, '开发人员', 'system');
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (1, 'top_admin', 1, '最高管理员', 'system');
 INSERT INTO onlineshop.roles (id, name, is_build_in, display_name, role_type) VALUES (2, 'system_admin', 1, '系统管理员', 'system');
