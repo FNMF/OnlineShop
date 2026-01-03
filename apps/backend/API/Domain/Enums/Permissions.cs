@@ -14,6 +14,10 @@
         GetProduct = 1003,
 
         GetOrder = 1004,
+
+        AddMerchantShop = 1005,
+        UpdateMerchantShop = 1006,
+        GetMerchantShop = 1007,
         //GroupUser
 
         //Group

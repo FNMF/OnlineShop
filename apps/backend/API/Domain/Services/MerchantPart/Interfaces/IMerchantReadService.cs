@@ -10,5 +10,6 @@ namespace API.Domain.Services.MerchantPart.Interfaces
         //Task<List<Merchant>> GetMerchantBySearchAsync(string search);
         //Task<Merchant> GetMerchantByAdminUuidAsync(Guid uuid);
         Task<Result<Merchant>> GetMerchantByUuidAsync(Guid uuid);
+        Task<Result<Merchant>> GetMerchantByAdminUuidAsync(Guid uuid);
     }
 }

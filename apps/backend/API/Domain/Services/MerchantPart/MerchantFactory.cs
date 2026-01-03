@@ -94,7 +94,6 @@ namespace API.Domain.Services.MerchantPart
                 BusinessStart = dto.Businessstart,
                 BusinessEnd = dto.Businessend,
                 AdminUuid = dto.Adminuuid,
-                Uuid = dto.MerchantUuid,
                 IsClosed = false,
                 IsDeleted = false,
                 IsAudited = false,

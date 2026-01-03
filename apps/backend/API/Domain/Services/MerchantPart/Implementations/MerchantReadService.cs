@@ -35,5 +35,24 @@ namespace API.Domain.Services.MerchantPart.Implementations
             }
             
         }
+
+        public async Task<Result<Merchant>> GetMerchantByAdminUuidAsync(Guid uuid)
+        {
+            try
+            {
+                var merchant = _merchantRepository.QueryMerchants()
+                    .FirstOrDefault(m => m.AdminUuid == uuid && m.IsDeleted == false);
+                if (merchant == null)
+                {
+                    return Result<Merchant>.Fail(ResultCode.NotFound, "没有找到相关商户");
+                }
+                return Result<Merchant>.Success(merchant);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return Result<Merchant>.Fail(ResultCode.ServerError, "查询商户时出错");
+            }
+        }
     }
 }
