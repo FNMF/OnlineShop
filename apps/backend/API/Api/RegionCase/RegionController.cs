@@ -1,4 +1,6 @@
 ﻿using API.Application.RegionCase.Interfaces;
+using API.Common.Models.Results;
+using API.Infrastructure.Region;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.RegionCase
@@ -17,19 +19,22 @@ namespace API.Api.RegionCase
         [HttpGet("provinces")]
         public async Task<IActionResult> GetProvinces()
         {
-            return Ok(await _service.GetProvincesAsync());
+            var result = await _service.GetProvincesAsync();
+            return Ok(result);
         }
 
         [HttpGet("cities")]
         public async Task<IActionResult> GetCities()
         {
-            return Ok(await _service.GetCitiesAsync());
+            var result = await _service.GetCitiesAsync();
+            return Ok(result);
         }
 
         [HttpGet("districts")]
         public async Task<IActionResult> GetDistricts()
         {
-            return Ok(await _service.GetDistrictsAsync());
+            var result = await _service.GetDistrictsAsync();
+            return Ok(result);
         }
     }
 }

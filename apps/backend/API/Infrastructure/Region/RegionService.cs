@@ -1,4 +1,5 @@
 ﻿using API.Application.RegionCase.Interfaces;
+using API.Common.Models.Results;
 using API.Domain.Entities.Models;
 using API.Infrastructure.Caching;
 using API.Infrastructure.Database;
@@ -20,9 +21,9 @@ namespace API.Infrastructure.Region
             _db = db;
         }
 
-        public async Task<List<Province>> GetProvincesAsync()
+        public async Task<Result<List<ProvinceDto>>> GetProvincesAsync()
         {
-            return await _cache.GetOrCreateAsync(
+            var provinces = await _cache.GetOrCreateAsync(
                 CacheKeys.Provinces,
                 async entry =>
                 {
@@ -33,11 +34,15 @@ namespace API.Infrastructure.Region
                         .OrderBy(p => p.Id)
                         .ToListAsync();
                 });
+
+            var provinecDtos = provinces.Select(p => new ProvinceDto { Id = p.Id, Name = p.Name }).ToList();
+
+            return Result<List<ProvinceDto>>.Success(provinecDtos);
         }
 
-        public async Task<List<City>> GetCitiesAsync()
+        public async Task<Result<List<CityDto>>> GetCitiesAsync()
         {
-            return await _cache.GetOrCreateAsync(
+            var cities= await _cache.GetOrCreateAsync(
                 CacheKeys.Cities,
                 async entry =>
                 {
@@ -48,11 +53,14 @@ namespace API.Infrastructure.Region
                         .OrderBy(c => c.Id)
                         .ToListAsync();
                 });
+            var cityDtos = cities.Select(c => new CityDto { Id = c.Id, Name = c.Name, ProvinceId = c.ProvinceId.Value }).ToList();
+
+            return Result<List<CityDto>>.Success(cityDtos);
         }
 
-        public async Task<List<District>> GetDistrictsAsync()
+        public async Task<Result<List<DistrictDto>>> GetDistrictsAsync()
         {
-            return await _cache.GetOrCreateAsync(
+            var districts = await _cache.GetOrCreateAsync(
                 CacheKeys.Districts,
                 async entry =>
                 {
@@ -63,6 +71,9 @@ namespace API.Infrastructure.Region
                         .OrderBy(d => d.Id)
                         .ToListAsync();
                 });
+            var districtDtos = districts.Select(d => new DistrictDto { Id = d.Id, Name = d.Name, CityId = d.CityId.Value }).ToList();
+
+            return Result<List<DistrictDto>>.Success(districtDtos);
         }
 
         public void ClearAll()
