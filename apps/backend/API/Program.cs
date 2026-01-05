@@ -30,6 +30,9 @@ namespace API
             var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
             var jwtKey = builder.Configuration["Jwt:SecretKey"];
 
+            // 缓存服务，后续可以换成分布式缓存如Redis
+            builder.Services.AddMemoryCache();
+
             builder.Services.AddScoped<EventBus>();
 
             builder.Services.AddControllers();

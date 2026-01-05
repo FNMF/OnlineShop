@@ -31,9 +31,13 @@ public partial class OnlineShopContext : DbContext
 
     public virtual DbSet<Cartitem> Cartitems { get; set; }
 
+    public virtual DbSet<City> Cities { get; set; }
+
     public virtual DbSet<Coupon> Coupons { get; set; }
 
     public virtual DbSet<Delivery> Deliveries { get; set; }
+
+    public virtual DbSet<District> Districts { get; set; }
 
     public virtual DbSet<Localfile> Localfiles { get; set; }
 
@@ -54,6 +58,8 @@ public partial class OnlineShopContext : DbContext
     public virtual DbSet<Privilege> Privileges { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
+
+    public virtual DbSet<Province> Provinces { get; set; }
 
     public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
 
@@ -168,6 +174,21 @@ public partial class OnlineShopContext : DbContext
                 .HasConstraintName("cartitem_cart_cart_uuid_fk");
         });
 
+        modelBuilder.Entity<City>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("cities", tb => tb.HasComment("城市表"));
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasComment("城市名称");
+            entity.Property(e => e.ProvinceId).HasComment("所属省份ID");
+
+            entity.HasOne(d => d.Province).WithMany(p => p.Cities)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("fk_city_province");
+        });
+
         modelBuilder.Entity<Coupon>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -186,6 +207,21 @@ public partial class OnlineShopContext : DbContext
             entity.HasOne(d => d.NotificationUu).WithMany(p => p.Deliveries)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("delivery_notification_notification_uuid_fk");
+        });
+
+        modelBuilder.Entity<District>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("districts", tb => tb.HasComment("区县表"));
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.CityId).HasComment("所属城市ID");
+            entity.Property(e => e.Name).HasComment("区县名称");
+
+            entity.HasOne(d => d.City).WithMany(p => p.Districts)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("fk_district_city");
         });
 
         modelBuilder.Entity<Localfile>(entity =>
@@ -299,6 +335,16 @@ public partial class OnlineShopContext : DbContext
             entity.HasOne(d => d.MerchantUu).WithMany(p => p.Products)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("product_merchant_merchant_uuid_fk");
+        });
+
+        modelBuilder.Entity<Province>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("provinces", tb => tb.HasComment("省份表"));
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Name).HasComment("省份名称");
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>

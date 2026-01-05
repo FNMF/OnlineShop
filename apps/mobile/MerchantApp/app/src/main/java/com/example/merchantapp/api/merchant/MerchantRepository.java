@@ -8,9 +8,9 @@ import com.example.merchantapp.service.ApiClient;
 import retrofit2.Callback;
 
 public class MerchantRepository {
-    private final MerchantApiService authApi;
+    private final MerchantApiService merchantApi;
     public MerchantRepository(){
-        this.authApi = ApiClient.getMerchantService();
+        this.merchantApi = ApiClient.getMerchantService();
     }
 
 

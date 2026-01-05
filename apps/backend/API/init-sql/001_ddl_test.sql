@@ -465,5 +465,35 @@ create table if not exists wallet_transactions
         foreign key (merchant_uuid) references merchants (uuid)
 );
 
+CREATE TABLE provinces (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL COMMENT '省份名称',
+
+    UNIQUE KEY uk_province_name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='省份表';
+
+CREATE TABLE cities (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL COMMENT '城市名称',
+    province_id INT NULL COMMENT '所属省份ID',
+
+    CONSTRAINT fk_city_province
+        FOREIGN KEY (province_id) REFERENCES provinces(id)
+        ON DELETE SET NULL,
+
+    UNIQUE KEY uk_city_name_province (name, province_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='城市表';
+
+CREATE TABLE districts (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL COMMENT '区县名称',
+    city_id INT NULL COMMENT '所属城市ID',
+
+    CONSTRAINT fk_district_city
+        FOREIGN KEY (city_id) REFERENCES cities(id)
+        ON DELETE SET NULL,
+
+    UNIQUE KEY uk_district_name_city (name, city_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='区县表';
 
 

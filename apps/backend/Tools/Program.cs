@@ -12,11 +12,17 @@
                 Console.WriteLine("请选择执行的子方法");
                 Console.WriteLine();
                 Console.WriteLine("1. ReplaceByteArrayWithGuid.Start()");
+                Console.WriteLine("2. RegionScript.Start()");
                 switch (Console.ReadLine())
                 {
                     case "1":
                         Console.Clear();
                         ReplaceByteArrayWithGuid.Start();
+                        break;
+
+                    case "2":
+                        Console.Clear();
+                        RegionScript.Start();
                         break;
                     default:
                         Console.Clear();
