@@ -7,7 +7,7 @@ namespace API.Application.RegionCase.Interfaces
     public interface IRegionService
     {
         Task<Result<List<ProvinceDto>>> GetProvincesAsync();
-        Task<Result<List<CityDto>>> GetCitiesAsync();
-        Task<Result<List<DistrictDto>>> GetDistrictsAsync();
+        Task<Result<List<CityDto>>> GetCitiesAsync(int provinceId);
+        Task<Result<List<DistrictDto>>> GetDistrictsAsync(int cityId);
     }
 }

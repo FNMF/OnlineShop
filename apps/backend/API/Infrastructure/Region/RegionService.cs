@@ -40,7 +40,7 @@ namespace API.Infrastructure.Region
             return Result<List<ProvinceDto>>.Success(provinecDtos);
         }
 
-        public async Task<Result<List<CityDto>>> GetCitiesAsync()
+        public async Task<Result<List<CityDto>>> GetCitiesAsync(int provinceId)
         {
             var cities= await _cache.GetOrCreateAsync(
                 CacheKeys.Cities,
@@ -53,12 +53,12 @@ namespace API.Infrastructure.Region
                         .OrderBy(c => c.Id)
                         .ToListAsync();
                 });
-            var cityDtos = cities.Select(c => new CityDto { Id = c.Id, Name = c.Name, ProvinceId = c.ProvinceId.Value }).ToList();
+            var cityDtos = cities.Where(c => c.ProvinceId ==provinceId).Select(c => new CityDto { Id = c.Id, Name = c.Name, ProvinceId = c.ProvinceId!.Value }).ToList();
 
             return Result<List<CityDto>>.Success(cityDtos);
         }
 
-        public async Task<Result<List<DistrictDto>>> GetDistrictsAsync()
+        public async Task<Result<List<DistrictDto>>> GetDistrictsAsync(int cityId)
         {
             var districts = await _cache.GetOrCreateAsync(
                 CacheKeys.Districts,
@@ -71,7 +71,7 @@ namespace API.Infrastructure.Region
                         .OrderBy(d => d.Id)
                         .ToListAsync();
                 });
-            var districtDtos = districts.Select(d => new DistrictDto { Id = d.Id, Name = d.Name, CityId = d.CityId.Value }).ToList();
+            var districtDtos = districts.Where(d => d.CityId == cityId).Select(d => new DistrictDto { Id = d.Id, Name = d.Name, CityId = d.CityId!.Value }).ToList();
 
             return Result<List<DistrictDto>>.Success(districtDtos);
         }

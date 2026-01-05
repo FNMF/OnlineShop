@@ -24,16 +24,16 @@ namespace API.Api.RegionCase
         }
 
         [HttpGet("cities")]
-        public async Task<IActionResult> GetCities()
+        public async Task<IActionResult> GetCities([FromQuery] int provinceId)
         {
-            var result = await _service.GetCitiesAsync();
+            var result = await _service.GetCitiesAsync(provinceId);
             return Ok(result);
         }
 
         [HttpGet("districts")]
-        public async Task<IActionResult> GetDistricts()
+        public async Task<IActionResult> GetDistricts([FromQuery] int cityId)
         {
-            var result = await _service.GetDistrictsAsync();
+            var result = await _service.GetDistrictsAsync(cityId);
             return Ok(result);
         }
     }
