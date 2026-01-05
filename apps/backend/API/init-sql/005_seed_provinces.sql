@@ -1,4 +1,6 @@
-﻿INSERT INTO provinces (id, name) VALUES (1, '北京市');
+﻿SET NAMES utf8mb4;
+
+INSERT INTO provinces (id, name) VALUES (1, '北京市');
 INSERT INTO provinces (id, name) VALUES (2, '天津市');
 INSERT INTO provinces (id, name) VALUES (3, '河北省');
 INSERT INTO provinces (id, name) VALUES (4, '山西省');

@@ -1,4 +1,6 @@
-﻿INSERT INTO cities (id, name, province_id) VALUES (1, '市辖区', 1);
+﻿SET NAMES utf8mb4;
+
+INSERT INTO cities (id, name, province_id) VALUES (1, '市辖区', 1);
 INSERT INTO cities (id, name, province_id) VALUES (2, '市辖区', 2);
 INSERT INTO cities (id, name, province_id) VALUES (3, '石家庄市', 3);
 INSERT INTO cities (id, name, province_id) VALUES (4, '唐山市', 3);

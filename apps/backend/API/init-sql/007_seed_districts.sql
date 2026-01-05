@@ -1,4 +1,6 @@
-﻿INSERT INTO districts (id, name, city_id) VALUES (1, '东城区', 1);
+﻿SET NAMES utf8mb4;
+
+INSERT INTO districts (id, name, city_id) VALUES (1, '东城区', 1);
 INSERT INTO districts (id, name, city_id) VALUES (2, '西城区', 1);
 INSERT INTO districts (id, name, city_id) VALUES (3, '朝阳区', 1);
 INSERT INTO districts (id, name, city_id) VALUES (4, '丰台区', 1);
