@@ -29,5 +29,24 @@ namespace API.Infrastructure.Repositories
 
             return roles;
         }
+
+        // 测试阶段获得shop管理员角色
+        public async Task<bool> MarkAsAdmin(Guid adminUuid)
+        {
+            var adminRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "shop_owner");
+            if (adminRole == null)
+            {
+                throw new Exception("shop_owner role not found");
+            }
+            var adminRoleRelation = new AdminRole
+            {
+                ArAdminuuid = adminUuid,
+                ArRoleid = adminRole.Id
+            };
+            _context.AdminRoles.Add(adminRoleRelation);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

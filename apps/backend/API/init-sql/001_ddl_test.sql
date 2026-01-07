@@ -225,7 +225,7 @@ create table if not exists roles
 
 create table if not exists admin_role
 (
-    ar_id        INT NOT NULL PRIMARY KEY,
+    ar_id        INT auto_increment NOT NULL PRIMARY KEY,
     ar_adminuuid BINARY(16) NOT NULL,
     ar_roleid    INT NOT NULL,
     CONSTRAINT admin_role_admin_admin_uuid_fk
