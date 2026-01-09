@@ -43,6 +43,7 @@
             app:itemBackground="@drawable/nav_item_background"/>
     </LinearLayout>
 
+
     <!-- 左侧抽屉菜单 -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_drawer"

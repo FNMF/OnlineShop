@@ -27,8 +27,8 @@ public class RoleManager {
         return new Gson().fromJson(json, new TypeToken<List<String>>() {}.getType());
     }
 
-    public static boolean isShopAdmin(Context context) {
-        return getRoles(context).contains("shop_admin");
+    public static boolean isShopOwner(Context context) {
+        return getRoles(context).contains("shop_owner");
         // 与后端返回值的身份String内容相同。
     }
 

@@ -1,6 +1,7 @@
 ﻿using API.Application.RoleCase.Interfaces;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
+using API.Domain.Entities.Models;
 using API.Domain.Enums;
 using API.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
@@ -27,10 +28,11 @@ namespace API.Application.RoleCase.Services
             try
             {
                 var uuid = _currentService.RequiredUuid;
-                var isExist = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid);
-                if (isExist != null && isExist.Count > 0)
+                var rolesResult =await GetRoles();
+                var roles = rolesResult.Data;
+                if (roles.Contains("shop_owner"))
                 {
-                    return Result.Fail(ResultCode.InfoExist, "已存在其余身份");
+                    return Result.Fail(ResultCode.InfoExist, "已拥有测试商户身份");
                 }
 
                 var isSuccess = await _adminRoleRepository.MarkAsAdmin(uuid);
@@ -42,7 +44,7 @@ namespace API.Application.RoleCase.Services
                 {
                     return Result.Fail(ResultCode.ServerError, "获得测试商户身份失败");
                 }
-            }
+            } 
             catch (Exception ex)
             {
                 _logger.LogError(ex, "获得测试商户时发生错误");
@@ -52,17 +54,12 @@ namespace API.Application.RoleCase.Services
         public async Task<Result<List<string>>> GetRoles()
         {
             var uuid = _currentService.RequiredUuid;
-            var isExist = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid);
-            if(isExist == null)
-            {
-                return Result<List<string>>.Fail(ResultCode.NotExist, "无身份信息");
-            }
+            var roles = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid)
+                          ?? new List<Role>();
 
-            var roles = new List<string>();
-            roles = isExist.Select(r => r.Name).ToList();
-
-            return Result<List<string>>.Success(roles);
-
+            return Result<List<string>>.Success(
+                roles.Select(r => r.Name).ToList()
+            );
         }
     }
 }
