@@ -11,7 +11,7 @@ import com.example.merchantapp.databinding.ActivityLoginBinding;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.storage.TokenManager;
-import com.example.merchantapp.ui.MainActivity;
+import com.example.merchantapp.ui.PostLoginLoadingActivity;
 import com.example.merchantapp.ui.SplashActivity;
 
 import retrofit2.Call;
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                             body.getLoginResponse().getMerchant()
                     );
 
-                    goMain();
+                    goPostLoginLoading();
                 } else {
                     toast("账号或密码错误");
                 }
@@ -82,9 +82,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goMain() {
+    private void goPostLoginLoading() {
         // 清栈不让返回登录页
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, PostLoginLoadingActivity.class);
         intent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK

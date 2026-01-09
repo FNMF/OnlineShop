@@ -13,7 +13,7 @@ import com.example.merchantapp.R;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.storage.TokenManager;
-import com.example.merchantapp.ui.MainActivity;
+import com.example.merchantapp.ui.PostLoginLoadingActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +79,7 @@ public class RegisterPasswordActivity extends AppCompatActivity {
                     );
 
                     // 注册完成 → 进 Main，清栈
-                    goMainAndClearStack();
+                    goPostLoginLoading();
                 } else {
                     // tempToken 失效 or 业务失败
                     handleRegisterError(response.code());
@@ -114,8 +114,8 @@ public class RegisterPasswordActivity extends AppCompatActivity {
         }
     }
 
-    private void goMainAndClearStack() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void goPostLoginLoading() {
+        Intent intent = new Intent(this, PostLoginLoadingActivity.class);
         intent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK

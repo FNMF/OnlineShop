@@ -12,5 +12,5 @@ import retrofit2.http.POST;
 
 public interface MerchantApiService {
     @POST("/api/merchant")
-    Call<ApiResponse<AdminMerchantResponse>> createMerchant(@Body )
+    Call<ApiResponse<AdminMerchantResponse>> createMerchant(@Body CreateMerchantRequest body);
 }

@@ -1,7 +1,9 @@
 ﻿using API.Application.RoleCase.Interfaces;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
+using API.Domain.Enums;
 using API.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace API.Application.RoleCase.Services
 {
@@ -20,7 +22,7 @@ namespace API.Application.RoleCase.Services
             _logger = logger;
         }
         // 测试阶段获得shop管理员角色，后续要删除或修改
-        public async Task<Result> GetShopAdminRoleTest()
+        public async Task<Result> ApplyShopAdminRoleTest()
         {
             try
             {
@@ -43,9 +45,24 @@ namespace API.Application.RoleCase.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error in GetShopAdminRoleTest");
+                _logger.LogError(ex, "获得测试商户时发生错误");
                 return Result.Fail(ResultCode.ServerError, "获得测试商户身份异常");
             }
+        }
+        public async Task<Result<List<string>>> GetRoles()
+        {
+            var uuid = _currentService.RequiredUuid;
+            var isExist = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid);
+            if(isExist == null)
+            {
+                return Result<List<string>>.Fail(ResultCode.NotExist, "无身份信息");
+            }
+
+            var roles = new List<string>();
+            roles = isExist.Select(r => r.Name).ToList();
+
+            return Result<List<string>>.Success(roles);
+
         }
     }
 }

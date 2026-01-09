@@ -3,6 +3,7 @@ package com.example.merchantapp.service;
 import com.example.merchantapp.api.auth.AuthApiService;
 import com.example.merchantapp.api.merchant.MerchantApiService;
 import com.example.merchantapp.api.product.ProductApiService;
+import com.example.merchantapp.api.role.RoleApiService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -51,6 +52,9 @@ public class ApiClient {
 
     public static AuthApiService getRawAuthService() {
         return getRawRetrofit().create(AuthApiService.class);
+    }
+    public static RoleApiService getRoleService(){
+        return getAuthRetrofit().create(RoleApiService.class);
     }
 
     public static MerchantApiService getMerchantService(){

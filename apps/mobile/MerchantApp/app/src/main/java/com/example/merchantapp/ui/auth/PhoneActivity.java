@@ -15,7 +15,7 @@ import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.model.auth.RegisterResponse;
 import com.example.merchantapp.storage.TokenManager;
-import com.example.merchantapp.ui.MainActivity;
+import com.example.merchantapp.ui.PostLoginLoadingActivity;
 import com.example.merchantapp.ui.SplashActivity;
 
 import retrofit2.Call;
@@ -146,7 +146,7 @@ public class PhoneActivity extends AppCompatActivity {
                     LoginResponse login = body.getLoginResponse();
                     if (login != null) {
                         TokenManager.saveLogin(PhoneActivity.this, login.getAccessToken(), login.getRefreshToken(), login.getMerchant());
-                        goMain();
+                        goPostLoginLoading();
                     } else {
                         toast("登录失败，请稍后重试");
                     }
@@ -161,8 +161,8 @@ public class PhoneActivity extends AppCompatActivity {
         });
     }
 
-    private void goMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void goPostLoginLoading() {
+        Intent intent = new Intent(this, PostLoginLoadingActivity.class);
         intent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK

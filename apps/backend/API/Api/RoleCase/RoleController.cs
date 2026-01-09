@@ -12,18 +12,32 @@ namespace API.Api.RoleCase
         {
             _roleService = roleService;
         }
-        [HttpGet()]
+        [HttpGet("test")]
         [Authorize]
-        public async Task<IActionResult> GetRoles()
+        public async Task<IActionResult> ApplyTestRole()
         {
-            var result = await _roleService.GetShopAdminRoleTest();
+            var result = await _roleService.ApplyShopAdminRoleTest();
             if(result.IsSuccess)
             {
                 return Ok(result);
             }
             else
             {
-                return StatusCode(500, result);
+                return BadRequest(result);
+            }
+        }
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetRoles()
+        {
+            var result = await _roleService.GetRoles();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
             }
         }
     }

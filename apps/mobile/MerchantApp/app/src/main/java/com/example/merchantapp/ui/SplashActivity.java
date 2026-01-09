@@ -2,22 +2,16 @@ package com.example.merchantapp.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.merchantapp.R;
 import com.example.merchantapp.api.auth.AuthRepository;
-import com.example.merchantapp.api.merchant.MerchantRepository;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.storage.TokenManager;
-import com.example.merchantapp.ui.auth.LoginActivity;
 import com.example.merchantapp.ui.auth.PhoneActivity;
 
 import retrofit2.Call;
@@ -77,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
                                 login.getMerchant()
                         );
 
-                        goMain();
+                        goPostLoginLoading();
                     }
 
                     @Override
@@ -90,8 +84,8 @@ public class SplashActivity extends AppCompatActivity {
                 });
     }
 
-    private void goMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void goPostLoginLoading() {
+        Intent intent = new Intent(this, PostLoginLoadingActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

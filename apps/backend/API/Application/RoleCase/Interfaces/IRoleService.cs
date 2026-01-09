@@ -4,6 +4,7 @@ namespace API.Application.RoleCase.Interfaces
 {
     public interface IRoleService
     {
-        Task<Result> GetShopAdminRoleTest();
+        Task<Result> ApplyShopAdminRoleTest();
+        Task<Result<List<string>>> GetRoles();
     }
 }
