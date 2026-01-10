@@ -1,16 +1,12 @@
 package com.example.merchantapp.ui.products;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,12 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.merchantapp.R;
-import com.example.merchantapp.model.product.ProductRead;
 import com.example.merchantapp.service.ShopAdminGuard;
-import com.example.merchantapp.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
-import java.util.List; // 引入你实际使用的数据类型
 
 /**
  * A fragment representing a list of Items.

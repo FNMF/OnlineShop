@@ -1,4 +1,4 @@
-package com.example.merchantapp.viewmodel;
+package com.example.merchantapp.ui.products;
 
 import android.app.Application;
 

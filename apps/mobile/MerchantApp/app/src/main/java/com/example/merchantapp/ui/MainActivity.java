@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Gravity;
 
 import com.example.merchantapp.R;
+import com.example.merchantapp.storage.SessionManager;
+import com.example.merchantapp.ui.auth.PhoneActivity;
 import com.example.merchantapp.ui.sidemenu.ProductServiceActivity;
 import com.example.merchantapp.ui.sidemenu.ProfileActivity;
 import com.example.merchantapp.ui.sidemenu.SettingsActivity;
@@ -12,6 +14,7 @@ import com.example.merchantapp.ui.sidemenu.ShopSettingsActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_product_service) {
                 startActivity(new Intent(this , ProductServiceActivity.class));
             } else if (id == R.id.nav_logout) {
-                // TODO: 执行退出逻辑
+                showLogoutDialog();
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -75,5 +78,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private void showLogoutDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("退出登录")
+                .setMessage("确认退出当前账号吗？")
+                .setPositiveButton("确认", (dialog, which) -> {
+                    logout();
+                })
+                .setNegativeButton("取消", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .show();
+    }
+    private void logout() {
+        SessionManager.logout(this);
+
+        Intent intent = new Intent(this, PhoneActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 
 }
