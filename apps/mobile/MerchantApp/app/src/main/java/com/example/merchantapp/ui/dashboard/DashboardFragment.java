@@ -51,18 +51,18 @@ public class DashboardFragment extends Fragment {
         binding.noPermissionContainer.setVisibility(View.VISIBLE);
 
         binding.btnApplyShopAdmin.setOnClickListener(v ->
-                shopAdminGuard.applyShopAdmin(this::refreshUi)
+                shopAdminGuard.checkAndApplyShopAdmin(this::refreshUi)
         );
     }
 
     private void refreshUi() {
-        // 最简单、最稳定的刷新方式
-        requireActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .detach(this)
-                .attach(this)
-                .commit();
+        if (shopAdminGuard.isShopAdmin()) {
+            DashboardViewModel dashboardViewModel =
+                    new ViewModelProvider(this).get(DashboardViewModel.class);
+            showContent(dashboardViewModel);
+        } else {
+            showNoPermission();
+        }
     }
 
     @Override

@@ -54,12 +54,10 @@ namespace API.Application.RoleCase.Services
         public async Task<Result<List<string>>> GetRoles()
         {
             var uuid = _currentService.RequiredUuid;
-            var roles = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid)
+            var rolesResult = await _adminRoleRepository.GetRolesByAdminIdAsync(uuid)
                           ?? new List<Role>();
-
-            return Result<List<string>>.Success(
-                roles.Select(r => r.Name).ToList()
-            );
+            var roles = rolesResult.Select(r => r.Name).ToList();
+            return Result<List<string>>.Success(roles);
         }
     }
 }

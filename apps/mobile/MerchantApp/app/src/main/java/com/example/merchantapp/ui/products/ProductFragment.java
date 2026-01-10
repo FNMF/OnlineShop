@@ -62,7 +62,7 @@ public class ProductFragment extends Fragment {
             noPermissionContainer.setVisibility(View.VISIBLE);
 
             applyBtn.setOnClickListener(v ->
-                    guard.applyShopAdmin(this::refreshPage)
+                    guard.checkAndApplyShopAdmin(this::refreshPage)
             );
             return root;
         }

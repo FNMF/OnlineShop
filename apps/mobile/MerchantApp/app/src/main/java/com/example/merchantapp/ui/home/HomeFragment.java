@@ -1,6 +1,7 @@
 package com.example.merchantapp.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,18 +53,18 @@ public class HomeFragment extends Fragment {
         binding.noPermissionContainer.setVisibility(View.VISIBLE);
 
         binding.btnApplyShopAdmin.setOnClickListener(v ->
-                shopAdminGuard.applyShopAdmin(this::refreshUi)
+                shopAdminGuard.checkAndApplyShopAdmin(this::refreshUi)
         );
     }
 
     private void refreshUi() {
-        // 最简单、最稳定的刷新方式
-        requireActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .detach(this)
-                .attach(this)
-                .commit();
+        if (shopAdminGuard.isShopAdmin()) {
+            HomeViewModel homeViewModel =
+                    new ViewModelProvider(this).get(HomeViewModel.class);
+            showContent(homeViewModel);
+        } else {
+            showNoPermission();
+        }
     }
 
     @Override

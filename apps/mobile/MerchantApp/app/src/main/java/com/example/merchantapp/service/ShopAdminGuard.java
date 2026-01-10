@@ -1,12 +1,14 @@
 package com.example.merchantapp.service;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.merchantapp.api.role.RoleRepository;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.role.RoleResponse;
 import com.example.merchantapp.storage.RoleManager;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,13 +26,22 @@ public class ShopAdminGuard {
     public boolean isShopAdmin() {
         return RoleManager.isShopOwner(context);
     }
+    public void checkAndApplyShopAdmin(Runnable onResult) {
+        // 先刷新角色
+        refreshRole(() -> {
+            if (isShopAdmin()) {
+                onResult.run(); // 已经是管理员
+            } else {
+                applyShopAdmin(onResult); // 申请管理员
+            }
+        });
+    }
 
     public void applyShopAdmin(Runnable onSuccess) {
         roleRepository.applyTestShopAdmin(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call,
                                    Response<ApiResponse> response) {
-
                 if (response.isSuccessful()
                         && response.body() != null
                         && response.body().isSuccess()) {
@@ -54,7 +65,6 @@ public class ShopAdminGuard {
             @Override
             public void onResponse(Call<ApiResponse<RoleResponse>> call,
                                    Response<ApiResponse<RoleResponse>> response) {
-
                 if (response.isSuccessful() && response.body() != null) {
                     RoleResponse data = response.body().getData();
                     if (data != null && data.getRoles() != null) {
