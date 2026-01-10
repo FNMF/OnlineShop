@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                android:title="添加商品"
                 android:elevation="4dp" />
 
             <!-- 表单卡片 -->
@@ -50,7 +49,7 @@
 
                     <EditText
                         android:id="@+id/edit_name"
-                        android:hint="商品名称"
+                        android:hint="商品名称（例：产品）"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_bg"
@@ -58,7 +57,7 @@
 
                     <EditText
                         android:id="@+id/edit_price"
-                        android:hint="价格"
+                        android:hint="价格（例：19.9）"
                         android:inputType="numberDecimal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,7 +66,7 @@
 
                     <EditText
                         android:id="@+id/edit_stock"
-                        android:hint="库存"
+                        android:hint="库存（例：9999）"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -76,7 +75,7 @@
 
                     <EditText
                         android:id="@+id/edit_weight"
-                        android:hint="重量（例：500g）"
+                        android:hint="重量（例：200g、1斤、2千克）"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext_bg"
