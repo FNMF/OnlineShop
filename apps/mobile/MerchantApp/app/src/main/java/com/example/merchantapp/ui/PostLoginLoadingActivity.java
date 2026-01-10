@@ -3,17 +3,14 @@ package com.example.merchantapp.ui;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.merchantapp.R;
 import com.example.merchantapp.api.role.RoleRepository;
 import com.example.merchantapp.model.ApiResponse;
-import com.example.merchantapp.model.role.RoleResponse;
 import com.example.merchantapp.storage.RoleManager;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,25 +31,21 @@ public class PostLoginLoadingActivity extends AppCompatActivity {
     private void initAfterLogin() {
 
         //  获取角色
-        roleRepository.getUserRoles(new Callback<ApiResponse<RoleResponse>>() {
+        roleRepository.getUserRoles(new Callback<ApiResponse<List<String>>>() {
             @Override
-            public void onResponse(Call<ApiResponse<RoleResponse>> call,
-                                   Response<ApiResponse<RoleResponse>> response) {
-
+            public void onResponse(Call<ApiResponse<List<String>>> call,
+                                   Response<ApiResponse<List<String>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    RoleResponse data = response.body().getData();
-                    if (data != null && data.getRoles() != null) {
+                    List<String> roles = response.body().getData();
                         RoleManager.saveRoles(
                                 PostLoginLoadingActivity.this,
-                                data.getRoles()
-                        );
+                                roles);
                     }
-                }
                 goMain();
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<RoleResponse>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<List<String>>> call, Throwable t) {
                 goMain();
             }
         });

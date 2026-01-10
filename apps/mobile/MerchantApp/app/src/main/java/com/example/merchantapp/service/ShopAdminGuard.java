@@ -1,14 +1,13 @@
 package com.example.merchantapp.service;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.merchantapp.api.role.RoleRepository;
 import com.example.merchantapp.model.ApiResponse;
-import com.example.merchantapp.model.role.RoleResponse;
 import com.example.merchantapp.storage.RoleManager;
-import com.google.gson.Gson;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,21 +60,19 @@ public class ShopAdminGuard {
     }
 
     private void refreshRole(Runnable onSuccess) {
-        roleRepository.getUserRoles(new Callback<ApiResponse<RoleResponse>>() {
+        roleRepository.getUserRoles(new Callback<ApiResponse<List<String>>>() {
             @Override
-            public void onResponse(Call<ApiResponse<RoleResponse>> call,
-                                   Response<ApiResponse<RoleResponse>> response) {
+            public void onResponse(Call<ApiResponse<List<String>>> call,
+                                   Response<ApiResponse<List<String>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    RoleResponse data = response.body().getData();
-                    if (data != null && data.getRoles() != null) {
-                        RoleManager.saveRoles(context, data.getRoles());
-                    }
+                    List<String> roles = response.body().getData();
+                    RoleManager.saveRoles(context, roles);
                 }
                 onSuccess.run();
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<RoleResponse>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<List<String>>> call, Throwable t) {
                 onSuccess.run();
             }
         });
