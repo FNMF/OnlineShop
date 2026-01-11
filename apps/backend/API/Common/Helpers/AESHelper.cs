@@ -5,8 +5,22 @@ namespace API.Common.Helpers
 {
     public class AESHelper
     {
-        private static readonly byte[] Key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("AES_KEY")
-        ?? throw new Exception("AES_KEY not found"));
+        private readonly byte[] _key;
+
+        public AESHelper(IConfiguration configuration)
+        {
+            var keyStr = configuration["AES_KEY"];
+            if (string.IsNullOrEmpty(keyStr))
+                throw new Exception("AES_KEY not found");
+
+            _key = HexToBytes(keyStr);
+        }
+        private static byte[] HexToBytes(string hex)
+        {
+            return Enumerable.Range(0, hex.Length / 2)
+                .Select(i => Convert.ToByte(hex.Substring(i * 2, 2), 16))
+                .ToArray();
+        }
 
         // IV 长度固定 16 字节，AES块大小
         private const int IvSize = 16;

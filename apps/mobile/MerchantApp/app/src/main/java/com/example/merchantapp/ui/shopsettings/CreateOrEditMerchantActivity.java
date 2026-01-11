@@ -1,6 +1,7 @@
 package com.example.merchantapp.ui.shopsettings;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -32,6 +33,7 @@ import retrofit2.Response;
 public class CreateOrEditMerchantActivity extends AppCompatActivity {
 
     /* ---------------- core ---------------- */
+    private CreateOrEditMerchantViewModel submitViewModel;
 
     private MerchantFormViewModel viewModel;
     private RegionRepository regionRepo;
@@ -75,6 +77,32 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_merchant);
+
+        submitViewModel = new ViewModelProvider(this)
+                .get(CreateOrEditMerchantViewModel.class);
+        submitViewModel.getSubmitState().observe(this, state -> {
+            if (state == null) return;
+
+            switch (state.status) {
+                case LOADING:
+                    btnNext.setEnabled(false);
+                    btnNext.setText("提交中...");
+                    break;
+
+                case SUCCESS:
+                    Toast.makeText(this, "商户创建成功", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
+                    break;
+
+                case ERROR:
+                    btnNext.setEnabled(true);
+                    btnNext.setText("完成");
+                    Toast.makeText(this, state.errorMessage, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
+
 
         viewModel = new ViewModelProvider(this).get(MerchantFormViewModel.class);
         regionRepo = new RegionRepository();
@@ -132,6 +160,10 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
         etProvince.setAdapter(provinceAdapter);
         etCity.setAdapter(cityAdapter);
         etDistrict.setAdapter(districtAdapter);
+
+        etProvince.setOnClickListener(v -> etProvince.showDropDown());
+        etCity.setOnClickListener(v -> etCity.showDropDown());
+        etDistrict.setOnClickListener(v -> etDistrict.showDropDown());
 
         etCity.setEnabled(false);
         etDistrict.setEnabled(false);
@@ -342,9 +374,7 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
     }
 
     private void submitForm() {
-        // TODO 调接口
-        setResult(RESULT_OK);
-        finish();
+        submitViewModel.createMerchant(viewModel.getState());
     }
 
     private boolean validateName() {
