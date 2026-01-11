@@ -29,6 +29,11 @@ namespace API
 
             var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
             var jwtKey = builder.Configuration["Jwt:SecretKey"];
+            // aesKey初始化
+            var aesKey = builder.Configuration["AES_KEY"]
+    ?? throw new Exception("AES_KEY missing");
+
+            AESHelper.Init(aesKey);
 
             // 缓存服务，后续可以换成分布式缓存如Redis
             builder.Services.AddMemoryCache();
@@ -147,7 +152,6 @@ namespace API
             builder.Services.AddLogging();
             //特殊名称服务注册
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            builder.Services.AddSingleton<AESHelper>();
             builder.Services.AddScoped<IEventBus, EventBus>();
             //通用名称服务注册
             builder.Services.Scan(scan => scan

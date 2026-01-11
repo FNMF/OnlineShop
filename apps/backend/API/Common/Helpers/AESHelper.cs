@@ -5,16 +5,18 @@ namespace API.Common.Helpers
 {
     public class AESHelper
     {
-        private readonly byte[] _key;
-
-        public AESHelper(IConfiguration configuration)
+        private static byte[]? _key;
+        public static void Init(string hexKey)
         {
-            var keyStr = configuration["AES_KEY"];
-            if (string.IsNullOrEmpty(keyStr))
-                throw new Exception("AES_KEY not found");
+            if (_key != null) return;
 
-            _key = HexToBytes(keyStr);
+            if (hexKey.Length != 32)
+                throw new Exception("AES key must be 16 bytes (32 hex chars)");
+
+            _key = HexToBytes(hexKey);
         }
+        private static byte[] Key =>
+        _key ?? throw new Exception("AESHelper not initialized");
         private static byte[] HexToBytes(string hex)
         {
             return Enumerable.Range(0, hex.Length / 2)
