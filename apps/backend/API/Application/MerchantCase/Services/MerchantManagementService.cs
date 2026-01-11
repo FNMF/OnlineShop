@@ -121,37 +121,7 @@ namespace API.Application.MerchantCase.Services
             }
         }
 
-        public async Task<Result<UserMerchantResult>> GetMerchantAsync(Guid uuid)
-        {
-            try
-            {
-                var readResult = await _merchantReadService.GetMerchantByUuidAsync(uuid);
-                if (!readResult.IsSuccess)
-                {
-                    return Result<UserMerchantResult>.Fail(readResult.Code, readResult.Message);
-                }
-                var merchantResult = new UserMerchantResult
-                {
-                    Name = readResult.Data.Name,
-                    Province = readResult.Data.Province,
-                    City = readResult.Data.City,
-                    District = readResult.Data.District,
-                    Detail = readResult.Data.Detail,
-                    BusinessStart = readResult.Data.BusinessStart,
-                    BusinessEnd = readResult.Data.BusinessEnd,
-                    DeliveryFee = readResult.Data.DeliveryFee,
-                    MinimumOrderAmount = readResult.Data.MinimumOrderAmount,
-                    FreeDeliveryThreshold = readResult.Data.FreeDeliveryThreshold,
-                    IsClosed = readResult.Data.IsClosed
-                };
-                return Result<UserMerchantResult>.Success(merchantResult);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "获取商户信息失败");
-                return Result<UserMerchantResult>.Fail(ResultCode.ServerError, "获取商户信息失败");
-            }
-        }
+        
 
         public async Task<Result<AdminMerchantResult>> UpdateMerchantAsync(MerchantUpdateOptions opt)
         {

@@ -18,7 +18,7 @@ public interface AuthApiService {
     Call<ApiResponse<AuthResponse>> loginByValidationCode(@Body LoginByValidationCodeRequest body);
 
     // Token刷新
-    @POST("/api/auth/login/shop_admin/token")
+    @POST("/api/auth/refresh")
     Call<ApiResponse<AuthResponse>> refreshToken(@Body RefreshTokenRequest body);
 
     // 申请验证码

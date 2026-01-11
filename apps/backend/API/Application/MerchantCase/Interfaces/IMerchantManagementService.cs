@@ -8,7 +8,6 @@ namespace API.Application.MerchantCase.Interfaces
     {
         Task<Result<AdminMerchantResult>> CreateMerchantAsync(MerchantCreateOptions opt);
         Task<Result<AdminMerchantResult>> GetMerchantDetailAsync();
-        Task<Result<UserMerchantResult>> GetMerchantAsync(Guid uuid);
         Task<Result<AdminMerchantResult>> UpdateMerchantAsync(MerchantUpdateOptions opt);
     }
 }

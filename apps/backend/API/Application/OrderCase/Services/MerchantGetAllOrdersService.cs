@@ -1,4 +1,5 @@
-﻿using API.Application.OrderCase.Interfaces;
+﻿using API.Application.MerchantCase.Interfaces;
+using API.Application.OrderCase.Interfaces;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Aggregates.OrderAggregate.Interfaces;
@@ -9,12 +10,14 @@ namespace API.Application.OrderCase.Services
     public class MerchantGetAllOrdersService: IMerchantGetAllOrdersService
     {
         private readonly IOrderReadService _orderReadService;
+        private readonly IGetMerchantService _getMerchantService;
         private readonly ICurrentService _currentService;
         private readonly ILogger<MerchantGetAllOrdersService> _logger;
 
-        public MerchantGetAllOrdersService(IOrderReadService orderReadService, ICurrentService currentService, ILogger<MerchantGetAllOrdersService> logger)
+        public MerchantGetAllOrdersService(IOrderReadService orderReadService, IGetMerchantService getMerchantService, ICurrentService currentService, ILogger<MerchantGetAllOrdersService> logger)
         {
             _orderReadService = orderReadService;
+            _getMerchantService = getMerchantService;
             _currentService = currentService;
             _logger = logger;
         }
@@ -23,12 +26,12 @@ namespace API.Application.OrderCase.Services
         {
             try
             {
-                var merchantUuid = _currentService.RequiredUuid;
-                if (merchantUuid == null || merchantUuid == Guid.Empty)
+                var merchantResult = await _getMerchantService.GetMerchantUuid();
+                if (!merchantResult.IsSuccess)
                 {
-                    _logger.LogWarning("未找到当前商户信息");
-                    return Result<List<OrderMain>>.Fail(ResultCode.Unauthorized, "未找到当前商户信息");
+                    return Result<List<OrderMain>>.Fail(merchantResult.Code, merchantResult.Message);
                 }
+                var merchantUuid = merchantResult.Data;
                 var ordersResult = await _orderReadService.MerchantGetAllOrdersByUuid(merchantUuid);
                 if (!ordersResult.IsSuccess)
                 {

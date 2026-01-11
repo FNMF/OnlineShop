@@ -2,7 +2,7 @@ package com.example.merchantapp.api.merchant;
 
 import java.math.BigDecimal;
 
-public class CreateMerchantRequest {
+public class UpdateMerchantRequest {
     public String name;
     public String province;
     public String city;
@@ -13,7 +13,7 @@ public class CreateMerchantRequest {
     public BigDecimal delivery_fee;
     public BigDecimal minimum_order_amount;
     public BigDecimal free_delivery_threshold;
-    public CreateMerchantRequest(String name,
+    public UpdateMerchantRequest(String name,
                                  String province,
                                  String city,
                                  String district,

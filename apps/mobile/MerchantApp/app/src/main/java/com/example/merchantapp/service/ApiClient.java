@@ -2,7 +2,9 @@ package com.example.merchantapp.service;
 
 import com.example.merchantapp.api.auth.AuthApiService;
 import com.example.merchantapp.api.merchant.MerchantApiService;
+import com.example.merchantapp.api.order.OrderApiService;
 import com.example.merchantapp.api.product.ProductApiService;
+import com.example.merchantapp.api.region.RegionApiService;
 import com.example.merchantapp.api.role.RoleApiService;
 
 import okhttp3.OkHttpClient;
@@ -56,6 +58,9 @@ public class ApiClient {
     public static RoleApiService getRoleService(){
         return getAuthRetrofit().create(RoleApiService.class);
     }
+    public static RegionApiService getRegionService(){
+        return getAuthRetrofit().create(RegionApiService.class);
+    }
 
     public static MerchantApiService getMerchantService(){
         return getAuthRetrofit().create(MerchantApiService.class);
@@ -63,6 +68,10 @@ public class ApiClient {
 
     public static ProductApiService getProductService() {
         return getAuthRetrofit().create(ProductApiService.class);
+    }
+
+    public static OrderApiService getOrderService(){
+        return getAuthRetrofit().create(OrderApiService.class);
     }
 }
 
