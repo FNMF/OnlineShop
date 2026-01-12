@@ -1,5 +1,7 @@
 package com.example.merchantapp.ui.auth;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.merchantapp.api.auth.AuthRepository;
@@ -10,8 +12,10 @@ import retrofit2.Callback;
 
 public class LoginViewModel extends ViewModel {
 
-    private final AuthRepository repository = new AuthRepository();
-
+    private final AuthRepository repository;
+    public LoginViewModel() {
+        repository = new AuthRepository();
+    }
     public void loginByAccount(String account,
                                String password,
                                Callback<ApiResponse<AuthResponse>> callback) {

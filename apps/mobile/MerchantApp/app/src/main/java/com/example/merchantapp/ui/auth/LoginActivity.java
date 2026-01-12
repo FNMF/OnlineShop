@@ -58,17 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                                    Response<ApiResponse<AuthResponse>> response) {
 
                 if (response.isSuccessful() && response.body() != null) {
-                    ApiResponse<AuthResponse> wrapper = response.body();
-                    AuthResponse body = wrapper.getData();
-
-                    // 保存 token & 商户信息
-                    TokenManager.saveLogin(
-                            LoginActivity.this,
-                            body.getLoginResponse().getAccessToken(),
-                            body.getLoginResponse().getRefreshToken(),
-                            body.getLoginResponse().getMerchant()
-                    );
-
                     goPostLoginLoading();
                 } else {
                     toast("账号或密码错误");

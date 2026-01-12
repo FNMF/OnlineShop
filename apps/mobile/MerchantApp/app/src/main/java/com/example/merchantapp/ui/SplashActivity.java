@@ -11,6 +11,7 @@ import com.example.merchantapp.api.auth.AuthRepository;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
+import com.example.merchantapp.storage.SessionManager;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.auth.PhoneActivity;
 
@@ -19,70 +20,23 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
-
-    private AuthRepository authRepository;
-    private String refreshToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
-        authRepository = new AuthRepository();
 
         autoLogin();
         }
 
     private void autoLogin() {
-        if (!TokenManager.hasRefreshToken(this)) {
+        if (!SessionManager.get().isLoggedIn()) {
             goPhone();
             return;
         }
-        refreshToken = TokenManager.getRefreshToken(this);
-
-        authRepository.getMerchantProfile(
-                new Callback<ApiResponse<AuthResponse>>() {
-                    @Override
-                    public void onResponse(
-                            Call<ApiResponse<AuthResponse>> call,
-                            Response<ApiResponse<AuthResponse>> response
-                    ) {
-                        if (!response.isSuccessful()
-                                || response.body() == null
-                                || response.body().getData() == null) {
-
-                            TokenManager.clearAll(SplashActivity.this);
-                            goPhone();
-                            return;
-                        }
-
-                        AuthResponse body = response.body().getData();
-                        LoginResponse login = body.getLoginResponse();
-
-                        if (login == null) {
-                            TokenManager.clearAll(SplashActivity.this);
-                            goPhone();
-                            return;
-                        }
-
-                        TokenManager.saveLogin(
-                                SplashActivity.this,
-                                login.getAccessToken(),
-                                refreshToken,
-                                login.getMerchant()
-                        );
-
-                        goPostLoginLoading();
-                    }
-
-                    @Override
-                    public void onFailure(
-                            Call<ApiResponse<AuthResponse>> call,
-                            Throwable t
-                    ) {
-                        goPhone();
-                    }
-                });
+        goPostLoginLoading();
     }
+
 
     private void goPostLoginLoading() {
         Intent intent = new Intent(this, PostLoginLoadingActivity.class);

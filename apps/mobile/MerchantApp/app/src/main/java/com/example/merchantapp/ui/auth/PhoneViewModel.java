@@ -1,5 +1,7 @@
 package com.example.merchantapp.ui.auth;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.example.merchantapp.api.auth.AuthRepository;
@@ -9,7 +11,10 @@ import com.example.merchantapp.model.auth.AuthResponse;
 import retrofit2.Callback;
 
 public class PhoneViewModel extends ViewModel {
-    private final AuthRepository repository = new AuthRepository();
+    private final AuthRepository repository;
+    public PhoneViewModel() {
+        repository = new AuthRepository();
+    }
     public void loginByValidationCode(String phone,
                                       String code,
                                       Callback<ApiResponse<AuthResponse>> callback){

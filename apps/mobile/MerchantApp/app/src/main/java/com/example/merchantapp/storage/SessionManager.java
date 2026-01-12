@@ -2,20 +2,48 @@ package com.example.merchantapp.storage;
 
 import android.content.Context;
 
-public class SessionManager {
-    private SessionManager() {}
+import com.example.merchantapp.model.auth.LoginResponse;
 
-    /** 退出登录 / 清空会话 */
-    public static void logout(Context context) {
-        TokenManager.clearAll(context);
-        RoleManager.clear(context);
-        // TODO,以后有就加
-        // UserManager.clear(context);
-        // PushManager.clear(context);
+public class SessionManager {
+
+    private static SessionManager instance;
+    private final Context appContext;
+
+    private SessionManager(Context context) {
+        this.appContext = context.getApplicationContext();
     }
 
-    /** 是否已登录 */
-    public static boolean isLoggedIn(Context context) {
-        return TokenManager.getAccessToken(context) != null;
+    public static void init(Context context) {
+        if (instance == null) {
+            instance = new SessionManager(context);
+        }
+    }
+
+    public static SessionManager get() {
+        if (instance == null) {
+            throw new IllegalStateException("SessionManager not initialized");
+        }
+        return instance;
+    }
+
+    public void onLoginSuccess(LoginResponse login) {
+        TokenManager.saveAccessToken(login.getAccessToken());
+        TokenManager.saveRefreshToken(login.getRefreshToken());
+        AdminManager.saveAdmin(appContext,login.getMerchant());
+    }
+
+    public boolean isLoggedIn() {
+        return TokenManager.getAccessToken() != null;
+    }
+
+    public void logout() {
+        TokenManager.clearAll();
+        RoleManager.clear(appContext);
+        AdminManager.clear(appContext);
     }
 }
+
+
+
+
+

@@ -65,19 +65,8 @@ public class RegisterPasswordActivity extends AppCompatActivity {
             public void onResponse(Call<ApiResponse<AuthResponse>> call,
                                    Response<ApiResponse<AuthResponse>> response) {
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful()&& response.body() != null) {
                     toast("注册成功");
-
-                    ApiResponse<AuthResponse> wrapper = response.body();
-                    AuthResponse body = wrapper.getData();
-
-                    TokenManager.saveLogin(
-                            RegisterPasswordActivity.this,
-                            body.getLoginResponse().getAccessToken(),
-                            body.getLoginResponse().getRefreshToken(),
-                            body.getLoginResponse().getMerchant()
-                    );
-
                     // 注册完成 → 进 Main，清栈
                     goPostLoginLoading();
                 } else {

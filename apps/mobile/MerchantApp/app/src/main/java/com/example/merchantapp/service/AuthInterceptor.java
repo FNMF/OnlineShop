@@ -20,20 +20,16 @@ public class AuthInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        String access = TokenManager.getAccessToken();
 
-        String access = TokenManager.getAccessToken(context);
-        String temp = TokenManager.getTempToken(context);
-
-        Request original = chain.request();
-        Request.Builder builder = original.newBuilder();
-
-        if (access != null&& !access.isEmpty()) {
-            builder.addHeader("Authorization", "Bearer " + access);
-        } else if (temp != null&& !temp.isEmpty()) {
-            builder.addHeader("Authorization", "Bearer " + temp);
+        Request request = chain.request();
+        if (access != null) {
+            request = request.newBuilder()
+                    .header("Authorization", "Bearer " + access)
+                    .build();
         }
-
-        return chain.proceed(builder.build());
+        return chain.proceed(request);
     }
 }
+
 

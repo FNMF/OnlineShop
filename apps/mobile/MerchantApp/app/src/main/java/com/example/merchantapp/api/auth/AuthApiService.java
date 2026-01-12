@@ -6,6 +6,7 @@ import com.example.merchantapp.model.auth.AuthResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AuthApiService {
@@ -19,7 +20,10 @@ public interface AuthApiService {
 
     // Token刷新
     @POST("/api/auth/refresh")
-    Call<ApiResponse<AuthResponse>> refreshToken(@Body RefreshTokenRequest body);
+    Call<ApiResponse<AuthResponse>> refreshToken(
+            @Header("Authorization") String authorization,
+            @Body String refreshToken
+    );
 
     // 申请验证码
     @POST("/api/auth/code/apply")
@@ -27,7 +31,9 @@ public interface AuthApiService {
 
     // 验证码TempToken注册
     @POST("/api/auth/register/shop_admin/temp")
-    Call<ApiResponse<AuthResponse>> registerByTempToken(@Body RegisterByTempTokenRequest body);
+    Call<ApiResponse<AuthResponse>> registerByTempToken(@Header("Authorization") String authorization,
+            @Body RegisterByTempTokenRequest body
+    );
     // 获取管理员信息
     @GET("/api/shop_admin/profile")
     Call<ApiResponse<AuthResponse>> GetMerchantProfile();

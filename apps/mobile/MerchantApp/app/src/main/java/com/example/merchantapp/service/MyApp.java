@@ -2,11 +2,10 @@ package com.example.merchantapp.service;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.merchantapp.BuildConfig;
+import com.example.merchantapp.storage.ProductManager;
+import com.example.merchantapp.storage.SessionManager;
 
 public class MyApp extends Application {
     private static MyApp instance;
@@ -19,7 +18,7 @@ public class MyApp extends Application {
         //GlobalNetworkService.init(this);
 
         // 例如：初始化对象管理
-
+        SessionManager.init(this);
         ProductManager.init(this);
 
         // 检查应用更新

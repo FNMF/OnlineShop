@@ -1,8 +1,10 @@
 package com.example.merchantapp.ui.auth;
 
 import android.content.Intent;
+import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.TokenWatcher;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.model.auth.RegisterResponse;
+import com.example.merchantapp.storage.AdminManager;
 import com.example.merchantapp.storage.TokenManager;
 import com.example.merchantapp.ui.PostLoginLoadingActivity;
 import com.example.merchantapp.ui.SplashActivity;
@@ -121,19 +124,17 @@ public class PhoneActivity extends AppCompatActivity {
             public void onResponse(Call<ApiResponse<AuthResponse>> call,
                                    Response<ApiResponse<AuthResponse>> response) {
 
-                if (!response.isSuccessful() || response.body() == null) {
+                if (!response.isSuccessful() || response.body() == null || response.body().getData() == null) {
                     toast("验证码错误或已过期");
                     return;
                 }
 
-                    ApiResponse<AuthResponse> wrapper = response.body();
-                    AuthResponse body = wrapper.getData();
+                AuthResponse body = response.body().getData();
 
                 if (Boolean.TRUE.equals(body.isNewUser())) {
-                    // 新用户 → 去设置密码
+                    // 新用户 → 跳转设置密码
                     RegisterResponse register = body.getRegisterResponse();
                     if (register != null) {
-                        TokenManager.saveTempToken(PhoneActivity.this, register.getTempToken());
                         Intent intent = new Intent(PhoneActivity.this, RegisterPasswordActivity.class);
                         intent.putExtra("tempToken", register.getTempToken());
                         intent.putExtra("expiresIn", register.getExpiresIn());
@@ -143,15 +144,9 @@ public class PhoneActivity extends AppCompatActivity {
                         toast("无法获取新用户信息，请重新获取验证码");
                     }
                 } else {
-                    LoginResponse login = body.getLoginResponse();
-                    if (login != null) {
-                        TokenManager.saveLogin(PhoneActivity.this, login.getAccessToken(), login.getRefreshToken(), login.getMerchant());
-                        goPostLoginLoading();
-                    } else {
-                        toast("登录失败，请稍后重试");
-                    }
+                    // 老用户 → 登录成功后直接跳转
+                    goPostLoginLoading();
                 }
-
             }
 
             @Override

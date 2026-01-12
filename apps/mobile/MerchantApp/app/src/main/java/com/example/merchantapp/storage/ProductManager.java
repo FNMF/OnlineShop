@@ -1,4 +1,4 @@
-package com.example.merchantapp.service;
+package com.example.merchantapp.storage;
 
 
 import android.content.Context;
