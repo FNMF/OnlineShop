@@ -1,6 +1,7 @@
 package com.example.merchantapp.service;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.merchantapp.storage.TokenManager;
 
@@ -20,13 +21,16 @@ public class AuthInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        String access = TokenManager.getAccessToken();
-
         Request request = chain.request();
-        if (access != null) {
-            request = request.newBuilder()
-                    .header("Authorization", "Bearer " + access)
-                    .build();
+        Log.d("HTTP", "Content-Type = " + request.body().contentType());
+
+        if (request.header("Authorization") == null) {
+            String access = TokenManager.getAccessToken();
+            if (access != null) {
+                request = request.newBuilder()
+                        .header("Authorization", "Bearer " + access)
+                        .build();
+            }
         }
         return chain.proceed(request);
     }

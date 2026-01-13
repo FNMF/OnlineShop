@@ -1,6 +1,7 @@
 package com.example.merchantapp.api.auth;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.merchantapp.model.auth.LoginResponse;
 import com.example.merchantapp.model.auth.RegisterResponse;

@@ -35,7 +35,7 @@ public class ApiClient {
         return authRetrofit;
     }
 
-    /* ===== 裸 Retrofit（只给 refresh 用） ===== */
+    /* ===== 裸 Retrofit ===== */
     public static Retrofit getRawRetrofit() {
         if (rawRetrofit == null) {
             rawRetrofit = new Retrofit.Builder()

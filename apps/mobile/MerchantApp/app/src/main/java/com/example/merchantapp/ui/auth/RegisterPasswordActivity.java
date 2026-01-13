@@ -2,6 +2,7 @@ package com.example.merchantapp.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,7 +65,6 @@ public class RegisterPasswordActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse<AuthResponse>> call,
                                    Response<ApiResponse<AuthResponse>> response) {
-
                 if (response.isSuccessful()&& response.body() != null) {
                     toast("注册成功");
                     // 注册完成 → 进 Main，清栈
