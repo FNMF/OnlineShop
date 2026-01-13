@@ -42,18 +42,7 @@ namespace API.Api.IdentityCase.Controllers
         [Authorize(AuthenticationSchemes = "RegisterTempToken")]
         public async Task<IActionResult> RegisterByTemp([FromBody] ShopAdminRegisterByTempOptions opt)
         {
-            Request.EnableBuffering();
 
-            Request.Body.Position = 0;
-            using var reader = new StreamReader(Request.Body, Encoding.UTF8, leaveOpen: true);
-            var rawBody = await reader.ReadToEndAsync();
-            Request.Body.Position = 0;
-
-            _logger.LogInformation("=== RAW REQUEST ===");
-            _logger.LogInformation("Content-Type: {ct}", Request.ContentType);
-            _logger.LogInformation("Headers: {headers}", Request.Headers);
-            _logger.LogInformation("RawBody: {body}", rawBody);
-            _logger.LogInformation("Model is null? {isNull}", opt == null);
             if (opt == null)
             {
                 return BadRequest("无效的请求数据");

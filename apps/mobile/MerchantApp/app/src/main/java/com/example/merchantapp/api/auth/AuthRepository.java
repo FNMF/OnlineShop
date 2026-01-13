@@ -117,7 +117,7 @@ public class AuthRepository {
     /* ===== 注册设置密码（用 temp token，会自动走 AuthInterceptor） ===== */
     public void registerByTempToken(String password, Callback<ApiResponse<AuthResponse>> callback) {
         String temp = TokenManager.getTempToken();
-        authApi.registerByTempToken("Bearer " + temp ,new RegisterByTempTokenRequest(password))
+        rawAuthApi.registerByTempToken("Bearer " + temp ,new RegisterByTempTokenRequest(password))
                 .enqueue(new Callback<ApiResponse<AuthResponse>>() {
                     @Override
                     public void onResponse(

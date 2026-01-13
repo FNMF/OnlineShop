@@ -1,4 +1,6 @@
-﻿using API.Infrastructure.Database;
+﻿using API.Common.Helpers;
+using API.Infrastructure.Database;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Api.Ops
@@ -8,11 +10,14 @@ namespace API.Api.Ops
     public class HealthyController:ControllerBase
     {
         private readonly OnlineShopContext _dbContext;
+        private readonly JwtHelper _jwtHelper;
 
-        public HealthyController(OnlineShopContext dbContext)
+        public HealthyController(OnlineShopContext dbContext, JwtHelper jwtHelper)
         {
             _dbContext = dbContext;
+            _jwtHelper = jwtHelper;
         }
+
         // Warining: 这个接口不要暴露在公网，以免被滥用
         [HttpGet("db")]
         public IActionResult PingDb()

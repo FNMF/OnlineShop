@@ -22,7 +22,6 @@ public class AuthInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        Log.d("HTTP", "Content-Type = " + request.body().contentType());
 
         if (request.header("Authorization") == null) {
             String access = TokenManager.getAccessToken();
