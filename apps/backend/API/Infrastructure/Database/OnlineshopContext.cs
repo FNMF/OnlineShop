@@ -112,7 +112,6 @@ public partial class OnlineShopContext : DbContext
         {
             entity.HasKey(e => e.ArId).HasName("PRIMARY");
 
-            entity.Property(e => e.ArId).ValueGeneratedNever();
             entity.Property(e => e.ArAdminuuid).IsFixedLength();
 
             entity.HasOne(d => d.ArAdminuu).WithMany(p => p.AdminRoles)

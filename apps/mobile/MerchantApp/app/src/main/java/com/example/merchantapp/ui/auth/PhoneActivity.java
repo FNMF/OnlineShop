@@ -50,24 +50,8 @@ public class PhoneActivity extends AppCompatActivity {
 
         // 切回账号密码登录
         binding.loginWithAccountPassword.setOnClickListener(v -> finish());
-
-        // test
-        binding.loginTest.setOnClickListener(v -> test());
     }
 
-    private void test(){
-        viewModel.test("pwd123123", new Callback<ApiResponse<AuthResponse>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<AuthResponse>> call, Response<ApiResponse<AuthResponse>> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
-
-            }
-        });
-    }
     private void sendCode() {
         String phone = binding.phoneNumber.getText().toString().trim();
 

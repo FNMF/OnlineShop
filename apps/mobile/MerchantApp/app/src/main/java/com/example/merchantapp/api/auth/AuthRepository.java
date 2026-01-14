@@ -144,27 +144,6 @@ public class AuthRepository {
                     }
                 });;
     }
-
-    //test
-    public void test(String password, Callback<ApiResponse<AuthResponse>> callback) {
-        String temp = "";
-        rawAuthApi.registerByTempToken("Bearer " + temp ,new RegisterByTempTokenRequest(password))
-                .enqueue(new Callback<ApiResponse<AuthResponse>>() {
-                    @Override
-                    public void onResponse(
-                            Call<ApiResponse<AuthResponse>> call,
-                            Response<ApiResponse<AuthResponse>> response
-                    ) {
-                        // 无论成功失败，回调给上层
-                        callback.onResponse(call, response);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ApiResponse<AuthResponse>> call, Throwable t) {
-                        callback.onFailure(call, t);
-                    }
-                });;
-    }
     /* ===== 获取当前用户信息 ===== */
     public void getMerchantProfile(Callback<ApiResponse<AuthResponse>> callback){
         authApi.GetMerchantProfile().enqueue(callback);

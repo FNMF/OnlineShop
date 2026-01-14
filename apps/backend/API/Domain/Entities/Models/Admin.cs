@@ -33,7 +33,7 @@ public partial class Admin
 
     [Column("last_location")]
     [StringLength(255)]
-    public string LastLocation { get; set; } = null!;
+    public string? LastLocation { get; set; }
 
     [Column("last_login_time", TypeName = "datetime")]
     public DateTime LastLoginTime { get; set; }
