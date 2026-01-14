@@ -4,8 +4,8 @@
     {
         public string Phone { get; }
         public string Password { get; }
-        public string IpLocation { get; }
-        public ShopAdminCreateDto(string phone, string password, string ipLocation)
+        public string? IpLocation { get; }
+        public ShopAdminCreateDto(string phone, string password, string? ipLocation)
         {
             Phone = phone;
             Password = password;
