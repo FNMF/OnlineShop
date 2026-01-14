@@ -36,10 +36,13 @@ namespace API.Domain.Services.IdentityPart.Implementations
                 }
 
                 admin = AdminFactory.CreateNoServiceShop(dto).Data;
+                _logger.LogInformation("创建管理员实体成功");
 
                 await _adminRepository.AddAdminAsync(admin);
+                _logger.LogInformation("添加管理员实体到数据库成功");
 
                 await _adminRepository.SetAsNoServiceAdmin(admin);
+                _logger.LogInformation("设置管理员角色成功");
 
                 return Result<Admin>.Success(admin); 
 
