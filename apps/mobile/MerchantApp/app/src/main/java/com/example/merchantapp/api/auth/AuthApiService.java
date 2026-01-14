@@ -35,6 +35,7 @@ public interface AuthApiService {
     Call<ApiResponse<AuthResponse>> registerByTempToken(@Header("Authorization") String authorization,
             @Body RegisterByTempTokenRequest body
     );
+
     // 获取管理员信息
     @GET("/api/shop_admin/profile")
     Call<ApiResponse<AuthResponse>> GetMerchantProfile();

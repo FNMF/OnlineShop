@@ -24,4 +24,8 @@ public class PhoneViewModel extends ViewModel {
                              Callback<ApiResponse<Object>> callback){
         repository.sendCode(phone,callback);
     }
+    public void test(String pwd ,
+                     Callback<ApiResponse<AuthResponse>> callback){
+        repository.test(pwd,callback);
+    }
 }

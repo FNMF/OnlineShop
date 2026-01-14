@@ -31,7 +31,7 @@ public class NetworkUtils {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.vesev.top/api/") // TODO: 改成你的后端地址
+                .baseUrl("https://api.vesev.top/") // TODO: 改成你的后端地址
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

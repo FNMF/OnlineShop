@@ -84,6 +84,7 @@ namespace API.Application.IdentityCase.Services
             try
             {
                 var phone = _currentService.CurrentPhone;
+                _logger.LogInformation("通过临时令牌注册手机号：{Phone}", phone);
                 if (string.IsNullOrEmpty(phone))
                 {
                     return Result<AuthResult>.Fail(ResultCode.InvalidInput, "无效的手机号");
