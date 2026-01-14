@@ -12,7 +12,7 @@ namespace API.Domain.Services.AdminPart
             var validations = new List<Func<ShopAdminCreateDto, bool>>
             {
                 o => !string.IsNullOrEmpty(o.Phone)&&o.Phone.Length ==11,
-                o => !string.IsNullOrEmpty(o.Password)&&o.Password.Length >8&&o.Password.Length<30,
+                o => !string.IsNullOrEmpty(o.Password)&&o.Password.Length >=8&&o.Password.Length<=30,
             };
 
             var validationMessages = new List<string>();
