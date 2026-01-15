@@ -1,5 +1,6 @@
 ﻿using API.Application.MerchantCase.DTOs;
 using API.Application.MerchantCase.Interfaces;
+using API.Common.Helpers;
 using API.Common.Interfaces;
 using API.Common.Models.Results;
 using API.Domain.Services.MerchantPart.Interfaces;
@@ -33,7 +34,7 @@ namespace API.Application.MerchantCase.Services
                     Province = readResult.Data.Province,
                     City = readResult.Data.City,
                     District = readResult.Data.District,
-                    Detail = readResult.Data.Detail,
+                    Detail = AESHelper.Decrypt(readResult.Data.Detail),
                     BusinessStart = readResult.Data.BusinessStart,
                     BusinessEnd = readResult.Data.BusinessEnd,
                     DeliveryFee = readResult.Data.DeliveryFee,

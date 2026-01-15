@@ -1,5 +1,7 @@
 package com.example.merchantapp.ui.shopsettings;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -44,7 +46,6 @@ public class CreateOrEditMerchantViewModel extends ViewModel {
                     @Override
                     public void onResponse(Call<ApiResponse<AdminMerchantResponse>> call,
                                            Response<ApiResponse<AdminMerchantResponse>> response) {
-
                         if (response.isSuccessful()
                                 && response.body() != null
                                 && response.body().isSuccess()) {

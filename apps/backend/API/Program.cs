@@ -3,6 +3,7 @@ using API.Application.Common.EventBus;
 using API.Common.Helpers;
 using API.Common.Models;
 using API.Infrastructure.Database;
+using API.Infrastructure.Extensions;
 using API.Infrastructure.WechatPayV3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -186,6 +187,14 @@ namespace API
                     // 其他可选配置按需设置
                 });
             });
+
+            //Json解析器添加TimeOnly支持
+            builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
+    });
+
 
             //注册SignalR
             builder.Services.AddSignalR();

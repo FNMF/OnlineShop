@@ -35,11 +35,15 @@ public class TokenAuthenticator implements Authenticator {
         String access = TokenManager.getAccessToken();
 
         if (refresh == null || access == null) return null;
-
         retrofit2.Response<ApiResponse<AuthResponse>> resp =
                 rawAuthApi.refreshToken("Bearer " + access, refresh).execute();
 
-        if (!resp.isSuccessful() || resp.body() == null) return null;
+        if (!resp.isSuccessful() ||
+                resp.body() == null ||
+                !resp.body().isSuccess()||
+                resp.body().getData() == null ||
+                resp.body().getData().loginResponse == null
+        ) return null;
 
         LoginResponse login = resp.body().getData().getLoginResponse();
         if (login == null) return null;
