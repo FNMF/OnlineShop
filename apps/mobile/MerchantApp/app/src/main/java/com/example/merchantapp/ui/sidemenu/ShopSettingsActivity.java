@@ -6,14 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.merchantapp.R;
@@ -78,11 +73,16 @@ public class ShopSettingsActivity extends BaseActivity {
         Button createBtn = findViewById(R.id.btn_create_shop);
         createBtn.setOnClickListener(v -> {
             Intent intent = new Intent(ShopSettingsActivity.this, CreateOrEditMerchantActivity.class);
-            createMerchantLauncher.launch(intent);
+            createOrEditMerchantLauncher.launch(intent);
+        });
+        Button editBtn = findViewById(R.id.btn_edit_shop);
+        editBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(ShopSettingsActivity.this, CreateOrEditMerchantActivity.class);
+            createOrEditMerchantLauncher.launch(intent);
         });
     }
 
-    private ActivityResultLauncher<Intent> createMerchantLauncher =
+    private ActivityResultLauncher<Intent> createOrEditMerchantLauncher =
             registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(),
                     result -> {

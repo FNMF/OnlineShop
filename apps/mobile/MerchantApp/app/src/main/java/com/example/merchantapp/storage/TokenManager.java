@@ -1,9 +1,7 @@
 package com.example.merchantapp.storage;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
-import com.example.merchantapp.model.auth.MerchantInfo;
 import com.example.merchantapp.service.MyApp;
 
 public final class TokenManager {

@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.merchantapp.R;
+import com.example.merchantapp.api.UserSessionRepository;
 import com.example.merchantapp.api.auth.AuthRepository;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
@@ -20,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,27 +29,49 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         autoLogin();
-        }
+    }
 
     private void autoLogin() {
         if (!SessionManager.get().isLoggedIn()) {
             goPhone();
             return;
         }
-        goPostLoginLoading();
+
+        // 冷启动：有 token，初始化 Session
+        new UserSessionRepository().fetchSession(
+                this,
+                new UserSessionRepository.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        goMain();
+                    }
+
+                    @Override
+                    public void onError() {
+                        // Session 构建失败，通常是 token 已失效
+                        SessionManager.get().logout();
+                        goPhone();
+                    }
+                }
+        );
     }
 
-
-    private void goPostLoginLoading() {
-        Intent intent = new Intent(this, PostLoginLoadingActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    private void goMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
         startActivity(intent);
         finish();
     }
 
     private void goPhone() {
         Intent intent = new Intent(this, PhoneActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
         startActivity(intent);
         finish();
     }

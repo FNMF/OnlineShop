@@ -7,7 +7,7 @@ public class LoginResponse {
     private String accessToken;
     private String refreshToken;
     @SerializedName("readDto")
-    private MerchantInfo merchant;
+    private AdminInfo merchant;
 
     public String getAccessToken() {
         return accessToken;
@@ -17,7 +17,7 @@ public class LoginResponse {
         return refreshToken;
     }
 
-    public MerchantInfo getMerchant() {
+    public AdminInfo getMerchant() {
         return merchant;
     }
 }

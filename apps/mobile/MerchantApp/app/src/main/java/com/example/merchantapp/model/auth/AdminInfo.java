@@ -1,6 +1,6 @@
 package com.example.merchantapp.model.auth;
 
-public class MerchantInfo {
+public class AdminInfo {
     private String uuid;
     private String phone;
     private int account;

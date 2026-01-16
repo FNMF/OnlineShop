@@ -6,9 +6,12 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.merchantapp.R;
+import com.example.merchantapp.api.UserSessionRepository;
 import com.example.merchantapp.api.role.RoleRepository;
 import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.storage.RoleManager;
+import com.example.merchantapp.storage.SessionManager;
+import com.example.merchantapp.ui.auth.PhoneActivity;
 
 import java.util.List;
 
@@ -18,7 +21,7 @@ import retrofit2.Response;
 
 public class PostLoginLoadingActivity extends AppCompatActivity {
 
-    private final RoleRepository roleRepository = new RoleRepository();
+    private final UserSessionRepository userSessionRepository = new UserSessionRepository();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,31 +33,35 @@ public class PostLoginLoadingActivity extends AppCompatActivity {
 
     private void initAfterLogin() {
 
-        //  获取角色
-        roleRepository.getUserRoles(new Callback<ApiResponse<List<String>>>() {
-            @Override
-            public void onResponse(Call<ApiResponse<List<String>>> call,
-                                   Response<ApiResponse<List<String>>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<String> roles = response.body().getData();
-                        RoleManager.saveRoles(
-                                PostLoginLoadingActivity.this,
-                                roles);
+        new UserSessionRepository().fetchSession(
+                this,
+                new UserSessionRepository.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        goMain();
                     }
-                goMain();
-            }
 
-            @Override
-            public void onFailure(Call<ApiResponse<List<String>>> call, Throwable t) {
-                goMain();
-            }
-        });
-
-        // TODO，后续可能的获取各种内容
+                    @Override
+                    public void onError() {
+                        // 理论上极少发生，除非登录异常
+                        SessionManager.get().logout();
+                        goPhone();
+                    }
+                }
+        );
     }
 
     private void goMain() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        startActivity(intent);
+        finish();
+    }
+    private void goPhone() {
+        Intent intent = new Intent(this, PhoneActivity.class);
         intent.setFlags(
                 Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK

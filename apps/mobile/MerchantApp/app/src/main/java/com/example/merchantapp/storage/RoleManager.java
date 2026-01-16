@@ -12,7 +12,7 @@ import java.util.List;
 
 public class RoleManager {
     private static final String SP_NAME = "user_role";
-    private static final String KEY_ROLES = "roles";
+    private static final String KEY_ROLES = "key_roles";
 
     public static void saveRoles(Context context, List<String> roles) {
         SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);

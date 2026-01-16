@@ -17,9 +17,8 @@ public class MyApp extends Application {
         // 网络检测
         //GlobalNetworkService.init(this);
 
-        // 例如：初始化对象管理
+        // 初始化对象管理
         SessionManager.init(this);
-        ProductManager.init(this);
 
         // 检查应用更新
         UpdateChecker.checkForUpdate(this, BuildConfig.VERSION_CODE);

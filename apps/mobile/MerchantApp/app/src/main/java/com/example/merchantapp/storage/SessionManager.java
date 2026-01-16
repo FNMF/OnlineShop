@@ -40,6 +40,8 @@ public class SessionManager {
         TokenManager.clearAll();
         RoleManager.clear(appContext);
         AdminManager.clear(appContext);
+        ProductManager.clear(appContext);
+        ShopManager.clear(appContext);
     }
 }
 
