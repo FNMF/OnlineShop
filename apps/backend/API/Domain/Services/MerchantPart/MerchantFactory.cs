@@ -33,7 +33,7 @@ namespace API.Domain.Services.MerchantPart
             if (validationMessages.Any())
             {
                 return Result<Merchant>.Fail(ResultCode.ValidationError, string.Join(", ", validationMessages));
-            };
+            }
 
             var merchant = new Merchant
             {
@@ -55,7 +55,7 @@ namespace API.Domain.Services.MerchantPart
             };
             return Result<Merchant>.Success(merchant);
         }
-        public static Result<Merchant> Update(MerchantUpdateDto dto)
+        public static Result<Merchant> Update(Merchant merchant, MerchantUpdateDto dto)
         {
             var validations = new List<Func<MerchantUpdateDto, bool>>
             {
@@ -83,26 +83,17 @@ namespace API.Domain.Services.MerchantPart
             {
                 return Result<Merchant>.Fail(ResultCode.ValidationError, string.Join(", ", validationMessages));
             }
-            ;
 
-            var merchant = new Merchant
-            {
-                Uuid = dto.Uuid,
-                Name = dto.Name,
-                Province = dto.Province,
-                City = dto.City,
-                District = dto.District,
-                Detail = AESHelper.Encrypt(dto.Detail),
-                BusinessStart = dto.Businessstart,
-                BusinessEnd = dto.Businessend,
-                AdminUuid = dto.Adminuuid,
-                IsClosed = false,
-                IsDeleted = false,
-                IsAudited = false,
-                DeliveryFee = dto.DeliveryFee,
-                MinimumOrderAmount = dto.MinimumOrderAmount,
-                FreeDeliveryThreshold = dto.FreeDeliveryThreshold,
-            };
+            merchant.Name = dto.Name;
+            merchant.Province = dto.Province;
+            merchant.City = dto.City;
+            merchant.District = dto.District;
+            merchant.Detail = AESHelper.Encrypt(dto.Detail);
+            merchant.BusinessStart = dto.Businessstart;
+            merchant.BusinessEnd = dto.Businessend;
+            merchant.DeliveryFee = dto.DeliveryFee;
+            merchant.MinimumOrderAmount = dto.MinimumOrderAmount;
+            merchant.FreeDeliveryThreshold = dto.FreeDeliveryThreshold;
 
             return Result<Merchant>.Success(merchant);
         }

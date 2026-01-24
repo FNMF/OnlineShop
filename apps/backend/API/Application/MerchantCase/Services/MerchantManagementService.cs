@@ -146,6 +146,7 @@ namespace API.Application.MerchantCase.Services
                 {
                     return Result<AdminMerchantResult>.Fail(ResultCode.Unauthorized, "无权限更新该商户信息");
                 }
+                var merchant = existMerchantResult.Data;
                 var updateDto = new MerchantUpdateDto(
                     opt.Uuid,
                     opt.Name,
@@ -160,7 +161,7 @@ namespace API.Application.MerchantCase.Services
                     opt.MinimumOrderAmount,
                     opt.FreeDeliveryThreshold
                     );
-                var updateResult = await _merchantUpdateService.UpdateMerchantAsync(updateDto);
+                var updateResult = await _merchantUpdateService.UpdateMerchantAsync(merchant,updateDto);
                 if (!updateResult.IsSuccess)
                 {
                     return Result<AdminMerchantResult>.Fail(updateResult.Code, updateResult.Message);

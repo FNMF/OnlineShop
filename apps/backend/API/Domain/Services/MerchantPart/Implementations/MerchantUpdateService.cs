@@ -17,11 +17,11 @@ namespace API.Domain.Services.MerchantPart.Implementations
             _logger = logger;
         }
 
-        public async Task<Result<Merchant>> UpdateMerchantAsync(MerchantUpdateDto dto)
+        public async Task<Result<Merchant>> UpdateMerchantAsync(Merchant merchant, MerchantUpdateDto dto)
         {
             try
             {
-                var result = MerchantFactory.Update(dto);
+                var result = MerchantFactory.Update(merchant, dto);
                 if (!result.IsSuccess)
                 {
                     return Result<Merchant>.Fail(ResultCode.ValidationError, "输入数据不合法");

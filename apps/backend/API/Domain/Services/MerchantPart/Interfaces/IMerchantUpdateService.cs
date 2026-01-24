@@ -6,6 +6,6 @@ namespace API.Domain.Services.MerchantPart.Interfaces
 {
     public interface IMerchantUpdateService
     {
-        Task<Result<Merchant>> UpdateMerchantAsync(MerchantUpdateDto dto);
+        Task<Result<Merchant>> UpdateMerchantAsync(Merchant merchant, MerchantUpdateDto dto);
     }
 }
