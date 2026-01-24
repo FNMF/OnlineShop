@@ -5,6 +5,7 @@ import com.example.merchantapp.model.ApiResponse;
 import com.example.merchantapp.model.auth.AuthResponse;
 import com.example.merchantapp.model.merchant.AdminMerchantResponse;
 import com.example.merchantapp.service.ApiClient;
+import com.example.merchantapp.storage.ShopManager;
 
 import java.math.BigDecimal;
 
@@ -23,11 +24,11 @@ public class MerchantRepository {
                                String city,
                                String district,
                                String detail,
-                               String business_start,
-                               String business_end,
-                               BigDecimal delivery_fee,
-                               BigDecimal minimum_order_amount,
-                               BigDecimal free_delivery_threshold,
+                               String businessStart,
+                               String businessEnd,
+                               BigDecimal deliveryFee,
+                               BigDecimal minimumOrderAmount,
+                               BigDecimal freeDeliveryThreshold,
                                Callback<ApiResponse<AdminMerchantResponse>> callback){
         merchantApi.createMerchant(
                 new CreateMerchantRequest(name,
@@ -35,11 +36,11 @@ public class MerchantRepository {
                         city,
                         district,
                         detail,
-                        business_start,
-                        business_end,
-                        delivery_fee,
-                        minimum_order_amount,
-                        free_delivery_threshold)
+                        businessStart,
+                        businessEnd,
+                        deliveryFee,
+                        minimumOrderAmount,
+                        freeDeliveryThreshold)
                 ).enqueue(callback);
     }
     public void updateMerchant(String name,
@@ -47,23 +48,24 @@ public class MerchantRepository {
                                String city,
                                String district,
                                String detail,
-                               String business_start,
-                               String business_end,
-                               BigDecimal delivery_fee,
-                               BigDecimal minimum_order_amount,
-                               BigDecimal free_delivery_threshold,
+                               String businessStart,
+                               String businessEnd,
+                               BigDecimal deliveryFee,
+                               BigDecimal minimumOrderAmount,
+                               BigDecimal freeDeliveryThreshold,
                                Callback<ApiResponse<AdminMerchantResponse>> callback){
         merchantApi.updateMerchant(
-                new UpdateMerchantRequest(name,
+                new UpdateMerchantRequest(ShopManager.getShop().getUuid(),
+                        name,
                         province,
                         city,
                         district,
                         detail,
-                        business_start,
-                        business_end,
-                        delivery_fee,
-                        minimum_order_amount,
-                        free_delivery_threshold)
+                        businessStart,
+                        businessEnd,
+                        deliveryFee,
+                        minimumOrderAmount,
+                        freeDeliveryThreshold)
         ).enqueue(callback);
     }
 

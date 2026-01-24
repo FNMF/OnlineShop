@@ -4,8 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.merchantapp.BuildConfig;
+import com.example.merchantapp.storage.AdminManager;
 import com.example.merchantapp.storage.ProductManager;
+import com.example.merchantapp.storage.RoleManager;
 import com.example.merchantapp.storage.SessionManager;
+import com.example.merchantapp.storage.ShopManager;
 
 public class MyApp extends Application {
     private static MyApp instance;
@@ -14,11 +17,14 @@ public class MyApp extends Application {
         super.onCreate();
         instance = this;
         // 这里是全局初始化的地方
-        // 网络检测
-        //GlobalNetworkService.init(this);
 
         // 初始化对象管理
         SessionManager.init(this);
+        AdminManager.init(this);
+        ProductManager.init(this);
+        RoleManager.init(this);
+        ShopManager.init(this);
+
 
         // 检查应用更新
         UpdateChecker.checkForUpdate(this, BuildConfig.VERSION_CODE);

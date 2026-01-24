@@ -59,6 +59,7 @@ namespace API.Domain.Services.MerchantPart
         {
             var validations = new List<Func<MerchantUpdateDto, bool>>
             {
+                o => dto.Uuid!=Guid.Empty,
                 o => !string.IsNullOrEmpty(o.Name)&&o.Name.Length<=20,
                 o => !string.IsNullOrEmpty(o.Province)&&o.Province.Length<=20,
                 o => !string.IsNullOrEmpty(o.City)&&o.City.Length<=20,
@@ -86,6 +87,7 @@ namespace API.Domain.Services.MerchantPart
 
             var merchant = new Merchant
             {
+                Uuid = dto.Uuid,
                 Name = dto.Name,
                 Province = dto.Province,
                 City = dto.City,

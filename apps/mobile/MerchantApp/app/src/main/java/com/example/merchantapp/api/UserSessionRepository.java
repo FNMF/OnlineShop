@@ -40,14 +40,21 @@ public class UserSessionRepository {
         AtomicInteger successCount = new AtomicInteger(0);
         AtomicBoolean hasError = new AtomicBoolean(false);
 
+
         Runnable tryFinish = () -> {
             if (successCount.incrementAndGet() == 3 && !hasError.get()) {
-                AdminManager.saveAdmin(context, adminRef.get().getLoginResponse().getMerchant());
-                ShopManager.saveShop(context, merchantRef.get());
-                RoleManager.saveRoles(context, rolesRef.get());
+                AdminManager.saveAdmin(adminRef.get().getLoginResponse().getMerchant());
+                RoleManager.saveRoles(rolesRef.get());
+
+                // 商户存在才保存
+                if (merchantRef.get() != null) {
+                    ShopManager.saveShop(merchantRef.get());
+                }
+
                 callback.onSuccess();
             }
         };
+
 
         authRepo.getMerchantProfile(new retrofit2.Callback<>() {
             @Override
@@ -76,9 +83,6 @@ public class UserSessionRepository {
                 if (response.isSuccessful() && response.body() != null) {
                     merchantRef.set(response.body().getData());
                     tryFinish.run();
-                } else {
-                    hasError.set(true);
-                    callback.onError();
                 }
             }
 

@@ -132,12 +132,22 @@ namespace API.Application.MerchantCase.Services
             {
                 var adminUuid = _currentService.RequiredUuid;
 
-                var existResult = await _merchantReadService.GetMerchantByAdminUuidAsync(adminUuid);
-                if (!existResult.IsSuccess)
+                var existAdminResult = await _merchantReadService.GetMerchantByAdminUuidAsync(adminUuid);
+                if (!existAdminResult.IsSuccess)
                 {
-                    return Result<AdminMerchantResult>.Fail(existResult.Code, "商户不存在");
+                    return Result<AdminMerchantResult>.Fail(existAdminResult.Code, "商户不存在");
+                }
+                var existMerchantResult = await _merchantReadService.GetMerchantByUuidAsync(opt.Uuid);
+                if (!existMerchantResult.IsSuccess) 
+                {
+                    return Result<AdminMerchantResult>.Fail(existAdminResult.Code, "商户不存在");
+                }
+                if (existMerchantResult.Data.AdminUuid != adminUuid)
+                {
+                    return Result<AdminMerchantResult>.Fail(ResultCode.Unauthorized, "无权限更新该商户信息");
                 }
                 var updateDto = new MerchantUpdateDto(
+                    opt.Uuid,
                     opt.Name,
                     opt.Province,
                     opt.City,

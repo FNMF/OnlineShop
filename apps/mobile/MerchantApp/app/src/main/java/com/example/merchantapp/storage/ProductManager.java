@@ -16,14 +16,24 @@ public class ProductManager {
 
     private static final String SP_NAME = "product_prefs";
     private static final String KEY_PRODUCTS = "key_products";
-    public static void saveProducts(Context context, List<ProductRead> products) {
+    private static Context context;
+    public static void init(Context ctx) {
+        context = ctx.getApplicationContext();
+    }
+    private static SharedPreferences sp() {
+        if (context == null) {
+            throw new IllegalStateException("ProductManager not initialized");
+        }
+        return context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
+    }
+    public static void saveProducts(List<ProductRead> products) {
         SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         String json = new Gson().toJson(products);
         sp.edit()
                 .putString(KEY_PRODUCTS, json)
                 .apply();
     }
-    public static List<ProductRead> getProducts(Context context) {
+    public static List<ProductRead> getProducts() {
         SharedPreferences sp = context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE);
         String json = sp.getString(KEY_PRODUCTS, null);
         if (json == null) return new ArrayList<>();
@@ -31,7 +41,7 @@ public class ProductManager {
         Type type = new TypeToken<List<ProductRead>>() {}.getType();
         return new Gson().fromJson(json, type);
     }
-    public static void clear(Context context) {
+    public static void clear() {
         context.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
                 .edit()
                 .clear()

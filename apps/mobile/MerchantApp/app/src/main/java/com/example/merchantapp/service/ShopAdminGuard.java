@@ -23,7 +23,7 @@ public class ShopAdminGuard {
     }
 
     public boolean isShopAdmin() {
-        return RoleManager.isShopOwner(context);
+        return RoleManager.isShopOwner();
     }
     public void checkAndApplyShopAdmin(Runnable onResult) {
         // 先刷新角色
@@ -66,7 +66,7 @@ public class ShopAdminGuard {
                                    Response<ApiResponse<List<String>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<String> roles = response.body().getData();
-                    RoleManager.saveRoles(context, roles);
+                    RoleManager.saveRoles(roles);
                 }
                 onSuccess.run();
             }

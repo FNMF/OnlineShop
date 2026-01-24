@@ -29,7 +29,7 @@ public class SessionManager {
     public void onLoginSuccess(LoginResponse login) {
         TokenManager.saveAccessToken(login.getAccessToken());
         TokenManager.saveRefreshToken(login.getRefreshToken());
-        AdminManager.saveAdmin(appContext,login.getMerchant());
+        AdminManager.saveAdmin(login.getMerchant());
     }
 
     public boolean isLoggedIn() {
@@ -38,10 +38,10 @@ public class SessionManager {
 
     public void logout() {
         TokenManager.clearAll();
-        RoleManager.clear(appContext);
-        AdminManager.clear(appContext);
-        ProductManager.clear(appContext);
-        ShopManager.clear(appContext);
+        RoleManager.clear();
+        AdminManager.clear();
+        ProductManager.clear();
+        ShopManager.clear();
     }
 }
 

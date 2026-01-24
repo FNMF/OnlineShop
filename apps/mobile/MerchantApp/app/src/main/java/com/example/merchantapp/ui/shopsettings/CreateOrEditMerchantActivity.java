@@ -115,7 +115,7 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
         observeStep();
         setupButtons();
 
-        localShop = ShopManager.getShop(this);
+        localShop = ShopManager.getShop();
 
         if (localShop != null) {
             viewModel.fillFromMerchant(localShop);
