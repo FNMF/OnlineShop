@@ -9,13 +9,13 @@ public class AdminMerchantResponse {
     private String city;
     private String district;
     private String detail;
-    private String business_start;
-    private String business_end;
-    private BigDecimal delivery_fee;
-    private BigDecimal minimum_order_amount;
-    private BigDecimal free_delivery_threshold;
-    private boolean is_closed;
-    private boolean is_audited;
+    private String businessStart;
+    private String businessEnd;
+    private BigDecimal deliveryFee;
+    private BigDecimal minimumOrderAmount;
+    private BigDecimal freeDeliveryThreshold;
+    private boolean isClosed;
+    private boolean isAudited;
     public String getUuid(){
         return uuid;
     }
@@ -41,30 +41,30 @@ public class AdminMerchantResponse {
     }
 
     public String getBusinessStart() {
-        return business_start;
+        return businessStart;
     }
 
     public String getBusinessEnd() {
-        return business_end;
+        return businessEnd;
     }
 
     public BigDecimal getDeliveryFee() {
-        return delivery_fee;
+        return deliveryFee;
     }
 
     public BigDecimal getMinimumOrderAmount() {
-        return minimum_order_amount;
+        return minimumOrderAmount;
     }
 
     public BigDecimal getFreeDeliveryThreshold() {
-        return free_delivery_threshold;
+        return freeDeliveryThreshold;
     }
 
     public boolean isClosed() {
-        return is_closed;
+        return isClosed;
     }
 
     public boolean isAudited() {
-        return is_audited;
+        return isAudited;
     }
 }

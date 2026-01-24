@@ -164,7 +164,8 @@ public class ShopSettingsActivity extends BaseActivity {
 
         tvDeliveryInfo.setText(
                 "配送费 ¥" + merchant.getDeliveryFee()
-                        + "｜起送 ¥" + merchant.getMinimumOrderAmount()
+                        + " |起送 ¥" + merchant.getMinimumOrderAmount()
+                        + " |免配送费要求 ¥" + merchant.getFreeDeliveryThreshold()
         );
     }
 }
