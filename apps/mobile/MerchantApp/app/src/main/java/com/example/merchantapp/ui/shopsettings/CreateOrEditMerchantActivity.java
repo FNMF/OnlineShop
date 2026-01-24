@@ -16,7 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.merchantapp.R;
 import com.example.merchantapp.api.region.RegionRepository;
 import com.example.merchantapp.model.ApiResponse;
+import com.example.merchantapp.model.merchant.AdminMerchantResponse;
 import com.example.merchantapp.model.region.RegionItem;
+import com.example.merchantapp.storage.ShopManager;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
@@ -37,6 +39,8 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
 
     private MerchantFormViewModel viewModel;
     private RegionRepository regionRepo;
+    private AdminMerchantResponse localShop;
+
 
     /* ---------------- step containers ---------------- */
 
@@ -110,11 +114,32 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
         initViews();
         observeStep();
         setupButtons();
+
+        localShop = ShopManager.getShop(this);
+
+        if (localShop != null) {
+            viewModel.fillFromMerchant(localShop);
+            fillUIFromState();
+        }
     }
 
     /* ================================================= */
     /* ================= 初始化 ======================== */
     /* ================================================= */
+
+    private void fillUIFromState() {
+        MerchantFormState s = viewModel.getState();
+
+        etShopName.setText(s.name);
+        etDetailAddress.setText(s.detailAddress);
+
+        tvStartTime.setText(s.businessStart);
+        tvEndTime.setText(s.businessEnd);
+
+        etDeliveryFee.setText(s.deliveryFee.toPlainString());
+        etMinimumAmount.setText(s.minimumOrderAmount.toPlainString());
+        etFreeDelivery.setText(s.freeDeliveryThreshold.toPlainString());
+    }
 
     private void initViews() {
 
@@ -374,7 +399,7 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
     }
 
     private void submitForm() {
-        submitViewModel.createMerchant(viewModel.getState());
+        submitViewModel.submit(viewModel.getState());
     }
 
     private boolean validateName() {
@@ -409,9 +434,12 @@ public class CreateOrEditMerchantActivity extends AppCompatActivity {
 
     private boolean validateFee() {
         try {
-            new BigDecimal(etDeliveryFee.getText().toString());
-            new BigDecimal(etMinimumAmount.getText().toString());
-            new BigDecimal(etFreeDelivery.getText().toString());
+            MerchantFormState s = viewModel.getState();
+
+            s.deliveryFee = new BigDecimal(etDeliveryFee.getText().toString());
+            s.minimumOrderAmount = new BigDecimal(etMinimumAmount.getText().toString());
+            s.freeDeliveryThreshold = new BigDecimal(etFreeDelivery.getText().toString());
+
             return true;
         } catch (Exception e) {
             toast("请输入正确的金额");

@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.merchantapp.model.merchant.AdminMerchantResponse;
 import com.example.merchantapp.model.region.RegionItem;
+
+import java.math.BigDecimal;
 
 public class MerchantFormViewModel extends ViewModel {
 
@@ -63,5 +66,33 @@ public class MerchantFormViewModel extends ViewModel {
         MerchantFormState s = getState();
         s.detailAddress = info;
     }
+
+    public void fillFromMerchant(AdminMerchantResponse m) {
+        MerchantFormState s = getState();
+
+        s.uuid = m.getUuid();
+        s.name = m.getName();
+
+        s.provinceName = m.getProvince();
+        s.cityName = m.getCity();
+        s.districtName = m.getDistrict();
+        s.detailAddress = m.getDetail();
+
+        s.businessStart = m.getBusinessStart();
+        s.businessEnd = m.getBusinessEnd();
+
+        s.deliveryFee = m.getDeliveryFee() != null
+                ? m.getDeliveryFee()
+                : BigDecimal.ZERO;
+
+        s.minimumOrderAmount = m.getMinimumOrderAmount() != null
+                ? m.getMinimumOrderAmount()
+                : BigDecimal.ZERO;
+
+        s.freeDeliveryThreshold = m.getFreeDeliveryThreshold() != null
+                ? m.getFreeDeliveryThreshold()
+                : BigDecimal.ZERO;
+    }
+
 }
 

@@ -3,6 +3,7 @@ package com.example.merchantapp.ui.shopsettings;
 import java.math.BigDecimal;
 
 public class MerchantFormState {
+    public String uuid;
 
     public String name;
 

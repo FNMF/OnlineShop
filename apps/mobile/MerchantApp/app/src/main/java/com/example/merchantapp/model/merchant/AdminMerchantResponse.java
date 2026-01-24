@@ -3,6 +3,7 @@ package com.example.merchantapp.model.merchant;
 import java.math.BigDecimal;
 
 public class AdminMerchantResponse {
+    private String uuid;
     private String name;
     private String province;
     private String city;
@@ -15,6 +16,9 @@ public class AdminMerchantResponse {
     private BigDecimal free_delivery_threshold;
     private boolean is_closed;
     private boolean is_audited;
+    public String getUuid(){
+        return uuid;
+    }
 
     public String getName() {
         return name;

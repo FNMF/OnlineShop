@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.merchantapp.R;
 import com.example.merchantapp.model.merchant.AdminMerchantResponse;
 import com.example.merchantapp.service.ShopAdminGuard;
+import com.example.merchantapp.storage.ShopManager;
 import com.example.merchantapp.ui.BaseActivity;
 import com.example.merchantapp.ui.shopsettings.CreateOrEditMerchantActivity;
 

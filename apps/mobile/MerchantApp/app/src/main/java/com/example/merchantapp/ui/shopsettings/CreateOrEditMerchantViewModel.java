@@ -26,47 +26,87 @@ public class CreateOrEditMerchantViewModel extends ViewModel {
         return submitState;
     }
 
-    public void createMerchant(MerchantFormState form) {
+    public void submit(MerchantFormState form) {
 
         submitState.setValue(SubmitState.loading());
+        if(form.uuid == null) {
+            repository.createMerchant(
+                    form.name,
+                    form.provinceName,
+                    form.cityName,
+                    form.districtName,
+                    form.detailAddress,
+                    form.businessStart,
+                    form.businessEnd,
+                    form.deliveryFee,
+                    form.minimumOrderAmount,
+                    form.freeDeliveryThreshold,
+                    new Callback<ApiResponse<AdminMerchantResponse>>() {
 
-        repository.createMerchant(
-                form.name,
-                form.provinceName,
-                form.cityName,
-                form.districtName,
-                form.detailAddress,
-                form.businessStart,
-                form.businessEnd,
-                form.deliveryFee,
-                form.minimumOrderAmount,
-                form.freeDeliveryThreshold,
-                new Callback<ApiResponse<AdminMerchantResponse>>() {
+                        @Override
+                        public void onResponse(Call<ApiResponse<AdminMerchantResponse>> call,
+                                               Response<ApiResponse<AdminMerchantResponse>> response) {
+                            if (response.isSuccessful()
+                                    && response.body() != null
+                                    && response.body().isSuccess()) {
 
-                    @Override
-                    public void onResponse(Call<ApiResponse<AdminMerchantResponse>> call,
-                                           Response<ApiResponse<AdminMerchantResponse>> response) {
-                        if (response.isSuccessful()
-                                && response.body() != null
-                                && response.body().isSuccess()) {
+                                submitState.postValue(SubmitState.success());
 
-                            submitState.postValue(SubmitState.success());
+                            } else {
+                                submitState.postValue(
+                                        SubmitState.error("创建商户失败")
+                                );
+                            }
+                        }
 
-                        } else {
+                        @Override
+                        public void onFailure(Call<ApiResponse<AdminMerchantResponse>> call,
+                                              Throwable t) {
                             submitState.postValue(
-                                    SubmitState.error("创建商户失败")
+                                    SubmitState.error(t.getMessage())
                             );
                         }
                     }
+            );
+        }else{
+            repository.updateMerchant(
+                    form.name,
+                    form.provinceName,
+                    form.cityName,
+                    form.districtName,
+                    form.detailAddress,
+                    form.businessStart,
+                    form.businessEnd,
+                    form.deliveryFee,
+                    form.minimumOrderAmount,
+                    form.freeDeliveryThreshold,
+                    new Callback<ApiResponse<AdminMerchantResponse>>() {
 
-                    @Override
-                    public void onFailure(Call<ApiResponse<AdminMerchantResponse>> call,
-                                          Throwable t) {
-                        submitState.postValue(
-                                SubmitState.error(t.getMessage())
-                        );
+                        @Override
+                        public void onResponse(Call<ApiResponse<AdminMerchantResponse>> call,
+                                               Response<ApiResponse<AdminMerchantResponse>> response) {
+                            if (response.isSuccessful()
+                                    && response.body() != null
+                                    && response.body().isSuccess()) {
+
+                                submitState.postValue(SubmitState.success());
+
+                            } else {
+                                submitState.postValue(
+                                        SubmitState.error("修改商户失败")
+                                );
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiResponse<AdminMerchantResponse>> call,
+                                              Throwable t) {
+                            submitState.postValue(
+                                    SubmitState.error(t.getMessage())
+                            );
+                        }
                     }
-                }
-        );
+            );
+        }
     }
 }

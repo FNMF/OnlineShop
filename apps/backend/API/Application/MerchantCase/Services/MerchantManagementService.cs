@@ -65,6 +65,7 @@ namespace API.Application.MerchantCase.Services
 
                 var merchantResult = new AdminMerchantResult
                 {
+                    Uuid = createResult.Data.Uuid,
                     Name = createResult.Data.Name,
                     Province = createResult.Data.Province,
                     City = createResult.Data.City,
@@ -100,6 +101,7 @@ namespace API.Application.MerchantCase.Services
                 }
                 var merchantResult = new AdminMerchantResult
                 {
+                    Uuid = readResult.Data.Uuid,
                     Name = readResult.Data.Name,
                     Province = readResult.Data.Province,
                     City = readResult.Data.City,
@@ -156,6 +158,7 @@ namespace API.Application.MerchantCase.Services
 
                 var merchantResult = new AdminMerchantResult
                 {
+                    Uuid = updateResult.Data.Uuid,
                     Name = updateResult.Data.Name,
                     Province = updateResult.Data.Province,
                     City = updateResult.Data.City,
